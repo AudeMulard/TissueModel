@@ -1,0 +1,8 @@
+singular error from 20 pointss
+fiure out what it is about: DONE
+
+try out linear scheme with no linear solver
+try out line (all test cases) with newton solver.
+do them manually also to check accuracy
+
+singular matrix for line. the problem is in the calulation of F, I don't add the exterior nodes
