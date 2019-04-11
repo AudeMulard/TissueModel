@@ -3,12 +3,19 @@ import matplotlib.pyplot as plt
 np.set_printoptions(precision=0)
 ### Set boundary conditions on extoerior nodes
 
-def new_bc(network, defo):
+def new_bc(network, defo, side):
 	new_positions = network.vertices
-	for k in network.boundary_nodes_left:
-	        new_positions[k,0] = new_positions[k,0] - defo
-	for k in network.boundary_nodes_right:
-	        new_positions[k,0] = new_positions[k,0] + defo
+	if side == 'left':
+		for k in network.boundary_nodes_left:
+		        new_positions[k,0] = new_positions[k,0] - defo
+	if side == 'right':
+		for k in network.boundary_nodes_right:
+		        new_positions[k,0] = new_positions[k,0] + defo
+	if side == 'both':
+		for k in network.boundary_nodes_left:
+		        new_positions[k,0] = new_positions[k,0] - defo
+		for k in network.boundary_nodes_right:
+		        new_positions[k,0] = new_positions[k,0] + defo
 	for k in network.interior_nodes:
 #		new_positions[k,0] = new_positions[k,0] * 1.05 # essential movement to not have a singular matrix at first step
 		new_positions[k] = new_positions[k] * 1.05 # essential movement to not have a singular matrix at first step
@@ -60,7 +67,6 @@ def write_system(network):
 def linear_scheme(network):
 	matrix, rest = write_system(network)
 	new_pos = np.linalg.solve(matrix,rest)
-	print matrix
 	for i in range(len(network.interior_nodes)):
 		j=network.interior_nodes[i]
 		network.vertices[j,0] = new_pos[2*i]
@@ -75,7 +81,6 @@ def write_force(network, i, j, constitutive):
 		lambda_f = length_square(network.vertices[i]-network.vertices[j])/length_square(network.vertices_ini[i]-network.vertices_ini[j])
 		epsilon = 0.5*(lambda_f-1.)
 		force=network.Ef*network.A/network.B*(np.exp(network.B*epsilon)-1.)
-#		print i,j,lambda_f,force
 		return force*(network.vertices[i]-network.vertices[j])
 	elif constitutive == 'constant':
 		return network.Ef*((network.vertices[i]-network.vertices[j])-(network.vertices_ini[i]-network.vertices_ini[j]))
@@ -121,7 +126,6 @@ def write_jacobian_point(network, i, constitutive):
 		if network.interior_nodes[i]==network.ridge_vertices[j][1]:
 			jacobian_x += find_jacobian_x(network, network.interior_nodes[i], network.ridge_vertices[j][0], constitutive)
 			jacobian_y += find_jacobian_y(network, network.interior_nodes[i], network.ridge_vertices[j][0], constitutive)
-#		print network.interior_nodes[i], j, jacobian_x
 	return np.array([jacobian_x, jacobian_y])
 
 ### Iterative Newton scheme to solve the nonlinear equations
@@ -144,7 +148,6 @@ def write_matrix_J(network, constitutive):
 		J[2*i,2*i+1]=write_jacobian_point(network, i, constitutive)[1,0]
 		J[2*i+1, 2*i] = write_jacobian_point(network,i, constitutive)[0,1]
 		J[2*i+1,2*i+1]=write_jacobian_point(network, i, constitutive)[1,1]
-#		print i, write_jacobian_point(network, i, constitutive)
 		for k in network.list_nodes_ridges[network.interior_nodes[i]]:
 			if network.interior_nodes[i]==network.ridge_vertices[k][0] and network.ridge_vertices[k][1] in network.interior_nodes:
 				r=network.ridge_vertices[k][1]
@@ -160,7 +163,6 @@ def write_matrix_J(network, constitutive):
 				J[2*i,2*j+1]=-find_jacobian_y(network, network.interior_nodes[i], r, constitutive)[0]
 				J[2*i+1,2*j]=-find_jacobian_x(network, network.interior_nodes[i], r, constitutive)[1]
 				J[2*i+1,2*j+1]=-find_jacobian_y(network, network.interior_nodes[i], r, constitutive)[1]
-			#print i, k,J
 	return J
 
 
@@ -170,7 +172,6 @@ def iterative_newton(network, constitutive):
 	for k in range(max_iter):
 		F = write_vector_F(network, constitutive)
 		J = write_matrix_J(network, constitutive)
-		print J
 		diff = np.linalg.solve(J,-F)
 		for i in range(len(network.interior_nodes)):
 			j=network.interior_nodes[i]
@@ -186,8 +187,8 @@ def iterative_newton(network, constitutive):
 
 ### Global function of solving one step if the netowrk
 
-def solve_force_balance(network, defo, constitutive, scheme):
-	network = new_bc(network, defo)
+def solve_force_balance(network, defo, constitutive, scheme, side):
+	network = new_bc(network, defo, side)
 	if scheme == 'nonlinear':
 		network = iterative_newton(network, constitutive)
 	if scheme == 'linear':

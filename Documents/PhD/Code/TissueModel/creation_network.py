@@ -18,7 +18,7 @@ class Network:
 			self.vertices = Voronoi(Seeds).vertices
 			self.ridge_vertices = Voronoi(Seeds).ridge_vertices
 			self.min_distance = min_distance
-			self.vertices_ini = self.set_fibers().vertices
+			#self.vertices_ini = self.set_fibers().vertices
 		
 		if creation == "big grid":
 			self.vertices = np.array([[0.0,0.25],[0.0,0.5],[0.0,0.75],[0.25,0.0],[0.25,0.25],[0.25,0.5],[0.25,0.75],[0.25,1.0],[0.5,0.0],[0.5,0.25],[0.5,0.5],[0.5,0.75],[0.5,1.0],[0.75,0.0],[0.75,0.25],[0.75,0.5],[0.75,0.75],[0.75,1.0],[1.0,0.25],[1.0,0.5],[1.0,0.75]])
@@ -303,8 +303,9 @@ class Network:
 
 # Global function that applies all the corrections to the network
 
-	def set_fibers(self):
-		self.delete_first_point()
+	def set_fibers(self, creation):
+		if creation == 'Voronoi':
+			self.delete_first_point()
 		self = self.cut_network()
 		self = self.merge_nodes()
 		self = self.sort_nodes()
@@ -335,8 +336,8 @@ class Network:
 		import matplotlib.pyplot as plt
 		fig = plt.figure()
 		ax = fig.gca()
-		plt.xlim([-0.5,1.5])
-		plt.ylim([0.0,1.0])
+#		plt.xlim([-0.5,1.5])
+#		plt.ylim([0.0,1.0])
 		from matplotlib.collections import LineCollection
 		ax.scatter(self.vertices_ini[1:,0],self.vertices_ini[1:,1], color='grey')
 		if kw.get('show_vertices', True):
