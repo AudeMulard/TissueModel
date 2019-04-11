@@ -16,9 +16,8 @@ def new_bc(network, defo, side):
 		        new_positions[k,0] = new_positions[k,0] - defo
 		for k in network.boundary_nodes_right:
 		        new_positions[k,0] = new_positions[k,0] + defo
-	for k in network.interior_nodes:
-#		new_positions[k,0] = new_positions[k,0] * 1.05 # essential movement to not have a singular matrix at first step
-		new_positions[k] = new_positions[k] * 1.05 # essential movement to not have a singular matrix at first step
+#	for k in network.interior_nodes:
+#		new_positions[k] = new_positions[k] * 1.05 # essential movement to not have a singular matrix at first step
 	network.vertices=new_positions
 	return network
 
@@ -172,6 +171,7 @@ def iterative_newton(network, constitutive):
 	for k in range(max_iter):
 		F = write_vector_F(network, constitutive)
 		J = write_matrix_J(network, constitutive)
+		print J
 		diff = np.linalg.solve(J,-F)
 		for i in range(len(network.interior_nodes)):
 			j=network.interior_nodes[i]
@@ -190,6 +190,7 @@ def iterative_newton(network, constitutive):
 def solve_force_balance(network, defo, constitutive, scheme, side):
 	network = new_bc(network, defo, side)
 	if scheme == 'nonlinear':
+		network = linear_scheme(network)
 		network = iterative_newton(network, constitutive)
 	if scheme == 'linear':
 		network = linear_scheme(network)

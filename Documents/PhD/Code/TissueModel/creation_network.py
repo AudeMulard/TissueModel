@@ -41,9 +41,15 @@ class Network:
 			self.min_distance = min_distance
 
 		if creation == "1 long cross":
-			self.vertices = np.array([[0.0,0.5],[0.25,0.5],[0.5,0.5],[0.75,0.5],[1.0,0.5],[0.5,0.0],[0.5,0.25],[0.5,0.75],[0.5,1.0]])
-			self.ridge_vertices = np.array([[0,1],[1,2],[2,3],[3,4],[5,6],[6,2],[2,7],[7,8]])
+			self.vertices = np.array([[0.0,0.5],[0.5,0.5],[1.0,0.5],[0.5,0.0],[0.5,0.25],[0.5,0.75],[0.5,1.0]])
+			self.ridge_vertices = np.array([[0,1],[1,2],[3,4],[4,1],[1,5],[5,6]])
 			self.min_distance = min_distance
+
+		if creation == "1 half long cross":
+			self.vertices = np.array([[0.0,0.5],[0.25,0.5],[0.5,0.5],[0.75,0.5],[1.0,0.5],[0.5,0.25],[0.5,0.75]])
+			self.ridge_vertices = np.array([[0,1],[1,2],[2,3],[3,4],[5,6],[5,2],[2,6]])
+			self.min_distance = min_distance
+
 		if creation == "manual":
 			self.vertices = np.array([[0.0,0.0],[0.3,0.1],[0.6,0.3],[1.0,0.0]])
 			self.ridge_vertices = np.array([[0,1],[1,2],[2,3]])
