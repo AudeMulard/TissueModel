@@ -30,10 +30,15 @@ def full_test(network, defo, constitutive, scheme, side, iteration, plot):
 	stress = [0.0]
 	strain = [0.0]
 	for i in range(iteration):
+		network = new_bc(network, defo, side)
+		if i==0 and constitutive != 'constant':
+			network = linear_scheme(network)
 		network=solve_force_balance(network, defo, constitutive, scheme, side)
 		if plot == True:
 			stress.append(calulate_macro_stress(network, constitutive))
 			strain.append(defo*(i+1))
 	if plot == True:
-		plt.scatter(strain, stress)
+		fig = plt.figure()
+		ax = fig.gca()
+		ax.scatter(strain, stress)
 	return network
