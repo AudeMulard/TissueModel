@@ -189,7 +189,7 @@ def write_matrix_J(network, constitutive):
 
 
 def iterative_newton(network, constitutive):
-	max_iter = 50
+	max_iter = 100
 	epsilon = 1e-8
 	for k in range(max_iter):
 		F = write_vector_F(network, constitutive)
@@ -200,10 +200,11 @@ def iterative_newton(network, constitutive):
 			network.vertices[j,0] = network.vertices[j,0] + diff[2*i]
 			network.vertices[j,1] = network.vertices[j,1] + diff[2*i+1]
 		if np.linalg.norm(diff) < epsilon:
+#			print length_square(network.vertices[0]-network.vertices[1]),length_square(network.vertices[2]-network.vertices[1]),length_square(network.vertices[2]-network.vertices[3])
 			print('convergence!, nre iter:', k)
 			break
-		else:
-			print(k, 'not converged')
+#		else:
+#			print(k, 'not converged')
 	return network
 
 
