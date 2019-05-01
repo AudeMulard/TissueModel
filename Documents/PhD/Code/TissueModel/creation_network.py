@@ -27,8 +27,12 @@ class Network:
 			if self.ridge_vertices[k][0]==-1 or self.ridge_vertices[k][1]==-1 or self.ridge_vertices[k][0]==len(self.vertices) or self.ridge_vertices[k][1]==len(self.vertices):
 				ridges_to_delete= np.append(ridges_to_delete, k)
 		ridges_to_delete=np.array(sorted(ridges_to_delete, reverse=True))
-		for k in ridges_to_delete:
-			self.ridge_vertices=np.delete(self.ridge_vertices, k, axis=0)
+		if self.dimension == 2:
+			for k in ridges_to_delete:
+				self.ridge_vertices=np.delete(self.ridge_vertices, k, axis=0)
+		if self.dimension == 3:
+			for k in ridges_to_delete:
+				self.ridge_vertices=np.delete(self.ridge_vertices, k, axis=0)
 		return self
 
 	def delete_point(self, i):
@@ -111,55 +115,42 @@ class Network:
 
 	def cut_network_updown(self):
 		nodes = self.vertices
-		nodes_to_delete_down = []
-		nodes_to_delete_up = []
+		nodes_to_delete = []
 		ridges_to_delete = []
-		for i in range(len(nodes)):
-        		if nodes[i,1] < 0.0:
-				nodes_to_delete_down = np.append(nodes_to_delete_down,i)
-			if nodes[i,1] > 1.0:
-				nodes_to_delete_up = np.append(nodes_to_delete_up,i)
-		nodes_to_delete = np.append(nodes_to_delete_down, nodes_to_delete_up)
+		if self.dimension == 2:
+			interval = [1]
+		elif self.dimension == 3:
+			interval = [1,2]
+		# Select in one list all the points outside of the domain
+		for coord in interval:
+			for i in range(len(nodes)):
+        			if nodes[i,coord] < 0.0 or nodes[i,coord] > 1.0:
+					nodes_to_delete = np.append(nodes_to_delete,i)
+		nodes_to_delete = set(nodes_to_delete)
+		# delete ridges that are completely out of the domain
 		for i in range(len(self.ridge_vertices)):
 			if self.ridge_vertices[i][0] in nodes_to_delete and self.ridge_vertices[i][1] in nodes_to_delete:
 				ridges_to_delete = np.append(ridges_to_delete, i)
 		ridges_to_delete=np.array(sorted(ridges_to_delete, reverse=True))
 		for ridge in ridges_to_delete:
 			self.ridge_vertices=np.delete(self.ridge_vertices,ridge, axis=0)
+		# delete ridges attached to the points to delete
 		ridges_to_delete=[]
-		for node in nodes_to_delete_down:
+		for node in nodes_to_delete:
 			node= int(node)
-                	for k in range(len(self.ridge_vertices)):
-                        	if self.ridge_vertices[k][0]==node:
+        	       	for k in range(len(self.ridge_vertices)):
+        	               	if self.ridge_vertices[k][0]==node:
 					ridges_to_delete = np.append(ridges_to_delete,k)
-#		                	x = nodes[node,0]+1.0/(nodes[self.ridge_vertices[k][1],1]-nodes[node,1])*(nodes[self.ridge_vertices[k][1],0]-nodes[node,0])*(0.0-nodes[node,1])
-#        		                nodes=np.append(nodes,[[x,0.0]], axis=0)
-#        		                self.ridge_vertices[k][0]=len(nodes)-1
 		                elif self.ridge_vertices[k][1]==node:
 					ridges_to_delete = np.append(ridges_to_delete,k)
-#                		        x = nodes[node,0]+1.0/(nodes[self.ridge_vertices[k][0],1]-nodes[node,1])*(nodes[self.ridge_vertices[k][0],0]-nodes[node,0])*(0.0-nodes[node,1])
-#                		        nodes=np.append(nodes,[[x,0.0]], axis=0)
-#					self.ridge_vertices[k][1]=len(nodes)-1
-		for node in nodes_to_delete_up:
-			node= int(node)
-                	for k in range(len(self.ridge_vertices)):
-                        	if self.ridge_vertices[k][0]==node:
-					ridges_to_delete = np.append(ridges_to_delete,k)
-#		                	x = nodes[node,0]+1.0/(nodes[self.ridge_vertices[k][1],1]-nodes[node,1])*(nodes[self.ridge_vertices[k][1],0]-nodes[node,0])*(1.0-nodes[node,1])
-#        		                nodes=np.append(nodes,[[x,1.0]], axis=0)
-#					self.ridge_vertices[k][0]=len(nodes)-1
-		                elif self.ridge_vertices[k][1]==node:
-					ridges_to_delete = np.append(ridges_to_delete,k)
-#					x = nodes[node,0]+1.0/(nodes[self.ridge_vertices[k][0],1]-nodes[node,1])*(nodes[self.ridge_vertices[k][0],0]-nodes[node,0])*(1.0-nodes[node,1])
-#					nodes=np.append(nodes,[[x,1.0]], axis=0)
-#					self.ridge_vertices[k][1]=len(nodes)-1
 		ridges_to_delete=np.array(sorted(ridges_to_delete, reverse=True))
 		for ridge in ridges_to_delete:
 			self.ridge_vertices=np.delete(self.ridge_vertices,ridge, axis=0)
+		# delete the exterior points
 		nodes_to_delete=np.array(sorted(nodes_to_delete, reverse=True))
 		for point in nodes_to_delete:
 			nodes=np.delete(nodes,point,0)
-		# Renumber points after deleting some
+		# Renumber points in the ridge_vertices after deleting some
 		for ridge in self.ridge_vertices:
 			for i in range(2):
 				r=0
@@ -168,16 +159,17 @@ class Network:
 						r+=1
 				ridge[i] = ridge[i] - r
 		self.vertices=nodes
-		while ridges_to_delete !=[]:
+		## Supress alone fibres and points
+		while ridges_to_delete.tolist() !=[]:
 			ridges_to_delete=[]
 			nodes_to_delete=[]
 			self = self.create_ridge_node_list()
 			self = self.sort_nodes()
 			for i in range(len(self.interior_nodes)):
-#				print i, self.list_nodes_ridges[i]
-				if len(self.list_nodes_ridges[i])==1:
-					nodes_to_delete = np.append(nodes_to_delete,i)
-					ridges_to_delete= np.append(ridges_to_delete,self.list_nodes_ridges[i])
+				j = self.interior_nodes[i]
+				if len(self.list_nodes_ridges[j])<=1:
+					nodes_to_delete = np.append(nodes_to_delete,j)
+					ridges_to_delete= np.append(ridges_to_delete,self.list_nodes_ridges[j])
 			nodes = self.vertices
 			ridges_to_delete=np.array(sorted(ridges_to_delete, reverse=True))
 			for ridge in ridges_to_delete:
@@ -185,7 +177,7 @@ class Network:
 			nodes_to_delete=np.array(sorted(nodes_to_delete, reverse=True))
 			for point in nodes_to_delete:
 				nodes=np.delete(nodes,point,0)
-		# Renumber points after deleting some
+			# Renumber points after deleting some
 			for ridge in self.ridge_vertices:
 				for i in range(2):
 					r=0
@@ -217,23 +209,43 @@ class Network:
 			node=int(node)
                 	for k in range(len(self.ridge_vertices)):
                         	if self.ridge_vertices[k][0]==node:
-		                	y = nodes[node,1]+(nodes[self.ridge_vertices[k][1],1]-nodes[node,1])/(nodes[self.ridge_vertices[k][1],0]-nodes[node,0])*(0.0-nodes[node,0])
-        		                nodes=np.append(nodes,[[0.0,y]], axis=0)
+					if self.dimension == 2:
+			                	y = nodes[node,1]+(nodes[self.ridge_vertices[k][1],1]-nodes[node,1])/(nodes[self.ridge_vertices[k][1],0]-nodes[node,0])*(0.0-nodes[node,0])
+        			                nodes=np.append(nodes,[[0.0,y]], axis=0)
+					if self.dimension == 3:
+						y = nodes[node,1]+(nodes[self.ridge_vertices[k][1],1]-nodes[node,1])/(nodes[self.ridge_vertices[k][1],0]-nodes[node,0])*(0.0-nodes[node,0])
+						z = nodes[node,2]+(nodes[self.ridge_vertices[k][1],2]-nodes[node,2])/(nodes[self.ridge_vertices[k][1],0]-nodes[node,0])*(0.0-nodes[node,0])
+        			                nodes=np.append(nodes,[[0.0,y,z]], axis=0)
         		                self.ridge_vertices[k][0]=len(nodes)-1
 		                elif self.ridge_vertices[k][1]==node:
-                		        y = nodes[node,1]+(nodes[self.ridge_vertices[k][0],1]-nodes[node,1])/(nodes[self.ridge_vertices[k][0],0]-nodes[node,0])*(0.0-nodes[node,0])
-                		        nodes=np.append(nodes,[[0.0,y]], axis=0)
+					if self.dimension == 2:
+                		        	y = nodes[node,1]+(nodes[self.ridge_vertices[k][0],1]-nodes[node,1])/(nodes[self.ridge_vertices[k][0],0]-nodes[node,0])*(0.0-nodes[node,0])
+                		        	nodes=np.append(nodes,[[0.0,y]], axis=0)
+					if self.dimension == 3:
+						y = nodes[node,1]+(nodes[self.ridge_vertices[k][0],1]-nodes[node,1])/(nodes[self.ridge_vertices[k][0],0]-nodes[node,0])*(0.0-nodes[node,0])
+						z = nodes[node,2]+(nodes[self.ridge_vertices[k][0],2]-nodes[node,2])/(nodes[self.ridge_vertices[k][0],0]-nodes[node,0])*(0.0-nodes[node,0])
+        			                nodes=np.append(nodes,[[0.0,y,z]], axis=0)
 					self.ridge_vertices[k][1]=len(nodes)-1
 		for node in nodes_to_delete_right:
 			node= int(node)
                 	for k in range(len(self.ridge_vertices)):
                         	if self.ridge_vertices[k][0]==node:
-		                	y = nodes[node,1]+(nodes[self.ridge_vertices[k][1],1]-nodes[node,1])/(nodes[self.ridge_vertices[k][1],0]-nodes[node,0])*(1.0-nodes[node,0])
-        		                nodes=np.append(nodes,[[1.0,y]], axis=0)
+					if self.dimension==2:
+		                		y = nodes[node,1]+(nodes[self.ridge_vertices[k][1],1]-nodes[node,1])/(nodes[self.ridge_vertices[k][1],0]-nodes[node,0])*(1.0-nodes[node,0])
+        		                	nodes=np.append(nodes,[[1.0,y]], axis=0)
+					if self.dimension == 3:
+						y = nodes[node,1]+(nodes[self.ridge_vertices[k][1],1]-nodes[node,1])/(nodes[self.ridge_vertices[k][1],0]-nodes[node,0])*(1.0-nodes[node,0])
+						z = nodes[node,2]+(nodes[self.ridge_vertices[k][1],2]-nodes[node,2])/(nodes[self.ridge_vertices[k][1],0]-nodes[node,0])*(1.0-nodes[node,0])
+        			                nodes=np.append(nodes,[[1.0,y,z]], axis=0)
 					self.ridge_vertices[k][0]=len(nodes)-1
 		                elif self.ridge_vertices[k][1]==node:
-					y = nodes[node,1]+(nodes[self.ridge_vertices[k][0],1]-nodes[node,1])/(nodes[self.ridge_vertices[k][0],0]-nodes[node,0])*(1.0-nodes[node,0])
-					nodes=np.append(nodes,[[1.0,y]], axis=0)
+					if self.dimension == 2:
+						y = nodes[node,1]+(nodes[self.ridge_vertices[k][0],1]-nodes[node,1])/(nodes[self.ridge_vertices[k][0],0]-nodes[node,0])*(1.0-nodes[node,0])
+						nodes=np.append(nodes,[[1.0,y]], axis=0)
+					if self.dimension == 3:
+						y = nodes[node,1]+(nodes[self.ridge_vertices[k][0],1]-nodes[node,1])/(nodes[self.ridge_vertices[k][0],0]-nodes[node,0])*(1.0-nodes[node,0])
+						z = nodes[node,2]+(nodes[self.ridge_vertices[k][0],2]-nodes[node,2])/(nodes[self.ridge_vertices[k][0],0]-nodes[node,0])*(1.0-nodes[node,0])
+        			                nodes=np.append(nodes,[[1.0,y,z]], axis=0)
 					self.ridge_vertices[k][1]=len(nodes)-1
 		nodes_to_delete=np.array(sorted(nodes_to_delete, reverse=True))
 		for point in nodes_to_delete:
@@ -254,15 +266,43 @@ class Network:
 		self=self.cut_network_updown()
 		return self
 
+	def delete_doubles(self):
+		ridges = {tuple(np.sort(node)) for node in self.ridge_vertices}
+		ridges = set(ridges)
+		self.ridge_vertices = [list(l) for l in ridges]
+		return self
+
+	def delete_alone_points(self):
+		nodes_to_delete = []
+		for i in range(len(self.vertices)):
+			if len(self.list_nodes_ridges[i])==0:
+				nodes_to_delete = np.append(nodes_to_delete,i)
+		nodes_to_delete=np.array(sorted(nodes_to_delete, reverse=True))
+		for point in nodes_to_delete:
+			self.vertices=np.delete(self.vertices,point,0)
+		# Renumber points after deleting some
+		for ridge in self.ridge_vertices:
+			for i in range(2):
+				r=0
+				for node in nodes_to_delete:
+					if node < ridge[i]:
+						r+=1
+				ridge[i] = ridge[i] - r
+		return self
+
 # Global function that applies all the corrections to the network
 
 	def set_fibers(self, creation):
 		self = self.create_network(creation)
 		if creation == 'Voronoi' or creation == 'random network 3':
-			self.delete_first_point()
+			self = self.delete_first_point()
 			self = self.cut_network()
 		self = self.merge_nodes()
 		self = self.sort_nodes()
+		self = self.delete_doubles()
+		self = self.create_ridge_node_list()
+		print self.list_nodes_ridges
+		self = self.delete_alone_points()
 		self = self.create_ridge_node_list()
 		self.vertices_ini = np.array(self.vertices.tolist())
 		return self
@@ -272,19 +312,31 @@ class Network:
 	def plot_network(self, **kw):
 		import matplotlib.pyplot as plt
 		fig = plt.figure()
-		ax = fig.gca()
-		plt.xlim([0.0,1.0])
-		plt.ylim([0.0,1.0])
-		from matplotlib.collections import LineCollection
-		if kw.get('show_vertices', True):
-			ax.scatter(self.vertices[:,0],self.vertices[:,1])
 		line_segments = []
-		for simplex in self.ridge_vertices:
-		        simplex = np.asarray(simplex)
-	            	line_segments.append([(x, y) for x, y in self.vertices[simplex]])
-  		lc = LineCollection(line_segments,linestyle='solid')
+		if self.dimension == 2:
+			ax = fig.gca()
+			from matplotlib.collections import LineCollection
+			if kw.get('show_vertices', True):
+				ax.scatter(self.vertices[:,0],self.vertices[:,1])
+			for simplex in self.ridge_vertices:
+			        simplex = np.asarray(simplex)
+		            	line_segments.append([(x, y) for x, y in self.vertices[simplex]])
+			lc = LineCollection(line_segments,linestyle='solid')
+		if self.dimension ==3:
+			from mpl_toolkits.mplot3d import Axes3D
+			from mpl_toolkits.mplot3d.art3d import Line3DCollection
+			ax = fig.add_subplot(111, projection='3d')
+			if kw.get('show_vertices', True):
+				ax.scatter(self.vertices[:,0],self.vertices[:,1],self.vertices[:,2])
+			for simplex in self.ridge_vertices:
+			        simplex = np.asarray(simplex)
+		            	line_segments.append([(x, y, z) for x, y, z in self.vertices[simplex]])
+			ax.set_xlim3d([0.0,1.0])
+			ax.set_ylim3d([0.0,1.0])
+			ax.set_zlim3d([0.0,1.0])		
+  			lc = Line3DCollection(line_segments,linestyle='solid')
 		ax.add_collection(lc)
-		return ax.figure
+		return ax.figure		
 
 	def plot_network_extension(self, **kw):
 		import matplotlib.pyplot as plt
