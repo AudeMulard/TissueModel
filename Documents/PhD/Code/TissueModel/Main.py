@@ -24,7 +24,7 @@ constitutive = 'linear2'
 scheme='nonlinear'
 side = 'right'
 plot = True
-video = True
+video = False
 
 x = Network(dimension, complexity_network, length_domain, min_distance, Ef, A, B, creation)
 
@@ -37,12 +37,13 @@ if creation == "Voronoi":
 	myfile.write(str(x.ridge_vertices))
 	myfile.close()
 
-x= x.set_fibers(creation)
-print x.vertices
+x = x.set_fibers(creation)
 x = new_bc(x, defo, side)
-"""
-x = full_test(x, defo, constitutive, scheme, side, iteration, plot,video)
-"""
+x.plot_network()
+x = solve_force_balance(x, defo, constitutive, scheme, side)
+
+#x = full_test(x, defo, constitutive, scheme, side, iteration, plot,video)
+
 
 #x.plot_network_extension()
 x.plot_network()

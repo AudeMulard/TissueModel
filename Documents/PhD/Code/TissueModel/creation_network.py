@@ -294,16 +294,16 @@ class Network:
 
 	def set_fibers(self, creation):
 		self = self.create_network(creation)
-		if creation == 'Voronoi' or creation == 'random network 3':
+		if creation == 'Voronoi' or creation == '3d random':
 			self = self.delete_first_point()
 			self = self.cut_network()
 		self = self.merge_nodes()
 		self = self.sort_nodes()
 		self = self.delete_doubles()
 		self = self.create_ridge_node_list()
-		print self.list_nodes_ridges
 		self = self.delete_alone_points()
 		self = self.create_ridge_node_list()
+		self = self.sort_nodes()
 		self.vertices_ini = np.array(self.vertices.tolist())
 		return self
 
