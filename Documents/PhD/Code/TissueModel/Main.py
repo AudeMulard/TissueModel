@@ -6,14 +6,14 @@ import matplotlib.pyplot as plt
 
 ## PARAMETERS
 dimension=3 #dimension of the problem
-complexity_network=20 #number of random seed points
+complexity_network=30 #number of random seed points
 length_domain=1.0
 min_distance = length_domain * 0.025
 defo = 0.1*length_domain
 Ef=1.0
 A=1.4E-8
 B=3.8
-iteration = 15
+iteration = 6
 
 
 #np.set_printoptions(precision=2)
@@ -24,7 +24,7 @@ constitutive = 'linear2'
 scheme='nonlinear'
 side = 'right'
 plot = True
-video = False
+video = True
 
 x = Network(dimension, complexity_network, length_domain, min_distance, Ef, A, B, creation)
 
@@ -40,10 +40,14 @@ if creation == "Voronoi":
 x = x.set_fibers(creation)
 x = new_bc(x, defo, side)
 x.plot_network()
-x = solve_force_balance(x, defo, constitutive, scheme, side)
+
+#x = solve_force_balance(x, defo, constitutive, scheme, side)
+
+x = full_test(x, defo, constitutive, scheme, side, iteration, plot,video)
+
+#defo = -0.1*length_domain
 
 #x = full_test(x, defo, constitutive, scheme, side, iteration, plot,video)
-
 
 #x.plot_network_extension()
 x.plot_network()

@@ -311,13 +311,18 @@ def write_matrix_J_3d(network, constitutive):
 		for k in network.list_nodes_ridges[network.interior_nodes[i]]:
 			if network.interior_nodes[i]==network.ridge_vertices[k][0] and network.ridge_vertices[k][1] in network.interior_nodes:
 				r=network.ridge_vertices[k][1]
+				j=network.interior_nodes.index(r)
+				for coord1 in coords:
+					J[network.dimension*i+coord1,network.dimension*j]=-find_jacobian_x_3d(network, network.interior_nodes[i], r, constitutive)[coord1]
+					J[network.dimension*i+coord1,network.dimension*j+1]=-find_jacobian_y_3d(network, network.interior_nodes[i], r, constitutive)[coord1]
+					J[network.dimension*i+coord1,network.dimension*j+2]=-find_jacobian_z_3d(network, network.interior_nodes[i], r, constitutive)[coord1]
 			elif network.interior_nodes[i]==network.ridge_vertices[k][1] and network.ridge_vertices[k][0] in network.interior_nodes:
 				r=network.ridge_vertices[k][0]
-			j=network.interior_nodes.index(r)
-			for coord1 in coords:
-				J[network.dimension*i+coord1,network.dimension*j]=-find_jacobian_x_3d(network, network.interior_nodes[i], r, constitutive)[coord1]
-				J[network.dimension*i+coord1,network.dimension*j+1]=-find_jacobian_y_3d(network, network.interior_nodes[i], r, constitutive)[coord1]
-				J[network.dimension*i+coord1,network.dimension*j+2]=-find_jacobian_z_3d(network, network.interior_nodes[i], r, constitutive)[coord1]
+				j=network.interior_nodes.index(r)
+				for coord1 in coords:
+					J[network.dimension*i+coord1,network.dimension*j]=-find_jacobian_x_3d(network, network.interior_nodes[i], r, constitutive)[coord1]
+					J[network.dimension*i+coord1,network.dimension*j+1]=-find_jacobian_y_3d(network, network.interior_nodes[i], r, constitutive)[coord1]
+					J[network.dimension*i+coord1,network.dimension*j+2]=-find_jacobian_z_3d(network, network.interior_nodes[i], r, constitutive)[coord1]
 				"""
 				J[network.dimension*i,network.dimension*j]=-find_jacobian_x_3d(network, network.interior_nodes[i], r, constitutive)[0]
 				J[network.dimension*i,network.dimension*j+1]=-find_jacobian_y_3d(network, network.interior_nodes[i], r, constitutive)[0]
@@ -375,7 +380,10 @@ def iterative_newton_3d(network, constitutive):
 
 def solve_force_balance(network, defo, constitutive, scheme, side):
 	if scheme == 'nonlinear':
-		network = iterative_newton_3d(network, constitutive)
+		if network.dimension ==2:
+			network = iterative_newton(network, constitutive)
+		if network.dimension == 3:
+			network = iterative_newton_3d(network, constitutive)
 	if scheme == 'linear':
 		network = linear_scheme(network)
 	return network
