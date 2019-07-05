@@ -13,6 +13,9 @@ class Network:
 		self.A = A
 		self.B = B
 		self.min_distance = min_distance
+
+		self.strain = []
+		self.stress = []
 		
 	def create_network(self, creation):
 		self.vertices, self.ridge_vertices = network_types.select_network(self, creation)
@@ -53,7 +56,7 @@ class Network:
 		for i in range(len(nodes)):
         		if nodes[i,0] <= 0.0:
         		        boundary_nodes_left.append(i)
-        		elif nodes[i,0] >= 1.0:
+        		elif nodes[i,0] >= self.length:
         		        boundary_nodes_right.append(i)
         		else:
         		        interior_nodes.append(i)
@@ -124,7 +127,7 @@ class Network:
 		# Select in one list all the points outside of the domain
 		for coord in interval:
 			for i in range(len(nodes)):
-        			if nodes[i,coord] < 0.0 or nodes[i,coord] > 1.0:
+        			if nodes[i,coord] < 0.0 or nodes[i,coord] > self.length:
 					nodes_to_delete = np.append(nodes_to_delete,i)
 		nodes_to_delete = set(nodes_to_delete)
 		# delete ridges that are completely out of the domain
@@ -196,7 +199,7 @@ class Network:
 		for i in range(len(nodes)):
         		if nodes[i,0] < 0.0:
 				nodes_to_delete_left = np.append(nodes_to_delete_left,i)
-			if nodes[i,0] > 1.0:
+			if nodes[i,0] > self.length:
 				nodes_to_delete_right = np.append(nodes_to_delete_right,i)
 		nodes_to_delete = np.append(nodes_to_delete_left, nodes_to_delete_right)
 		for i in range(len(self.ridge_vertices)):
@@ -231,21 +234,21 @@ class Network:
                 	for k in range(len(self.ridge_vertices)):
                         	if self.ridge_vertices[k][0]==node:
 					if self.dimension==2:
-		                		y = nodes[node,1]+(nodes[self.ridge_vertices[k][1],1]-nodes[node,1])/(nodes[self.ridge_vertices[k][1],0]-nodes[node,0])*(1.0-nodes[node,0])
-        		                	nodes=np.append(nodes,[[1.0,y]], axis=0)
+		                		y = nodes[node,1]+(nodes[self.ridge_vertices[k][1],1]-nodes[node,1])/(nodes[self.ridge_vertices[k][1],0]-nodes[node,0])*(self.length-nodes[node,0])
+        		                	nodes=np.append(nodes,[[self.length,y]], axis=0)
 					if self.dimension == 3:
-						y = nodes[node,1]+(nodes[self.ridge_vertices[k][1],1]-nodes[node,1])/(nodes[self.ridge_vertices[k][1],0]-nodes[node,0])*(1.0-nodes[node,0])
-						z = nodes[node,2]+(nodes[self.ridge_vertices[k][1],2]-nodes[node,2])/(nodes[self.ridge_vertices[k][1],0]-nodes[node,0])*(1.0-nodes[node,0])
-        			                nodes=np.append(nodes,[[1.0,y,z]], axis=0)
+						y = nodes[node,1]+(nodes[self.ridge_vertices[k][1],1]-nodes[node,1])/(nodes[self.ridge_vertices[k][1],0]-nodes[node,0])*(self.length-nodes[node,0])
+						z = nodes[node,2]+(nodes[self.ridge_vertices[k][1],2]-nodes[node,2])/(nodes[self.ridge_vertices[k][1],0]-nodes[node,0])*(self.length-nodes[node,0])
+        			                nodes=np.append(nodes,[[self.length,y,z]], axis=0)
 					self.ridge_vertices[k][0]=len(nodes)-1
 		                elif self.ridge_vertices[k][1]==node:
 					if self.dimension == 2:
-						y = nodes[node,1]+(nodes[self.ridge_vertices[k][0],1]-nodes[node,1])/(nodes[self.ridge_vertices[k][0],0]-nodes[node,0])*(1.0-nodes[node,0])
-						nodes=np.append(nodes,[[1.0,y]], axis=0)
+						y = nodes[node,1]+(nodes[self.ridge_vertices[k][0],1]-nodes[node,1])/(nodes[self.ridge_vertices[k][0],0]-nodes[node,0])*(self.length-nodes[node,0])
+						nodes=np.append(nodes,[[self.length,y]], axis=0)
 					if self.dimension == 3:
-						y = nodes[node,1]+(nodes[self.ridge_vertices[k][0],1]-nodes[node,1])/(nodes[self.ridge_vertices[k][0],0]-nodes[node,0])*(1.0-nodes[node,0])
-						z = nodes[node,2]+(nodes[self.ridge_vertices[k][0],2]-nodes[node,2])/(nodes[self.ridge_vertices[k][0],0]-nodes[node,0])*(1.0-nodes[node,0])
-        			                nodes=np.append(nodes,[[1.0,y,z]], axis=0)
+						y = nodes[node,1]+(nodes[self.ridge_vertices[k][0],1]-nodes[node,1])/(nodes[self.ridge_vertices[k][0],0]-nodes[node,0])*(self.length-nodes[node,0])
+						z = nodes[node,2]+(nodes[self.ridge_vertices[k][0],2]-nodes[node,2])/(nodes[self.ridge_vertices[k][0],0]-nodes[node,0])*(self.length-nodes[node,0])
+        			                nodes=np.append(nodes,[[self.length,y,z]], axis=0)
 					self.ridge_vertices[k][1]=len(nodes)-1
 		nodes_to_delete=np.array(sorted(nodes_to_delete, reverse=True))
 		for point in nodes_to_delete:
@@ -299,6 +302,13 @@ class Network:
 			self = self.cut_network()
 		self = self.merge_nodes()
 		self = self.sort_nodes()
+		while len(self.boundary_nodes_right) <= min(self.complexity/10,4) or len(self.boundary_nodes_left) <= min(self.complexity/10,4):
+			self = self.create_network(creation)
+			if creation == 'Voronoi' or creation == '3d random':
+				self = self.delete_first_point()
+				self = self.cut_network()
+			self = self.merge_nodes()
+			self = self.sort_nodes()
 		self = self.delete_doubles()
 		self = self.create_ridge_node_list()
 		self = self.delete_alone_points()
@@ -331,9 +341,9 @@ class Network:
 			for simplex in self.ridge_vertices:
 			        simplex = np.asarray(simplex)
 		            	line_segments.append([(x, y, z) for x, y, z in self.vertices[simplex]])
-			ax.set_xlim3d([0.0,1.0])
-			ax.set_ylim3d([0.0,1.0])
-			ax.set_zlim3d([0.0,1.0])		
+			ax.set_xlim3d([0.0,self.length])
+			ax.set_ylim3d([0.0,self.length])
+			ax.set_zlim3d([0.0,self.length])		
   			lc = Line3DCollection(line_segments,linestyle='solid')
 		ax.add_collection(lc)
 		return ax.figure		
@@ -342,10 +352,10 @@ class Network:
 		import matplotlib.pyplot as plt
 		fig = plt.figure()
 		ax = fig.gca()
-		plt.xlim([-0.5,1.5])
-		plt.ylim([-0.5,1.0])
+		plt.xlim([-0.1,self.length])
+		plt.ylim([-0.1,self.length])
 		from matplotlib.collections import LineCollection
-		ax.scatter(self.vertices_ini[1:,0],self.vertices_ini[1:,1], color='grey')
+		#ax.scatter(self.vertices_ini[1:,0],self.vertices_ini[1:,1], color='grey')
 		if kw.get('show_vertices', True):
 			ax.scatter(self.vertices[:,0],self.vertices[:,1], color='red')
 		line_segments_ini = []
@@ -356,7 +366,7 @@ class Network:
 		for simplex in self.ridge_vertices:
 		        simplex = np.asarray(simplex)
 	            	line_segments.append([(x, y) for x, y in self.vertices[simplex]])
-		lc_ini = LineCollection(line_segments_ini,linestyle='solid', color='grey', label='initial')
+		lc_ini = LineCollection(line_segments_ini,linestyle='dashed', color='grey', label='initial')
   		lc = LineCollection(line_segments,linestyle='solid', label='after tensile test', color='red')
 		ax.add_collection(lc_ini)
 		ax.add_collection(lc)

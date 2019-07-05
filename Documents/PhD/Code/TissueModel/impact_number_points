@@ -1,0 +1,544 @@
+Complexity: 20
+Network 0
+0
+('convergence!, nre iter:', 3)
+1
+('convergence!, nre iter:', 3)
+2
+('convergence!, nre iter:', 3)
+3
+('convergence!, nre iter:', 4)
+4
+('convergence!, nre iter:', 4)
+5
+('convergence!, nre iter:', 4)
+6
+('convergence!, nre iter:', 4)
+7
+('convergence!, nre iter:', 4)
+8
+('convergence!, nre iter:', 8)
+9
+('convergence!, nre iter:', 4)
+Network 1
+0
+('convergence!, nre iter:', 3)
+1
+('convergence!, nre iter:', 3)
+2
+('convergence!, nre iter:', 4)
+3
+('convergence!, nre iter:', 4)
+4
+('convergence!, nre iter:', 6)
+5
+('convergence!, nre iter:', 6)
+6
+('convergence!, nre iter:', 7)
+7
+('convergence!, nre iter:', 5)
+8
+('convergence!, nre iter:', 8)
+9
+('convergence!, nre iter:', 9)
+Network 2
+0
+('convergence!, nre iter:', 5)
+1
+('convergence!, nre iter:', 7)
+2
+('convergence!, nre iter:', 11)
+3
+('convergence!, nre iter:', 16)
+4
+('convergence!, nre iter:', 13)
+5
+('convergence!, nre iter:', 8)
+6
+('convergence!, nre iter:', 8)
+7
+('convergence!, nre iter:', 8)
+8
+('convergence!, nre iter:', 9)
+9
+('convergence!, nre iter:', 26)
+Network 3
+0
+('convergence!, nre iter:', 3)
+1
+('convergence!, nre iter:', 4)
+2
+('convergence!, nre iter:', 4)
+3
+('convergence!, nre iter:', 5)
+4
+('convergence!, nre iter:', 4)
+5
+('convergence!, nre iter:', 8)
+6
+('convergence!, nre iter:', 4)
+7
+('convergence!, nre iter:', 5)
+8
+('convergence!, nre iter:', 6)
+9
+('convergence!, nre iter:', 8)
+Network 4
+0
+('convergence!, nre iter:', 4)
+1
+('convergence!, nre iter:', 4)
+2
+('convergence!, nre iter:', 5)
+3
+('convergence!, nre iter:', 7)
+4
+('convergence!, nre iter:', 10)
+5
+('convergence!, nre iter:', 9)
+6
+('convergence!, nre iter:', 4)
+7
+('convergence!, nre iter:', 5)
+8
+('convergence!, nre iter:', 5)
+9
+('convergence!, nre iter:', 5)
+Network 5
+0
+('convergence!, nre iter:', 3)
+1
+('convergence!, nre iter:', 3)
+2
+('convergence!, nre iter:', 3)
+3
+('convergence!, nre iter:', 3)
+4
+('convergence!, nre iter:', 3)
+5
+('convergence!, nre iter:', 4)
+6
+('convergence!, nre iter:', 4)
+7
+('convergence!, nre iter:', 4)
+8
+('convergence!, nre iter:', 4)
+9
+('convergence!, nre iter:', 5)
+Network 6
+0
+('convergence!, nre iter:', 3)
+1
+('convergence!, nre iter:', 4)
+2
+('convergence!, nre iter:', 4)
+3
+('convergence!, nre iter:', 28)
+4
+('convergence!, nre iter:', 4)
+5
+('convergence!, nre iter:', 7)
+6
+('convergence!, nre iter:', 4)
+7
+('convergence!, nre iter:', 5)
+8
+('convergence!, nre iter:', 8)
+9
+('convergence!, nre iter:', 11)
+Network 7
+0
+('convergence!, nre iter:', 5)
+1
+('convergence!, nre iter:', 6)
+2
+('convergence!, nre iter:', 18)
+3
+('convergence!, nre iter:', 8)
+4
+('convergence!, nre iter:', 10)
+5
+('convergence!, nre iter:', 9)
+6
+('convergence!, nre iter:', 9)
+7
+('convergence!, nre iter:', 10)
+8
+('convergence!, nre iter:', 19)
+9
+('convergence!, nre iter:', 17)
+Network 8
+0
+('convergence!, nre iter:', 3)
+1
+('convergence!, nre iter:', 4)
+2
+('convergence!, nre iter:', 4)
+3
+('convergence!, nre iter:', 5)
+4
+('convergence!, nre iter:', 8)
+5
+('convergence!, nre iter:', 6)
+6
+('convergence!, nre iter:', 5)
+7
+('convergence!, nre iter:', 15)
+8
+('convergence!, nre iter:', 5)
+9
+('convergence!, nre iter:', 5)
+Network 9
+0
+('convergence!, nre iter:', 3)
+1
+('convergence!, nre iter:', 4)
+2
+('convergence!, nre iter:', 4)
+3
+('convergence!, nre iter:', 4)
+4
+('convergence!, nre iter:', 14)
+5
+('convergence!, nre iter:', 5)
+6
+('convergence!, nre iter:', 13)
+7
+('convergence!, nre iter:', 13)
+8
+('convergence!, nre iter:', 5)
+9
+('convergence!, nre iter:', 5)
+Network 10
+0
+('convergence!, nre iter:', 3)
+1
+('convergence!, nre iter:', 3)
+2
+('convergence!, nre iter:', 4)
+3
+('convergence!, nre iter:', 8)
+4
+('convergence!, nre iter:', 5)
+5
+('convergence!, nre iter:', 5)
+6
+('convergence!, nre iter:', 4)
+7
+('convergence!, nre iter:', 5)
+8
+('convergence!, nre iter:', 4)
+9
+('convergence!, nre iter:', 4)
+Network 11
+0
+('convergence!, nre iter:', 3)
+1
+('convergence!, nre iter:', 3)
+2
+('convergence!, nre iter:', 4)
+3
+('convergence!, nre iter:', 5)
+4
+('convergence!, nre iter:', 3)
+5
+('convergence!, nre iter:', 5)
+6
+('convergence!, nre iter:', 3)
+7
+('convergence!, nre iter:', 3)
+8
+('convergence!, nre iter:', 7)
+9
+('convergence!, nre iter:', 4)
+Network 12
+0
+('convergence!, nre iter:', 4)
+1
+('convergence!, nre iter:', 5)
+2
+('convergence!, nre iter:', 15)
+3
+('convergence!, nre iter:', 4)
+4
+('convergence!, nre iter:', 4)
+5
+('convergence!, nre iter:', 5)
+6
+('convergence!, nre iter:', 5)
+7
+('convergence!, nre iter:', 6)
+8
+('convergence!, nre iter:', 6)
+9
+('convergence!, nre iter:', 6)
+Network 13
+0
+('convergence!, nre iter:', 4)
+1
+('convergence!, nre iter:', 4)
+2
+('convergence!, nre iter:', 9)
+3
+('convergence!, nre iter:', 5)
+4
+('convergence!, nre iter:', 7)
+5
+('convergence!, nre iter:', 6)
+6
+('convergence!, nre iter:', 13)
+7
+('convergence!, nre iter:', 20)
+8
+('convergence!, nre iter:', 13)
+9
+('convergence!, nre iter:', 24)
+Network 14
+0
+('convergence!, nre iter:', 3)
+1
+('convergence!, nre iter:', 4)
+2
+('convergence!, nre iter:', 3)
+3
+('convergence!, nre iter:', 4)
+4
+('convergence!, nre iter:', 4)
+5
+('convergence!, nre iter:', 5)
+6
+('convergence!, nre iter:', 9)
+7
+('convergence!, nre iter:', 12)
+8
+('convergence!, nre iter:', 8)
+9
+('convergence!, nre iter:', 10)
+Network 15
+0
+('convergence!, nre iter:', 4)
+1
+('convergence!, nre iter:', 6)
+2
+('convergence!, nre iter:', 5)
+3
+('convergence!, nre iter:', 6)
+4
+('convergence!, nre iter:', 15)
+5
+('convergence!, nre iter:', 14)
+6
+('convergence!, nre iter:', 6)
+7
+('convergence!, nre iter:', 6)
+8
+('convergence!, nre iter:', 17)
+9
+('convergence!, nre iter:', 6)
+Network 16
+0
+('convergence!, nre iter:', 3)
+1
+('convergence!, nre iter:', 7)
+2
+('convergence!, nre iter:', 5)
+3
+('convergence!, nre iter:', 4)
+4
+('convergence!, nre iter:', 3)
+5
+('convergence!, nre iter:', 4)
+6
+('convergence!, nre iter:', 4)
+7
+('convergence!, nre iter:', 4)
+8
+('convergence!, nre iter:', 4)
+9
+('convergence!, nre iter:', 5)
+Network 17
+0
+('convergence!, nre iter:', 3)
+1
+('convergence!, nre iter:', 4)
+2
+('convergence!, nre iter:', 4)
+3
+('convergence!, nre iter:', 7)
+4
+('convergence!, nre iter:', 70)
+5
+('convergence!, nre iter:', 4)
+6
+('convergence!, nre iter:', 11)
+7
+('convergence!, nre iter:', 4)
+8
+('convergence!, nre iter:', 4)
+9
+('convergence!, nre iter:', 4)
+Network 18
+0
+('convergence!, nre iter:', 3)
+1
+('convergence!, nre iter:', 19)
+2
+('convergence!, nre iter:', 5)
+3
+('convergence!, nre iter:', 4)
+4
+('convergence!, nre iter:', 5)
+5
+('convergence!, nre iter:', 4)
+6
+('convergence!, nre iter:', 3)
+7
+('convergence!, nre iter:', 4)
+8
+('convergence!, nre iter:', 5)
+9
+('convergence!, nre iter:', 7)
+Network 19
+0
+('convergence!, nre iter:', 3)
+1
+('convergence!, nre iter:', 4)
+2
+('convergence!, nre iter:', 3)
+3
+('convergence!, nre iter:', 5)
+4
+('convergence!, nre iter:', 4)
+5
+('convergence!, nre iter:', 9)
+6
+('convergence!, nre iter:', 6)
+7
+('convergence!, nre iter:', 7)
+8
+('convergence!, nre iter:', 13)
+9
+('convergence!, nre iter:', 5)
+[0.0080495545716974364] [0.011544694263867282]
+Complexity: 30
+Network 0
+0
+('convergence!, nre iter:', 5)
+1
+('convergence!, nre iter:', 9)
+2
+('convergence!, nre iter:', 16)
+3
+('convergence!, nre iter:', 17)
+4
+('convergence!, nre iter:', 5)
+5
+('convergence!, nre iter:', 6)
+6
+('convergence!, nre iter:', 5)
+7
+('convergence!, nre iter:', 6)
+8
+('convergence!, nre iter:', 6)
+9
+('convergence!, nre iter:', 8)
+Network 1
+0
+('convergence!, nre iter:', 4)
+1
+('convergence!, nre iter:', 5)
+2
+('convergence!, nre iter:', 7)
+3
+('convergence!, nre iter:', 9)
+4
+('convergence!, nre iter:', 9)
+5
+('convergence!, nre iter:', 5)
+6
+('convergence!, nre iter:', 6)
+7
+('convergence!, nre iter:', 5)
+8
+('convergence!, nre iter:', 6)
+9
+('convergence!, nre iter:', 6)
+Network 2
+0
+('convergence!, nre iter:', 4)
+1
+('convergence!, nre iter:', 4)
+2
+('convergence!, nre iter:', 4)
+3
+('convergence!, nre iter:', 5)
+4
+('convergence!, nre iter:', 5)
+5
+('convergence!, nre iter:', 7)
+6
+('convergence!, nre iter:', 9)
+7
+('convergence!, nre iter:', 13)
+8
+('convergence!, nre iter:', 5)
+9
+('convergence!, nre iter:', 6)
+Network 3
+0
+('convergence!, nre iter:', 3)
+1
+('convergence!, nre iter:', 3)
+2
+('convergence!, nre iter:', 4)
+3
+('convergence!, nre iter:', 4)
+4
+('convergence!, nre iter:', 4)
+5
+('convergence!, nre iter:', 6)
+6
+('convergence!, nre iter:', 12)
+7
+('convergence!, nre iter:', 6)
+8
+('convergence!, nre iter:', 11)
+9
+('convergence!, nre iter:', 27)
+Network 4
+0
+('convergence!, nre iter:', 4)
+1
+('convergence!, nre iter:', 5)
+2
+('convergence!, nre iter:', 5)
+3
+('convergence!, nre iter:', 4)
+4
+('convergence!, nre iter:', 12)
+5
+('convergence!, nre iter:', 19)
+6
+('convergence!, nre iter:', 9)
+7
+('convergence!, nre iter:', 6)
+8
+('convergence!, nre iter:', 6)
+9
+('convergence!, nre iter:', 5)
+Network 5
+0
+('convergence!, nre iter:', 3)
+1
+('convergence!, nre iter:', 5)
+2
+('convergence!, nre iter:', 4)
+3
+('convergence!, nre iter:', 6)
+4
+('convergence!, nre iter:', 6)
+5
+('convergence!, nre iter:', 4)
+6
+('convergence!, nre iter:', 8)
+7

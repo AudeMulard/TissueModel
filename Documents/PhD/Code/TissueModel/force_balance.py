@@ -1,6 +1,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
 #np.set_printoptions(precision=0)
+
+
 ### Set boundary conditions on extoerior nodes
 
 def new_bc(network, defo, side):
@@ -63,7 +65,7 @@ def write_system(network):
 						matrix[network.dimension*i+coord,network.dimension*j+coord]=-Ef
 						rest[network.dimension*i+coord] += Ef*(network.vertices_ini[network.interior_nodes[i]][coord]-network.vertices_ini[network.ridge_vertices[k][0]][coord])
 				else:
-					for coords in coord:
+					for coord in coords:
 						rest[network.dimension*i+coord] = rest[network.dimension*i+coord] + Ef*network.vertices[network.ridge_vertices[k][0]][coord] + Ef*(network.vertices_ini[network.interior_nodes[i]][coord]-network.vertices_ini[network.ridge_vertices[k][0]][coord])
 	return matrix, rest
 
@@ -80,6 +82,7 @@ def linear_scheme(network):
 			network.vertices[j,coord] = new_pos[network.dimension*i+coord]
 	return network
 
+"""
 ######################### NONLINEAR SCHEME #########################################
 # calculate the whole jacobian at one point, differentiated by itself
 # calculate the force at each point
@@ -104,6 +107,7 @@ def write_force_eq_point(network, i, constitutive):
 		if network.interior_nodes[i]==network.ridge_vertices[j][1]:
 			force_equation += write_force(network, network.interior_nodes[i], network.ridge_vertices[j][0], constitutive)
 	return force_equation
+"""
 
 # Calculate jacobian for the force contributed by j on i, differentiated by x
 def find_jacobian_x(network, i, j, constitutive):
@@ -210,9 +214,10 @@ def iterative_newton(network, constitutive):
 		if np.linalg.norm(diff) < epsilon:
 			print('convergence!, nre iter:', k)
 			break
-#		else:
-#			print(k, 'not converged')
+		else:
+			print(k, 'not converged')
 	return network
+
 
 
 ######################### NONLINEAR SCHEME 3D #########################################
@@ -220,6 +225,7 @@ def iterative_newton(network, constitutive):
 # calculate the force at each point
 def write_force(network, i, j, constitutive):
 	if constitutive == 'linear2':
+		print length_square(network,network.vertices[i]-network.vertices[j])
 		return network.Ef*(np.sqrt(length_square(network,network.vertices[i]-network.vertices[j]))-np.sqrt(length_square(network,network.vertices_ini[i]-network.vertices_ini[j])))*(network.vertices[i]-network.vertices[j])/np.sqrt(length_square(network,network.vertices[i]-network.vertices[j]))
 
 def write_force_eq_point(network, i, constitutive):
@@ -355,7 +361,7 @@ def write_matrix_J_3d(network, constitutive):
 	return J
 
 
-def iterative_newton_3d(network, constitutive):
+def iterative_newton_3d(network, constitutive,step):
 	max_iter = 100
 	epsilon = 1e-8
 	for k in range(max_iter):
@@ -368,7 +374,7 @@ def iterative_newton_3d(network, constitutive):
 			network.vertices[j,1] = network.vertices[j,1] + diff[network.dimension*i+1]
 			network.vertices[j,2] = network.vertices[j,2] + diff[network.dimension*i+2]
 		if np.linalg.norm(diff) < epsilon:
-			print('convergence!, nre iter:', k)
+			print(step,'convergence!, nre iter:', k)
 			break
 #		else:
 #			print(k, 'not converged')
@@ -378,13 +384,14 @@ def iterative_newton_3d(network, constitutive):
 
 ### Global function of solving one step if the netowrk
 
-def solve_force_balance(network, defo, constitutive, scheme, side):
+def solve_force_balance(network, defo, constitutive, scheme, side, step):
 	if scheme == 'nonlinear':
 		if network.dimension ==2:
+			print step
 			network = iterative_newton(network, constitutive)
-		if network.dimension == 3:
-			network = iterative_newton_3d(network, constitutive)
-	if scheme == 'linear':
+		elif network.dimension == 3:
+			network = iterative_newton_3d(network, constitutive, step)
+	elif scheme == 'linear':
 		network = linear_scheme(network)
 	return network
 
