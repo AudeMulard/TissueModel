@@ -1,20 +1,20 @@
 import numpy as np
 from force_balance import *
 from creation_network import Network
+import csv, os
 
 
 class Tensile_test:
-	def __init__(self, constitutive, scheme, side, space_discretization, traction_distance, plot, video, phase, ax):
+	def __init__(self, constitutive, scheme, side, space_discretization, traction_distance, plot, video, phase, path):
 		self.constitutive = constitutive
 		self.scheme = scheme
 		self.side = side
 		self.space_discretization = space_discretization
 		self.traction_distance = traction_distance
-		self.iterations = int(traction_distance / space_discretization)
+		self.iterations = abs(int(traction_distance / space_discretization))
 		self.plot = plot
 		self.video = video
 		self.phase = phase
-		self.ax = ax
 
 # Calulate the force on boundary point
 
@@ -32,29 +32,27 @@ class Tensile_test:
 					stress -= write_force(network, node, network.ridge_vertices[j][1], self.constitutive)
 				if node==network.ridge_vertices[j][1]:
 					stress -= write_force(network, node, network.ridge_vertices[j][0], self.constitutive)
-		stress = 1/network.length**2*np.linalg.norm(stress)
+		stress = np.linalg.norm(stress)/(network.length/network.mean_length)
 		return stress
 
 # sum them up and divide by volume to give constraint.
 
-	def full_test(self, network):
-		network.stress = [0.0]
-		network.strain = [0.0]
+	def full_test(self, network, path):
 		for i in range(self.iterations):
 	#		print 'Step', i
-			network = new_bc(network, self.space_discretization, self.side)
+			network = new_bc(network, self.space_discretization*self.traction_distance/abs(self.traction_distance), self.side)
 			if i==0 and self.constitutive != 'constant':
 				network = linear_scheme(network)
 			network=solve_force_balance(network, self.space_discretization, self.constitutive, self.scheme, self.side, i)
 			if self.plot == True:
 				network.stress.append(self.calculate_macro_stress(network))
-				network.strain.append(self.space_discretization*(i+1))
+				network.strain.append(network.strain[-1]+self.space_discretization*self.traction_distance/abs(self.traction_distance))
+				last_network = 'stress_strain_%d.csv' % network.complexity
+				with open(os.path.join(path,last_network), 'w') as writeFile:
+					writer = csv.writer(writeFile)
+					writer.writerows([network.strain])
+					writer.writerows([network.stress])
+				writeFile.close()	
 			if self.video == True:
-				network.plot_network_extension()
-				plt.savefig("%sstep%d.png" % (self.phase,i))
-		if self.plot == True:
-			fig = plt.figure()
-			ax = fig.gca()
-			self.ax.scatter(network.strain, network.stress)
-			plt.savefig('stress_strain.png')
+				network.save_network(i, path)
 		return network

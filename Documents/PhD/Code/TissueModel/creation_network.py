@@ -1,11 +1,15 @@
 import numpy as np
 from scipy.spatial import Voronoi, voronoi_plot_2d
 import network_types
+import seaborn as sns
+import matplotlib.pyplot as plt
+import csv
+import os
 
 # Class of the network, with different initial positions and all the corrections needed
 
 class Network:
-	def __init__(self, dimension, complexity_network, length_domain, min_distance, Ef, A, B, creation):
+	def __init__(self, dimension, complexity_network, length_domain, min_distance, Ef, A, B, creation, path):
 		self.complexity = complexity_network
 		self.length=length_domain
 		self.dimension = dimension
@@ -14,8 +18,8 @@ class Network:
 		self.B = B
 		self.min_distance = min_distance
 
-		self.strain = []
-		self.stress = []
+		self.strain = [0.]
+		self.stress = [0.]
 		
 	def create_network(self, creation):
 		self.vertices, self.ridge_vertices = network_types.select_network(self, creation)
@@ -32,10 +36,10 @@ class Network:
 		ridges_to_delete=np.array(sorted(ridges_to_delete, reverse=True))
 		if self.dimension == 2:
 			for k in ridges_to_delete:
-				self.ridge_vertices=np.delete(self.ridge_vertices, k, axis=0)
+				self.ridge_vertices=np.delete(self.ridge_vertices, int(k), axis=0)
 		if self.dimension == 3:
 			for k in ridges_to_delete:
-				self.ridge_vertices=np.delete(self.ridge_vertices, k, axis=0)
+				self.ridge_vertices=np.delete(self.ridge_vertices, int(k), axis=0)
 		return self
 
 	def delete_point(self, i):
@@ -95,7 +99,7 @@ class Network:
 						nodes_to_delete = np.append(nodes_to_delete,j)
 		nodes_to_delete=np.array(sorted(nodes_to_delete, reverse=True))
 		for point in nodes_to_delete:
-			nodes=np.delete(nodes,point,0)
+			nodes=np.delete(nodes,int(point),0)
 		self.vertices = nodes
 		# Renumber points after deleting some
 		for ridge in self.ridge_vertices:
@@ -111,7 +115,7 @@ class Network:
 				ridges_to_delete = np.append(ridges_to_delete,i)
 		ridges_to_delete=np.array(sorted(ridges_to_delete, reverse=True))
 		for ridge in ridges_to_delete:
-			self.ridge_vertices=np.delete(self.ridge_vertices,ridge,0)
+			self.ridge_vertices=np.delete(self.ridge_vertices,int(ridge),0)
 		return self
 
 # Cut network to make it belong to the domain area, first top and bottom then on the sides
@@ -152,7 +156,7 @@ class Network:
 		# delete the exterior points
 		nodes_to_delete=np.array(sorted(nodes_to_delete, reverse=True))
 		for point in nodes_to_delete:
-			nodes=np.delete(nodes,point,0)
+			nodes=np.delete(nodes,int(point),0)
 		# Renumber points in the ridge_vertices after deleting some
 		for ridge in self.ridge_vertices:
 			for i in range(2):
@@ -179,7 +183,7 @@ class Network:
 				self.ridge_vertices=np.delete(self.ridge_vertices,ridge, axis=0)
 			nodes_to_delete=np.array(sorted(nodes_to_delete, reverse=True))
 			for point in nodes_to_delete:
-				nodes=np.delete(nodes,point,0)
+				nodes=np.delete(nodes,int(point),0)
 			# Renumber points after deleting some
 			for ridge in self.ridge_vertices:
 				for i in range(2):
@@ -207,7 +211,7 @@ class Network:
 				ridges_to_delete = np.append(ridges_to_delete, i)
 		ridges_to_delete=np.array(sorted(ridges_to_delete, reverse=True))
 		for ridge in ridges_to_delete:
-			self.ridge_vertices=np.delete(self.ridge_vertices,ridge, axis=0)
+			self.ridge_vertices=np.delete(self.ridge_vertices,int(ridge), axis=0)
 		for node in nodes_to_delete_left:
 			node=int(node)
                 	for k in range(len(self.ridge_vertices)):
@@ -252,7 +256,7 @@ class Network:
 					self.ridge_vertices[k][1]=len(nodes)-1
 		nodes_to_delete=np.array(sorted(nodes_to_delete, reverse=True))
 		for point in nodes_to_delete:
-			nodes=np.delete(nodes,point,0)
+			nodes=np.delete(nodes,int(point),0)
 		# Renumber points after deleting some
 		for ridge in self.ridge_vertices:
 			for i in range(2):
@@ -282,7 +286,7 @@ class Network:
 				nodes_to_delete = np.append(nodes_to_delete,i)
 		nodes_to_delete=np.array(sorted(nodes_to_delete, reverse=True))
 		for point in nodes_to_delete:
-			self.vertices=np.delete(self.vertices,point,0)
+			self.vertices=np.delete(self.vertices,int(point),0)
 		# Renumber points after deleting some
 		for ridge in self.ridge_vertices:
 			for i in range(2):
@@ -293,13 +297,54 @@ class Network:
 				ridge[i] = ridge[i] - r
 		return self
 
+	def distribution_length_fiber(self, path):
+		lengths = []
+		for ridge in self.ridge_vertices:
+			lengths.append(np.linalg.norm(self.vertices[ridge[0]]-self.vertices[ridge[1]]))
+		self.mean_length = np.mean(lengths)
+		fig = plt.figure()
+		plt.axvline(self.mean_length, color = 'red',linewidth = 5 )
+		fig.gca().text(0.45,2.,r'$l_0$',fontsize=40)
+		fig.gca().tick_params(axis="x", labelsize=25)
+		sns.despine(left=True, top=True, right=True)
+		sns.distplot(lengths, kde=True)
+		fig.gca().get_yaxis().set_visible(False)
+		fig.gca().xaxis.set_ticks_position('bottom')
+		fig.gca().tick_params(width=4)
+		plt.savefig(os.path.join(path,'distribution_length.pdf'), bbox_inches='tight')
+		self.mean_length = np.mean(lengths)
+		return self
+
+	def save_network(self, step, path):
+		last_network = 'network_vertices_%s.csv' % step
+		with open(os.path.join(path,last_network), 'w') as writeFile:
+			writer = csv.writer(writeFile)
+			writer.writerows(self.vertices)
+		writeFile.close()
+		if step == 'initial':
+			last_network = 'network_ridge_vertices_%s.csv' % step
+			with open(os.path.join(path,last_network), 'w') as writeFile:
+				writer = csv.writer(writeFile)
+				writer.writerows(self.ridge_vertices)
+			writeFile.close()
+
 # Global function that applies all the corrections to the network
 
-	def set_fibers(self, creation):
-		self = self.create_network(creation)
-		if creation == 'Voronoi' or creation == '3d random':
-			self = self.delete_first_point()
-			self = self.cut_network()
+	def set_fibers(self, creation, path):
+		if creation == 'old':
+			with open('network_vertices_initial.csv','r') as readFile:
+				reader = csv.reader(readFile)
+				list_vertices = np.array(list(reader))
+				self.vertices=list_vertices.astype(float)
+			with open('network_ridge_vertices.csv','r') as readFile:
+				reader = csv.reader(readFile)
+				list_ridge_vertices=np.array(list(reader))
+				self.ridge_vertices=list_ridge_vertices.astype(int)
+		else:
+			self = self.create_network(creation)
+			if creation == 'Voronoi':
+				self = self.delete_first_point()
+				self = self.cut_network()
 		self = self.merge_nodes()
 		self = self.sort_nodes()
 		while len(self.boundary_nodes_right) <= min(self.complexity/10,4) or len(self.boundary_nodes_left) <= min(self.complexity/10,4):
@@ -315,6 +360,8 @@ class Network:
 		self = self.create_ridge_node_list()
 		self = self.sort_nodes()
 		self.vertices_ini = np.array(self.vertices.tolist())
+		self = self.distribution_length_fiber(path)
+		self.save_network('initial', path)
 		return self
 
 # Plots the network
@@ -327,7 +374,7 @@ class Network:
 			ax = fig.gca()
 			from matplotlib.collections import LineCollection
 			if kw.get('show_vertices', True):
-				ax.scatter(self.vertices[:,0],self.vertices[:,1])
+				ax.scatter(self.vertices[:,0],self.vertices[:,1], s =2.)
 			for simplex in self.ridge_vertices:
 			        simplex = np.asarray(simplex)
 		            	line_segments.append([(x, y) for x, y in self.vertices[simplex]])
@@ -352,8 +399,8 @@ class Network:
 		import matplotlib.pyplot as plt
 		fig = plt.figure()
 		ax = fig.gca()
-		plt.xlim([-0.1,self.length])
-		plt.ylim([-0.1,self.length])
+		plt.xlim([-0.1,self.length*1.5])
+		plt.ylim([-0.1,self.length*1.1])
 		from matplotlib.collections import LineCollection
 		#ax.scatter(self.vertices_ini[1:,0],self.vertices_ini[1:,1], color='grey')
 		if kw.get('show_vertices', True):

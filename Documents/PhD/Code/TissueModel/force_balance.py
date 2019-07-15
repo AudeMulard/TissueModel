@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 #np.set_printoptions(precision=0)
 
 
-### Set boundary conditions on extoerior nodes
+### Set boundary conditions on exterior nodes
 
 def new_bc(network, defo, side):
 	new_positions = network.vertices
@@ -214,8 +214,8 @@ def iterative_newton(network, constitutive):
 		if np.linalg.norm(diff) < epsilon:
 			print('convergence!, nre iter:', k)
 			break
-		else:
-			print(k, 'not converged')
+		elif k== max_iter-1:
+			raise ValueError 
 	return network
 
 
@@ -225,7 +225,6 @@ def iterative_newton(network, constitutive):
 # calculate the force at each point
 def write_force(network, i, j, constitutive):
 	if constitutive == 'linear2':
-		print length_square(network,network.vertices[i]-network.vertices[j])
 		return network.Ef*(np.sqrt(length_square(network,network.vertices[i]-network.vertices[j]))-np.sqrt(length_square(network,network.vertices_ini[i]-network.vertices_ini[j])))*(network.vertices[i]-network.vertices[j])/np.sqrt(length_square(network,network.vertices[i]-network.vertices[j]))
 
 def write_force_eq_point(network, i, constitutive):
