@@ -41,8 +41,6 @@ class Tensile_test:
 		for i in range(self.iterations):
 	#		print 'Step', i
 			network = new_bc(network, self.space_discretization*self.traction_distance/abs(self.traction_distance), self.side)
-			if i==0 and self.constitutive != 'constant':
-				network = linear_scheme(network)
 			network=solve_force_balance(network, self.space_discretization, self.constitutive, self.scheme, self.side, i)
 			if self.plot == True:
 				network.stress.append(self.calculate_macro_stress(network))

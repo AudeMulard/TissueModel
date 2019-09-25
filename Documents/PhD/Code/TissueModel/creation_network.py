@@ -5,6 +5,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import csv
 import os
+import force_balance
 
 # Class of the network, with different initial positions and all the corrections needed
 
@@ -364,58 +365,52 @@ class Network:
 		self.save_network('initial', path)
 		return self
 
-# Plots the network
-
-	def plot_network(self, **kw):
+	def set_fibers_explanation(self, creation, path):
 		import matplotlib.pyplot as plt
-		fig = plt.figure()
-		line_segments = []
-		if self.dimension == 2:
-			ax = fig.gca()
-			from matplotlib.collections import LineCollection
-			if kw.get('show_vertices', True):
-				ax.scatter(self.vertices[:,0],self.vertices[:,1], s =2.)
-			for simplex in self.ridge_vertices:
-			        simplex = np.asarray(simplex)
-		            	line_segments.append([(x, y) for x, y in self.vertices[simplex]])
-			lc = LineCollection(line_segments,linestyle='solid')
-		if self.dimension ==3:
-			from mpl_toolkits.mplot3d import Axes3D
-			from mpl_toolkits.mplot3d.art3d import Line3DCollection
-			ax = fig.add_subplot(111, projection='3d')
-			if kw.get('show_vertices', True):
-				ax.scatter(self.vertices[:,0],self.vertices[:,1],self.vertices[:,2])
-			for simplex in self.ridge_vertices:
-			        simplex = np.asarray(simplex)
-		            	line_segments.append([(x, y, z) for x, y, z in self.vertices[simplex]])
-			ax.set_xlim3d([0.0,self.length])
-			ax.set_ylim3d([0.0,self.length])
-			ax.set_zlim3d([0.0,self.length])		
-  			lc = Line3DCollection(line_segments,linestyle='solid')
-		ax.add_collection(lc)
-		return ax.figure		
-
-	def plot_network_extension(self, **kw):
-		import matplotlib.pyplot as plt
-		fig = plt.figure()
-		ax = fig.gca()
-		plt.xlim([-0.1,self.length*1.5])
-		plt.ylim([-0.1,self.length*1.1])
 		from matplotlib.collections import LineCollection
-		#ax.scatter(self.vertices_ini[1:,0],self.vertices_ini[1:,1], color='grey')
-		if kw.get('show_vertices', True):
-			ax.scatter(self.vertices[:,0],self.vertices[:,1], color='red')
-		line_segments_ini = []
-		for simplex_ini in self.ridge_vertices:
-		        simplex_ini = np.asarray(simplex_ini)
-	            	line_segments_ini.append([(x, y) for x, y in self.vertices_ini[simplex_ini]])
+		fig = plt.figure()
+		ax1 = fig.add_subplot(221)
+		ax2 = fig.add_subplot(222, sharex=ax1, sharey=ax1)
+		ax3 = fig.add_subplot(223, sharex=ax1, sharey=ax1)
+		ax4 = fig.add_subplot(224, sharex=ax1, sharey=ax1)
+		Seeds=np.random.rand(self.complexity,self.dimension)*self.length
+		ax1.scatter(Seeds[:,0],Seeds[:,1])
+		ax1.set_ylim([-0.1*self.length,self.length*1.1])
+		ax1.set_xlim([-0.1*self.length,self.length*1.1])
+		ax1.set_title('Seeds')
+		####
+		voronoi = Voronoi(Seeds)
+		self.vertices = Voronoi(Seeds).vertices
+		self.ridge_vertices = Voronoi(Seeds).ridge_vertices
+		self = self.delete_first_point()
+		ax2.scatter(self.vertices[:,0],self.vertices[:,1], s =2.)
 		line_segments = []
 		for simplex in self.ridge_vertices:
 		        simplex = np.asarray(simplex)
-	            	line_segments.append([(x, y) for x, y in self.vertices[simplex]])
-		lc_ini = LineCollection(line_segments_ini,linestyle='dashed', color='grey', label='initial')
-  		lc = LineCollection(line_segments,linestyle='solid', label='after tensile test', color='red')
-		ax.add_collection(lc_ini)
-		ax.add_collection(lc)
-		ax.legend()
-		return ax.figure
+		        line_segments.append([(x, y) for x, y in self.vertices[simplex]])
+		lc = LineCollection(line_segments,linestyle='solid')
+		ax2.set_title('Voronoi tesselation')
+		ax2.add_collection(lc)
+		####
+		self = self.cut_network()
+		ax3.scatter(self.vertices[:,0],self.vertices[:,1], s =2.)
+		line_segments = []
+		for simplex in self.ridge_vertices:
+		        simplex = np.asarray(simplex)
+		        line_segments.append([(x, y) for x, y in self.vertices[simplex]])
+		lc = LineCollection(line_segments,linestyle='solid')
+		ax3.set_title('Network cut')
+		ax3.add_collection(lc)
+		####
+		self = self.merge_nodes()
+		ax4.scatter(self.vertices[:,0],self.vertices[:,1], s =2.)
+		line_segments = []
+		for simplex in self.ridge_vertices:
+		        simplex = np.asarray(simplex)
+		        line_segments.append([(x, y) for x, y in self.vertices[simplex]])
+		lc = LineCollection(line_segments,linestyle='solid')
+		ax4.set_title('Close points merged')
+		ax4.add_collection(lc)
+		plt.savefig('../Data/creation_network/creation_network.pdf')
+
+

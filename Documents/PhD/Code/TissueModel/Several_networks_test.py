@@ -34,7 +34,7 @@ def one_network_test(complexity_network,dimension, length_domain, min_distance, 
 def plot_impact_number_points(number_networks,dimension, length_domain, min_distance, Ef, A, B, creation, tensile_test_1, path):
 	mean = []
 	standard_dev = []
-	for complexity_network in [200,250,300,350,500]:#[30,40,50,60, 70, 80, 90, 100, 125,150,300,500]:
+	for complexity_network in [30,40,50,60, 70]:
 		length_domain = complexity_network/10.
 		tensile_test_1.traction_distance = 0.3*length_domain
 		print 'Complexity:', complexity_network
@@ -43,12 +43,5 @@ def plot_impact_number_points(number_networks,dimension, length_domain, min_dist
 		standard_dev.append(standard_dev1)
 		print mean, standard_dev
 	return mean, standard_dev
-
-"""
-import numpy
-xdata = numpy.array([0, 0.1,0.2,0.3,0.4])
-ydata = numpy.array([0,0.146*10E-3,1.135*10E-3,2.987*10E-3,4.722*10E-3])
-ax.scatter(xdata,ydata, color = 'red')
-"""
 
 
