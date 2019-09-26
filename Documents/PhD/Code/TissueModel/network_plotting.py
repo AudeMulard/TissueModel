@@ -15,7 +15,7 @@ def plot_network(network,  **kw):
 			ax.scatter(network.vertices[:,0],network.vertices[:,1], s =2.)
 		for simplex in network.ridge_vertices:
 		        simplex = np.asarray(simplex)
-	            	line_segments.append([(x, y) for x, y in network.vertices[simplex]])
+		        line_segments.append([(x, y) for x, y in network.vertices[simplex]])
 		lc = LineCollection(line_segments,linestyle='solid')
 	if network.dimension ==3:
 		from mpl_toolkits.mplot3d import Axes3D
@@ -25,7 +25,7 @@ def plot_network(network,  **kw):
 			ax.scatter(network.vertices[:,0],network.vertices[:,1],network.vertices[:,2])
 		for simplex in network.ridge_vertices:
 		        simplex = np.asarray(simplex)
-	            	line_segments.append([(x, y, z) for x, y, z in network.vertices[simplex]])
+		        line_segments.append([(x, y, z) for x, y, z in network.vertices[simplex]])
 		ax.set_xlim3d([0.0,network.length])
 		ax.set_ylim3d([0.0,network.length])
 		ax.set_zlim3d([0.0,network.length])		
@@ -46,11 +46,11 @@ def plot_network_extension(network, **kw):
 	line_segments_ini = []
 	for simplex_ini in network.ridge_vertices:
 	        simplex_ini = np.asarray(simplex_ini)
-            	line_segments_ini.append([(x, y) for x, y in network.vertices_ini[simplex_ini]])
+	        line_segments_ini.append([(x, y) for x, y in network.vertices_ini[simplex_ini]])
 	line_segments = []
 	for simplex in network.ridge_vertices:
 	        simplex = np.asarray(simplex)
-            	line_segments.append([(x, y) for x, y in network.vertices[simplex]])
+	        line_segments.append([(x, y) for x, y in network.vertices[simplex]])
 	lc_ini = LineCollection(line_segments_ini,linestyle='dashed', color='grey', label='initial')
 	lc = LineCollection(line_segments,linestyle='solid', label='after tensile test', color='red')
 	ax.add_collection(lc_ini)
@@ -77,7 +77,7 @@ def plot_constraints(network):
 	ax.scatter(network.vertices[:,0],network.vertices[:,1])
 	for simplex in network.ridge_vertices:
 		simplex = np.asarray(simplex)
-	    	line_segments.append([(x, y) for x, y in network.vertices[simplex]])
+		line_segments.append([(x, y) for x, y in network.vertices[simplex]])
 	lc = LineCollection(line_segments,linestyle='solid',cmap=cmap,norm=norm)
 	sm = plt.cm.ScalarMappable(cmap=cmap, norm=norm)
 	lc.set_array(np.array(ridge_constraints))

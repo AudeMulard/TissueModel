@@ -34,7 +34,7 @@ stress_rep = True
 while True:
 	folder = str(input("Did you change the folder? enter 'y' for yes: "))
 	if folder != "y":
-		print 'Exit and change the folder'
+		print('Exit and change the folder')
 	else:
 		break
 

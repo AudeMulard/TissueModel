@@ -125,24 +125,24 @@ def write_matrix_J(network, constitutive):
 				J[2*i+1,2*j+1]=-find_jacobian_y(network, network.interior_nodes[i], r, constitutive)[1]
 	for i in range(len(network.boundary_nodes_left)):
 		b = 2*len(network.interior_nodes)+i
-		J[b,b] = write_jacobian_point(network, b, constitutive)[0,0]
-		J[b,b+1] = write_jacobian_point(network, b, constitutive)[1,0]
+		J[b,b] = write_jacobian_point(network, b, constitutive)[1,0]
+		J[b+1,b] = write_jacobian_point(network, b, constitutive)[1,1]
 		for k in network.list_nodes_ridges[network.boundary_nodes_left[i]]:
 			if network.boundary_nodes_left[i]==network.ridge_vertices[k][0] and network.ridge_vertices[k][1] in network.interior_nodes:
 				r=network.ridge_vertices[k][1]
 				j=network.interior_nodes.index(r)
 				J[b,2*j]=-find_jacobian_x(network, network.interior_nodes[i], r, constitutive)[0]
-				J[b,2*j+1]=-find_jacobian_y(network, network.interior_nodes[i], r, constitutive)[0]
+				J[b+1,2*j]=-find_jacobian_y(network, network.interior_nodes[i], r, constitutive)[1]
 			if network.boundary_nodes_left[i]==network.ridge_vertices[k][1] and network.ridge_vertices[k][0] in network.interior_nodes:
 				r=network.ridge_vertices[k][0]
 				j=network.interior_nodes.index(r)
 				J[b,2*j]=-find_jacobian_x(network, network.interior_nodes[i], r, constitutive)[0]
-				J[b,2*j+1]=-find_jacobian_y(network, network.interior_nodes[i], r, constitutive)[0]
+				J[b+1,2*j]=-find_jacobian_y(network, network.interior_nodes[i], r, constitutive)[1]
 	for i in range(len(network.boundary_nodes_right)):
-		print b
+		print(i,b)
 		b = 2*len(network.interior_nodes)+len(network.boundary_nodes_left) +i
 		J[b,b] = write_jacobian_point(network, b, constitutive)[0,0]
-		J[b,b+1] = write_jacobian_point(network, b, constitutive)[1,0]
+		J[b+1,b] = write_jacobian_point(network, b, constitutive)[0,1]
 		for k in network.list_nodes_ridges[network.boundary_nodes_left[i]]:
 			if network.boundary_nodes_left[i]==network.ridge_vertices[k][0] and network.ridge_vertices[k][1] in network.interior_nodes:
 				r=network.ridge_vertices[k][1]
@@ -163,7 +163,7 @@ def iterative_newton(network, constitutive):
 	for k in range(max_iter):
 		F = write_vector_F(network, constitutive)
 		J = write_matrix_J(network, constitutive)
-		print J, len(J)
+		print( J, len(J))
 		diff = np.linalg.solve(J,-F)
 		for i in range(len(network.interior_nodes)):
 			j=network.interior_nodes[i]
@@ -179,7 +179,7 @@ def iterative_newton(network, constitutive):
 ### Global function of solving one step if the netowrk
 
 def solve_force_balance(network, defo, constitutive, scheme, side, step):
-	print step
+	print( step)
 	network = iterative_newton(network, constitutive)
 	return network
 
