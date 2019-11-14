@@ -10,6 +10,8 @@ def plot_network(network,  **kw):
 	line_segments = []
 	if network.dimension == 2:
 		ax = fig.gca()
+		#ax.axis('equal')
+		#ax.set(xlim=(0., 2.0), ylim=(0., 1.1))
 		from matplotlib.collections import LineCollection
 		if kw.get('show_vertices', True):
 			ax.scatter(network.vertices[:,0],network.vertices[:,1], s =2.)
@@ -73,6 +75,7 @@ def plot_constraints(network):
 	fig = plt.figure()
 	line_segments = []
 	ax = fig.gca()
+	ax.set(xlim=(0., 2.0), ylim=(0., 1.1))
 	from matplotlib.collections import LineCollection
 	ax.scatter(network.vertices[:,0],network.vertices[:,1])
 	for simplex in network.ridge_vertices:

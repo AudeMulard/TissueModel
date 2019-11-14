@@ -2,6 +2,7 @@ import numpy as np
 from force_balance import *
 from creation_network import Network
 import csv, os
+from network_plotting import *
 
 
 class Tensile_test:
@@ -42,15 +43,13 @@ class Tensile_test:
 	#		print 'Step', i
 			network = new_bc(network, self.space_discretization*self.traction_distance/abs(self.traction_distance), self.side)
 			network=solve_force_balance(network, self.space_discretization, self.constitutive, self.scheme, self.side, i)
-			if self.plot == True:
-				network.stress.append(self.calculate_macro_stress(network))
-				network.strain.append(network.strain[-1]+self.space_discretization*self.traction_distance/abs(self.traction_distance))
-				last_network = 'stress_strain_%d.csv' % network.complexity
-				with open(os.path.join(path,last_network), 'w') as writeFile:
-					writer = csv.writer(writeFile)
-					writer.writerows([network.strain])
-					writer.writerows([network.stress])
-				writeFile.close()	
-			if self.video == True:
-				network.save_network(i, path)
+			network.stress.append(self.calculate_macro_stress(network))
+			network.strain.append(network.strain[-1]+self.space_discretization*self.traction_distance/abs(self.traction_distance))
+			last_network = 'stress_strain.csv'
+			with open(os.path.join(path,last_network), 'w') as writeFile:
+				writer = csv.writer(writeFile)
+				writer.writerows([network.strain])
+				writer.writerows([network.stress])
+			writeFile.close()	
+			network.save_network(i, path)
 		return network

@@ -1,7 +1,7 @@
 import numpy as np
 from scipy.spatial import Voronoi, voronoi_plot_2d
 import network_types
-import seaborn as sns
+#import seaborn as sns
 import matplotlib.pyplot as plt
 import csv
 import os
@@ -303,6 +303,7 @@ class Network:
 		for ridge in self.ridge_vertices:
 			lengths.append(np.linalg.norm(self.vertices[ridge[0]]-self.vertices[ridge[1]]))
 		self.mean_length = np.mean(lengths)
+		"""
 		fig = plt.figure()
 		plt.axvline(self.mean_length, color = 'red',linewidth = 5 )
 		fig.gca().text(0.45,2.,r'$l_0$',fontsize=40)
@@ -313,6 +314,7 @@ class Network:
 		fig.gca().xaxis.set_ticks_position('bottom')
 		fig.gca().tick_params(width=4)
 		plt.savefig(os.path.join(path,'distribution_length.pdf'), bbox_inches='tight')
+		"""
 		self.mean_length = np.mean(lengths)
 		return self
 
@@ -323,7 +325,7 @@ class Network:
 			writer.writerows(self.vertices)
 		writeFile.close()
 		if step == 'initial':
-			last_network = 'network_ridge_vertices_%s.csv' % step
+			last_network = 'network_ridge_vertices.csv'
 			with open(os.path.join(path,last_network), 'w') as writeFile:
 				writer = csv.writer(writeFile)
 				writer.writerows(self.ridge_vertices)
@@ -341,25 +343,29 @@ class Network:
 				reader = csv.reader(readFile)
 				list_ridge_vertices=np.array(list(reader))
 				self.ridge_vertices=list_ridge_vertices.astype(int)
+		elif creation != 'Voronoi' and creation != '3d random':
+			self = self.create_network(creation)
+			self = self.create_ridge_node_list()
+			self = self.sort_nodes()
 		else:
 			self = self.create_network(creation)
 			if creation == 'Voronoi':
 				self = self.delete_first_point()
 				self = self.cut_network()
-		self = self.merge_nodes()
-		self = self.sort_nodes()
-		while len(self.boundary_nodes_right) <= min(self.complexity/10,4) or len(self.boundary_nodes_left) <= min(self.complexity/10,4):
-			self = self.create_network(creation)
-			if creation == 'Voronoi' or creation == '3d random':
-				self = self.delete_first_point()
-				self = self.cut_network()
 			self = self.merge_nodes()
 			self = self.sort_nodes()
-		self = self.delete_doubles()
-		self = self.create_ridge_node_list()
-		self = self.delete_alone_points()
-		self = self.create_ridge_node_list()
-		self = self.sort_nodes()
+			while len(self.boundary_nodes_right) <= min(self.complexity/10,4) or len(self.boundary_nodes_left) <= min(self.complexity/10,4):
+				self = self.create_network(creation)
+				if creation == 'Voronoi' or creation == '3d random':
+					self = self.delete_first_point()
+					self = self.cut_network()
+				self = self.merge_nodes()
+				self = self.sort_nodes()
+			self = self.delete_doubles()
+			self = self.create_ridge_node_list()
+			self = self.delete_alone_points()
+			self = self.create_ridge_node_list()
+			self = self.sort_nodes()
 		self.vertices_ini = np.array(self.vertices.tolist())
 		self = self.distribution_length_fiber(path)
 		self.save_network('initial', path)
