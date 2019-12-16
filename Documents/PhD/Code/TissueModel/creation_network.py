@@ -58,6 +58,7 @@ class Network:
 		boundary_nodes_left =[]
 		boundary_nodes_right=[]
 		interior_nodes=[]
+		vertices_interior = []
 		for i in range(len(nodes)):
         		if nodes[i,0] <= 0.0:
         		        boundary_nodes_left.append(i)
@@ -319,17 +320,24 @@ class Network:
 		return self
 
 	def save_network(self, step, path):
-		last_network = 'network_vertices_%s.csv' % step
-		with open(os.path.join(path,last_network), 'w') as writeFile:
-			writer = csv.writer(writeFile)
-			writer.writerows(self.vertices)
-		writeFile.close()
 		if step == 'initial':
-			last_network = 'network_ridge_vertices.csv'
+			last_network = 'network_ridge_vertices_%d.csv' % len(self.vertices)
 			with open(os.path.join(path,last_network), 'w') as writeFile:
 				writer = csv.writer(writeFile)
 				writer.writerows(self.ridge_vertices)
 			writeFile.close()
+			last_network = 'network_vertices_initial_%d.csv' % len(self.vertices)
+			with open(os.path.join(path,last_network), 'w') as writeFile:
+				writer = csv.writer(writeFile)
+				writer.writerows(self.vertices)
+			writeFile.close()
+		else:
+			last_network = 'network_vertices_%03d.csv' % int(step)
+			with open(os.path.join(path,last_network), 'w') as writeFile:
+				writer = csv.writer(writeFile)
+				writer.writerows(self.vertices)
+			writeFile.close()
+		
 
 # Global function that applies all the corrections to the network
 
@@ -345,6 +353,7 @@ class Network:
 				self.ridge_vertices=list_ridge_vertices.astype(int)
 		elif creation != 'Voronoi' and creation != '3d random':
 			self = self.create_network(creation)
+			self = self.delete_first_point()
 			self = self.create_ridge_node_list()
 			self = self.sort_nodes()
 		else:
@@ -365,11 +374,36 @@ class Network:
 			self = self.create_ridge_node_list()
 			self = self.delete_alone_points()
 			self = self.create_ridge_node_list()
-			self = self.sort_nodes()
+		self = self.sort_nodes()
 		self.vertices_ini = np.array(self.vertices.tolist())
 		self = self.distribution_length_fiber(path)
 		self.save_network('initial', path)
 		return self
+
+	def length_ridge(self,x):	
+		if self.dimension == 2:
+			return np.sqrt(x[0]**2+x[1]**2)
+		elif self.dimension == 3:
+			return x[0]**2+x[1]**2+x[2]**2
+
+	def elas_energy_total(self,vertices_interior):
+		energy =0
+		for ridge in self.ridge_vertices:
+			if ridge[0] in self.interior_nodes:
+				i = self.interior_nodes.index(ridge[0])
+				if ridge[1] in self.interior_nodes:
+					j = self.interior_nodes.index(ridge[1])
+					energy += self.Ef*(self.length_ridge(vertices_interior[2*i:2*i+2]-vertices_interior[2*j:2*j+2])-self.length_ridge(self.vertices_ini[ridge[0]]-self.vertices_ini[ridge[1]]))**2
+				else:
+					energy += self.Ef*(self.length_ridge(vertices_interior[2*i:2*i+2]-self.vertices[ridge[1]])-self.length_ridge(self.vertices_ini[ridge[0]]-self.vertices_ini[ridge[1]]))**2
+			else:
+				if ridge[1] in self.interior_nodes:
+					j = self.interior_nodes.index(ridge[1])
+					energy += self.Ef*(self.length_ridge(self.vertices[ridge[0]]-vertices_interior[2*j:2*j+2])-self.length_ridge(self.vertices_ini[ridge[0]]-self.vertices_ini[ridge[1]]))**2
+				else:
+					energy += self.Ef*(self.length_ridge(self.vertices[ridge[0]]-self.vertices[ridge[1]])-self.length_ridge(self.vertices_ini[ridge[0]]-self.vertices_ini[ridge[1]]))**2
+		#print energy
+		return energy
 
 	def set_fibers_explanation(self, creation, path):
 		import matplotlib.pyplot as plt

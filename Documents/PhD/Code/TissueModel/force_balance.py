@@ -361,8 +361,8 @@ def write_matrix_J_3d(network, constitutive):
 
 
 def iterative_newton_3d(network, constitutive,step):
-	max_iter = 100
-	epsilon = 1e-8
+	max_iter = 200
+	epsilon = 1e-10
 	for k in range(max_iter):
 		F = write_vector_F_3d(network, constitutive)
 		J = write_matrix_J_3d(network, constitutive)
