@@ -3,6 +3,13 @@ import matplotlib.pyplot as plt
 #np.set_printoptions(precision=0)
 
 
+import warnings
+
+warnings.filterwarnings("error", category=RuntimeWarning)
+
+#with warnings.catch_warnings():
+#    warnings.simplefilter("error")
+
 ### Set boundary conditions on exterior nodes
 
 def new_bc(network, defo, side):
@@ -126,8 +133,8 @@ def find_jacobian_x(network, i, j, constitutive):
 	elif constitutive == 'linear2':
 		length = np.sqrt(length_square(network,network.vertices[i]-network.vertices[j]))
 		jac = network.Ef*(network.vertices[i][0]-network.vertices[j][0])/length
-		force = network.Ef*(1-np.sqrt(length_square(network,network.vertices_ini[i]-network.vertices_ini[j]))/np.sqrt(length_square(network,network.vertices[i]-network.vertices[j])))
-		return jac*(network.vertices[i]-network.vertices[j])/np.sqrt(length_square(network,network.vertices[i]-network.vertices[j])) + force*np.array([1,0])
+		force = network.Ef*(1-np.sqrt(length_square(network,network.vertices_ini[i]-network.vertices_ini[j]))/length)
+		return jac*(network.vertices[i]-network.vertices[j])/length + force*np.array([1,0])
 
 # Calculate jacobian for the force contributed by j on i, differentiated by y
 def find_jacobian_y(network, i, j, constitutive):
@@ -147,8 +154,8 @@ def find_jacobian_y(network, i, j, constitutive):
 	elif constitutive == 'linear2':
 		length = np.sqrt(length_square(network,network.vertices[i]-network.vertices[j]))
 		jac = network.Ef*(network.vertices[i][1]-network.vertices[j][1])/length
-		force = network.Ef*(1-np.sqrt(length_square(network,network.vertices_ini[i]-network.vertices_ini[j]))/np.sqrt(length_square(network,network.vertices[i]-network.vertices[j])))
-		return jac*(network.vertices[i]-network.vertices[j])/np.sqrt(length_square(network,network.vertices[i]-network.vertices[j])) + force*np.array([0,1])
+		force = network.Ef*(1-np.sqrt(length_square(network,network.vertices_ini[i]-network.vertices_ini[j]))/length)
+		return jac*(network.vertices[i]-network.vertices[j])/length + force*np.array([0,1])
 
 def write_jacobian_point(network, i, constitutive):
 	jacobian_x=0
@@ -200,19 +207,25 @@ def write_matrix_J(network, constitutive):
 	return J
 
 
-def iterative_newton(network, constitutive):
-	max_iter = 100
+def iterative_newton(network, constitutive,details):
+	max_iter = 500
 	epsilon = 1e-8
 	for k in range(max_iter):
 		F = write_vector_F(network, constitutive)
 		J = write_matrix_J(network, constitutive)
+		#print J
 		diff = np.linalg.solve(J,-F)
+		#print F, J, diff
 		for i in range(len(network.interior_nodes)):
 			j=network.interior_nodes[i]
 			network.vertices[j,0] = network.vertices[j,0] + diff[2*i]
 			network.vertices[j,1] = network.vertices[j,1] + diff[2*i+1]
+		if details == True:
+			if k%25==0:
+				print 'Step: ', k, ', convergence: ',np.linalg.norm(diff)#, max(diff), list(diff).index(max(diff)), network.vertices[136/2]
 		if np.linalg.norm(diff) < epsilon:
-			print('convergence!, nre iter:', k)
+			if details == True:
+				print('convergence!, nre iter:', k)
 			break
 		elif k== max_iter-1:
 			raise ValueError 
@@ -383,11 +396,10 @@ def iterative_newton_3d(network, constitutive,step):
 
 ### Global function of solving one step if the netowrk
 
-def solve_force_balance(network, defo, constitutive, scheme, side, step):
+def solve_force_balance(network, defo, constitutive, scheme, side, step,details):
 	if scheme == 'nonlinear':
 		if network.dimension ==2:
-			print(step)
-			network = iterative_newton(network, constitutive)
+			network = iterative_newton(network, constitutive,details)
 		elif network.dimension == 3:
 			network = iterative_newton_3d(network, constitutive, step)
 	elif scheme == 'linear':

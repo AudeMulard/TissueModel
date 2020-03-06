@@ -6,8 +6,9 @@ import matplotlib.pyplot as plt
 import csv
 import os
 import force_balance
-
+from network_plotting import *
 # Class of the network, with different initial positions and all the corrections needed
+import fnmatch
 
 class Network:
 	def __init__(self, dimension, complexity_network, length_domain, min_distance, Ef, A, B, creation, path):
@@ -18,30 +19,42 @@ class Network:
 		self.A = A
 		self.B = B
 		self.min_distance = min_distance
+		self.creation = creation
 
 		self.strain = [0.]
 		self.stress = [0.]
 		
 	def create_network(self, creation):
 		self.vertices, self.ridge_vertices = network_types.select_network(self, creation)
+		self.interior_nodes = []
+		self.boundary_nodes_left=[]
+		self.boundary_nodes_right=[]
 		return self
 
 # Deletion of the first point because it creates intersections in the network
-
 	def delete_first_point(self):
-		self.vertices = np.delete(self.vertices, -1, axis=0)
+		#self = self.create_ridge_node_list()
 		ridges_to_delete = []
-		for k in range(len(self.ridge_vertices)):
-			if self.ridge_vertices[k][0]==-1 or self.ridge_vertices[k][1]==-1 or self.ridge_vertices[k][0]==len(self.vertices) or self.ridge_vertices[k][1]==len(self.vertices):
-				ridges_to_delete= np.append(ridges_to_delete, k)
+		for i in range(len(self.ridge_vertices)):
+			if self.ridge_vertices[i][0]==-1 or self.ridge_vertices[i][1]==-1:
+				ridges_to_delete.append(i)
+		#ridges_to_delete = self.list_nodes_ridges[-1]
 		ridges_to_delete=np.array(sorted(ridges_to_delete, reverse=True))
-		if self.dimension == 2:
-			for k in ridges_to_delete:
-				self.ridge_vertices=np.delete(self.ridge_vertices, int(k), axis=0)
-		if self.dimension == 3:
-			for k in ridges_to_delete:
-				self.ridge_vertices=np.delete(self.ridge_vertices, int(k), axis=0)
+		for k in ridges_to_delete:
+			self.ridge_vertices=np.delete(self.ridge_vertices, int(k), axis=0)
+		self = self.delete_points_with_two_ridges()
 		return self
+
+	def delete_points_with_two_ridges(self):
+		self = self.create_ridge_node_list()
+		for i in range(len(self.list_nodes_ridges)):
+			if len(self.list_nodes_ridges[i])==2:
+				self.delete_two_ridge_points(i)
+		self = self.delete_doubles()
+		self = self.create_ridge_node_list()
+		self = self.delete_alone_points()
+		return self
+
 
 	def delete_point(self, i):
 		self.vertices = np.delete(self.vertices, i, axis=0)
@@ -49,6 +62,24 @@ class Network:
 			for i in range(2):
 				if i < ridge[i]:
 					ridge[i] -= 1
+		return self
+
+	def delete_two_ridge_points(self,i):
+		list_ridges = self.list_nodes_ridges[i]
+		ridges = self.ridge_vertices
+		if ridges[list_ridges[0]][0] == i and ridges[list_ridges[1]][0] == i:
+			ridges[list_ridges[0]][0] = ridges[list_ridges[1]][1]
+			ridges[list_ridges[1]][0] = ridges[list_ridges[0]][1]
+		elif ridges[list_ridges[0]][1] == i and ridges[list_ridges[1]][0] == i:
+			ridges[list_ridges[0]][1] = ridges[list_ridges[1]][1]
+			ridges[list_ridges[1]][0] = ridges[list_ridges[0]][0]
+		elif ridges[list_ridges[0]][0] == i and ridges[list_ridges[1]][1] == i:
+			ridges[list_ridges[0]][0] = ridges[list_ridges[1]][0]
+			ridges[list_ridges[1]][1] = ridges[list_ridges[0]][1]
+		elif ridges[list_ridges[0]][1] == i and ridges[list_ridges[1]][1] == i:
+			ridges[list_ridges[0]][1] = ridges[list_ridges[1]][0]
+			ridges[list_ridges[1]][1] = ridges[list_ridges[0]][0]
+		self.ridge_vertices == ridges
 		return self
 
 # Sort the nodes in three parts: two boundary lists and the interior nodes list
@@ -89,16 +120,17 @@ class Network:
 		nodes = self.vertices
 		nodes_to_delete = []
 		for i in range(len(nodes)):
-	        	for j in range(i):
-	                	distance = np.sqrt((nodes[i,0]-nodes[j,0])**2+(nodes[i,1]-nodes[j,1])**2)
-	                	if distance < self.min_distance:
-	                	    for k in range(len(self.ridge_vertices)):
-	                	        if self.ridge_vertices[k][0]==j:
-	                	            self.ridge_vertices[k][0]=i
-	                	        if self.ridge_vertices[k][1]==j:
-	                	            self.ridge_vertices[k][1]=i
-	                	    if j not in nodes_to_delete:
-	                	        nodes_to_delete = np.append(nodes_to_delete,j)
+			if i in self.interior_nodes:
+				for j in range(i):
+					distance = np.sqrt((nodes[i,0]-nodes[j,0])**2+(nodes[i,1]-nodes[j,1])**2)
+					if distance < self.min_distance:
+					    for k in range(len(self.ridge_vertices)):
+					        if self.ridge_vertices[k][0]==j:
+					            self.ridge_vertices[k][0]=i
+					        if self.ridge_vertices[k][1]==j:
+					            self.ridge_vertices[k][1]=i
+					    if j not in nodes_to_delete:
+					        nodes_to_delete = np.append(nodes_to_delete,j)
 		nodes_to_delete=np.array(sorted(nodes_to_delete, reverse=True))
 		for point in nodes_to_delete:
 			nodes=np.delete(nodes,int(point),0)
@@ -121,7 +153,6 @@ class Network:
 		return self
 
 # Cut network to make it belong to the domain area, first top and bottom then on the sides
-
 	def cut_network_updown(self):
 		nodes = self.vertices
 		nodes_to_delete = []
@@ -168,33 +199,41 @@ class Network:
 						r+=1
 				ridge[i] = ridge[i] - r
 		self.vertices=nodes
-		## Supress alone fibres and points
-		while ridges_to_delete.tolist() !=[]:
-			ridges_to_delete=[]
-			nodes_to_delete=[]
+		for k in range(3):
 			self = self.create_ridge_node_list()
-			self = self.sort_nodes()
-			for i in range(len(self.interior_nodes)):
-				j = self.interior_nodes[i]
-				if len(self.list_nodes_ridges[j])<=1:
-					nodes_to_delete = np.append(nodes_to_delete,j)
-					ridges_to_delete= np.append(ridges_to_delete,self.list_nodes_ridges[j])
-			nodes = self.vertices
-			ridges_to_delete=np.array(sorted(ridges_to_delete, reverse=True))
-			for ridge in ridges_to_delete:
-				self.ridge_vertices=np.delete(self.ridge_vertices,ridge, axis=0)
-			nodes_to_delete=np.array(sorted(nodes_to_delete, reverse=True))
-			for point in nodes_to_delete:
-				nodes=np.delete(nodes,int(point),0)
-			# Renumber points after deleting some
-			for ridge in self.ridge_vertices:
-				for i in range(2):
-					r=0
-					for node in nodes_to_delete:
-						if node < ridge[i]:
-							r+=1
-					ridge[i] = ridge[i] - r
-			self.vertices=nodes
+			for i in range(len(self.list_nodes_ridges)):
+				if len(self.list_nodes_ridges[i])==2:
+					self.delete_two_ridge_points(i)
+			self = self.delete_doubles()
+			self = self.create_ridge_node_list()
+			self = self.delete_alone_points()
+			## Supress alone fibres and points
+			while ridges_to_delete.tolist() !=[]:
+				ridges_to_delete=[]
+				nodes_to_delete=[]
+				self = self.create_ridge_node_list()
+				self = self.sort_nodes()
+				for i in range(len(self.interior_nodes)):
+					j = self.interior_nodes[i]
+					if len(self.list_nodes_ridges[j])<=1:
+						nodes_to_delete = np.append(nodes_to_delete,j)
+						ridges_to_delete= np.append(ridges_to_delete,self.list_nodes_ridges[j])
+				nodes = self.vertices
+				ridges_to_delete=np.array(sorted(ridges_to_delete, reverse=True))
+				for ridge in ridges_to_delete:
+					self.ridge_vertices=np.delete(self.ridge_vertices,ridge, axis=0)
+				nodes_to_delete=np.array(sorted(nodes_to_delete, reverse=True))
+				for point in nodes_to_delete:
+					nodes=np.delete(nodes,int(point),0)
+				# Renumber points after deleting some
+				for ridge in self.ridge_vertices:
+					for i in range(2):
+						r=0
+						for node in nodes_to_delete:
+							if node < ridge[i]:
+								r+=1
+						ridge[i] = ridge[i] - r
+				self.vertices=nodes
 		return self
 
 	def cut_network_side(self):
@@ -271,7 +310,9 @@ class Network:
 		return self
 	
 	def cut_network(self):
+		#plot_network(self)
 		self=self.cut_network_side()
+		#plot_network(self)
 		self=self.cut_network_updown()
 		return self
 
@@ -282,6 +323,7 @@ class Network:
 		return self
 
 	def delete_alone_points(self):
+		self = self.create_ridge_node_list()
 		nodes_to_delete = []
 		for i in range(len(self.vertices)):
 			if len(self.list_nodes_ridges[i])==0:
@@ -298,41 +340,53 @@ class Network:
 						r+=1
 				ridge[i] = ridge[i] - r
 		return self
+					
+	def delete_single_ridge_points(self):
+		self =self.create_ridge_node_list()
+		ridges_to_delete = []
+		for i in range(len(self.vertices)):
+			if len(self.list_nodes_ridges[i])==1 and i in self.interior_nodes:
+				ridges_to_delete.append(self.list_nodes_ridges[i][0])
+		ridges_to_delete=np.array(sorted(ridges_to_delete, reverse=True))
+		for ridge in ridges_to_delete:
+			self.ridge_vertices=np.delete(self.ridge_vertices,ridge, axis=0)
+		return self
 
 	def distribution_length_fiber(self, path):
 		lengths = []
 		for ridge in self.ridge_vertices:
 			lengths.append(np.linalg.norm(self.vertices[ridge[0]]-self.vertices[ridge[1]]))
 		self.mean_length = np.mean(lengths)
-		"""
-		fig = plt.figure()
-		plt.axvline(self.mean_length, color = 'red',linewidth = 5 )
-		fig.gca().text(0.45,2.,r'$l_0$',fontsize=40)
-		fig.gca().tick_params(axis="x", labelsize=25)
-		sns.despine(left=True, top=True, right=True)
-		sns.distplot(lengths, kde=True)
-		fig.gca().get_yaxis().set_visible(False)
-		fig.gca().xaxis.set_ticks_position('bottom')
-		fig.gca().tick_params(width=4)
-		plt.savefig(os.path.join(path,'distribution_length.pdf'), bbox_inches='tight')
-		"""
-		self.mean_length = np.mean(lengths)
 		return self
 
 	def save_network(self, step, path):
 		if step == 'initial':
-			last_network = 'network_ridge_vertices_%d.csv' % len(self.vertices)
+			filename = 'parameters_%s.csv' % self.creation
+			with open(os.path.join(path,filename), 'w') as writeFile:
+				writer = csv.writer(writeFile)
+				writer.writerow(["complexity",self.complexity])
+				writer.writerow(["length",self.length])
+				writer.writerow(["k_spring",self.Ef])
+				writer.writerow(["merge_distance",self.min_distance])
+			writeFile.close()
+			last_network = 'network_ridge_vertices%s.csv' % self.creation
 			with open(os.path.join(path,last_network), 'w') as writeFile:
 				writer = csv.writer(writeFile)
 				writer.writerows(self.ridge_vertices)
 			writeFile.close()
-			last_network = 'network_vertices_initial_%d.csv' % len(self.vertices)
+			last_network = 'network_vertices_initial%s.csv' % self.creation
 			with open(os.path.join(path,last_network), 'w') as writeFile:
 				writer = csv.writer(writeFile)
 				writer.writerows(self.vertices)
 			writeFile.close()
+		elif step=='temp':
+			last_network = 'network_vertices.csv'
+			with open(last_network, 'w') as writeFile:
+				writer = csv.writer(writeFile)
+				writer.writerows(self.vertices)
+			writeFile.close()
 		else:
-			last_network = 'network_vertices_%03d.csv' % int(step)
+			last_network = 'network_vertices_%03d%s.csv' % (int(step),self.creation)
 			with open(os.path.join(path,last_network), 'w') as writeFile:
 				writer = csv.writer(writeFile)
 				writer.writerows(self.vertices)
@@ -343,41 +397,53 @@ class Network:
 
 	def set_fibers(self, creation, path):
 		if creation == 'old':
-			with open('network_vertices_initial.csv','r') as readFile:
+			filename = fnmatch.filter(os.listdir('.'), 'network_vertices_initial_167.csv')
+			with open(filename[0],'r') as readFile:
 				reader = csv.reader(readFile)
 				list_vertices = np.array(list(reader))
 				self.vertices=list_vertices.astype(float)
-			with open('network_ridge_vertices.csv','r') as readFile:
+			filename = fnmatch.filter(os.listdir('.'), 'network_ridge_vertices_167.csv')
+			with open(filename[0], 'r') as readFile:
 				reader = csv.reader(readFile)
 				list_ridge_vertices=np.array(list(reader))
 				self.ridge_vertices=list_ridge_vertices.astype(int)
-		elif creation != 'Voronoi' and creation != '3d random':
+		elif creation != 'Voronoi':# and creation != 'reg_Voronoi':
 			self = self.create_network(creation)
 			self = self.delete_first_point()
 			self = self.create_ridge_node_list()
 			self = self.sort_nodes()
+			self = self.cut_network()
 		else:
 			self = self.create_network(creation)
-			if creation == 'Voronoi':
-				self = self.delete_first_point()
-				self = self.cut_network()
-			self = self.merge_nodes()
-			self = self.sort_nodes()
-			while len(self.boundary_nodes_right) <= min(self.complexity/10,4) or len(self.boundary_nodes_left) <= min(self.complexity/10,4):
+			while len(self.boundary_nodes_right) <= min(self.complexity/10,8) or len(self.boundary_nodes_left) <= min(self.complexity/10,8):
 				self = self.create_network(creation)
-				if creation == 'Voronoi' or creation == '3d random':
-					self = self.delete_first_point()
-					self = self.cut_network()
+				self = self.cut_network()
+				self = self.delete_first_point()
+				self = self.delete_doubles()
+				#self = self.cut_network()
+				self = self.sort_nodes()
+			plot_network(self)
+			print 'number of boundary_nodes: ', len(self.boundary_nodes_right),len(self.boundary_nodes_left)
+			while len(self.ridge_vertices)-2*len(self.interior_nodes)<=self.complexity/10:
+				self.min_distance +=0.001
+				self = self.delete_doubles()
+				self = self.delete_points_with_two_ridges()
+				self = self.sort_nodes()
+				self = self.create_ridge_node_list()
 				self = self.merge_nodes()
 				self = self.sort_nodes()
-			self = self.delete_doubles()
-			self = self.create_ridge_node_list()
+			print 'hyperstatic number: ',len(self.ridge_vertices)-2*len(self.interior_nodes)
+			print 'number of boundary_nodes: ', len(self.boundary_nodes_right),len(self.boundary_nodes_left)
+			print 'min_distance: ', self.min_distance
 			self = self.delete_alone_points()
-			self = self.create_ridge_node_list()
+			self = self.delete_single_ridge_points()
+			self = self.delete_alone_points()
+			#self = self.create_ridge_node_list()
 		self = self.sort_nodes()
 		self.vertices_ini = np.array(self.vertices.tolist())
 		self = self.distribution_length_fiber(path)
 		self.save_network('initial', path)
+		self = self.create_ridge_node_list()
 		return self
 
 	def length_ridge(self,x):	

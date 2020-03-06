@@ -16,9 +16,50 @@ def select_network(network,creation):
 				ridge_vertices = new_ridge_vertices
 			return vertices, ridge_vertices
 
+		if creation == "reg_Voronoi":
+			Seeds = []
+			for x in range(50):
+				for y in range(50):
+					Seeds.append([x/10.,y/20.-0.05])
+			for x in range(50):
+				for y in range(50):
+					Seeds.append([x/10.-0.05,y/20.-0.025])
+			#print Seeds
+			#Seeds=np.random.rand(network.complexity,network.dimension)*network.length
+			voronoi = Voronoi(Seeds)
+			vertices = Voronoi(Seeds).vertices
+			ridge_vertices = Voronoi(Seeds).ridge_vertices
+			if network.dimension == 3:
+				new_ridge_vertices = []
+				for ridge in ridge_vertices:
+					for i in range(len(ridge)-1):
+						new_ridge_vertices.append([ridge[i],ridge[i+1]])
+				ridge_vertices = new_ridge_vertices
+			return vertices, ridge_vertices
+		
+		if creation == "disturbed_grid":
+			Seeds = []
+			for x in range(network.complexity):
+				for y in range(network.complexity):
+					Seeds.append([x/10.+np.random.rand()*network.B,y/10.+np.random.rand()*network.B])
+			voronoi = Voronoi(Seeds)
+			vertices = Voronoi(Seeds).vertices
+			ridge_vertices = Voronoi(Seeds).ridge_vertices
+			return vertices, ridge_vertices
+
 		if creation == "big grid":
 			vertices = np.array([[0.0,0.25],[0.0,0.5],[0.0,0.75],[0.25,0.0],[0.25,0.25],[0.25,0.5],[0.25,0.75],[0.25,1.0],[0.5,0.0],[0.5,0.25],[0.5,0.5],[0.5,0.75],[0.5,1.0],[0.75,0.0],[0.75,0.25],[0.75,0.5],[0.75,0.75],[0.75,1.0],[1.0,0.25],[1.0,0.5],[1.0,0.75]])
 			ridge_vertices = np.array([[0,4],[4,9],[9,14],[14,18],[1,5],[5,10],[10,15],[15,19],[2,6],[6,11],[11,16],[16,20],[3,4],[4,5],[5,6],[6,7],[8,9],[9,10],[10,11],[11,12],[13,14],[14,15],[15,16],[16,17]])
+			return vertices, ridge_vertices
+
+		if creation == "cut big grid":
+			vertices = np.array([[0.0,0.25],[0.0,0.5],[0.0,0.75],[0.25,0.0],[0.25,0.25],[0.25,0.5],[0.25,0.75],[0.25,1.0],[0.5,0.0],[0.5,0.25],[0.5,0.5],[0.5,0.75],[0.5,1.0],[0.75,0.0],[0.75,0.25],[0.75,0.5],[0.75,0.75],[0.75,1.0],[1.0,0.25],[1.0,0.5],[1.0,0.75]])
+			ridge_vertices = np.array([[0,4],[4,9],[9,14],[14,18],[1,5],[5,10],[10,15],[15,19],[2,6],[6,11],[11,16],[16,20],[3,4],[4,5],[5,6],[6,7],[8,9],[9,10],[10,11],[11,12],[13,14],[14,15],[15,16],[16,17]])
+			return vertices, ridge_vertices
+
+		if creation == "vertical line":
+			vertices = np.array([[0.0,0.0],[0.0,1.0],[0.5,0.0],[0.5,1.0],[1.0,0.0],[1.0,1.0]])
+			ridge_vertices = np.array([[0,2],[2,4],[1,3],[3,5],[2,3]])
 			return vertices, ridge_vertices
 
 		if creation == "small grid":

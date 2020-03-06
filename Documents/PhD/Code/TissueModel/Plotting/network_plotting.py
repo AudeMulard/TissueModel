@@ -15,6 +15,8 @@ def plot_network(network,  **kw):
 		from matplotlib.collections import LineCollection
 		if kw.get('show_vertices', True):
 			ax.scatter(network.vertices[:,0],network.vertices[:,1], s =2.)
+		#for i in range(len(network.vertices[:,0])):
+		#	ax.annotate(i, (network.vertices[i,0],network.vertices[i,1]),fontsize=10)
 		for simplex in network.ridge_vertices:
 		        simplex = np.asarray(simplex)
 		        line_segments.append([(x, y) for x, y in network.vertices[simplex]])

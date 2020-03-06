@@ -27,11 +27,16 @@ print sys.argv[1][-7:-4]
 
 for k in range(int(sys.argv[1][-7:-4])):
 	plot_network_geometry(k)
-	plt.savefig('step_%03d.png' % k,bbox_inches='tight',dpi=200)
+	#plt.axis('equal')
+	#plt.xlim(0.0,2.0)
+	plt.ylim([-0.1,1.1])
+	plt.xlim([0.0,2.0])
+	plt.savefig('step_%03d.png' % k,bbox_inches='tight',dpi=500)
 	plt.close()
 
 
 for k in range(int(sys.argv[1][-7:-4])):
 	plot_network_constraints(k)
+	plt.xlim(0.0,2.0)
 	plt.savefig('constraints_step_%03d.png' % k,bbox_inches='tight',dpi=200)
 	plt.close()
