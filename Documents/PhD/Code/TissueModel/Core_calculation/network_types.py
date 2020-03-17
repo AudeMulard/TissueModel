@@ -16,6 +16,12 @@ def select_network(network,creation):
 				ridge_vertices = new_ridge_vertices
 			return vertices, ridge_vertices
 
+		"""if creation == "growth_network":
+			Seeds = np.random.rand(network.complexity,network.dimension)*network.length
+			orientations = np.random.rand(network.complexity,1.)*180
+			for seed in Seeds:"""
+				
+
 		if creation == "reg_Voronoi":
 			Seeds = []
 			for x in range(50):
@@ -41,7 +47,7 @@ def select_network(network,creation):
 			Seeds = []
 			for x in range(network.complexity):
 				for y in range(network.complexity):
-					Seeds.append([x/10.+np.random.rand()*network.B,y/10.+np.random.rand()*network.B])
+					Seeds.append([x/20.+np.random.rand()*network.disturbance,y/20.+np.random.rand()*network.disturbance])
 			voronoi = Voronoi(Seeds)
 			vertices = Voronoi(Seeds).vertices
 			ridge_vertices = Voronoi(Seeds).ridge_vertices

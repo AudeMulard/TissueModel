@@ -84,11 +84,12 @@ def smallest_values(step,ridge_vertices):
 		list_angle.append(abs(np.dot(vertices[ridge[0]]-vertices[ridge[1]], [1.,0.]))**2/length)
 	avg_angle = sum(list_angle)/sum(lengths)
 	max_angle = max(list_angle)
+
 	min_angle = min(list_angle)
 	return min_length, avg_angle, min_angle, max_angle
 
 def plot_avg_angle(strain):
-	os.chdir('../Data/influence_points/')
+	os.chdir('../Data/disturbed_grid/')
 	if len(sys.argv) == 1:
 		os.chdir(sorted_ls('.')[-1])
 	else:
@@ -120,7 +121,7 @@ def plot_avg_angle(strain):
 	return avg_angles
 
 if __name__ == "__main__":
-	os.chdir('../Data/influence_points/')
+	os.chdir('../Data/reg_Voronoi/')
 	if len(sys.argv) == 1:
 		os.chdir(sorted_ls('.')[-1])
 	else:

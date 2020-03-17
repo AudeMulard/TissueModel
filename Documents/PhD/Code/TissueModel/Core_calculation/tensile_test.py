@@ -2,7 +2,7 @@ import numpy as np
 from force_balance import *
 from creation_network import Network
 import csv, os
-from network_plotting import *
+from Plotting.network_plotting import *
 
 
 class Tensile_test:
@@ -17,6 +17,17 @@ class Tensile_test:
 		self.video = video
 		self.phase = phase
 
+	def save_parameters(self,network,path):
+		filename = 'parameters_%03d.csv' % len(network.vertices)
+		with open(os.path.join(path,filename), 'a') as writeFile:
+			writer = csv.writer(writeFile)
+			writer.writerow(["constitutive",self.constitutive])
+			writer.writerow(["side",self.side])
+			writer.writerow(["space discretization",self.space_discretization])
+			writer.writerow(["traction_distance",self.traction_distance])
+			writer.writerow(["phase",self.phase])
+		writeFile.close()
+
 # Calulate the force on boundary point
 
 	def calculate_macro_stress(self,network):
@@ -26,35 +37,28 @@ class Tensile_test:
 				if node==network.ridge_vertices[j][0]:
 					i = node
 					k = network.ridge_vertices[j][1]
-					#stress += network.Ef*(np.sqrt(length_square(network,network.vertices[i]-network.vertices[k]))-np.sqrt(length_square(network,network.vertices_ini[i]-network.vertices_ini[k]))) *network.vertices[node][0]
 					stress += write_force(network, node, network.ridge_vertices[j][1], self.constitutive)[0]*network.vertices[node][0]
-					#stress += network.Ef*(np.sqrt(length_square(network,network.vertices[i]-network.vertices[k]))-np.sqrt(length_square(network,network.vertices_ini[i]-network.vertices_ini[k])))* (network.vertices[i][0]-network.vertices[k][0]) /np.sqrt(length_square(network,network.vertices[i]-network.vertices[k]))*network.vertices[node][0]
 				if node==network.ridge_vertices[j][1]:
 					i = node
 					k = network.ridge_vertices[j][0]
-					#stress += network.Ef*(np.sqrt(length_square(network,network.vertices[i]-network.vertices[k]))-np.sqrt(length_square(network,network.vertices_ini[i]-network.vertices_ini[k]))) *network.vertices[node][0]#
 					stress += write_force(network, node, network.ridge_vertices[j][0], self.constitutive)[0]*network.vertices[node][0]
-					#stress += network.Ef*(np.sqrt(length_square(network,network.vertices[i]-network.vertices[k]))-np.sqrt(length_square(network,network.vertices_ini[i]-network.vertices_ini[k])))* (network.vertices[i][0]-network.vertices[k][0]) /np.sqrt(length_square(network,network.vertices[i]-network.vertices[k]))*network.vertices[node][0]
 		for node in network.boundary_nodes_left:
 			for j in network.list_nodes_ridges[node]:
 				if node==network.ridge_vertices[j][0]:
 					i = node
 					k = network.ridge_vertices[j][1]
-					#stress -= network.Ef*(np.sqrt(length_square(network,network.vertices[i]-network.vertices[k]))-np.sqrt(length_square(network,network.vertices_ini[i]-network.vertices_ini[k]))) *network.vertices[node][0]
 					stress+=write_force(network, node, network.ridge_vertices[j][1], self.constitutive)[0]*network.vertices[node][0]
-					#stress += network.Ef*(np.sqrt(length_square(network,network.vertices[i]-network.vertices[k]))-np.sqrt(length_square(network,network.vertices_ini[i]-network.vertices_ini[k])))* (network.vertices[i][0]-network.vertices[k][0]) /np.sqrt(length_square(network,network.vertices[i]-network.vertices[k]))*network.vertices[node][0]
 				if node==network.ridge_vertices[j][1]:
 					i = node
 					k = network.ridge_vertices[j][0]
-					#stress -= network.Ef*(np.sqrt(length_square(network,network.vertices[i]-network.vertices[k]))-np.sqrt(length_square(network,network.vertices_ini[i]-network.vertices_ini[k]))) *network.vertices[node][0]#
 					stress+=write_force(network, node, network.ridge_vertices[j][0], self.constitutive)[0]*network.vertices[node][0]
-					#stress += network.Ef*(np.sqrt(length_square(network,network.vertices[i]-network.vertices[k]))-np.sqrt(length_square(network,network.vertices_ini[i]-network.vertices_ini[k])))* (network.vertices[i][0]-network.vertices[k][0]) /np.sqrt(length_square(network,network.vertices[i]-network.vertices[k]))*network.vertices[node][0]
 		stress = stress/(network.length)
 		return stress
 
 # sum them up and divide by volume to give constraint.
 
 	def full_test(self, network, path,details):
+		self.save_parameters(network,path)
 		network.save_network('temp',path)
 		i = 0
 		while (max(network.vertices[:,0])-network.length) <= self.traction_distance:
@@ -76,7 +80,7 @@ class Tensile_test:
 				except (ValueError,RuntimeWarning):
 					print 'New discretization: ', space_discretization/2, ' on step ', current_disp
 					space_discretization = space_discretization/2
-					with open('network_vertices.csv','r') as readFile:
+					with open(os.path.join(path,'network_vertices.csv'),'r') as readFile:
 						reader = csv.reader(readFile)
 						list_vertices = np.array(list(reader))
 						network.vertices=list_vertices.astype(float)
@@ -86,7 +90,7 @@ class Tensile_test:
 			network.stress.append(self.calculate_macro_stress(network))
 			network.strain.append((max(network.vertices[:,0])-network.length)/network.length)
 			#last_network = 'stress_strain_%03d.csv' % network.complexity
-			last_network = 'stress_strain_%s.csv' % network.creation
+			last_network = 'stress_strain_%s.csv' % len(network.vertices)
 			with open(os.path.join(path,last_network), 'w') as writeFile:
 				writer = csv.writer(writeFile)
 				writer.writerows([network.strain])

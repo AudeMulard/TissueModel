@@ -4,7 +4,7 @@
 
 
 current_dir=$(pwd)
-cd ../Data/default/
+cd ../Data/reg_Voronoi/
 
 if [ "$1" == "" ]; then
 	cd $(ls -Art | tail -n 1)
@@ -14,11 +14,11 @@ fi
 
 echo $(pwd)
 new_dir=$(pwd)
-OUTPUT=$(ls network_vertices_???.csv | tail -n 1)
+OUTPUT=$(ls network_vertices_???_???.csv | tail -n 1)
 rm *.png
 cd "${current_dir}"
 
-python video.py "${OUTPUT}" $1
+python Plotting/video.py "${OUTPUT}" $1
 
 cd "${new_dir}"
 

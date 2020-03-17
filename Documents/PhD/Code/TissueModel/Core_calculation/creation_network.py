@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 import csv
 import os
 import force_balance
-from network_plotting import *
+from Plotting.network_plotting import *
 # Class of the network, with different initial positions and all the corrections needed
 import fnmatch
 
@@ -17,7 +17,7 @@ class Network:
 		self.dimension = dimension
 		self.Ef = Ef
 		self.A = A
-		self.B = B
+		self.disturbance = B
 		self.min_distance = min_distance
 		self.creation = creation
 
@@ -199,41 +199,42 @@ class Network:
 						r+=1
 				ridge[i] = ridge[i] - r
 		self.vertices=nodes
-		for k in range(3):
-			self = self.create_ridge_node_list()
-			for i in range(len(self.list_nodes_ridges)):
-				if len(self.list_nodes_ridges[i])==2:
-					self.delete_two_ridge_points(i)
-			self = self.delete_doubles()
-			self = self.create_ridge_node_list()
-			self = self.delete_alone_points()
-			## Supress alone fibres and points
-			while ridges_to_delete.tolist() !=[]:
-				ridges_to_delete=[]
-				nodes_to_delete=[]
+		if self.creation != 'reg_Voronoi':
+			for k in range(3):
 				self = self.create_ridge_node_list()
-				self = self.sort_nodes()
-				for i in range(len(self.interior_nodes)):
-					j = self.interior_nodes[i]
-					if len(self.list_nodes_ridges[j])<=1:
-						nodes_to_delete = np.append(nodes_to_delete,j)
-						ridges_to_delete= np.append(ridges_to_delete,self.list_nodes_ridges[j])
-				nodes = self.vertices
-				ridges_to_delete=np.array(sorted(ridges_to_delete, reverse=True))
-				for ridge in ridges_to_delete:
-					self.ridge_vertices=np.delete(self.ridge_vertices,ridge, axis=0)
-				nodes_to_delete=np.array(sorted(nodes_to_delete, reverse=True))
-				for point in nodes_to_delete:
-					nodes=np.delete(nodes,int(point),0)
-				# Renumber points after deleting some
-				for ridge in self.ridge_vertices:
-					for i in range(2):
-						r=0
-						for node in nodes_to_delete:
-							if node < ridge[i]:
-								r+=1
-						ridge[i] = ridge[i] - r
-				self.vertices=nodes
+				for i in range(len(self.list_nodes_ridges)):
+					if len(self.list_nodes_ridges[i])==2:
+						self.delete_two_ridge_points(i)
+				self = self.delete_doubles()
+				self = self.create_ridge_node_list()
+				self = self.delete_alone_points()
+				## Supress alone fibres and points
+				while ridges_to_delete.tolist() !=[]:
+					ridges_to_delete=[]
+					nodes_to_delete=[]
+					self = self.create_ridge_node_list()
+					self = self.sort_nodes()
+					for i in range(len(self.interior_nodes)):
+						j = self.interior_nodes[i]
+						if len(self.list_nodes_ridges[j])<=1:
+							nodes_to_delete = np.append(nodes_to_delete,j)
+							ridges_to_delete= np.append(ridges_to_delete,self.list_nodes_ridges[j])
+					nodes = self.vertices
+					ridges_to_delete=np.array(sorted(ridges_to_delete, reverse=True))
+					for ridge in ridges_to_delete:
+						self.ridge_vertices=np.delete(self.ridge_vertices,ridge, axis=0)
+					nodes_to_delete=np.array(sorted(nodes_to_delete, reverse=True))
+					for point in nodes_to_delete:
+						nodes=np.delete(nodes,int(point),0)
+					# Renumber points after deleting some
+					for ridge in self.ridge_vertices:
+						for i in range(2):
+							r=0
+							for node in nodes_to_delete:
+								if node < ridge[i]:
+									r+=1
+							ridge[i] = ridge[i] - r
+					self.vertices=nodes
 		return self
 
 	def cut_network_side(self):
@@ -310,9 +311,7 @@ class Network:
 		return self
 	
 	def cut_network(self):
-		#plot_network(self)
 		self=self.cut_network_side()
-		#plot_network(self)
 		self=self.cut_network_updown()
 		return self
 
@@ -342,6 +341,8 @@ class Network:
 		return self
 					
 	def delete_single_ridge_points(self):
+		self = self.delete_doubles()
+		self = self.sort_nodes()
 		self =self.create_ridge_node_list()
 		ridges_to_delete = []
 		for i in range(len(self.vertices)):
@@ -350,6 +351,7 @@ class Network:
 		ridges_to_delete=np.array(sorted(ridges_to_delete, reverse=True))
 		for ridge in ridges_to_delete:
 			self.ridge_vertices=np.delete(self.ridge_vertices,ridge, axis=0)
+		self = self.delete_alone_points()
 		return self
 
 	def distribution_length_fiber(self, path):
@@ -361,32 +363,38 @@ class Network:
 
 	def save_network(self, step, path):
 		if step == 'initial':
-			filename = 'parameters_%s.csv' % self.creation
+			filename = 'parameters_%03d.csv' % len(self.vertices)
 			with open(os.path.join(path,filename), 'w') as writeFile:
 				writer = csv.writer(writeFile)
+				writer.writerow(["dimension",self.dimension])
 				writer.writerow(["complexity",self.complexity])
 				writer.writerow(["length",self.length])
 				writer.writerow(["k_spring",self.Ef])
 				writer.writerow(["merge_distance",self.min_distance])
+				writer.writerow(["type",self.creation])
+				writer.writerow(["number of nodes",len(self.vertices)])
+				writer.writerow(["number of springs",len(self.ridge_vertices)])
+				writer.writerow(["disturbance",self.disturbance])
+				writer.writerow(["A",self.A])
 			writeFile.close()
-			last_network = 'network_ridge_vertices%s.csv' % self.creation
+			last_network = 'network_ridge_vertices_%03d.csv' % len(self.vertices)
 			with open(os.path.join(path,last_network), 'w') as writeFile:
 				writer = csv.writer(writeFile)
 				writer.writerows(self.ridge_vertices)
 			writeFile.close()
-			last_network = 'network_vertices_initial%s.csv' % self.creation
+			last_network = 'network_vertices_initial_%03d.csv' % len(self.vertices)
 			with open(os.path.join(path,last_network), 'w') as writeFile:
 				writer = csv.writer(writeFile)
 				writer.writerows(self.vertices)
 			writeFile.close()
 		elif step=='temp':
 			last_network = 'network_vertices.csv'
-			with open(last_network, 'w') as writeFile:
+			with open(os.path.join(path,last_network), 'w') as writeFile:
 				writer = csv.writer(writeFile)
 				writer.writerows(self.vertices)
 			writeFile.close()
 		else:
-			last_network = 'network_vertices_%03d%s.csv' % (int(step),self.creation)
+			last_network = 'network_vertices_%03d_%03d.csv' % (int(step),len(self.vertices))
 			with open(os.path.join(path,last_network), 'w') as writeFile:
 				writer = csv.writer(writeFile)
 				writer.writerows(self.vertices)
@@ -407,6 +415,15 @@ class Network:
 				reader = csv.reader(readFile)
 				list_ridge_vertices=np.array(list(reader))
 				self.ridge_vertices=list_ridge_vertices.astype(int)
+		elif creation == 'reg_Voronoi':
+			self = self.create_network(creation)
+			self = self.delete_first_point()
+			self = self.cut_network()
+			self = self.delete_alone_points()
+			self = self.delete_single_ridge_points()
+			self = self.delete_doubles()
+			self = self.create_ridge_node_list()
+			self = self.sort_nodes()
 		elif creation != 'Voronoi':# and creation != 'reg_Voronoi':
 			self = self.create_network(creation)
 			self = self.delete_first_point()
@@ -422,7 +439,6 @@ class Network:
 				self = self.delete_doubles()
 				#self = self.cut_network()
 				self = self.sort_nodes()
-			plot_network(self)
 			print 'number of boundary_nodes: ', len(self.boundary_nodes_right),len(self.boundary_nodes_left)
 			while len(self.ridge_vertices)-2*len(self.interior_nodes)<=self.complexity/10:
 				self.min_distance +=0.001
