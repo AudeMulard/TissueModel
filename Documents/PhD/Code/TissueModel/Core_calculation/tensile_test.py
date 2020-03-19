@@ -71,7 +71,7 @@ class Tensile_test:
 			#network = new_bc(network, self.space_discretization*self.traction_distance/abs(self.traction_distance), self.side)
 			#network=solve_force_balance(network, self.space_discretization, self.constitutive, self.scheme, self.side, ite,details)
 			space_discretization = self.space_discretization
-			while result == False and tries <=10:
+			if result == False and tries <=10:
 				try:
 					network = new_bc(network, space_discretization*self.traction_distance/abs(self.traction_distance), self.side)
 					network=solve_force_balance(network, space_discretization, self.constitutive, self.scheme, self.side, current_disp,details)
@@ -86,6 +86,8 @@ class Tensile_test:
 						network.vertices=list_vertices.astype(float)
 					tries +=1
 					continue
+			else:
+				break
 			space_discretization = self.space_discretization
 			network.stress.append(self.calculate_macro_stress(network))
 			network.strain.append((max(network.vertices[:,0])-network.length)/network.length)
