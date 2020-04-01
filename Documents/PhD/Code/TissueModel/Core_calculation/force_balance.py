@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 #np.set_printoptions(precision=0)
-
+import sympy as sp
 
 import warnings
 
@@ -89,32 +89,10 @@ def linear_scheme(network):
 			network.vertices[j,coord] = new_pos[network.dimension*i+coord]
 	return network
 
-"""
+
 ######################### NONLINEAR SCHEME #########################################
 # calculate the whole jacobian at one point, differentiated by itself
 # calculate the force at each point
-def write_force(network, i, j, constitutive):
-	if constitutive == 'exponential':
-		lambda_f = length_square(network,network.vertices[i]-network.vertices[j])/length_square(network,network.vertices_ini[i]-network.vertices_ini[j])
-		epsilon = 0.5*(lambda_f-1.)
-		force=network.Ef*network.A/network.B*(np.exp(network.B*epsilon)-1.)
-		return force*(network.vertices[i]-network.vertices[j])
-	elif constitutive == 'constant':
-		return network.Ef*((network.vertices[i]-network.vertices[j])-(network.vertices_ini[i]-network.vertices_ini[j]))
-	elif constitutive == 'linear':
-		return network.Ef*(1-np.sqrt(length_square(network,network.vertices_ini[i]-network.vertices_ini[j]))/np.sqrt(length_square(network,network.vertices[i]-network.vertices[j])))*(network.vertices[i]-network.vertices[j])
-	elif constitutive == 'linear2':
-		return network.Ef*(np.sqrt(length_square(network,network.vertices[i]-network.vertices[j]))-np.sqrt(length_square(network,network.vertices_ini[i]-network.vertices_ini[j])))*(network.vertices[i]-network.vertices[j])/np.sqrt(length_square(network,network.vertices[i]-network.vertices[j]))
-
-def write_force_eq_point(network, i, constitutive):
-	force_equation =0
-	for j in network.list_nodes_ridges[network.interior_nodes[i]]:
-		if network.interior_nodes[i]==network.ridge_vertices[j][0]:
-			force_equation += write_force(network, network.interior_nodes[i], network.ridge_vertices[j][1], constitutive)
-		if network.interior_nodes[i]==network.ridge_vertices[j][1]:
-			force_equation += write_force(network, network.interior_nodes[i], network.ridge_vertices[j][0], constitutive)
-	return force_equation
-"""
 
 # Calculate jacobian for the force contributed by j on i, differentiated by x
 def find_jacobian_x(network, i, j, constitutive):
@@ -125,16 +103,15 @@ def find_jacobian_x(network, i, j, constitutive):
 		return jac*(network.vertices[i]-network.vertices[j]) + force*np.array([1,0])
 	elif constitutive == 'constant':
 		return network.Ef*np.array([1,0])
-	elif constitutive == 'linear':
-		length = np.sqrt(length_square(network,network.vertices[i]-network.vertices[j]))
-		jac = network.Ef*np.sqrt(length_square(network,network.vertices_ini[i]-network.vertices_ini[j]))*(network.vertices[i][0]-network.vertices[j][0])/length**3
-		force = network.Ef*(1-np.sqrt(length_square(network,network.vertices_ini[i]-network.vertices_ini[j]))/np.sqrt(length_square(network,network.vertices[i]-network.vertices[j])))
-		return jac*(network.vertices[i]-network.vertices[j]) + force*np.array([1,0])
-	elif constitutive == 'linear2':
-		length = np.sqrt(length_square(network,network.vertices[i]-network.vertices[j]))
-		jac = network.Ef*(network.vertices[i][0]-network.vertices[j][0])/length
-		force = network.Ef*(1-np.sqrt(length_square(network,network.vertices_ini[i]-network.vertices_ini[j]))/length)
-		return jac*(network.vertices[i]-network.vertices[j])/length + force*np.array([1,0])
+	elif constitutive == 'spring':
+		length = sp.sqrt(length_square(network,network.vertices[i]-network.vertices[j]))
+		diff_dist = network.Ef*(length-sp.sqrt(length_square(network,network.vertices_ini[i]-network.vertices_ini[j])))
+		degree_3_x = -network.Ef*diff_dist*(network.vertices[i][0]-network.vertices[j][0])**2/length**3
+		degree_2_x = network.Ef*(network.vertices[i][0]-network.vertices[j][0])**2/length**2
+		degree_1 = network.Ef*diff_dist/length
+		degree_3_y = -network.Ef*diff_dist*(network.vertices[i][0]-network.vertices[j][0])*(network.vertices[i][1]-network.vertices[j][1])/length**3
+		degree_2_y = network.Ef*(network.vertices[i][0]-network.vertices[j][0])*(network.vertices[i][1]-network.vertices[j][1])/length**2
+		return np.array([degree_3_x+degree_2_x+degree_1,degree_3_y+degree_2_y])
 
 # Calculate jacobian for the force contributed by j on i, differentiated by y
 def find_jacobian_y(network, i, j, constitutive):
@@ -143,19 +120,18 @@ def find_jacobian_y(network, i, j, constitutive):
 		jac = network.Ef*network.A/length_square(network,network.vertices_ini[i]-network.vertices_ini[j])*(network.vertices[i,1]-network.vertices[j,1])*np.exp(network.B*0.5*(lambda_f-1.))
 		force = network.Ef*network.A/network.B*(np.exp(network.B*0.5*(lambda_f-1.))-1.)
 		return jac*(network.vertices[i]-network.vertices[j]) + force*np.array([0,1])
-#		return np.array([0,1])
 	elif constitutive == 'constant':
 		return network.Ef*np.array([0,1])
-	elif constitutive == 'linear':
-		length = np.sqrt(length_square(network,network.vertices[i]-network.vertices[j]))
-		jac = network.Ef*np.sqrt(length_square(network,network.vertices_ini[i]-network.vertices_ini[j]))*(network.vertices[i][1]-network.vertices[j][1])/length**3
-		force = network.Ef*(1-np.sqrt(length_square(network,network.vertices_ini[i]-network.vertices_ini[j]))/np.sqrt(length_square(network,network.vertices[i]-network.vertices[j])))
-		return jac*(network.vertices[i]-network.vertices[j]) + force*np.array([0,1])
-	elif constitutive == 'linear2':
-		length = np.sqrt(length_square(network,network.vertices[i]-network.vertices[j]))
-		jac = network.Ef*(network.vertices[i][1]-network.vertices[j][1])/length
-		force = network.Ef*(1-np.sqrt(length_square(network,network.vertices_ini[i]-network.vertices_ini[j]))/length)
-		return jac*(network.vertices[i]-network.vertices[j])/length + force*np.array([0,1])
+	elif constitutive == 'spring':
+		length = sp.sqrt(length_square(network,network.vertices[i]-network.vertices[j]))
+		diff_dist = network.Ef*(length-sp.sqrt(length_square(network,network.vertices_ini[i]-network.vertices_ini[j])))
+		degree_3_x = -network.Ef*diff_dist*(network.vertices[i][0]-network.vertices[j][0])*(network.vertices[i][1]-network.vertices[j][1])/length**3
+		degree_2_x = network.Ef*(network.vertices[i][0]-network.vertices[j][0])*(network.vertices[i][1]-network.vertices[j][1])/length**2
+		degree_1 = network.Ef*diff_dist/length
+		degree_3_y = -network.Ef*diff_dist*(network.vertices[i][1]-network.vertices[j][1])**2/length**3
+		degree_2_y = network.Ef*(network.vertices[i][1]-network.vertices[j][1])**2/length**2
+		return np.array([degree_3_x+degree_2_x,degree_3_y+degree_2_y+degree_1])
+
 
 def write_jacobian_point(network, i, constitutive):
 	jacobian_x=0
@@ -237,8 +213,9 @@ def iterative_newton(network, constitutive,details):
 # calculate the whole jacobian at one point, differentiated by itself
 # calculate the force at each point
 def write_force(network, i, j, constitutive):
-	if constitutive == 'linear2':
-		return network.Ef*(np.sqrt(length_square(network,network.vertices[i]-network.vertices[j]))-np.sqrt(length_square(network,network.vertices_ini[i]-network.vertices_ini[j])))*(network.vertices[i]-network.vertices[j])/np.sqrt(length_square(network,network.vertices[i]-network.vertices[j]))
+	if constitutive == 'spring':
+		#print i, j, float(sp.sqrt(length_square(network,network.vertices[i]-network.vertices[j]))),float(sp.sqrt(length_square(network,network.vertices_ini[i]-network.vertices_ini[j])))
+		return network.Ef*(float(sp.sqrt(length_square(network,network.vertices[i]-network.vertices[j])))-float(sp.sqrt(length_square(network,network.vertices_ini[i]-network.vertices_ini[j]))))*(network.vertices[i]-network.vertices[j])/float(sp.sqrt(length_square(network,network.vertices[i]-network.vertices[j])))
 
 def write_force_eq_point(network, i, constitutive):
 	force_equation =0
@@ -252,26 +229,26 @@ def write_force_eq_point(network, i, constitutive):
 # Calculate jacobian for the force contributed by j on i, differentiated by x
 def find_jacobian_x_3d(network, i, j, constitutive):
 	if constitutive == 'linear2':
-		length = np.sqrt(length_square(network,network.vertices[i]-network.vertices[j]))
+		length = sp.sqrt(length_square(network,network.vertices[i]-network.vertices[j]))
 		jac = network.Ef*(network.vertices[i][0]-network.vertices[j][0])/length
-		force = network.Ef*(1-np.sqrt(length_square(network,network.vertices_ini[i]-network.vertices_ini[j]))/np.sqrt(length_square(network,network.vertices[i]-network.vertices[j])))
-		return jac*(network.vertices[i]-network.vertices[j])/np.sqrt(length_square(network,network.vertices[i]-network.vertices[j])) + force*np.array([1,0,0])
+		force = network.Ef*(1-sp.sqrt(length_square(network,network.vertices_ini[i]-network.vertices_ini[j]))/sp.sqrt(length_square(network,network.vertices[i]-network.vertices[j])))
+		return jac*(network.vertices[i]-network.vertices[j])/sp.sqrt(length_square(network,network.vertices[i]-network.vertices[j])) + force*np.array([1,0,0])
 
 # Calculate jacobian for the force contributed by j on i, differentiated by y
 def find_jacobian_y_3d(network, i, j, constitutive):
 	if constitutive == 'linear2':
-		length = np.sqrt(length_square(network,network.vertices[i]-network.vertices[j]))
+		length = sp.sqrt(length_square(network,network.vertices[i]-network.vertices[j]))
 		jac = network.Ef*(network.vertices[i][1]-network.vertices[j][1])/length
-		force = network.Ef*(1-np.sqrt(length_square(network,network.vertices_ini[i]-network.vertices_ini[j]))/np.sqrt(length_square(network,network.vertices[i]-network.vertices[j])))
-		return jac*(network.vertices[i]-network.vertices[j])/np.sqrt(length_square(network,network.vertices[i]-network.vertices[j])) + force*np.array([0,1,0])
+		force = network.Ef*(1-sp.sqrt(length_square(network,network.vertices_ini[i]-network.vertices_ini[j]))/sp.sqrt(length_square(network,network.vertices[i]-network.vertices[j])))
+		return jac*(network.vertices[i]-network.vertices[j])/sp.sqrt(length_square(network,network.vertices[i]-network.vertices[j])) + force*np.array([0,1,0])
 
 # Calculate jacobian for the force contributed by j on i, differentiated by z
 def find_jacobian_z_3d(network, i, j, constitutive):
 	if constitutive == 'linear2':
-		length = np.sqrt(length_square(network,network.vertices[i]-network.vertices[j]))
+		length = sp.sqrt(length_square(network,network.vertices[i]-network.vertices[j]))
 		jac = network.Ef*(network.vertices[i][2]-network.vertices[j][2])/length
-		force = network.Ef*(1-np.sqrt(length_square(network,network.vertices_ini[i]-network.vertices_ini[j]))/np.sqrt(length_square(network,network.vertices[i]-network.vertices[j])))
-		return jac*(network.vertices[i]-network.vertices[j])/np.sqrt(length_square(network,network.vertices[i]-network.vertices[j])) + force*np.array([0,0,1])
+		force = network.Ef*(1-sp.sqrt(length_square(network,network.vertices_ini[i]-network.vertices_ini[j]))/sp.sqrt(length_square(network,network.vertices[i]-network.vertices[j])))
+		return jac*(network.vertices[i]-network.vertices[j])/sp.sqrt(length_square(network,network.vertices[i]-network.vertices[j])) + force*np.array([0,0,1])
 
 def write_jacobian_point_3d(network, i, constitutive):
 	jacobian_x=0
@@ -315,17 +292,6 @@ def write_matrix_J_3d(network, constitutive):
 		for coord1 in coords:
 			for coord2 in coords:
 				J[network.dimension*i+coord1,network.dimension*i+coord2]=write_jacobian_point_3d(network, i, constitutive)[coord2,coord1]
-		"""
-		J[network.dimension*i,network.dimension*i]=write_jacobian_point_3d(network, i, constitutive)[0,0]
-		J[network.dimension*i,network.dimension*i+1]=write_jacobian_point_3d(network, i, constitutive)[1,0]
-		J[network.dimension*i,network.dimension*i+2]=write_jacobian_point_3d(network, i, constitutive)[2,0]
-		J[network.dimension*i+1,network.dimension*i] = write_jacobian_point_3d(network,i, constitutive)[0,1]
-		J[network.dimension*i+1,network.dimension*i+1]=write_jacobian_point_3d(network, i, constitutive)[1,1]
-		J[network.dimension*i+1,network.dimension*i+2]=write_jacobian_point_3d(network, i, constitutive)[2,1]
-		J[network.dimension*i+2,network.dimension*i] = write_jacobian_point_3d(network,i, constitutive)[0,2]
-		J[network.dimension*i+2,network.dimension*i+1]=write_jacobian_point_3d(network, i, constitutive)[1,2]
-		J[network.dimension*i+2,network.dimension*i+2]=write_jacobian_point_3d(network, i, constitutive)[2,2]
-		"""
 		for k in network.list_nodes_ridges[network.interior_nodes[i]]:
 			if network.interior_nodes[i]==network.ridge_vertices[k][0] and network.ridge_vertices[k][1] in network.interior_nodes:
 				r=network.ridge_vertices[k][1]
@@ -341,35 +307,6 @@ def write_matrix_J_3d(network, constitutive):
 					J[network.dimension*i+coord1,network.dimension*j]=-find_jacobian_x_3d(network, network.interior_nodes[i], r, constitutive)[coord1]
 					J[network.dimension*i+coord1,network.dimension*j+1]=-find_jacobian_y_3d(network, network.interior_nodes[i], r, constitutive)[coord1]
 					J[network.dimension*i+coord1,network.dimension*j+2]=-find_jacobian_z_3d(network, network.interior_nodes[i], r, constitutive)[coord1]
-				"""
-				J[network.dimension*i,network.dimension*j]=-find_jacobian_x_3d(network, network.interior_nodes[i], r, constitutive)[0]
-				J[network.dimension*i,network.dimension*j+1]=-find_jacobian_y_3d(network, network.interior_nodes[i], r, constitutive)[0]
-				J[network.dimension*i,network.dimension*j+2]=-find_jacobian_z_3d(network, network.interior_nodes[i], r, constitutive)[0]
-				J[network.dimension*i+1,network.dimension*j]=-find_jacobian_x_3d(network, network.interior_nodes[i], r, constitutive)[1]
-				J[network.dimension*i+1,network.dimension*j+1]=-find_jacobian_y_3d(network, network.interior_nodes[i], r, constitutive)[1]
-				J[network.dimension*i+1,network.dimension*j+2]=-find_jacobian_z_3d(network, network.interior_nodes[i], r, constitutive)[1]
-				J[network.dimension*i+2,network.dimension*j]=-find_jacobian_x_3d(network, network.interior_nodes[i], r, constitutive)[2]
-				J[network.dimension*i+2,network.dimension*j+1]=-find_jacobian_y_3d(network, network.interior_nodes[i], r, constitutive)[2]
-				J[network.dimension*i+2,network.dimension*j+2]=-find_jacobian_z_3d(network, network.interior_nodes[i], r, constitutive)[2]
-				
-			elif network.interior_nodes[i]==network.ridge_vertices[k][1] and network.ridge_vertices[k][0] in network.interior_nodes:
-				r=network.ridge_vertices[k][0]
-				j=network.interior_nodes.index(r)
-				for coord1 in coords:
-					J[network.dimension*i+coord1,network.dimension*j]=-find_jacobian_x_3d(network, network.interior_nodes[i], r, constitutive)[coord1]
-					J[network.dimension*i+coord1,network.dimension*j+1]=-find_jacobian_y_3d(network, network.interior_nodes[i], r, constitutive)[coord1]
-					J[network.dimension*i+coord1,network.dimension*j+2]=-find_jacobian_z_3d(network, network.interior_nodes[i], r, constitutive)[coord1]
-				
-				J[network.dimension*i,network.dimension*j]=-find_jacobian_x_3d(network, network.interior_nodes[i], r, constitutive)[0]
-				J[network.dimension*i,network.dimension*j+1]=-find_jacobian_y_3d(network, network.interior_nodes[i], r, constitutive)[0]
-				J[network.dimension*i,network.dimension*j+2]=-find_jacobian_z_3d(network, network.interior_nodes[i], r, constitutive)[0]
-				J[network.dimension*i+1,network.dimension*j]=-find_jacobian_x_3d(network, network.interior_nodes[i], r, constitutive)[1]
-				J[network.dimension*i+1,network.dimension*j+1]=-find_jacobian_y_3d(network, network.interior_nodes[i], r, constitutive)[1]
-				J[network.dimension*i+1,network.dimension*j+2]=-find_jacobian_z_3d(network, network.interior_nodes[i], r, constitutive)[1]
-				J[network.dimension*i+2,network.dimension*j]=-find_jacobian_x_3d(network, network.interior_nodes[i], r, constitutive)[2]
-				J[network.dimension*i+2,network.dimension*j+1]=-find_jacobian_y_3d(network, network.interior_nodes[i], r, constitutive)[2]
-				J[network.dimension*i+2,network.dimension*j+2]=-find_jacobian_z_3d(network, network.interior_nodes[i], r, constitutive)[2]
-				"""
 	return J
 
 
@@ -396,13 +333,13 @@ def iterative_newton_3d(network, constitutive,step):
 
 ### Global function of solving one step if the netowrk
 
-def solve_force_balance(network, defo, constitutive, scheme, side, step,details):
-	if scheme == 'nonlinear':
-		if network.dimension ==2:
+def solve_force_balance(network, constitutive, details):
+	if constitutive == 'linear':
+		network = linear_scheme(network)
+	else:
+		if network.dimension == 2:
 			network = iterative_newton(network, constitutive,details)
 		elif network.dimension == 3:
 			network = iterative_newton_3d(network, constitutive, step)
-	elif scheme == 'linear':
-		network = linear_scheme(network)
 	return network
 

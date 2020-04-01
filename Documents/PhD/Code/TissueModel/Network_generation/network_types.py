@@ -1,10 +1,19 @@
 import numpy as np
 from scipy.spatial import Voronoi, voronoi_plot_2d
+import matplotlib.pyplot as plt
+
+def length_square(x):
+	return x[0]**2+x[1]**2
 
 def select_network(network,creation):
 		
 		if creation == "Voronoi":
-			Seeds=np.random.rand(network.complexity,network.dimension)*network.length
+			Seeds = []
+			for node in range(network.complexity):
+				if network.dimension==2:
+					Seeds.append([np.random.rand()*network.length[0],np.random.rand()*network.length[1]])
+				elif network.dimension ==3:
+					Seeds.append([np.random.rand()*network.length[0],np.random.rand()*network.length[1],np.random.rand()*network.length[2]])
 			voronoi = Voronoi(Seeds)
 			vertices = Voronoi(Seeds).vertices
 			ridge_vertices = Voronoi(Seeds).ridge_vertices
@@ -16,10 +25,52 @@ def select_network(network,creation):
 				ridge_vertices = new_ridge_vertices
 			return vertices, ridge_vertices
 
-		"""if creation == "growth_network":
-			Seeds = np.random.rand(network.complexity,network.dimension)*network.length
-			orientations = np.random.rand(network.complexity,1.)*180
-			for seed in Seeds:"""
+		if creation == "growth_network":
+			#Seeds = np.random.rand(network.complexity,network.dimension)*network.length
+			Seeds = np.array([[ 0.92374815,  0.90291537], [ 0.87529856,  0.91491711], [ 0.59413968,  0.65649066], [ 0.70452016,  0.04474947], [ 0.79686153,  0.75654823]])
+			plt.scatter(Seeds[:,0],Seeds[:,1],label='Seeds')
+			#orientations = np.random.rand(network.complexity,1)*180
+			orientations = [[  44.12501178], [  99.64676771], [  38.26756236], [ 142.78837107], [  42.27702724]]
+			lines = []
+			for i in range(len(Seeds)):
+				a = float(np.tan(orientations[i]))
+				b = float(Seeds[i][1]-np.tan(orientations[i])*Seeds[i][0])
+				lines.append([a,b,0.0,b,1.0, a+b])
+				plt.plot([[0.0,Seeds[i][1]-np.tan(orientations[i])*Seeds[i][0]],[1.0, np.tan(orientations[i])+Seeds[i][1]-np.tan(orientations[i])*Seeds[i][0]]])
+			inter_points = []
+			for line1 in lines:
+				for line2 in lines:
+					if line1 != line2:
+						#print line1,line2
+						x_inter = (line2[1]-line1[1])/(line1[0]-line2[0])
+						y_inter = line1[0]*x_inter+line1[1]
+						inter_points.append([x_inter,y_inter])
+						if 1.0 > x_inter > Seeds[lines.index(line1)][0] and 0.0<y_inter<1.0 and length_square(Seeds[lines.index(line1)]-[x_inter,y_inter])<=length_square(Seeds[lines.index(line1)]-line1[3]):
+							line1[4]=x_inter
+							line1[5] =y_inter
+						elif 0.0<x_inter < Seeds[lines.index(line1)][0] and 0.0<y_inter<1.0 and length_square(Seeds[lines.index(line1)]-[x_inter,y_inter])<=length_square(Seeds[lines.index(line1)]-line1[2]):
+							line1[2]=x_inter
+							line1[3] = y_inter
+			#inter_points = {tuple(np.sort(node)) for node in inter_points}
+			#self.ridge_vertices = [list(l) for l in ridges]
+			#inter_points = set(inter_points)
+			inter_points = np.array([list(l) for l in inter_points])
+			plt.scatter(inter_points[:,0],inter_points[:,1],label = 'inter_points')
+			#print lines
+			lines = np.array(lines)
+			vertices = []
+			ridge_vertices=[]
+			for k in range(len(lines)):
+				vertices.append([lines[k,2], lines[k,3]])
+				vertices.append([lines[k,4], lines[k,5]])
+				ridge_vertices.append([2*k, 2*k+1])
+			vertices = np.array(vertices)
+			print vertices
+			#plt.scatter(vertices[:,0],vertices[:,1],label='vertices')
+			#plt.legend()
+			#plt.show()
+			print ridge_vertices
+			return vertices,ridge_vertices
 				
 
 		if creation == "reg_Voronoi":

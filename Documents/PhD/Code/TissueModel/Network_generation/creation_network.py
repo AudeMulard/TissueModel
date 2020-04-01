@@ -5,7 +5,7 @@ import network_types
 import matplotlib.pyplot as plt
 import csv
 import os
-import force_balance
+import Core_calculation.force_balance
 from Plotting.network_plotting import *
 # Class of the network, with different initial positions and all the corrections needed
 import fnmatch
@@ -93,7 +93,7 @@ class Network:
 		for i in range(len(nodes)):
         		if nodes[i,0] <= 0.0:
         		        boundary_nodes_left.append(i)
-        		elif nodes[i,0] >= self.length:
+        		elif nodes[i,0] >= self.length[0]:
         		        boundary_nodes_right.append(i)
         		else:
         		        interior_nodes.append(i)
@@ -164,7 +164,7 @@ class Network:
 		# Select in one list all the points outside of the domain
 		for coord in interval:
 			for i in range(len(nodes)):
-        			if nodes[i,coord] < 0.0 or nodes[i,coord] > self.length:
+        			if nodes[i,coord] < 0.0 or nodes[i,coord] > self.length[coord]:
         			    nodes_to_delete = np.append(nodes_to_delete,i)
 		nodes_to_delete = set(nodes_to_delete)
 		# delete ridges that are completely out of the domain
@@ -199,7 +199,7 @@ class Network:
 						r+=1
 				ridge[i] = ridge[i] - r
 		self.vertices=nodes
-		if self.creation != 'reg_Voronoi':
+		if self.creation == 'Voronoi':
 			for k in range(3):
 				self = self.create_ridge_node_list()
 				for i in range(len(self.list_nodes_ridges)):
@@ -245,7 +245,7 @@ class Network:
 		for i in range(len(nodes)):
         		if nodes[i,0] < 0.0:
         		    nodes_to_delete_left = np.append(nodes_to_delete_left,i)
-        		if nodes[i,0] > self.length:
+        		if nodes[i,0] > self.length[0]:
         		    nodes_to_delete_right = np.append(nodes_to_delete_right,i)
 		nodes_to_delete = np.append(nodes_to_delete_left, nodes_to_delete_right)
 		for i in range(len(self.ridge_vertices)):
@@ -280,21 +280,21 @@ class Network:
 			for k in range(len(self.ridge_vertices)):
 			    if self.ridge_vertices[k][0]==node:
 			        if self.dimension==2:
-			            y = nodes[node,1]+(nodes[self.ridge_vertices[k][1],1]-nodes[node,1])/(nodes[self.ridge_vertices[k][1],0]-nodes[node,0])*(self.length-nodes[node,0])
-			            nodes=np.append(nodes,[[self.length,y]], axis=0)
+			            y = nodes[node,1]+(nodes[self.ridge_vertices[k][1],1]-nodes[node,1])/(nodes[self.ridge_vertices[k][1],0]-nodes[node,0])*(self.length[0]-nodes[node,0])
+			            nodes=np.append(nodes,[[self.length[0],y]], axis=0)
 			        if self.dimension == 3:
-			            y = nodes[node,1]+(nodes[self.ridge_vertices[k][1],1]-nodes[node,1])/(nodes[self.ridge_vertices[k][1],0]-nodes[node,0])*(self.length-nodes[node,0])
-			            z = nodes[node,2]+(nodes[self.ridge_vertices[k][1],2]-nodes[node,2])/(nodes[self.ridge_vertices[k][1],0]-nodes[node,0])*(self.length-nodes[node,0])
-			            nodes=np.append(nodes,[[self.length,y,z]], axis=0)
+			            y = nodes[node,1]+(nodes[self.ridge_vertices[k][1],1]-nodes[node,1])/(nodes[self.ridge_vertices[k][1],0]-nodes[node,0])*(self.length[0]-nodes[node,0])
+			            z = nodes[node,2]+(nodes[self.ridge_vertices[k][1],2]-nodes[node,2])/(nodes[self.ridge_vertices[k][1],0]-nodes[node,0])*(self.length[0]-nodes[node,0])
+			            nodes=np.append(nodes,[[self.length[0],y,z]], axis=0)
 			        self.ridge_vertices[k][0]=len(nodes)-1
 			    elif self.ridge_vertices[k][1]==node:
 			        if self.dimension == 2:
-			            y = nodes[node,1]+(nodes[self.ridge_vertices[k][0],1]-nodes[node,1])/(nodes[self.ridge_vertices[k][0],0]-nodes[node,0])*(self.length-nodes[node,0])
-			            nodes=np.append(nodes,[[self.length,y]], axis=0)
+			            y = nodes[node,1]+(nodes[self.ridge_vertices[k][0],1]-nodes[node,1])/(nodes[self.ridge_vertices[k][0],0]-nodes[node,0])*(self.length[0]-nodes[node,0])
+			            nodes=np.append(nodes,[[self.length[0],y]], axis=0)
 			        if self.dimension == 3:
-			            y = nodes[node,1]+(nodes[self.ridge_vertices[k][0],1]-nodes[node,1])/(nodes[self.ridge_vertices[k][0],0]-nodes[node,0])*(self.length-nodes[node,0])
-			            z = nodes[node,2]+(nodes[self.ridge_vertices[k][0],2]-nodes[node,2])/(nodes[self.ridge_vertices[k][0],0]-nodes[node,0])*(self.length-nodes[node,0])
-			            nodes=np.append(nodes,[[self.length,y,z]], axis=0)
+			            y = nodes[node,1]+(nodes[self.ridge_vertices[k][0],1]-nodes[node,1])/(nodes[self.ridge_vertices[k][0],0]-nodes[node,0])*(self.length[0]-nodes[node,0])
+			            z = nodes[node,2]+(nodes[self.ridge_vertices[k][0],2]-nodes[node,2])/(nodes[self.ridge_vertices[k][0],0]-nodes[node,0])*(self.length[0]-nodes[node,0])
+			            nodes=np.append(nodes,[[self.length[0],y,z]], axis=0)
 			        self.ridge_vertices[k][1]=len(nodes)-1
 		nodes_to_delete=np.array(sorted(nodes_to_delete, reverse=True))
 		for point in nodes_to_delete:
@@ -400,17 +400,31 @@ class Network:
 				writer.writerows(self.vertices)
 			writeFile.close()
 		
+	def add_boundary_nodes(self):
+		self = self.create_ridge_node_list()
+		for node in self.interior_nodes:
+			cond = True
+			list_ridge=self.list_nodes_ridges[node]
+			if self.vertices[node][0]<=float(self.length)/10.:
+				for ridge_number in list_ridge:
+					ridge = self.ridge_vertices[ridge_number]
+					if self.vertices[ridge[0]][0]< self.vertices[node][0] or self.vertices[ridge[1]][0]<self.vertices[node][0]:
+						cond = False
+				if cond == True:
+					self.vertices=np.append(self.vertices,[[0.,self.vertices[node][1]]],axis=0)
+					self.ridge_vertices= np.append(self.ridge_vertices,[[len(self.vertices)-1,node]],axis=0)
+		return self
 
 # Global function that applies all the corrections to the network
 
 	def set_fibers(self, creation, path):
 		if creation == 'old':
-			filename = fnmatch.filter(os.listdir('.'), 'network_vertices_initial_167.csv')
+			filename = fnmatch.filter(os.listdir('.'), 'network_vertices_initial_118.csv')
 			with open(filename[0],'r') as readFile:
 				reader = csv.reader(readFile)
 				list_vertices = np.array(list(reader))
 				self.vertices=list_vertices.astype(float)
-			filename = fnmatch.filter(os.listdir('.'), 'network_ridge_vertices_167.csv')
+			filename = fnmatch.filter(os.listdir('.'), 'network_ridge_vertices_118.csv')
 			with open(filename[0], 'r') as readFile:
 				reader = csv.reader(readFile)
 				list_ridge_vertices=np.array(list(reader))
@@ -422,17 +436,20 @@ class Network:
 			self = self.delete_alone_points()
 			self = self.delete_single_ridge_points()
 			self = self.delete_doubles()
-			self = self.create_ridge_node_list()
-			self = self.sort_nodes()
-		elif creation != 'Voronoi':# and creation != 'reg_Voronoi':
+		elif creation == 'disturbed_grid':
 			self = self.create_network(creation)
 			self = self.delete_first_point()
-			self = self.create_ridge_node_list()
-			self = self.sort_nodes()
 			self = self.cut_network()
+			self = self.add_boundary_nodes()
+		elif creation != 'Voronoi':# and creation != 'reg_Voronoi':
+			self = self.create_network(creation)
+			#self = self.delete_first_point()
+			#self = self.cut_network()
+			plot_geometry(self)
 		else:
 			self = self.create_network(creation)
 			while len(self.boundary_nodes_right) <= min(self.complexity/10,8) or len(self.boundary_nodes_left) <= min(self.complexity/10,8):
+				print 'ok'
 				self = self.create_network(creation)
 				self = self.cut_network()
 				self = self.delete_first_point()

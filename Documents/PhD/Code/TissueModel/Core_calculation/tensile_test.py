@@ -1,14 +1,13 @@
 import numpy as np
 from force_balance import *
-from creation_network import Network
+from Network_generation.creation_network import Network
 import csv, os
 from Plotting.network_plotting import *
 
 
 class Tensile_test:
-	def __init__(self, constitutive, scheme, side, space_discretization, traction_distance, plot, video, phase, path):
+	def __init__(self, constitutive, side, space_discretization, traction_distance, plot, video, phase, path):
 		self.constitutive = constitutive
-		self.scheme = scheme
 		self.side = side
 		self.space_discretization = space_discretization
 		self.traction_distance = traction_distance
@@ -64,17 +63,13 @@ class Tensile_test:
 		while (max(network.vertices[:,0])-network.length) <= self.traction_distance:
 			current_disp = (max(network.vertices[:,0])-network.length)
 			print 'Displacement: ', current_disp, i
-		#for ite in range(1,self.iterations):
-	#		print 'Step', i"""
 			result = False
 			tries = 0
-			#network = new_bc(network, self.space_discretization*self.traction_distance/abs(self.traction_distance), self.side)
-			#network=solve_force_balance(network, self.space_discretization, self.constitutive, self.scheme, self.side, ite,details)
 			space_discretization = self.space_discretization
 			if result == False and tries <=10:
 				try:
 					network = new_bc(network, space_discretization*self.traction_distance/abs(self.traction_distance), self.side)
-					network=solve_force_balance(network, space_discretization, self.constitutive, self.scheme, self.side, current_disp,details)
+					network=solve_force_balance(network, self.constitutive, details)
 					result = True
 					network.save_network('temp',path)
 				except (ValueError,RuntimeWarning):
@@ -91,7 +86,6 @@ class Tensile_test:
 			space_discretization = self.space_discretization
 			network.stress.append(self.calculate_macro_stress(network))
 			network.strain.append((max(network.vertices[:,0])-network.length)/network.length)
-			#last_network = 'stress_strain_%03d.csv' % network.complexity
 			last_network = 'stress_strain_%s.csv' % len(network.vertices)
 			with open(os.path.join(path,last_network), 'w') as writeFile:
 				writer = csv.writer(writeFile)
