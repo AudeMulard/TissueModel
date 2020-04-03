@@ -51,7 +51,7 @@ class Tensile_test:
 					i = node
 					k = network.ridge_vertices[j][0]
 					stress+=write_force(network, node, network.ridge_vertices[j][0], self.constitutive)[0]*network.vertices[node][0]
-		stress = stress/(network.length)
+		stress = stress/(network.length[0])
 		return stress
 
 # sum them up and divide by volume to give constraint.
@@ -60,16 +60,26 @@ class Tensile_test:
 		self.save_parameters(network,path)
 		network.save_network('temp',path)
 		i = 0
-		while (max(network.vertices[:,0])-network.length) <= self.traction_distance:
-			current_disp = (max(network.vertices[:,0])-network.length)
+		while (max(network.vertices[:,0])-network.length[0]) <= self.traction_distance:
+			current_disp = (max(network.vertices[:,0])-network.length[0])
 			print 'Displacement: ', current_disp, i
 			result = False
 			tries = 0
 			space_discretization = self.space_discretization
-			if result == False and tries <=10:
+			if network.dimension == 2:
+				index=0
+				for ridge in network.ridge_vertices:
+					length_ini = length_square(network,network.vertices_ini[ridge[0]]-network.vertices_ini[ridge[1]])
+					length_new = length_square(network,network.vertices[ridge[0]]-network.vertices[ridge[1]])
+					if length_ini <= length_new:
+						network.state_ridge[index]='tension'
+					else:
+						network.state_ridge[index]='compression'
+					index+=1
+			while result == False and tries <=10:
 				try:
 					network = new_bc(network, space_discretization*self.traction_distance/abs(self.traction_distance), self.side)
-					network=solve_force_balance(network, self.constitutive, details)
+					network= solve_force_balance(network, self.constitutive, details)
 					result = True
 					network.save_network('temp',path)
 				except (ValueError,RuntimeWarning):
@@ -80,12 +90,9 @@ class Tensile_test:
 						list_vertices = np.array(list(reader))
 						network.vertices=list_vertices.astype(float)
 					tries +=1
-					continue
-			else:
-				break
 			space_discretization = self.space_discretization
 			network.stress.append(self.calculate_macro_stress(network))
-			network.strain.append((max(network.vertices[:,0])-network.length)/network.length)
+			network.strain.append((max(network.vertices[:,0])-network.length[0])/network.length[0])
 			last_network = 'stress_strain_%s.csv' % len(network.vertices)
 			with open(os.path.join(path,last_network), 'w') as writeFile:
 				writer = csv.writer(writeFile)

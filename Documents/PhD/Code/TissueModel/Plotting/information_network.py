@@ -96,12 +96,13 @@ def plot_avg_angle(strain,network,ax2,color):
 	return avg_angles
 
 if __name__ == "__main__":
-	os.chdir('../Data/Voronoi')
+	os.chdir('../Data/compression_tension')
 	if len(sys.argv) == 1:
 		os.chdir(sorted_ls('.')[-1])
 	else:
 		os.chdir(sys.argv[1])
 	filenames=fnmatch.filter(os.listdir('.'), 'stress_strain_*.csv')
+	print filenames
 	fig, ax1 = plt.subplots()
 	color = 'tab:red'
 	ax1.set_xlabel('strain')

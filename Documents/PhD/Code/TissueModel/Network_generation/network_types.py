@@ -26,17 +26,23 @@ def select_network(network,creation):
 			return vertices, ridge_vertices
 
 		if creation == "growth_network":
-			#Seeds = np.random.rand(network.complexity,network.dimension)*network.length
-			Seeds = np.array([[ 0.92374815,  0.90291537], [ 0.87529856,  0.91491711], [ 0.59413968,  0.65649066], [ 0.70452016,  0.04474947], [ 0.79686153,  0.75654823]])
-			plt.scatter(Seeds[:,0],Seeds[:,1],label='Seeds')
-			#orientations = np.random.rand(network.complexity,1)*180
-			orientations = [[  44.12501178], [  99.64676771], [  38.26756236], [ 142.78837107], [  42.27702724]]
+			Seeds = []
+			for node in range(network.complexity):
+				if network.dimension==2:
+					Seeds.append([np.random.rand()*network.length[0],np.random.rand()*network.length[1]])
+				elif network.dimension ==3:
+					Seeds.append([np.random.rand()*network.length[0],np.random.rand()*network.length[1],np.random.rand()*network.length[2]])
+			Seeds = np.array(Seeds)
+			#Seeds = np.array([[ 0.92374815,  0.90291537], [ 0.87529856,  0.91491711], [ 0.59413968,  0.65649066], [ 0.70452016,  0.04474947], [ 0.79686153,  0.75654823]])
+			#plt.scatter(Seeds[:,0],Seeds[:,1],label='Seeds',color='blue')
+			orientations = np.random.rand(network.complexity,1)*180
+			#orientations = [[  44.12501178], [  99.64676771], [  38.26756236], [ 142.78837107], [  42.27702724]]
 			lines = []
 			for i in range(len(Seeds)):
 				a = float(np.tan(orientations[i]))
 				b = float(Seeds[i][1]-np.tan(orientations[i])*Seeds[i][0])
-				lines.append([a,b,0.0,b,1.0, a+b])
-				plt.plot([[0.0,Seeds[i][1]-np.tan(orientations[i])*Seeds[i][0]],[1.0, np.tan(orientations[i])+Seeds[i][1]-np.tan(orientations[i])*Seeds[i][0]]])
+				lines.append([a,b,0.0,b,i,1.0, a+b, i])
+				#plt.plot([[0.0,Seeds[i][1]-np.tan(orientations[i])*Seeds[i][0]],[1.0, np.tan(orientations[i])+Seeds[i][1]-np.tan(orientations[i])*Seeds[i][0]]])
 			inter_points = []
 			for line1 in lines:
 				for line2 in lines:
@@ -44,30 +50,41 @@ def select_network(network,creation):
 						#print line1,line2
 						x_inter = (line2[1]-line1[1])/(line1[0]-line2[0])
 						y_inter = line1[0]*x_inter+line1[1]
-						inter_points.append([x_inter,y_inter])
-						if 1.0 > x_inter > Seeds[lines.index(line1)][0] and 0.0<y_inter<1.0 and length_square(Seeds[lines.index(line1)]-[x_inter,y_inter])<=length_square(Seeds[lines.index(line1)]-line1[3]):
-							line1[4]=x_inter
-							line1[5] =y_inter
-						elif 0.0<x_inter < Seeds[lines.index(line1)][0] and 0.0<y_inter<1.0 and length_square(Seeds[lines.index(line1)]-[x_inter,y_inter])<=length_square(Seeds[lines.index(line1)]-line1[2]):
-							line1[2]=x_inter
+						#inter_points.append([x_inter,y_inter])
+						if min(1.0,max(line2[5],line2[2])) > x_inter > max(Seeds[lines.index(line1)][0],min(line2[5],line2[2])) and max(0.0,min(line2[6],line2[3])) < y_inter < min(1.0,max(line2[6],line2[3])) and length_square(Seeds[lines.index(line1)]-[x_inter,y_inter])<=length_square(Seeds[lines.index(line1)]-[line1[5],line1[6]]):
+							print y_inter
+							line1[5] = x_inter
+							line1[6] = y_inter
+							line1[7] = lines.index(line2)
+						elif min(Seeds[lines.index(line1)][0],max(line2[5],line2[2])) > x_inter > max(0.0,min(line2[5],line2[2])) and max(0.0,min(line2[6],line2[3])) < y_inter < min(1.0,max(line2[6],line2[3])) and length_square(Seeds[lines.index(line1)]-[x_inter,y_inter])<=length_square(Seeds[lines.index(line1)]-[line1[2],line1[3]]):
+							print y_inter
+							line1[2] = x_inter
 							line1[3] = y_inter
-			#inter_points = {tuple(np.sort(node)) for node in inter_points}
-			#self.ridge_vertices = [list(l) for l in ridges]
-			#inter_points = set(inter_points)
-			inter_points = np.array([list(l) for l in inter_points])
-			plt.scatter(inter_points[:,0],inter_points[:,1],label = 'inter_points')
-			#print lines
+							line1[4] = lines.index(line2)
+						plt.scatter(x_inter,y_inter)
+				plt.scatter(Seeds[lines.index(line1)][0],Seeds[lines.index(line1)][1],color='blue')
+				plt.scatter(line1[2],line1[3], color='red')
+				plt.scatter(line1[5],line1[6], color='red')
+				plt.show()
+			#inter_points = np.array([list(l) for l in inter_points])
+			#plt.scatter(inter_points[:,0],inter_points[:,1],label = 'inter_points')
 			lines = np.array(lines)
 			vertices = []
 			ridge_vertices=[]
 			for k in range(len(lines)):
 				vertices.append([lines[k,2], lines[k,3]])
-				vertices.append([lines[k,4], lines[k,5]])
-				ridge_vertices.append([2*k, 2*k+1])
+				vertices.append([lines[k,5], lines[k,6]])
+			for line in lines:
+				ridge_vertices.append([vertices.index([line[2],line[3]]), vertices.index([lines[int(line[4])][2],lines[int(line[4])][3]])])
+				ridge_vertices.append([vertices.index([line[2],line[3]]), vertices.index([lines[int(line[4])][5],lines[int(line[4])][6]])])
+				ridge_vertices.append([vertices.index([line[5],line[6]]), vertices.index([lines[int(line[7])][2],lines[int(line[7])][3]])])
+				ridge_vertices.append([vertices.index([line[5],line[6]]), vertices.index([lines[int(line[7])][5],lines[int(line[7])][6]])])
 			vertices = np.array(vertices)
 			print vertices
-			#plt.scatter(vertices[:,0],vertices[:,1],label='vertices')
-			#plt.legend()
+			for i in range(len(vertices[:,0])):
+				plt.annotate(i, (vertices[i,0],vertices[i,1]),fontsize=10)
+			plt.scatter(vertices[:,0],vertices[:,1],label='vertices')
+			plt.legend()
 			#plt.show()
 			print ridge_vertices
 			return vertices,ridge_vertices

@@ -113,7 +113,7 @@ def load_network_info(path,**kw):
 	with open('parameters_%03d.csv' % path, 'r') as readFile:
 		reader = csv.reader(readFile)
 		params = dict(list(reader))
-	network = Network_generation.creation_network.Network(params['dimension'], params['complexity'], params['length'], params['merge_distance'], params['k_spring'], params['A'], params['disturbance'], params['type'],path)
+	network = Network_generation.creation_network.Network(params['dimension'], params['complexity'], params['length'], params['merge_distance'], params['k_tension'], params['k_compression'], params['A'], params['disturbance'], params['type'],path)
 	with open('network_vertices_initial_%03d.csv' % path, 'r') as readFile:
 		reader = csv.reader(readFile)
 		list_vertices = np.array(list(reader))

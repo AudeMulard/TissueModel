@@ -12,18 +12,19 @@ import matplotlib.patches as patches
 
 ## PARAMETERS
 dimension=3 #dimension of the problem
-complexity_network=650 #number of random seed points
+complexity_network=155 #number of random seed points
 length_domain=(1.0,0.75,1./3.)
 min_distance = 0.0001*length_domain[0]
-space_discretization = 0.01*length_domain[0]
-Ef=1.0
+space_discretization = 0.001*length_domain[0]
+k_tension=1.0
+k_compression = 1.0
 A=1.
 disturbance=0.02
-traction_distance = 0.1*length_domain[0]
+traction_distance = 0.5*length_domain[0]
 #iteration = 15
 
 
-data_path = '../Data/default/'
+data_path = '../Data/3D_try/'
 
 today = date.today()
 
@@ -43,12 +44,9 @@ phase = 'only_one'
 stress_rep = True
 details = True
 
-network = Network(dimension, complexity_network, length_domain, min_distance, Ef, A, disturbance, creation, path)
+network = Network(dimension, complexity_network, length_domain, min_distance, k_tension, k_compression, A, disturbance, creation, path)
 network = network.set_fibers(creation, path)
 print len(network.vertices)
-plot_geometry(network)
-plt.show()
-
 """
 cell = Cell(0.5,0.5,0.1)
 network= cell.add_cell(network)
@@ -61,10 +59,9 @@ plot_geometry(network)
 plt.savefig('cell_final.pdf')
 plt.show()
 
-
+"""
 
 
 test_1 = Tensile_test(constitutive, side, space_discretization, traction_distance, plot, video, phase, path)
 network = test_1.full_test(network, path,details)
-"""
 

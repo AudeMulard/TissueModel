@@ -11,11 +11,12 @@ from Plotting.network_plotting import *
 import fnmatch
 
 class Network:
-	def __init__(self, dimension, complexity_network, length_domain, min_distance, Ef, A, B, creation, path):
+	def __init__(self, dimension, complexity_network, length_domain, min_distance, k_tension, k_compression, A, B, creation, path):
 		self.complexity = complexity_network
 		self.length=length_domain
 		self.dimension = dimension
-		self.Ef = Ef
+		self.k_tension = k_tension
+		self.k_compression = k_compression
 		self.A = A
 		self.disturbance = B
 		self.min_distance = min_distance
@@ -369,7 +370,8 @@ class Network:
 				writer.writerow(["dimension",self.dimension])
 				writer.writerow(["complexity",self.complexity])
 				writer.writerow(["length",self.length])
-				writer.writerow(["k_spring",self.Ef])
+				writer.writerow(["k_tension",self.k_tension])
+				writer.writerow(["k_compression",self.k_compression])
 				writer.writerow(["merge_distance",self.min_distance])
 				writer.writerow(["type",self.creation])
 				writer.writerow(["number of nodes",len(self.vertices)])
@@ -419,16 +421,17 @@ class Network:
 
 	def set_fibers(self, creation, path):
 		if creation == 'old':
-			filename = fnmatch.filter(os.listdir('.'), 'network_vertices_initial_118.csv')
+			filename = fnmatch.filter(os.listdir('.'), 'network_vertices_initial_111.csv')
 			with open(filename[0],'r') as readFile:
 				reader = csv.reader(readFile)
 				list_vertices = np.array(list(reader))
 				self.vertices=list_vertices.astype(float)
-			filename = fnmatch.filter(os.listdir('.'), 'network_ridge_vertices_118.csv')
+			filename = fnmatch.filter(os.listdir('.'), 'network_ridge_vertices_111.csv')
 			with open(filename[0], 'r') as readFile:
 				reader = csv.reader(readFile)
 				list_ridge_vertices=np.array(list(reader))
 				self.ridge_vertices=list_ridge_vertices.astype(int)
+				self.ridge_vertices = [list(l) for l in self.ridge_vertices]
 		elif creation == 'reg_Voronoi':
 			self = self.create_network(creation)
 			self = self.delete_first_point()
@@ -441,6 +444,10 @@ class Network:
 			self = self.delete_first_point()
 			self = self.cut_network()
 			self = self.add_boundary_nodes()
+		elif creation == 'growth_network':
+			self = self.create_network(creation)
+			self = self.delete_doubles()
+			self = self.cut_network()
 		elif creation != 'Voronoi':# and creation != 'reg_Voronoi':
 			self = self.create_network(creation)
 			#self = self.delete_first_point()
@@ -449,7 +456,6 @@ class Network:
 		else:
 			self = self.create_network(creation)
 			while len(self.boundary_nodes_right) <= min(self.complexity/10,8) or len(self.boundary_nodes_left) <= min(self.complexity/10,8):
-				print 'ok'
 				self = self.create_network(creation)
 				self = self.cut_network()
 				self = self.delete_first_point()
@@ -457,7 +463,7 @@ class Network:
 				#self = self.cut_network()
 				self = self.sort_nodes()
 			print 'number of boundary_nodes: ', len(self.boundary_nodes_right),len(self.boundary_nodes_left)
-			while len(self.ridge_vertices)-2*len(self.interior_nodes)<=self.complexity/10:
+			while len(self.ridge_vertices)-self.dimension*len(self.interior_nodes)<=self.complexity/10:
 				self.min_distance +=0.001
 				self = self.delete_doubles()
 				self = self.delete_points_with_two_ridges()
@@ -465,7 +471,7 @@ class Network:
 				self = self.create_ridge_node_list()
 				self = self.merge_nodes()
 				self = self.sort_nodes()
-			print 'hyperstatic number: ',len(self.ridge_vertices)-2*len(self.interior_nodes)
+			print 'hyperstatic number: ',len(self.ridge_vertices)-self.dimension*len(self.interior_nodes)
 			print 'number of boundary_nodes: ', len(self.boundary_nodes_right),len(self.boundary_nodes_left)
 			print 'min_distance: ', self.min_distance
 			self = self.delete_alone_points()
@@ -477,6 +483,7 @@ class Network:
 		self = self.distribution_length_fiber(path)
 		self.save_network('initial', path)
 		self = self.create_ridge_node_list()
+		self.state_ridge = ['tension']*len(self.ridge_vertices)
 		return self
 
 	def length_ridge(self,x):	

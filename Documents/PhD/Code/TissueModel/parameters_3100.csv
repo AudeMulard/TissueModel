@@ -1,0 +1,10 @@
+dimension,3
+complexity,650
+length,"(1.0, 0.75, 0.3333333333333333)"
+k_spring,1.0
+merge_distance,0.0011
+type,Voronoi
+number of nodes,3100
+number of springs,5674
+disturbance,0.02
+A,1.0
