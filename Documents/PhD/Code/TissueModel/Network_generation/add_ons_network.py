@@ -78,7 +78,7 @@ class Cell:
 		return network
 
 	def contraction_bc(self,network,distance):
-		print self.boundary_cell
+		print(self.boundary_cell)
 		for node in self.boundary_cell:
 			network.vertices[node][0]=distance*(self.centre_x-network.vertices[node][0])+network.vertices[node][0]
 			network.vertices[node][1]=distance*(self.centre_y-network.vertices[node][1])+network.vertices[node][1]

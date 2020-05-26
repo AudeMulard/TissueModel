@@ -7,8 +7,7 @@ from scipy.sparse import csc_matrix
 from scipy.sparse.linalg import spsolve
 import warnings
 import time
-from sympy import Matrix
-from sympy import *
+
 
 warnings.filterwarnings("error", category=RuntimeWarning)
 
@@ -39,9 +38,8 @@ def new_bc(network, defo, side):
 import numba
 
 # Def of the square of the norm
-#@numba.autojit(nopython=True)
-def length_square(dimension,x):	
-	if dimension == 2:
+def length_square(network,x):	
+	if network.dimension == 2:
 		return x[0]**2+x[1]**2
 	elif dimension == 3:
 		return x[0]**2+x[1]**2+x[2]**2
@@ -102,11 +100,11 @@ def linear_scheme(network):
 # calculate the force at each point
 
 # Calculate jacobian for the force contributed by j on i, differentiated by x
-#@numba.autojit()
+@numba.jit(parallel=True)
 def find_jacobian_x(network, i, j, constitutive):
 	if constitutive == 'exponential':
-		lambda_f = length_square(network.dimension,network.vertices[i]-network.vertices[j])/length_square(network.dimension,network.vertices_ini[i]-network.vertices_ini[j])
-		jac = network.Ef*network.A/length_square(network.dimension,network.vertices_ini[i]-network.vertices_ini[j])*(network.vertices[i,0]-network.vertices[j,0])*np.exp(network.B*0.5*(lambda_f-1.))
+		lambda_f = length_square(network,network.vertices[i]-network.vertices[j])/length_square(network,network.vertices_ini[i]-network.vertices_ini[j])
+		jac = network.Ef*network.A/length_square(network,network.vertices_ini[i]-network.vertices_ini[j])*(network.vertices[i,0]-network.vertices[j,0])*np.exp(network.B*0.5*(lambda_f-1.))
 		force = network.Ef*network.A/network.B*(np.exp(network.B*0.5*(lambda_f-1.))-1.)
 		return jac*(network.vertices[i]-network.vertices[j]) + force*np.array([1,0])
 	elif constitutive == 'constant':
@@ -121,8 +119,8 @@ def find_jacobian_x(network, i, j, constitutive):
 		else:
 			Ef = network.k_compression"""
 		Ef = network.k_compression
-		length = sp.sqrt(length_square(network.dimension,network.vertices[i]-network.vertices[j]))
-		diff_dist = Ef*(length-sp.sqrt(length_square(network.dimension,network.vertices_ini[i]-network.vertices_ini[j])))
+		length = sp.sqrt(length_square(network,network.vertices[i]-network.vertices[j]))
+		diff_dist = Ef*(length-sp.sqrt(length_square(network,network.vertices_ini[i]-network.vertices_ini[j])))
 		degree_3_x = -Ef*diff_dist*(network.vertices[i][0]-network.vertices[j][0])**2/length**3
 		degree_2_x = Ef*(network.vertices[i][0]-network.vertices[j][0])**2/length**2
 		degree_1 = Ef*diff_dist/length
@@ -131,11 +129,11 @@ def find_jacobian_x(network, i, j, constitutive):
 		return -degree_3_x-degree_2_x-degree_1,-degree_3_y-degree_2_y
 
 # Calculate jacobian for the force contributed by j on i, differentiated by y
-#@numba.autojit()
+@numba.jit(parallel=True)
 def find_jacobian_y(network, i, j, constitutive):
 	if constitutive == 'exponential':
-		lambda_f = length_square(network.dimension,network.vertices[i]-network.vertices[j])/length_square(network.dimension,network.vertices_ini[i]-network.vertices_ini[j])
-		jac = network.Ef*network.A/length_square(network.dimension,network.vertices_ini[i]-network.vertices_ini[j])*(network.vertices[i,1]-network.vertices[j,1])*np.exp(network.B*0.5*(lambda_f-1.))
+		lambda_f = length_square(network,network.vertices[i]-network.vertices[j])/length_square(network,network.vertices_ini[i]-network.vertices_ini[j])
+		jac = network.Ef*network.A/length_square(network,network.vertices_ini[i]-network.vertices_ini[j])*(network.vertices[i,1]-network.vertices[j,1])*np.exp(network.B*0.5*(lambda_f-1.))
 		force = network.Ef*network.A/network.B*(np.exp(network.B*0.5*(lambda_f-1.))-1.)
 		return jac*(network.vertices[i]-network.vertices[j]) + force*np.array([0,1])
 	elif constitutive == 'constant':
@@ -150,8 +148,8 @@ def find_jacobian_y(network, i, j, constitutive):
 		else:
 			Ef = network.k_compression"""
 		Ef = network.k_compression
-		length = sp.sqrt(length_square(network.dimension,network.vertices[i]-network.vertices[j]))
-		diff_dist = Ef*(length-sp.sqrt(length_square(network.dimension,network.vertices_ini[i]-network.vertices_ini[j])))
+		length = sp.sqrt(length_square(network,network.vertices[i]-network.vertices[j]))
+		diff_dist = Ef*(length-sp.sqrt(length_square(network,network.vertices_ini[i]-network.vertices_ini[j])))
 		degree_3_x = -Ef*diff_dist*(network.vertices[i][0]-network.vertices[j][0])*(network.vertices[i][1]-network.vertices[j][1])/length**3
 		degree_2_x = Ef*(network.vertices[i][0]-network.vertices[j][0])*(network.vertices[i][1]-network.vertices[j][1])/length**2
 		degree_1 = Ef*diff_dist/length
@@ -213,14 +211,12 @@ def iterative_newton(network, constitutive,details):
 	epsilon = 1e-8
 	for k in range(max_iter):
 		F = write_vector_F(network, constitutive)
-		#print F
 		J = write_matrix_J(network, constitutive)
-		#if np.linalg.cond(J) > 10e10:
-		#	print('STOP SIMULATION: ERROR')
-		#print np.linalg.cond(J)
+		if np.linalg.cond(J) > 10e10:
+			print('STOP SIMULATION: ERROR')
 		#conversion in sparse
 		J_sparse = csc_matrix(J)
-		diff = spsolve(J_sparse,-F)#, use_umfpack=True)
+		diff = spsolve(J_sparse,-F)
 		#diff = scipy.linalg.solve(J,-F)
 		#print(len(diff_h),len(diff))
 		#print(np.allclose(diff,diff_h))
@@ -263,7 +259,7 @@ def write_force(network, i, j, constitutive):
 				Ef = network.k_compression
 		elif network.dimension == 3:
 			Ef = network.k_tension
-		return Ef*(float(sp.sqrt(length_square(network.dimension,network.vertices[i]-network.vertices[j])))-float(sp.sqrt(length_square(network.dimension,network.vertices_ini[i]-network.vertices_ini[j]))))*(network.vertices[i]-network.vertices[j])/float(sp.sqrt(length_square(network.dimension,network.vertices[i]-network.vertices[j])))
+		return Ef*(float(sp.sqrt(length_square(network,network.vertices[i]-network.vertices[j])))-float(sp.sqrt(length_square(network,network.vertices_ini[i]-network.vertices_ini[j]))))*(network.vertices[i]-network.vertices[j])/float(sp.sqrt(length_square(network,network.vertices[i]-network.vertices[j])))
 
 ## Sums up all the forces applied on the node i.
 
@@ -279,9 +275,9 @@ def write_force_eq_point(network, i, constitutive):
 # Calculate jacobian for the force contributed by j on i, differentiated by x
 def find_jacobian_x_3d(network, i, j, constitutive):
 	if constitutive == 'spring':
-		length = sp.sqrt(length_square(network.dimension,network.vertices[i]-network.vertices[j]))
+		length = sp.sqrt(length_square(network,network.vertices[i]-network.vertices[j]))
 		jac = network.k_tension*(network.vertices[i][0]-network.vertices[j][0])/length
-		force = network.k_tension*(1-sp.sqrt(length_square(network.dimension,network.vertices_ini[i]-network.vertices_ini[j]))/sp.sqrt(length_square(network.dimension,network.vertices[i]-network.vertices[j])))
+		force = network.k_tension*(1-sp.sqrt(length_square(network,network.vertices_ini[i]-network.vertices_ini[j]))/sp.sqrt(length_square(network,network.vertices[i]-network.vertices[j])))
 		jac_x = jac*(network.vertices[i][0]-network.vertices[j][0])/length+force
 		jac_y = jac*(network.vertices[i][1]-network.vertices[j][1])/length
 		jac_z = jac*(network.vertices[i][2]-network.vertices[j][2])/length
@@ -290,9 +286,9 @@ def find_jacobian_x_3d(network, i, j, constitutive):
 # Calculate jacobian for the force contributed by j on i, differentiated by y
 def find_jacobian_y_3d(network, i, j, constitutive):
 	if constitutive == 'spring':
-		length = sp.sqrt(length_square(network.dimension,network.vertices[i]-network.vertices[j]))
+		length = sp.sqrt(length_square(network,network.vertices[i]-network.vertices[j]))
 		jac = network.k_tension*(network.vertices[i][1]-network.vertices[j][1])/length
-		force = network.k_tension*(1-sp.sqrt(length_square(network.dimension,network.vertices_ini[i]-network.vertices_ini[j]))/sp.sqrt(length_square(network.dimension,network.vertices[i]-network.vertices[j])))
+		force = network.k_tension*(1-sp.sqrt(length_square(network,network.vertices_ini[i]-network.vertices_ini[j]))/sp.sqrt(length_square(network,network.vertices[i]-network.vertices[j])))
 		jac_x = jac*(network.vertices[i][0]-network.vertices[j][0])/length
 		jac_y = jac*(network.vertices[i][1]-network.vertices[j][1])/length+force
 		jac_z = jac*(network.vertices[i][2]-network.vertices[j][2])/length
@@ -301,9 +297,9 @@ def find_jacobian_y_3d(network, i, j, constitutive):
 # Calculate jacobian for the force contributed by j on i, differentiated by z
 def find_jacobian_z_3d(network, i, j, constitutive):
 	if constitutive == 'spring':
-		length = sp.sqrt(length_square(network.dimension,network.vertices[i]-network.vertices[j]))
+		length = sp.sqrt(length_square(network,network.vertices[i]-network.vertices[j]))
 		jac = network.k_tension*(network.vertices[i][2]-network.vertices[j][2])/length
-		force = network.k_tension*(1-sp.sqrt(length_square(network.dimension,network.vertices_ini[i]-network.vertices_ini[j]))/sp.sqrt(length_square(network.dimension,network.vertices[i]-network.vertices[j])))
+		force = network.k_tension*(1-sp.sqrt(length_square(network,network.vertices_ini[i]-network.vertices_ini[j]))/sp.sqrt(length_square(network,network.vertices[i]-network.vertices[j])))
 		jac_x = jac*(network.vertices[i][0]-network.vertices[j][0])/length
 		jac_y = jac*(network.vertices[i][1]-network.vertices[j][1])/length
 		jac_z = jac*(network.vertices[i][2]-network.vertices[j][2])/length+force

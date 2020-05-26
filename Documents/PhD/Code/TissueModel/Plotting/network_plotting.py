@@ -12,8 +12,8 @@ def length_square(network,x):
 		return x[0]**2+x[1]**2
 
 
-####################################### PLOTTING NETWORKS ###########################################
-# Plot geometry
+####################################### PLOTTING THE GEOMETRY OF NETWORKS ###########################################
+
 
 def plot_geometry(network,  **kw):
 	fig = plt.figure()
@@ -21,7 +21,7 @@ def plot_geometry(network,  **kw):
 	if int(network.dimension) == 2:
 		ax = fig.gca()
 		#ax.axis('equal')
-		#ax.set(xlim=(0., 2.0), ylim=(0., 1.1))
+		#ax.set(xlim=(0., 1.0), ylim=(0., 1.0))
 		from matplotlib.collections import LineCollection
 		ax.scatter(network.vertices[:,0],network.vertices[:,1], s =2.)
 		for i in range(len(network.vertices[:,0])):
@@ -103,55 +103,28 @@ def plot_constraints(network, **kw):
 	fig.colorbar(sm, orientation='vertical')
 	return ax.figure
 
-######################## LOAD NETWORK ################################
+
+
+
+######################## MAIN ##################################
 
 def sorted_ls(path):
     mtime = lambda f: os.stat(os.path.join(path, f)).st_mtime
     return list(sorted(os.listdir(path), key=mtime))
 
-def load_network_info(path,**kw):
-	with open('parameters_%03d.csv' % path, 'r') as readFile:
-		reader = csv.reader(readFile)
-		params = dict(list(reader))
-	network = Network_generation.creation_network.Network(params['dimension'], params['complexity'], params['length'], params['merge_distance'], params['k_tension'], params['k_compression'], params['A'], params['disturbance'], params['type'],path)
-	with open('network_vertices_initial_%03d.csv' % path, 'r') as readFile:
-		reader = csv.reader(readFile)
-		list_vertices = np.array(list(reader))
-		network.vertices_ini=list_vertices.astype(float)
-	filename = fnmatch.filter(os.listdir('.'), 'network_ridge_vertices_*.csv')
-	with open('network_ridge_vertices_%03d.csv' % path, 'r') as readFile:
-		reader = csv.reader(readFile)
-		list_ridge_vertices=np.array(list(reader))
-		network.ridge_vertices=list_ridge_vertices.astype(int)
-	if kw.get('step'):
-		print 'network_vertices_%03d_%03d.csv' % (int(kw['step']),int(params['number of nodes'])) 
-		try:
-			with open('network_vertices_%03d_%03d.csv' % (int(kw['step']),int(params['number of nodes'])) ,'r') as readFile:
-				reader = csv.reader(readFile)
-				list_vertices = np.array(list(reader))
-				network.vertices=list_vertices.astype(float)
-		except:
-			print 'No info on step, Initial step'
-			network.vertices = network.vertices_ini
-			pass
-	else:
-		network.vertices = network.vertices_ini
-	network=network.sort_nodes()
-	network=network.create_ridge_node_list()
-	return network
-
 
 if __name__ == '__main__':
-	os.chdir('../Data/Voronoi/')
+	os.chdir('../Data/growth_network/')
 	if len(sys.argv) != 1:
 		os.chdir(sys.argv[1])
 	else:
 		os.chdir(sorted_ls('.')[-1])
 	filenames=fnmatch.filter(os.listdir('.'), 'parameters_*.csv')
 	for filename in filenames:
-		network = load_network_info(int(filename[-7:-4]),step=4)
+		network = load_network_info(int(filename[-7:-4]),step=0)
 		plot_geometry(network)
 		plt.savefig('network_%03d.pdf' % int(filename[-7:-4]))
+		plt.show()
 	"""
 	type_plot = str(input("What graph do you want?\n enter 'geo' for geometry, 'const' for constraints"))
 
