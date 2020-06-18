@@ -26,9 +26,9 @@ def identical_check(path):
 			norm = length_square(vertices_first[i]-vertices_second[i])
 			if norm >= 10e-5:
 				with open('testing.txt', 'a') as writeFile:
-					writeFile.write(filename[17:20],i)
+					writeFile.write(filename[17:20]+' '+str(i),+'\n')
 	with open('testing.txt', 'a') as writeFile:
-		writeFile.write('Identical network test : all good')
+		writeFile.write('Identical network test : all good\n')
 	os.chdir(current_path)
 
 
@@ -36,7 +36,7 @@ def network_def_tests(network,path,test_1):
 	network = network.set_fibers(path)
 	
 	network = test_1.full_test(network, path,test_1.details,name='first')
-	print 'First calculation done'
+	print('First calculation done')
 	
 	network.vertices = np.array(network.vertices_ini)
 	network = test_1.full_test(network, path,test_1.details,name='second')

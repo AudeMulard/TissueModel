@@ -480,13 +480,16 @@ class Network:
 			self = self.create_network()
 			self = self.delete_doubles()
 			self = self.cut_network_updown()
-			self = self.delete_alone_points()
-			self = self.delete_single_ridge_points()
-			self.min_distance = 0.01
-			self = self.merge_nodes()
-			#self=self.delete_points_with_two_ridges()
-			self = self.sort_nodes()
-			self = self.create_ridge_node_list()
+			if self.dimension != 3:
+				self = self.delete_doubles()
+				self = self.cut_network_updown()
+				self = self.delete_alone_points()
+				self = self.delete_single_ridge_points()
+				self.min_distance = 0.01
+				self = self.merge_nodes()
+				#self=self.delete_points_with_two_ridges()
+				self = self.sort_nodes()
+				self = self.create_ridge_node_list()
 		elif self.creation != 'Voronoi' and self.creation != "growth_network":# and creation != 'reg_Voronoi':
 			self = self.create_network()
 			#self = self.delete_first_point()
@@ -502,7 +505,7 @@ class Network:
 				self = self.delete_doubles()
 				self = self.sort_nodes()
 			print('number of boundary_nodes: ', len(self.boundary_nodes_right),len(self.boundary_nodes_left))
-		if self.generation!= 'regular' and self.creation != 'old': 
+		if self.generation!= 'regular' and self.creation != 'old' and self.dimension!=3 and self.creation != '1 straight line':
 			while len(self.ridge_vertices)-self.dimension*len(self.interior_nodes)<=1:
 				self.min_distance +=0.001
 				self = self.delete_doubles()
@@ -515,12 +518,14 @@ class Network:
 			print('number of boundary_nodes: ', len(self.boundary_nodes_right),len(self.boundary_nodes_left))
 			print('min_distance: ', self.min_distance)
 			self = self.delete_points_with_two_ridges()
-		self = self.delete_alone_points()
-		self = self.delete_single_ridge_points()
-		self = self.delete_alone_points()
+		if self.creation!='1 straight line':
+			self = self.delete_alone_points()
+			self = self.delete_single_ridge_points()
+			self = self.delete_alone_points()
 		#self = self.create_ridge_node_list()
-		self = self.sort_nodes()
 		self.vertices_ini = np.array(self.vertices.tolist())
+		self = self.sort_nodes()
+		#network.vertices_ini=np.array(self.vertices.tolist())
 		self = self.distribution_length_fiber(path)
 		self.save_network('initial', path)
 		self = self.create_ridge_node_list()

@@ -38,7 +38,6 @@ def check_bio(path):
 	stress_exp, strain_exp = get_exp_data()
 	exp_curve = interp1d(strain_exp,stress_exp,fill_value='extrapolate')
 	filenames = fnmatch.filter(os.listdir('.'), 'stress_strain_*_0*.csv')
-	print filenames
 	stress,strain,diff_global = [],[],[]
 	diff = []
 	for filename in filenames:

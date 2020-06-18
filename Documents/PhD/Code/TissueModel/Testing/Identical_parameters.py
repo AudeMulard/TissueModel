@@ -29,12 +29,11 @@ def idparams_check(path):
 			dist += length_square(vertices_first[i]-vertices_second[i])
 		distance.append(dist/len(vertices_first))
 	with open('testing.txt', 'a') as writeFile:
-		writeFile.write('Difference in network positions :')
-		writeFile.write(str(distance))
+		writeFile.write('Difference in network positions :\n')
+		writeFile.write(str(distance)+'\n')
 	
 	# Compare stress_strain_curve
 	filenames = fnmatch.filter(os.listdir('.'), 'stress_strain_*.csv')
-	print filenames
 	stress = []
 	diff = []
 	for filename in filenames:
@@ -46,15 +45,14 @@ def idparams_check(path):
 		diff.append(stress[0][i]-stress[1][i]) # si pas meme implementer linearisation
 		
 	with open('testing.txt', 'a') as writeFile:
-		writeFile.write('Difference in global stress :')
-		writeFile.write(str(diff))
+		writeFile.write('Difference in global stress :\n')
+		writeFile.write(str(diff)+'\n')
 	
 	os.chdir(current_path)
 
 
 def network_def_idparams(network,path,test_1):
 	network_1 = network.set_fibers(path)
-	print len(network_1.vertices)
 	network_1 = test_1.full_test(network, path,test_1.details,name='first')
 
 	network_2 = network.set_fibers(path)

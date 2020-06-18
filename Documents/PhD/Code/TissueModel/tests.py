@@ -37,7 +37,7 @@ phase = 'only_one'
 stress_rep = True
 details = True
 
-list_modes = [['Voronoi','random'],['Voronoi','regular'],['growth_network','grid']]#,['Voronoi','grid']
+list_modes = [['growth_network','grid']]#['Voronoi','random'],['Voronoi','regular'],['growth_network','grid']]#,['Voronoi','grid']
 
 for mode in list_modes:
 	creation = mode[0]
@@ -64,7 +64,7 @@ for mode in list_modes:
 	
 	# Repeatability for same network
 	with open(os.path.join(path,'testing.txt'), 'a') as writeFile:
-		writeFile.write('Repeatability for the same network')
+		writeFile.write('Repeatability for the same network\n')
 	from Testing.Identical_network import *
 	network = Network(dimension, complexity_network, length_domain, min_distance, k_tension, k_compression, A, disturbance, creation,generation, path)
 	test_1 = Tensile_test(constitutive, side, space_discretization, traction_distance, plot, video, path,details)
@@ -73,7 +73,7 @@ for mode in list_modes:
 	
 	# Repeatability for different networks, same parameters
 	with open(os.path.join(path,'testing.txt'), 'a') as writeFile:
-		writeFile.write('Repeatability for different networks, same parameters')
+		writeFile.write('Repeatability for different networks, same parameters\n')
 	from Testing.Identical_parameters import *
 	network = Network(dimension, complexity_network, length_domain, min_distance, k_tension, k_compression, A, disturbance, creation,generation, path)
 	test_1 = Tensile_test(constitutive, side, space_discretization, traction_distance, _plot, video, path,details)
@@ -82,7 +82,7 @@ for mode in list_modes:
 	
 	# Elasticity test
 	with open(os.path.join(path,'testing.txt'), 'a') as writeFile:
-		writeFile.write('Elasticity test')
+		writeFile.write('Elasticity test\n')
 	from Testing.Elasticity import *
 	network = Network(dimension, complexity_network, length_domain, min_distance, k_tension, k_compression, A, disturbance, creation,generation, path)
 	test_1 = Tensile_test(constitutive, side, space_discretization, traction_distance, _plot, video, path,details)
@@ -91,7 +91,7 @@ for mode in list_modes:
 
 	# Add the change of step size
 	with open(os.path.join(path,'testing.txt'), 'a') as writeFile:
-		writeFile.write('Step size change test')
+		writeFile.write('Step size change test\n')
 	from Testing.Step_size import *
 	network = Network(dimension, complexity_network, length_domain, min_distance, k_tension, k_compression, A, disturbance, creation,generation, path)
 	test_1 = Tensile_test(constitutive, side, space_discretization, traction_distance, _plot, video, path,details)
@@ -101,7 +101,7 @@ for mode in list_modes:
 
 	############################### BIOLOGICAL MEANING ######################################
 	with open(os.path.join(path,'testing.txt'), 'a') as writeFile:
-		writeFile.write('Biological meaning')
+		writeFile.write('Biological meaning\n')
 	for i in range(10):
 		network = Network(dimension, complexity_network, length_domain, min_distance, k_tension, k_compression, A, disturbance, creation,generation, path)
 		network = network.set_fibers(path)

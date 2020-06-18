@@ -40,15 +40,14 @@ def elasticity_check(path):
 			dist += length_square(vertices_first[i]-vertices_second[i])
 		distance_compr.append(dist/len(vertices_first))
 	with open('testing.txt', 'a') as writeFile:
-		writeFile.write('Difference in network positions in traction :')
-		writeFile.write(str(distance_tract))
-	with open(path,'testing.txt', 'a') as writeFile:
-		writeFile.write('Difference in network positions in compression :')
-		writeFile.write(str(distance_compr))
+		writeFile.write('Difference in network positions in traction :\n')
+		writeFile.write(str(distance_tract)+'\n')
+	with open('testing.txt', 'a') as writeFile:
+		writeFile.write('Difference in network positions in compression :\n')
+		writeFile.write(str(distance_compr)+'\n')
 	
 	# Compare stress_strain_curve
 	filenames = fnmatch.filter(os.listdir('.'), 'stress_strain_*.csv')
-	print filenames
 	stress = []
 	difftract,diffcomp = [],[]
 	for filename in filenames:
@@ -56,18 +55,16 @@ def elasticity_check(path):
 			reader = csv.reader(readFile)
 			curve = np.array(list(reader))
 			stress.append([float(i) for i in curve[1]])
-	print stress
 	for i in range(len(curve[1])-1):
-		print i, len(curve[1])
 		difftract.append(stress[0][i]-stress[2][i-1])
 		diffcomp.append(stress[1][i]-stress[3][i])
 		
 	with open('testing.txt', 'a') as writeFile:
-		writeFile.write('Difference in global stress in traction:')
-		writeFile.write(str(difftract))
+		writeFile.write('Difference in global stress in traction:\n')
+		writeFile.write(str(difftract)+'\n')
 	with open('testing.txt', 'a') as writeFile:
-		writeFile.write('Difference in global stress in traction:')
-		writeFile.write(str(diffcomp))
+		writeFile.write('Difference in global stress in compression:\n')
+		writeFile.write(str(diffcomp)+'\n')
 	
 	os.chdir(current_path)
 

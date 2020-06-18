@@ -4,11 +4,13 @@ import matplotlib.pyplot as plt
 import sympy as sp
 import scipy
 from scipy.sparse import csc_matrix
-from scipy.sparse.linalg import spsolve
+from scipy.sparse.linalg import spsolve, isolve,gmres,cgs,qmr
 import warnings
 import time
 from sympy import Matrix
 from sympy import *
+from scipy.sparse.linalg.dsolve import linsolve
+from scipy.optimize import newton_krylov,anderson,fsolve
 
 warnings.filterwarnings("error", category=RuntimeWarning)
 
@@ -209,8 +211,36 @@ def write_matrix_J(network, constitutive):
 ## Iterative scheme of the Newton method
 
 def iterative_newton(network, constitutive,details):
+	from scipy.optimize.nonlin import InverseJacobian
+	from scipy.optimize.nonlin import BroydenFirst, KrylovJacobian
 	max_iter = 500
 	epsilon = 1e-8
+	vertices=[]
+	global vertices_ini
+	global list_nodes_ridges
+	global interior_nodes
+	global ridge_vertices
+	ridge_vertices = network.ridge_vertices
+	interior_nodes = network.interior_nodes
+	list_nodes_ridges=network.list_nodes_ridges
+	vertices_ini=network.vertices_ini
+	global vertices_all
+	vertices_all = network.vertices
+	#print vertices_all, vertices_ini
+	for i in range(len(network.interior_nodes)):
+		j = network.interior_nodes[i]
+		vertices.append(vertices_ini[j][0])
+		vertices.append(vertices_ini[j][1])
+	start = time.time()
+	jac=BroydenFirst()
+	sol = newton_krylov(create_F, vertices,verbose=True,f_tol=epsilon, inner_M=KrylovJacobian(inner_M=InverseJacobian(jac)))
+	print sol
+	vertices_sol = np.array(network.vertices)
+	for i in range(len(network.interior_nodes)):
+		j = network.interior_nodes[i]
+		vertices_sol[j]=[sol[2*i],sol[2*i+1]]
+	print 'krylov_time', time.time()-start
+	middle = time.time()
 	for k in range(max_iter):
 		F = write_vector_F(network, constitutive)
 		#print F
@@ -220,14 +250,41 @@ def iterative_newton(network, constitutive,details):
 		#print np.linalg.cond(J)
 		#conversion in sparse
 		J_sparse = csc_matrix(J)
-		diff = spsolve(J_sparse,-F)#, use_umfpack=True)
+		"""#diff = spsolve(J_sparse,-F)#, use_umfpack=True)
+		diff = isolve.bicg(J_sparse,-F)
+		print 'isolve', time.time()-start
+		middle = time.time()
+		#diff_h = linsolve.spsolve(J_sparse,-F, use_umfpack=True)
+		sol = newton_krylov(create_F,vertices)
+		print 'krylov', time.time()-middle
+		middle = time.time()
+		diff_h = gmres(J_sparse,-F)
+		print 'gmres', time.time() - middle
+		#for i in range(len(diff)):
+		#	if diff[i]-diff_h[i]>10e-10: print(diff[i], diff_h[i], i)
+		middle = time.time()
+		"""
+		diff= spsolve(J_sparse, -F)
+		"""
+		print 'spsolve',time.time() - middle
+		for i in range(len(diff)):
+			if diff[i]-diff_h[i]>10e-10: print(diff[i], diff_h[i], i)
+		middle = time.time()
+		diff_h = qmr(J_sparse, -F)
+		print time.time() - middle
+		for i in range(len(diff)):
+			if diff[i]-diff_h[i]>10e-10: print(diff[i], diff_h[i], i)
+		middle = time.time()
+		diff_h = cgs(J_sparse, -F)
+		print time.time() - middle
+		for i in range(len(diff)):
+			if diff[i]-diff_h[i]>10e-10: print(diff[i], diff_h[i], i)
+		"""
 		#diff = scipy.linalg.solve(J,-F)
 		#print(len(diff_h),len(diff))
 		#print(np.allclose(diff,diff_h))
 		#print diff_hey, 'not', np.linalg.norm(diff_hey)
 		#print F, J, diff
-		#for i in range(len(diff)):
-		#	if diff[i]-diff_h[i]>10e-10: print(diff[i], diff_h[i], i)
 		for i in range(len(network.interior_nodes)):
 			j=network.interior_nodes[i]
 			network.vertices[j,0] = network.vertices[j,0] + diff[2*i]
@@ -240,7 +297,11 @@ def iterative_newton(network, constitutive,details):
 				print(['convergence!, nre iter:', k])
 			break
 		elif k== max_iter-1:
-			raise ValueError 
+			raise ValueError
+	print 'mymethod', time.time()-middle
+	for i in range(len(network.vertices)):
+		if np.linalg.norm(network.vertices[i]-vertices_sol[i])>10e-10: print i, network.vertices[i],vertices_sol[i], network.vertices_ini[i]
+	print vertices_sol
 	return network
 
 
@@ -249,6 +310,31 @@ def iterative_newton(network, constitutive,details):
 
 
 ## calculate the force at applied on node i, by the ridge linked to j.
+
+def create_F(array):
+	result = []
+	for i in range(len(interior_nodes)):
+		force_equation_x = 0.0
+		force_equation_y = 0.0
+		#print i, interior_nodes[i],list_nodes_ridges[interior_nodes[i]]
+		for j in list_nodes_ridges[interior_nodes[i]]:
+			if interior_nodes[i] == ridge_vertices[j][0]:
+				k = interior_nodes[i]
+				j = ridge_vertices[j][1]
+			elif interior_nodes[i] == ridge_vertices[j][1]:
+				k = interior_nodes[i]
+				j = ridge_vertices[j][0]
+				#print k,j
+			force_equation_x += (float(sp.sqrt((array[2*i]-vertices_all[j][0])**2+(array[2*i+1]-vertices_all[j][1])**2))
+								 -float(np.linalg.norm(vertices_ini[k]-vertices_ini[j])))*(array[2*i]-vertices_all[j][0])\
+								 /float(sp.sqrt((array[2*i]-vertices_all[j][0])**2+(array[2*i+1]-vertices_all[j][1])**2))
+			force_equation_y+= (float(sp.sqrt((array[2 * i] - vertices_all[j][0]) ** 2 + (array[2 * i + 1] - vertices_all[j][1]) ** 2))
+								- float(np.linalg.norm(vertices_ini[k] - vertices_ini[j]))) * (array[2 * i + 1] -vertices_all[j][1])\
+							    / float(sp.sqrt((array[2 * i] - vertices_all[j][0]) ** 2 + (array[2 * i + 1] - vertices_all[j][1]) ** 2))
+			#print 'force_eq', force_equation_x
+		result.append(force_equation_x)
+		result.append(force_equation_y)
+	return result
 
 def write_force(network, i, j, constitutive):
 	if constitutive == 'spring':
@@ -374,7 +460,12 @@ def iterative_newton_3d(network, constitutive,details):
 	for k in range(max_iter):
 		F = write_vector_F_3d(network, constitutive)
 		J = write_matrix_J_3d(network, constitutive)
-		diff = np.linalg.solve(J,-F)
+		print np.linalg.cond(J)
+		#conversion in sparse
+		J_sparse = csc_matrix(J)
+		start = time.time()
+		diff = spsolve(J_sparse,-F)
+		print time.time()-start
 		for i in range(len(network.interior_nodes)):
 			j=network.interior_nodes[i]
 			network.vertices[j,0] = network.vertices[j,0] + diff[network.dimension*i]

@@ -1,6 +1,4986 @@
-('number of boundary_nodes: ', 9, 9)
-('hyperstatic number: ', 4)
-('number of boundary_nodes: ', 9, 9)
-('min_distance: ', 0.05410000000000004)
-('Displacement: ', 0.0, 0)
-('Step: ', 0, ', convergence: ', 0.076110344887442366)
+number of boundary_nodes:  9 9
+hyperstatic number:  3
+number of boundary_nodes:  9 9
+min_distance:  0.052100000000000035
+Displacement:  0.0 0
+Step:  0 , convergence:  0.20001289382771356
+['convergence!, nre iter:', 13]
+Displacement:  0.010000000000000009 0
+Step:  0 , convergence:  0.06422915700795441
+['convergence!, nre iter:', 8]
+Displacement:  0.020000000000000018 0
+Step:  0 , convergence:  0.06660024502417852
+['convergence!, nre iter:', 6]
+Displacement:  0.030000000000000027 0
+Step:  0 , convergence:  0.05502605599959216
+['convergence!, nre iter:', 4]
+Displacement:  0.040000000000000036 0
+Step:  0 , convergence:  0.05344292961612565
+['convergence!, nre iter:', 3]
+Displacement:  0.050000000000000044 0
+Step:  0 , convergence:  0.052509536296524335
+['convergence!, nre iter:', 3]
+Displacement:  0.06000000000000005 0
+Step:  0 , convergence:  0.051927123980734076
+['convergence!, nre iter:', 3]
+Displacement:  0.07000000000000006 0
+Step:  0 , convergence:  0.051553550144756814
+['convergence!, nre iter:', 3]
+Displacement:  0.08000000000000007 0
+Step:  0 , convergence:  0.05129938207364441
+['convergence!, nre iter:', 3]
+Displacement:  0.09000000000000008 0
+Step:  0 , convergence:  0.05110255872743881
+['convergence!, nre iter:', 3]
+Displacement:  0.10000000000000009 0
+Step:  0 , convergence:  0.05091848201271048
+['convergence!, nre iter:', 3]
+Displacement:  0.1100000000000001 0
+Step:  0 , convergence:  0.05071650945812564
+['convergence!, nre iter:', 3]
+Displacement:  0.1200000000000001 0
+Step:  0 , convergence:  0.050481848264144605
+['convergence!, nre iter:', 3]
+Displacement:  0.13000000000000012 0
+Step:  0 , convergence:  0.0502200474543236
+['convergence!, nre iter:', 3]
+Displacement:  0.14000000000000012 0
+Step:  0 , convergence:  0.04995456152568773
+['convergence!, nre iter:', 3]
+Displacement:  0.15000000000000013 0
+Step:  0 , convergence:  0.04971239503722859
+['convergence!, nre iter:', 3]
+Displacement:  0.16000000000000014 0
+Step:  0 , convergence:  0.04950983628729263
+['convergence!, nre iter:', 3]
+Displacement:  0.17000000000000015 0
+Step:  0 , convergence:  0.04934995152732202
+['convergence!, nre iter:', 3]
+Displacement:  0.18000000000000016 0
+Step:  0 , convergence:  0.04922798691361961
+['convergence!, nre iter:', 3]
+Displacement:  0.19000000000000017 0
+Step:  0 , convergence:  0.04913677170350537
+['convergence!, nre iter:', 3]
+Displacement:  0.20000000000000018 0
+Step:  0 , convergence:  0.049069497284094675
+['convergence!, nre iter:', 3]
+Displacement:  0.2100000000000002 0
+Step:  0 , convergence:  0.0490205906248161
+['convergence!, nre iter:', 3]
+Displacement:  0.2200000000000002 0
+Step:  0 , convergence:  0.04898574262296074
+['convergence!, nre iter:', 3]
+Displacement:  0.2300000000000002 0
+Step:  0 , convergence:  0.04896168039717161
+['convergence!, nre iter:', 3]
+Displacement:  0.2400000000000002 0
+Step:  0 , convergence:  0.048945916044571484
+['convergence!, nre iter:', 3]
+Displacement:  0.2500000000000002 0
+Step:  0 , convergence:  0.04893653983502069
+['convergence!, nre iter:', 3]
+Displacement:  0.26000000000000023 0
+Step:  0 , convergence:  0.0489320659170845
+['convergence!, nre iter:', 3]
+Displacement:  0.27000000000000024 0
+Step:  0 , convergence:  0.048931321559261276
+['convergence!, nre iter:', 3]
+Displacement:  0.28000000000000025 0
+Step:  0 , convergence:  0.04893336868878477
+['convergence!, nre iter:', 3]
+Displacement:  0.29000000000000026 0
+Step:  0 , convergence:  0.04893744835941648
+['convergence!, nre iter:', 3]
+Displacement:  0.30000000000000027 0
+Step:  0 , convergence:  0.04894294122152843
+['convergence!, nre iter:', 3]
+Displacement:  0.3100000000000003 0
+Step:  0 , convergence:  0.0489493391022553
+['convergence!, nre iter:', 3]
+Displacement:  0.3200000000000003 0
+Step:  0 , convergence:  0.04895622429404148
+['convergence!, nre iter:', 3]
+Displacement:  0.3300000000000003 0
+Step:  0 , convergence:  0.04896325419087796
+['convergence!, nre iter:', 3]
+Displacement:  0.3400000000000003 0
+Step:  0 , convergence:  0.04897014962914498
+['convergence!, nre iter:', 3]
+Displacement:  0.3500000000000003 0
+Step:  0 , convergence:  0.04897668578765953
+['convergence!, nre iter:', 3]
+Displacement:  0.3600000000000003 0
+Step:  0 , convergence:  0.048982684852008164
+['convergence!, nre iter:', 3]
+Displacement:  0.37000000000000033 0
+Step:  0 , convergence:  0.048988009899032424
+['convergence!, nre iter:', 3]
+Displacement:  0.38000000000000034 0
+Step:  0 , convergence:  0.04899255963821308
+['convergence!, nre iter:', 3]
+Displacement:  0.39000000000000035 0
+Step:  0 , convergence:  0.04899626377619344
+['convergence!, nre iter:', 3]
+Displacement:  0.40000000000000036 0
+Step:  0 , convergence:  0.04899907886079956
+['convergence!, nre iter:', 3]
+Displacement:  0.41000000000000036 0
+Step:  0 , convergence:  0.04900098452018256
+['convergence!, nre iter:', 3]
+Displacement:  0.4200000000000004 0
+Step:  0 , convergence:  0.04900198004810547
+['convergence!, nre iter:', 3]
+Displacement:  0.4300000000000004 0
+Step:  0 , convergence:  0.04900208130415442
+['convergence!, nre iter:', 3]
+Displacement:  0.4400000000000004 0
+Step:  0 , convergence:  0.04900131790363733
+['convergence!, nre iter:', 3]
+Displacement:  0.4500000000000004 0
+Step:  0 , convergence:  0.04899973067144968
+['convergence!, nre iter:', 3]
+Displacement:  0.4600000000000004 0
+Step:  0 , convergence:  0.048997369331784627
+['convergence!, nre iter:', 3]
+Displacement:  0.4700000000000004 0
+Step:  0 , convergence:  0.04899429040461163
+['convergence!, nre iter:', 3]
+Displacement:  0.4800000000000004 0
+Step:  0 , convergence:  0.048990555282372415
+['convergence!, nre iter:', 3]
+Displacement:  0.49000000000000044 0
+Step:  0 , convergence:  0.04898622846678245
+['convergence!, nre iter:', 3]
+First calculation done
+Displacement:  0.0 0
+Step:  0 , convergence:  0.20001289382771356
+['convergence!, nre iter:', 13]
+Displacement:  0.010000000000000009 0
+Step:  0 , convergence:  0.06422915700795441
+['convergence!, nre iter:', 8]
+Displacement:  0.020000000000000018 0
+Step:  0 , convergence:  0.06660024502417852
+['convergence!, nre iter:', 6]
+Displacement:  0.030000000000000027 0
+Step:  0 , convergence:  0.05502605599959216
+['convergence!, nre iter:', 4]
+Displacement:  0.040000000000000036 0
+Step:  0 , convergence:  0.05344292961612565
+['convergence!, nre iter:', 3]
+Displacement:  0.050000000000000044 0
+Step:  0 , convergence:  0.052509536296524335
+['convergence!, nre iter:', 3]
+Displacement:  0.06000000000000005 0
+Step:  0 , convergence:  0.051927123980734076
+['convergence!, nre iter:', 3]
+Displacement:  0.07000000000000006 0
+Step:  0 , convergence:  0.051553550144756814
+['convergence!, nre iter:', 3]
+Displacement:  0.08000000000000007 0
+Step:  0 , convergence:  0.05129938207364441
+['convergence!, nre iter:', 3]
+Displacement:  0.09000000000000008 0
+Step:  0 , convergence:  0.05110255872743881
+['convergence!, nre iter:', 3]
+Displacement:  0.10000000000000009 0
+Step:  0 , convergence:  0.05091848201271048
+['convergence!, nre iter:', 3]
+Displacement:  0.1100000000000001 0
+Step:  0 , convergence:  0.05071650945812564
+['convergence!, nre iter:', 3]
+Displacement:  0.1200000000000001 0
+Step:  0 , convergence:  0.050481848264144605
+['convergence!, nre iter:', 3]
+Displacement:  0.13000000000000012 0
+Step:  0 , convergence:  0.0502200474543236
+['convergence!, nre iter:', 3]
+Displacement:  0.14000000000000012 0
+Step:  0 , convergence:  0.04995456152568773
+['convergence!, nre iter:', 3]
+Displacement:  0.15000000000000013 0
+Step:  0 , convergence:  0.04971239503722859
+['convergence!, nre iter:', 3]
+Displacement:  0.16000000000000014 0
+Step:  0 , convergence:  0.04950983628729263
+['convergence!, nre iter:', 3]
+Displacement:  0.17000000000000015 0
+Step:  0 , convergence:  0.04934995152732202
+['convergence!, nre iter:', 3]
+Displacement:  0.18000000000000016 0
+Step:  0 , convergence:  0.04922798691361961
+['convergence!, nre iter:', 3]
+Displacement:  0.19000000000000017 0
+Step:  0 , convergence:  0.04913677170350537
+['convergence!, nre iter:', 3]
+Displacement:  0.20000000000000018 0
+Step:  0 , convergence:  0.049069497284094675
+['convergence!, nre iter:', 3]
+Displacement:  0.2100000000000002 0
+Step:  0 , convergence:  0.0490205906248161
+['convergence!, nre iter:', 3]
+Displacement:  0.2200000000000002 0
+Step:  0 , convergence:  0.04898574262296074
+['convergence!, nre iter:', 3]
+Displacement:  0.2300000000000002 0
+Step:  0 , convergence:  0.04896168039717161
+['convergence!, nre iter:', 3]
+Displacement:  0.2400000000000002 0
+Step:  0 , convergence:  0.048945916044571484
+['convergence!, nre iter:', 3]
+Displacement:  0.2500000000000002 0
+Step:  0 , convergence:  0.04893653983502069
+['convergence!, nre iter:', 3]
+Displacement:  0.26000000000000023 0
+Step:  0 , convergence:  0.0489320659170845
+['convergence!, nre iter:', 3]
+Displacement:  0.27000000000000024 0
+Step:  0 , convergence:  0.048931321559261276
+['convergence!, nre iter:', 3]
+Displacement:  0.28000000000000025 0
+Step:  0 , convergence:  0.04893336868878477
+['convergence!, nre iter:', 3]
+Displacement:  0.29000000000000026 0
+Step:  0 , convergence:  0.04893744835941648
+['convergence!, nre iter:', 3]
+Displacement:  0.30000000000000027 0
+Step:  0 , convergence:  0.04894294122152843
+['convergence!, nre iter:', 3]
+Displacement:  0.3100000000000003 0
+Step:  0 , convergence:  0.0489493391022553
+['convergence!, nre iter:', 3]
+Displacement:  0.3200000000000003 0
+Step:  0 , convergence:  0.04895622429404148
+['convergence!, nre iter:', 3]
+Displacement:  0.3300000000000003 0
+Step:  0 , convergence:  0.04896325419087796
+['convergence!, nre iter:', 3]
+Displacement:  0.3400000000000003 0
+Step:  0 , convergence:  0.04897014962914498
+['convergence!, nre iter:', 3]
+Displacement:  0.3500000000000003 0
+Step:  0 , convergence:  0.04897668578765953
+['convergence!, nre iter:', 3]
+Displacement:  0.3600000000000003 0
+Step:  0 , convergence:  0.048982684852008164
+['convergence!, nre iter:', 3]
+Displacement:  0.37000000000000033 0
+Step:  0 , convergence:  0.048988009899032424
+['convergence!, nre iter:', 3]
+Displacement:  0.38000000000000034 0
+Step:  0 , convergence:  0.04899255963821308
+['convergence!, nre iter:', 3]
+Displacement:  0.39000000000000035 0
+Step:  0 , convergence:  0.04899626377619344
+['convergence!, nre iter:', 3]
+Displacement:  0.40000000000000036 0
+Step:  0 , convergence:  0.04899907886079956
+['convergence!, nre iter:', 3]
+Displacement:  0.41000000000000036 0
+Step:  0 , convergence:  0.04900098452018256
+['convergence!, nre iter:', 3]
+Displacement:  0.4200000000000004 0
+Step:  0 , convergence:  0.04900198004810547
+['convergence!, nre iter:', 3]
+Displacement:  0.4300000000000004 0
+Step:  0 , convergence:  0.04900208130415442
+['convergence!, nre iter:', 3]
+Displacement:  0.4400000000000004 0
+Step:  0 , convergence:  0.04900131790363733
+['convergence!, nre iter:', 3]
+Displacement:  0.4500000000000004 0
+Step:  0 , convergence:  0.04899973067144968
+['convergence!, nre iter:', 3]
+Displacement:  0.4600000000000004 0
+Step:  0 , convergence:  0.048997369331784627
+['convergence!, nre iter:', 3]
+Displacement:  0.4700000000000004 0
+Step:  0 , convergence:  0.04899429040461163
+['convergence!, nre iter:', 3]
+Displacement:  0.4800000000000004 0
+Step:  0 , convergence:  0.048990555282372415
+['convergence!, nre iter:', 3]
+Displacement:  0.49000000000000044 0
+Step:  0 , convergence:  0.04898622846678245
+['convergence!, nre iter:', 3]
+number of boundary_nodes:  9 9
+hyperstatic number:  2
+number of boundary_nodes:  9 9
+min_distance:  0.053100000000000036
+Displacement:  0.0 0
+Step:  0 , convergence:  0.07659887155812405
+['convergence!, nre iter:', 8]
+Displacement:  0.010000000000000009 1
+Step:  0 , convergence:  0.05913146797433224
+['convergence!, nre iter:', 7]
+Displacement:  0.020000000000000018 2
+Step:  0 , convergence:  0.07129416275361826
+['convergence!, nre iter:', 7]
+Displacement:  0.030000000000000027 3
+Step:  0 , convergence:  0.06829823401041676
+['convergence!, nre iter:', 10]
+Displacement:  0.040000000000000036 4
+Step:  0 , convergence:  0.05125856585470865
+['convergence!, nre iter:', 4]
+Displacement:  0.050000000000000044 5
+Step:  0 , convergence:  0.05181206983773831
+['convergence!, nre iter:', 7]
+Displacement:  0.06000000000000005 6
+Step:  0 , convergence:  0.09103081897569278
+['convergence!, nre iter:', 9]
+Displacement:  0.07000000000000006 7
+Step:  0 , convergence:  0.04817455485119723
+['convergence!, nre iter:', 4]
+Displacement:  0.08000000000000007 8
+Step:  0 , convergence:  0.0482020295515876
+['convergence!, nre iter:', 4]
+Displacement:  0.09000000000000008 9
+Step:  0 , convergence:  0.04815328067039623
+['convergence!, nre iter:', 4]
+Displacement:  0.10000000000000009 10
+Step:  0 , convergence:  0.04803087008941589
+['convergence!, nre iter:', 4]
+Displacement:  0.1100000000000001 11
+Step:  0 , convergence:  0.04786514094172539
+['convergence!, nre iter:', 4]
+Displacement:  0.1200000000000001 12
+Step:  0 , convergence:  0.04769932218553961
+['convergence!, nre iter:', 4]
+Displacement:  0.13000000000000012 13
+Step:  0 , convergence:  0.047565332893235716
+['convergence!, nre iter:', 4]
+Displacement:  0.14000000000000012 14
+Step:  0 , convergence:  0.047472092962901766
+['convergence!, nre iter:', 4]
+Displacement:  0.15000000000000013 15
+Step:  0 , convergence:  0.047413111092098864
+['convergence!, nre iter:', 4]
+Displacement:  0.16000000000000014 16
+Step:  0 , convergence:  0.047377943327483296
+['convergence!, nre iter:', 4]
+Displacement:  0.17000000000000015 17
+Step:  0 , convergence:  0.04735790415095258
+['convergence!, nre iter:', 3]
+Displacement:  0.18000000000000016 18
+Step:  0 , convergence:  0.04734712791873419
+['convergence!, nre iter:', 3]
+Displacement:  0.19000000000000017 19
+Step:  0 , convergence:  0.04734197501038701
+['convergence!, nre iter:', 3]
+Displacement:  0.20000000000000018 20
+Step:  0 , convergence:  0.04734025647467955
+['convergence!, nre iter:', 3]
+Displacement:  0.2100000000000002 21
+Step:  0 , convergence:  0.04734066391666411
+['convergence!, nre iter:', 3]
+Displacement:  0.2200000000000002 22
+Step:  0 , convergence:  0.04734241213800955
+['convergence!, nre iter:', 3]
+Displacement:  0.2300000000000002 23
+Step:  0 , convergence:  0.04734502785983572
+['convergence!, nre iter:', 3]
+Displacement:  0.2400000000000002 24
+Step:  0 , convergence:  0.04734822691969265
+['convergence!, nre iter:', 3]
+Displacement:  0.2500000000000002 25
+Step:  0 , convergence:  0.047351842561206184
+['convergence!, nre iter:', 3]
+Displacement:  0.26000000000000023 26
+Step:  0 , convergence:  0.04735578276916379
+['convergence!, nre iter:', 3]
+Displacement:  0.27000000000000024 27
+Step:  0 , convergence:  0.047360004129263396
+['convergence!, nre iter:', 3]
+Displacement:  0.28000000000000025 28
+Step:  0 , convergence:  0.04736449520512125
+['convergence!, nre iter:', 3]
+Displacement:  0.29000000000000026 29
+Step:  0 , convergence:  0.047369265525339106
+['convergence!, nre iter:', 3]
+Displacement:  0.30000000000000027 30
+Step:  0 , convergence:  0.047374337994618994
+['convergence!, nre iter:', 3]
+Displacement:  0.3100000000000003 31
+Step:  0 , convergence:  0.047379743492000574
+['convergence!, nre iter:', 3]
+Displacement:  0.3200000000000003 32
+Step:  0 , convergence:  0.047385516940424366
+['convergence!, nre iter:', 3]
+Displacement:  0.3300000000000003 33
+Step:  0 , convergence:  0.047391694417674345
+['convergence!, nre iter:', 3]
+Displacement:  0.3400000000000003 34
+Step:  0 , convergence:  0.047398311036467626
+['convergence!, nre iter:', 3]
+Displacement:  0.3500000000000003 35
+Step:  0 , convergence:  0.047405399410004635
+['convergence!, nre iter:', 3]
+Displacement:  0.3600000000000003 36
+Step:  0 , convergence:  0.04741298857071304
+['convergence!, nre iter:', 3]
+Displacement:  0.37000000000000033 37
+Step:  0 , convergence:  0.04742110324119758
+['convergence!, nre iter:', 3]
+Displacement:  0.38000000000000034 38
+Step:  0 , convergence:  0.04742976337643498
+['convergence!, nre iter:', 3]
+Displacement:  0.39000000000000035 39
+Step:  0 , convergence:  0.047438983909583635
+['convergence!, nre iter:', 3]
+Displacement:  0.40000000000000036 40
+Step:  0 , convergence:  0.04744877464286856
+['convergence!, nre iter:', 3]
+Displacement:  0.41000000000000036 41
+Step:  0 , convergence:  0.04745914023133317
+['convergence!, nre iter:', 3]
+Displacement:  0.4200000000000004 42
+Step:  0 , convergence:  0.047470080211899454
+['convergence!, nre iter:', 3]
+Displacement:  0.4300000000000004 43
+Step:  0 , convergence:  0.04748158903412606
+['convergence!, nre iter:', 3]
+Displacement:  0.4400000000000004 44
+Step:  0 , convergence:  0.047493656053257394
+['convergence!, nre iter:', 3]
+Displacement:  0.4500000000000004 45
+Step:  0 , convergence:  0.04750626545152597
+['convergence!, nre iter:', 3]
+Displacement:  0.4600000000000004 46
+Step:  0 , convergence:  0.04751939606113138
+['convergence!, nre iter:', 3]
+Displacement:  0.4700000000000004 47
+Step:  0 , convergence:  0.047533021072593544
+['convergence!, nre iter:', 3]
+Displacement:  0.4800000000000004 48
+Step:  0 , convergence:  0.04754710762587533
+['convergence!, nre iter:', 3]
+Displacement:  0.49000000000000044 49
+Step:  0 , convergence:  0.04756161629897132
+['convergence!, nre iter:', 3]
+number of boundary_nodes:  10 9
+hyperstatic number:  15
+number of boundary_nodes:  10 9
+min_distance:  0.05410000000000004
+Displacement:  0.0 0
+Step:  0 , convergence:  0.05806981921776609
+['convergence!, nre iter:', 7]
+Displacement:  0.010000000000000009 1
+Step:  0 , convergence:  0.05507226168022461
+['convergence!, nre iter:', 8]
+Displacement:  0.020000000000000018 2
+Step:  0 , convergence:  0.06134546148667892
+['convergence!, nre iter:', 11]
+Displacement:  0.030000000000000027 3
+Step:  0 , convergence:  0.051490325156926926
+['convergence!, nre iter:', 5]
+Displacement:  0.040000000000000036 4
+Step:  0 , convergence:  0.05129120848074784
+['convergence!, nre iter:', 5]
+Displacement:  0.050000000000000044 5
+Step:  0 , convergence:  0.05038148589752104
+['convergence!, nre iter:', 5]
+Displacement:  0.06000000000000005 6
+Step:  0 , convergence:  0.050716847527435674
+['convergence!, nre iter:', 4]
+Displacement:  0.07000000000000006 7
+Step:  0 , convergence:  0.05101886196081738
+['convergence!, nre iter:', 4]
+Displacement:  0.08000000000000007 8
+Step:  0 , convergence:  0.05130335095336513
+['convergence!, nre iter:', 4]
+Displacement:  0.09000000000000008 9
+Step:  0 , convergence:  0.05165592885303766
+['convergence!, nre iter:', 4]
+Displacement:  0.10000000000000009 10
+Step:  0 , convergence:  0.052237829324864246
+['convergence!, nre iter:', 4]
+Displacement:  0.1100000000000001 11
+Step:  0 , convergence:  0.053706269052143096
+['convergence!, nre iter:', 7]
+Displacement:  0.1200000000000001 12
+Step:  0 , convergence:  0.09685446595118007
+Step:  25 , convergence:  1.4412463900210877
+Step:  50 , convergence:  1.9269610207969237
+Step:  75 , convergence:  4.3304654093574815
+Step:  100 , convergence:  1.3844893441507642
+Step:  125 , convergence:  2.1922127485170875
+Step:  150 , convergence:  0.7845532489371065
+Step:  175 , convergence:  0.7402562971715817
+Step:  200 , convergence:  8.047077268454977
+Step:  225 , convergence:  9.327380881401401
+Step:  250 , convergence:  7.620320953812532
+Step:  275 , convergence:  2.564911319903071
+Step:  300 , convergence:  1.546648288234106
+Step:  325 , convergence:  3.064981848158406
+Step:  350 , convergence:  1.2935222460264717
+['convergence!, nre iter:', 368]
+Displacement:  0.13000000000000012 13
+Step:  0 , convergence:  0.05297689872827546
+['convergence!, nre iter:', 5]
+Displacement:  0.14000000000000012 14
+Step:  0 , convergence:  0.04895601870735372
+['convergence!, nre iter:', 4]
+Displacement:  0.15000000000000013 15
+Step:  0 , convergence:  0.04806558373972951
+['convergence!, nre iter:', 4]
+Displacement:  0.16000000000000014 16
+Step:  0 , convergence:  0.04790614339704671
+Step:  25 , convergence:  0.06988483721127282
+Step:  50 , convergence:  0.45402796263843653
+['convergence!, nre iter:', 70]
+Displacement:  0.17000000000000015 17
+Step:  0 , convergence:  0.049715371377680444
+['convergence!, nre iter:', 5]
+Displacement:  0.18000000000000016 18
+Step:  0 , convergence:  0.052499671275111105
+Step:  25 , convergence:  0.018593258079825984
+Step:  50 , convergence:  0.011587346332752354
+['convergence!, nre iter:', 70]
+Displacement:  0.19000000000000017 19
+Step:  0 , convergence:  0.04874733304055681
+['convergence!, nre iter:', 3]
+Displacement:  0.20000000000000018 20
+Step:  0 , convergence:  0.04817703349410879
+['convergence!, nre iter:', 3]
+Displacement:  0.2100000000000002 21
+Step:  0 , convergence:  0.04763202543023221
+['convergence!, nre iter:', 3]
+Displacement:  0.2200000000000002 22
+Step:  0 , convergence:  0.047129685309936505
+['convergence!, nre iter:', 3]
+Displacement:  0.2300000000000002 23
+Step:  0 , convergence:  0.04668569684390103
+['convergence!, nre iter:', 3]
+Displacement:  0.2400000000000002 24
+Step:  0 , convergence:  0.04630676902308181
+['convergence!, nre iter:', 3]
+Displacement:  0.2500000000000002 25
+Step:  0 , convergence:  0.04599054704334316
+['convergence!, nre iter:', 3]
+Displacement:  0.26000000000000023 26
+Step:  0 , convergence:  0.04572960565738463
+['convergence!, nre iter:', 3]
+Displacement:  0.27000000000000024 27
+Step:  0 , convergence:  0.04551510201234958
+['convergence!, nre iter:', 3]
+Displacement:  0.28000000000000025 28
+Step:  0 , convergence:  0.04533869356746341
+['convergence!, nre iter:', 3]
+Displacement:  0.29000000000000026 29
+Step:  0 , convergence:  0.045193205181075086
+['convergence!, nre iter:', 3]
+Displacement:  0.30000000000000027 30
+Step:  0 , convergence:  0.04507271243783045
+['convergence!, nre iter:', 3]
+Displacement:  0.3100000000000003 31
+Step:  0 , convergence:  0.044972415835230414
+['convergence!, nre iter:', 3]
+Displacement:  0.3200000000000003 32
+Step:  0 , convergence:  0.04488846217399978
+['convergence!, nre iter:', 3]
+Displacement:  0.3300000000000003 33
+Step:  0 , convergence:  0.04481776921470796
+['convergence!, nre iter:', 3]
+Displacement:  0.3400000000000003 34
+Step:  0 , convergence:  0.044757871218211086
+['convergence!, nre iter:', 3]
+Displacement:  0.3500000000000003 35
+Step:  0 , convergence:  0.04470678902928363
+['convergence!, nre iter:', 3]
+Displacement:  0.3600000000000003 36
+Step:  0 , convergence:  0.04466292322916549
+['convergence!, nre iter:', 3]
+Displacement:  0.37000000000000033 37
+Step:  0 , convergence:  0.04462496698364366
+['convergence!, nre iter:', 3]
+Displacement:  0.38000000000000034 38
+Step:  0 , convergence:  0.04459183456686124
+['convergence!, nre iter:', 3]
+Displacement:  0.39000000000000035 39
+Step:  0 , convergence:  0.04456260132206629
+['convergence!, nre iter:', 3]
+Displacement:  0.40000000000000036 40
+Step:  0 , convergence:  0.0445364505433161
+['convergence!, nre iter:', 3]
+Displacement:  0.41000000000000036 41
+Step:  0 , convergence:  0.04451262195555717
+['convergence!, nre iter:', 3]
+Displacement:  0.4200000000000004 42
+Step:  0 , convergence:  0.044490354386733766
+['convergence!, nre iter:', 3]
+Displacement:  0.4300000000000004 43
+Step:  0 , convergence:  0.04446881025493266
+['convergence!, nre iter:', 3]
+Displacement:  0.4400000000000004 44
+Step:  0 , convergence:  0.04444695756106725
+['convergence!, nre iter:', 3]
+Displacement:  0.4500000000000004 45
+Step:  0 , convergence:  0.044423354523425176
+['convergence!, nre iter:', 3]
+Displacement:  0.4600000000000004 46
+Step:  0 , convergence:  0.044395694591576364
+['convergence!, nre iter:', 3]
+Displacement:  0.4700000000000004 47
+Step:  0 , convergence:  0.04435967569490249
+['convergence!, nre iter:', 3]
+Displacement:  0.4800000000000004 48
+Step:  0 , convergence:  0.04430550305601461
+['convergence!, nre iter:', 3]
+Displacement:  0.49000000000000044 49
+Step:  0 , convergence:  0.04420245245432902
+['convergence!, nre iter:', 5]
+number of boundary_nodes:  9 12
+hyperstatic number:  2
+number of boundary_nodes:  9 12
+min_distance:  0.04410000000000003
+Displacement:  0.0 0
+Step:  0 , convergence:  0.1211409184510076
+['convergence!, nre iter:', 9]
+Displacement:  0.010000000000000009 1
+Step:  0 , convergence:  0.3067008486795028
+['convergence!, nre iter:', 18]
+Displacement:  0.020000000000000018 2
+Step:  0 , convergence:  0.08814105858465225
+['convergence!, nre iter:', 13]
+Displacement:  0.030000000000000027 3
+Step:  0 , convergence:  0.6627576173139835
+Step:  25 , convergence:  2.204097833671203
+Step:  50 , convergence:  25.107818179366003
+Step:  75 , convergence:  3.950199045524558
+Step:  100 , convergence:  2.101716171160638
+Step:  125 , convergence:  3.3839406224958215
+Step:  150 , convergence:  5.755787878402155
+Step:  175 , convergence:  1.8931175686115722
+Step:  200 , convergence:  5.450302206447181
+Step:  225 , convergence:  30.017627418699913
+Step:  250 , convergence:  6.160783759562475
+Step:  275 , convergence:  1.0676293122642586
+Step:  300 , convergence:  3.4265079828402296
+Step:  325 , convergence:  8.644373507043817
+Step:  350 , convergence:  1.0934471692456864
+Step:  375 , convergence:  0.5494798269603505
+['convergence!, nre iter:', 388]
+Displacement:  0.05853606796898503 4
+Step:  0 , convergence:  0.0498389265943554
+Step:  25 , convergence:  2.241063015887338
+Step:  50 , convergence:  21.77663136851679
+Step:  75 , convergence:  2.9788992610602656
+Step:  100 , convergence:  26.813865963210148
+Step:  125 , convergence:  3.6928516982556236
+Step:  150 , convergence:  11.092320034526962
+Step:  175 , convergence:  4.931694866748423
+Step:  200 , convergence:  1.6350738571725154
+Step:  225 , convergence:  24.92476600304055
+Step:  250 , convergence:  5.381153439219881
+Step:  275 , convergence:  0.6942595645562001
+Step:  300 , convergence:  3.884779162408055
+Step:  325 , convergence:  2.81423498398831
+Step:  350 , convergence:  0.9460503311628591
+Step:  375 , convergence:  0.634499818846033
+Step:  400 , convergence:  4.367331524349103
+Step:  425 , convergence:  2.385907639033986
+Step:  450 , convergence:  1.229508073348311
+Step:  475 , convergence:  4.004164441364741
+New discretization:  0.005  on step  0.05853606796898503
+Step:  0 , convergence:  0.02473303785394575
+['convergence!, nre iter:', 4]
+Displacement:  0.06318466568362102 5
+Step:  0 , convergence:  0.05474111210773292
+Step:  25 , convergence:  0.022338914941104182
+Step:  50 , convergence:  0.12707815964055716
+Step:  75 , convergence:  0.037769788467792303
+Step:  100 , convergence:  0.040789564359818016
+Step:  125 , convergence:  0.486633556561644
+Step:  150 , convergence:  0.10775741026457969
+['convergence!, nre iter:', 160]
+Displacement:  0.05499999999999994 6
+Step:  0 , convergence:  0.04974071900683761
+['convergence!, nre iter:', 4]
+Displacement:  0.06499999999999995 7
+Step:  0 , convergence:  0.04990286537980258
+['convergence!, nre iter:', 4]
+Displacement:  0.07499999999999996 8
+Step:  0 , convergence:  0.050303804574760864
+['convergence!, nre iter:', 4]
+Displacement:  0.08499999999999996 9
+Step:  0 , convergence:  0.050895725987516335
+['convergence!, nre iter:', 4]
+Displacement:  0.09499999999999997 10
+Step:  0 , convergence:  0.05121435776381378
+['convergence!, nre iter:', 4]
+Displacement:  0.10499999999999998 11
+Step:  0 , convergence:  0.05088915734116875
+['convergence!, nre iter:', 4]
+Displacement:  0.11499999999999999 12
+Step:  0 , convergence:  0.05045477885813934
+['convergence!, nre iter:', 4]
+Displacement:  0.125 13
+Step:  0 , convergence:  0.05040228704563893
+['convergence!, nre iter:', 4]
+Displacement:  0.135 14
+Step:  0 , convergence:  0.05167682405596195
+['convergence!, nre iter:', 23]
+Displacement:  0.14500000000000002 15
+Step:  0 , convergence:  0.04791282175150901
+['convergence!, nre iter:', 4]
+Displacement:  0.15500000000000003 16
+Step:  0 , convergence:  0.047783075561036385
+['convergence!, nre iter:', 4]
+Displacement:  0.16500000000000004 17
+Step:  0 , convergence:  0.04771315262039461
+Step:  25 , convergence:  0.0016914722842292687
+Step:  50 , convergence:  0.0023014839663066007
+Step:  75 , convergence:  0.0016614945770868459
+Step:  100 , convergence:  0.01035379801785324
+Step:  125 , convergence:  0.016941240820966794
+Step:  150 , convergence:  0.01723426012989507
+Step:  175 , convergence:  0.011035020830094841
+Step:  200 , convergence:  0.0016799221319840265
+['convergence!, nre iter:', 209]
+Displacement:  0.17500000000000004 18
+Step:  0 , convergence:  0.04729164549425616
+['convergence!, nre iter:', 3]
+Displacement:  0.18500000000000005 19
+Step:  0 , convergence:  0.047241680064475676
+['convergence!, nre iter:', 3]
+Displacement:  0.19500000000000006 20
+Step:  0 , convergence:  0.04724096721575282
+['convergence!, nre iter:', 3]
+Displacement:  0.20500000000000007 21
+Step:  0 , convergence:  0.04733600182050716
+['convergence!, nre iter:', 4]
+Displacement:  0.21500000000000008 22
+Step:  0 , convergence:  0.047787701707535275
+['convergence!, nre iter:', 19]
+Displacement:  0.2250000000000001 23
+Step:  0 , convergence:  0.046827410546435376
+['convergence!, nre iter:', 3]
+Displacement:  0.2350000000000001 24
+Step:  0 , convergence:  0.046769276177250144
+['convergence!, nre iter:', 3]
+Displacement:  0.2450000000000001 25
+Step:  0 , convergence:  0.04672829622058501
+['convergence!, nre iter:', 3]
+Displacement:  0.2550000000000001 26
+Step:  0 , convergence:  0.046702292911799975
+['convergence!, nre iter:', 3]
+Displacement:  0.2650000000000001 27
+Step:  0 , convergence:  0.04668489955546045
+['convergence!, nre iter:', 3]
+Displacement:  0.27500000000000013 28
+Step:  0 , convergence:  0.046668143810372195
+['convergence!, nre iter:', 3]
+Displacement:  0.28500000000000014 29
+Step:  0 , convergence:  0.04664580212613197
+['convergence!, nre iter:', 3]
+Displacement:  0.29500000000000015 30
+Step:  0 , convergence:  0.0466144050817451
+['convergence!, nre iter:', 3]
+Displacement:  0.30500000000000016 31
+Step:  0 , convergence:  0.04657177297131521
+['convergence!, nre iter:', 3]
+Displacement:  0.31500000000000017 32
+Step:  0 , convergence:  0.04651369274130762
+['convergence!, nre iter:', 4]
+Displacement:  0.3250000000000002 33
+Step:  0 , convergence:  0.04642359184697379
+Step:  25 , convergence:  9.330842794398215e-05
+['convergence!, nre iter:', 27]
+Displacement:  0.3350000000000002 34
+Step:  0 , convergence:  0.04664898695772062
+['convergence!, nre iter:', 3]
+Displacement:  0.3450000000000002 35
+Step:  0 , convergence:  0.046619395424374634
+['convergence!, nre iter:', 3]
+Displacement:  0.3550000000000002 36
+Step:  0 , convergence:  0.04658854214061204
+['convergence!, nre iter:', 3]
+Displacement:  0.3650000000000002 37
+Step:  0 , convergence:  0.046556623883349614
+['convergence!, nre iter:', 3]
+Displacement:  0.3750000000000002 38
+Step:  0 , convergence:  0.046523632354456494
+['convergence!, nre iter:', 3]
+Displacement:  0.38500000000000023 39
+Step:  0 , convergence:  0.04648943663643148
+['convergence!, nre iter:', 3]
+Displacement:  0.39500000000000024 40
+Step:  0 , convergence:  0.046453871429902274
+['convergence!, nre iter:', 3]
+Displacement:  0.40500000000000025 41
+Step:  0 , convergence:  0.04641681555503782
+['convergence!, nre iter:', 3]
+Displacement:  0.41500000000000026 42
+Step:  0 , convergence:  0.04637823605064932
+['convergence!, nre iter:', 3]
+Displacement:  0.42500000000000027 43
+Step:  0 , convergence:  0.04633818029128211
+['convergence!, nre iter:', 3]
+Displacement:  0.4350000000000003 44
+Step:  0 , convergence:  0.0462967223714482
+['convergence!, nre iter:', 3]
+Displacement:  0.4450000000000003 45
+Step:  0 , convergence:  0.04625389204413692
+['convergence!, nre iter:', 3]
+Displacement:  0.4550000000000003 46
+Step:  0 , convergence:  0.0462096164555363
+['convergence!, nre iter:', 3]
+Displacement:  0.4650000000000003 47
+Step:  0 , convergence:  0.046163688994959394
+['convergence!, nre iter:', 3]
+Displacement:  0.4750000000000003 48
+Step:  0 , convergence:  0.04611576199833319
+['convergence!, nre iter:', 3]
+Displacement:  0.4850000000000003 49
+Step:  0 , convergence:  0.046065351471064414
+['convergence!, nre iter:', 3]
+Displacement:  0.49500000000000033 50
+Step:  0 , convergence:  0.046011841019651556
+['convergence!, nre iter:', 3]
+Displacement:  0.5050000000000003 0
+Step:  0 , convergence:  0.046753473703689104
+['convergence!, nre iter:', 3]
+Displacement:  0.49500000000000033 1
+Step:  0 , convergence:  0.046830100676754825
+['convergence!, nre iter:', 3]
+Displacement:  0.4850000000000003 2
+Step:  0 , convergence:  0.04690392024978057
+['convergence!, nre iter:', 3]
+Displacement:  0.4750000000000003 3
+Step:  0 , convergence:  0.04697563203904543
+['convergence!, nre iter:', 3]
+Displacement:  0.4650000000000003 4
+Step:  0 , convergence:  0.047045810998556606
+['convergence!, nre iter:', 3]
+Displacement:  0.4550000000000003 5
+Step:  0 , convergence:  0.04711491323127155
+['convergence!, nre iter:', 3]
+Displacement:  0.4450000000000003 6
+Step:  0 , convergence:  0.04718326784772382
+['convergence!, nre iter:', 3]
+Displacement:  0.4350000000000003 7
+Step:  0 , convergence:  0.047251068455241726
+['convergence!, nre iter:', 3]
+Displacement:  0.42500000000000027 8
+Step:  0 , convergence:  0.047318376795094756
+['convergence!, nre iter:', 3]
+Displacement:  0.41500000000000026 9
+Step:  0 , convergence:  0.04738514995545439
+['convergence!, nre iter:', 3]
+Displacement:  0.40500000000000025 10
+Step:  0 , convergence:  0.047451294018546274
+['convergence!, nre iter:', 3]
+Displacement:  0.39500000000000024 11
+Step:  0 , convergence:  0.04751672955925532
+['convergence!, nre iter:', 3]
+Displacement:  0.38500000000000023 12
+Step:  0 , convergence:  0.04758143864796781
+['convergence!, nre iter:', 3]
+Displacement:  0.3750000000000002 13
+Step:  0 , convergence:  0.0476454648943083
+['convergence!, nre iter:', 3]
+Displacement:  0.3650000000000002 14
+Step:  0 , convergence:  0.04770885969017797
+['convergence!, nre iter:', 3]
+Displacement:  0.3550000000000002 15
+Step:  0 , convergence:  0.04777159110344695
+['convergence!, nre iter:', 3]
+Displacement:  0.3450000000000002 16
+Step:  0 , convergence:  0.04783343870801683
+['convergence!, nre iter:', 3]
+Displacement:  0.3350000000000002 17
+Step:  0 , convergence:  0.04789388887180415
+['convergence!, nre iter:', 3]
+Displacement:  0.3250000000000002 18
+Step:  0 , convergence:  0.047952035607282985
+['convergence!, nre iter:', 4]
+Displacement:  0.31500000000000017 19
+Step:  0 , convergence:  0.04800649724173571
+['convergence!, nre iter:', 4]
+Displacement:  0.30500000000000016 20
+Step:  0 , convergence:  0.04805539102118635
+['convergence!, nre iter:', 4]
+Displacement:  0.29500000000000015 21
+Step:  0 , convergence:  0.04809647641777611
+['convergence!, nre iter:', 4]
+Displacement:  0.28500000000000014 22
+Step:  0 , convergence:  0.04812766966825621
+['convergence!, nre iter:', 4]
+Displacement:  0.27500000000000013 23
+Step:  0 , convergence:  0.04814813273577651
+['convergence!, nre iter:', 4]
+Displacement:  0.2650000000000001 24
+Step:  0 , convergence:  0.04815976281921006
+['convergence!, nre iter:', 4]
+Displacement:  0.2550000000000001 25
+Step:  0 , convergence:  0.04816800446067638
+['convergence!, nre iter:', 4]
+Displacement:  0.2450000000000001 26
+Step:  0 , convergence:  0.04818042858871128
+['convergence!, nre iter:', 4]
+Displacement:  0.2350000000000001 27
+Step:  0 , convergence:  0.04820334143853682
+['convergence!, nre iter:', 4]
+Displacement:  0.2250000000000001 28
+Step:  0 , convergence:  0.04823967340199696
+['convergence!, nre iter:', 4]
+Displacement:  0.21500000000000008 29
+Step:  0 , convergence:  0.048289830579856134
+['convergence!, nre iter:', 4]
+Displacement:  0.20500000000000007 30
+Step:  0 , convergence:  0.04835281525084928
+['convergence!, nre iter:', 4]
+Displacement:  0.19500000000000006 31
+Step:  0 , convergence:  0.048426987379044634
+['convergence!, nre iter:', 4]
+Displacement:  0.18500000000000005 32
+Step:  0 , convergence:  0.048511272538108746
+['convergence!, nre iter:', 4]
+Displacement:  0.17500000000000004 33
+Step:  0 , convergence:  0.04860575597257907
+['convergence!, nre iter:', 4]
+Displacement:  0.16500000000000004 34
+Step:  0 , convergence:  0.048711467705569035
+['convergence!, nre iter:', 4]
+Displacement:  0.15500000000000003 35
+Step:  0 , convergence:  0.048830027137491266
+['convergence!, nre iter:', 4]
+Displacement:  0.14500000000000002 36
+Step:  0 , convergence:  0.048963470907693235
+['convergence!, nre iter:', 4]
+Displacement:  0.135 37
+Step:  0 , convergence:  0.04911426863065884
+['convergence!, nre iter:', 4]
+Displacement:  0.125 38
+Step:  0 , convergence:  0.04928548876875449
+['convergence!, nre iter:', 4]
+Displacement:  0.11499999999999999 39
+Step:  0 , convergence:  0.04948113733718466
+['convergence!, nre iter:', 4]
+Displacement:  0.10499999999999998 40
+Step:  0 , convergence:  0.04970680654838065
+['convergence!, nre iter:', 4]
+Displacement:  0.09499999999999997 41
+Step:  0 , convergence:  0.04997106667436291
+['convergence!, nre iter:', 4]
+Displacement:  0.08499999999999996 42
+Step:  0 , convergence:  0.05028913754481638
+['convergence!, nre iter:', 4]
+Displacement:  0.07499999999999996 43
+Step:  0 , convergence:  0.05069597921778146
+['convergence!, nre iter:', 4]
+Displacement:  0.06499999999999995 44
+Step:  0 , convergence:  0.051320048399076224
+['convergence!, nre iter:', 4]
+Displacement:  0.05499999999999994 45
+Step:  0 , convergence:  0.05342265391482581
+['convergence!, nre iter:', 4]
+Displacement:  0.04499999999999993 46
+Step:  0 , convergence:  0.08233787560252234
+['convergence!, nre iter:', 6]
+Displacement:  0.03499999999999992 47
+Step:  0 , convergence:  0.0544307885682752
+['convergence!, nre iter:', 4]
+Displacement:  0.02499999999999991 48
+Step:  0 , convergence:  0.054939166979944866
+['convergence!, nre iter:', 4]
+Displacement:  0.014999999999999902 49
+Step:  0 , convergence:  0.056978300155263
+['convergence!, nre iter:', 5]
+Displacement:  0.004999999999999893 50
+Step:  0 , convergence:  0.06157245985366741
+['convergence!, nre iter:', 5]
+Displacement:  -0.0050000000000001155 0
+Step:  0 , convergence:  0.053055521333810696
+['convergence!, nre iter:', 4]
+Displacement:  0.004999999999999893 1
+Step:  0 , convergence:  0.052085030046767976
+['convergence!, nre iter:', 4]
+Displacement:  0.014999999999999902 2
+Step:  0 , convergence:  0.0513501830743102
+['convergence!, nre iter:', 3]
+Displacement:  0.02499999999999991 3
+Step:  0 , convergence:  0.05075823337955213
+['convergence!, nre iter:', 3]
+Displacement:  0.03499999999999992 4
+Step:  0 , convergence:  0.050261905045813994
+['convergence!, nre iter:', 3]
+Displacement:  0.04499999999999993 5
+Step:  0 , convergence:  0.04983570657675666
+['convergence!, nre iter:', 3]
+Displacement:  0.05499999999999994 6
+Step:  0 , convergence:  0.04946446635328696
+['convergence!, nre iter:', 3]
+Displacement:  0.06499999999999995 7
+Step:  0 , convergence:  0.0491379957164679
+['convergence!, nre iter:', 3]
+Displacement:  0.07499999999999996 8
+Step:  0 , convergence:  0.04884882382324094
+['convergence!, nre iter:', 3]
+Displacement:  0.08499999999999996 9
+Step:  0 , convergence:  0.04859121948008512
+['convergence!, nre iter:', 3]
+Displacement:  0.09499999999999997 10
+Step:  0 , convergence:  0.04836070229741013
+['convergence!, nre iter:', 3]
+Displacement:  0.10499999999999998 11
+Step:  0 , convergence:  0.0481537406103282
+['convergence!, nre iter:', 3]
+Displacement:  0.11499999999999999 12
+Step:  0 , convergence:  0.0479675300483776
+['convergence!, nre iter:', 3]
+Displacement:  0.125 13
+Step:  0 , convergence:  0.04779981529179313
+['convergence!, nre iter:', 3]
+Displacement:  0.135 14
+Step:  0 , convergence:  0.047648740748624976
+['convergence!, nre iter:', 3]
+Displacement:  0.14500000000000002 15
+Step:  0 , convergence:  0.04751272466002429
+['convergence!, nre iter:', 3]
+Displacement:  0.15500000000000003 16
+Step:  0 , convergence:  0.047390355787248276
+['convergence!, nre iter:', 3]
+Displacement:  0.16500000000000004 17
+Step:  0 , convergence:  0.047280316933642715
+['convergence!, nre iter:', 3]
+Displacement:  0.17500000000000004 18
+Step:  0 , convergence:  0.047181350371293354
+['convergence!, nre iter:', 3]
+Displacement:  0.18500000000000005 19
+Step:  0 , convergence:  0.04709230245163576
+['convergence!, nre iter:', 3]
+Displacement:  0.19500000000000006 20
+Step:  0 , convergence:  0.04701230670863157
+['convergence!, nre iter:', 3]
+Displacement:  0.20500000000000007 21
+Step:  0 , convergence:  0.04694110790060638
+['convergence!, nre iter:', 3]
+Displacement:  0.21500000000000008 22
+Step:  0 , convergence:  0.046879300511346755
+['convergence!, nre iter:', 3]
+Displacement:  0.2250000000000001 23
+Step:  0 , convergence:  0.04682826893292786
+['convergence!, nre iter:', 3]
+Displacement:  0.2350000000000001 24
+Step:  0 , convergence:  0.0467900944725747
+['convergence!, nre iter:', 3]
+Displacement:  0.2450000000000001 25
+Step:  0 , convergence:  0.046766564920839304
+['convergence!, nre iter:', 3]
+Displacement:  0.2550000000000001 26
+Step:  0 , convergence:  0.04675658486736864
+['convergence!, nre iter:', 3]
+Displacement:  0.2650000000000001 27
+Step:  0 , convergence:  0.046754979867997294
+['convergence!, nre iter:', 3]
+Displacement:  0.27500000000000013 28
+Step:  0 , convergence:  0.04675480166030095
+['convergence!, nre iter:', 3]
+Displacement:  0.28500000000000014 29
+Step:  0 , convergence:  0.04675070051283599
+['convergence!, nre iter:', 3]
+Displacement:  0.29500000000000015 30
+Step:  0 , convergence:  0.04674034610438381
+['convergence!, nre iter:', 3]
+Displacement:  0.30500000000000016 31
+Step:  0 , convergence:  0.04672377916656013
+['convergence!, nre iter:', 3]
+Displacement:  0.31500000000000017 32
+Step:  0 , convergence:  0.0467021563150254
+['convergence!, nre iter:', 3]
+Displacement:  0.3250000000000002 33
+Step:  0 , convergence:  0.04667684281671638
+['convergence!, nre iter:', 3]
+Displacement:  0.3350000000000002 34
+Step:  0 , convergence:  0.04664898695772063
+['convergence!, nre iter:', 3]
+Displacement:  0.3450000000000002 35
+Step:  0 , convergence:  0.04661939542437464
+['convergence!, nre iter:', 3]
+Displacement:  0.3550000000000002 36
+Step:  0 , convergence:  0.04658854214061203
+['convergence!, nre iter:', 3]
+Displacement:  0.3650000000000002 37
+Step:  0 , convergence:  0.04655662388334961
+['convergence!, nre iter:', 3]
+Displacement:  0.3750000000000002 38
+Step:  0 , convergence:  0.0465236323544565
+['convergence!, nre iter:', 3]
+Displacement:  0.38500000000000023 39
+Step:  0 , convergence:  0.04648943663643146
+['convergence!, nre iter:', 3]
+Displacement:  0.39500000000000024 40
+Step:  0 , convergence:  0.04645387142990229
+['convergence!, nre iter:', 3]
+Displacement:  0.40500000000000025 41
+Step:  0 , convergence:  0.046416815555037835
+['convergence!, nre iter:', 3]
+Displacement:  0.41500000000000026 42
+Step:  0 , convergence:  0.0463782360506494
+['convergence!, nre iter:', 3]
+Displacement:  0.42500000000000027 43
+Step:  0 , convergence:  0.04633818029128214
+['convergence!, nre iter:', 3]
+Displacement:  0.4350000000000003 44
+Step:  0 , convergence:  0.04629672237144819
+['convergence!, nre iter:', 3]
+Displacement:  0.4450000000000003 45
+Step:  0 , convergence:  0.04625389204413693
+['convergence!, nre iter:', 3]
+Displacement:  0.4550000000000003 46
+Step:  0 , convergence:  0.046209616455536284
+['convergence!, nre iter:', 3]
+Displacement:  0.4650000000000003 47
+Step:  0 , convergence:  0.046163688994959394
+['convergence!, nre iter:', 3]
+Displacement:  0.4750000000000003 48
+Step:  0 , convergence:  0.04611576199833319
+['convergence!, nre iter:', 3]
+Displacement:  0.4850000000000003 49
+Step:  0 , convergence:  0.046065351471064414
+['convergence!, nre iter:', 3]
+Displacement:  0.49500000000000033 50
+Step:  0 , convergence:  0.046011841019651556
+['convergence!, nre iter:', 3]
+Displacement:  0.5050000000000003 0
+Step:  0 , convergence:  0.046753473703689104
+['convergence!, nre iter:', 3]
+Displacement:  0.49500000000000033 1
+Step:  0 , convergence:  0.046830100676754825
+['convergence!, nre iter:', 3]
+Displacement:  0.4850000000000003 2
+Step:  0 , convergence:  0.04690392024978057
+['convergence!, nre iter:', 3]
+Displacement:  0.4750000000000003 3
+Step:  0 , convergence:  0.04697563203904543
+['convergence!, nre iter:', 3]
+Displacement:  0.4650000000000003 4
+Step:  0 , convergence:  0.047045810998556606
+['convergence!, nre iter:', 3]
+Displacement:  0.4550000000000003 5
+Step:  0 , convergence:  0.04711491323127155
+['convergence!, nre iter:', 3]
+Displacement:  0.4450000000000003 6
+Step:  0 , convergence:  0.04718326784772382
+['convergence!, nre iter:', 3]
+Displacement:  0.4350000000000003 7
+Step:  0 , convergence:  0.047251068455241726
+['convergence!, nre iter:', 3]
+Displacement:  0.42500000000000027 8
+Step:  0 , convergence:  0.047318376795094756
+['convergence!, nre iter:', 3]
+Displacement:  0.41500000000000026 9
+Step:  0 , convergence:  0.04738514995545439
+['convergence!, nre iter:', 3]
+Displacement:  0.40500000000000025 10
+Step:  0 , convergence:  0.047451294018546274
+['convergence!, nre iter:', 3]
+Displacement:  0.39500000000000024 11
+Step:  0 , convergence:  0.04751672955925532
+['convergence!, nre iter:', 3]
+Displacement:  0.38500000000000023 12
+Step:  0 , convergence:  0.04758143864796781
+['convergence!, nre iter:', 3]
+Displacement:  0.3750000000000002 13
+Step:  0 , convergence:  0.0476454648943083
+['convergence!, nre iter:', 3]
+Displacement:  0.3650000000000002 14
+Step:  0 , convergence:  0.04770885969017797
+['convergence!, nre iter:', 3]
+Displacement:  0.3550000000000002 15
+Step:  0 , convergence:  0.04777159110344695
+['convergence!, nre iter:', 3]
+Displacement:  0.3450000000000002 16
+Step:  0 , convergence:  0.04783343870801683
+['convergence!, nre iter:', 3]
+Displacement:  0.3350000000000002 17
+Step:  0 , convergence:  0.04789388887180415
+['convergence!, nre iter:', 3]
+Displacement:  0.3250000000000002 18
+Step:  0 , convergence:  0.047952035607282985
+['convergence!, nre iter:', 4]
+Displacement:  0.31500000000000017 19
+Step:  0 , convergence:  0.04800649724173571
+['convergence!, nre iter:', 4]
+Displacement:  0.30500000000000016 20
+Step:  0 , convergence:  0.04805539102118635
+['convergence!, nre iter:', 4]
+Displacement:  0.29500000000000015 21
+Step:  0 , convergence:  0.04809647641777611
+['convergence!, nre iter:', 4]
+Displacement:  0.28500000000000014 22
+Step:  0 , convergence:  0.04812766966825621
+['convergence!, nre iter:', 4]
+Displacement:  0.27500000000000013 23
+Step:  0 , convergence:  0.04814813273577651
+['convergence!, nre iter:', 4]
+Displacement:  0.2650000000000001 24
+Step:  0 , convergence:  0.04815976281921006
+['convergence!, nre iter:', 4]
+Displacement:  0.2550000000000001 25
+Step:  0 , convergence:  0.04816800446067638
+['convergence!, nre iter:', 4]
+Displacement:  0.2450000000000001 26
+Step:  0 , convergence:  0.04818042858871128
+['convergence!, nre iter:', 4]
+Displacement:  0.2350000000000001 27
+Step:  0 , convergence:  0.04820334143853682
+['convergence!, nre iter:', 4]
+Displacement:  0.2250000000000001 28
+Step:  0 , convergence:  0.04823967340199696
+['convergence!, nre iter:', 4]
+Displacement:  0.21500000000000008 29
+Step:  0 , convergence:  0.048289830579856134
+['convergence!, nre iter:', 4]
+Displacement:  0.20500000000000007 30
+Step:  0 , convergence:  0.04835281525084928
+['convergence!, nre iter:', 4]
+Displacement:  0.19500000000000006 31
+Step:  0 , convergence:  0.048426987379044634
+['convergence!, nre iter:', 4]
+Displacement:  0.18500000000000005 32
+Step:  0 , convergence:  0.048511272538108746
+['convergence!, nre iter:', 4]
+Displacement:  0.17500000000000004 33
+Step:  0 , convergence:  0.04860575597257907
+['convergence!, nre iter:', 4]
+Displacement:  0.16500000000000004 34
+Step:  0 , convergence:  0.048711467705569035
+['convergence!, nre iter:', 4]
+Displacement:  0.15500000000000003 35
+Step:  0 , convergence:  0.048830027137491266
+['convergence!, nre iter:', 4]
+Displacement:  0.14500000000000002 36
+Step:  0 , convergence:  0.048963470907693235
+['convergence!, nre iter:', 4]
+Displacement:  0.135 37
+Step:  0 , convergence:  0.04911426863065884
+['convergence!, nre iter:', 4]
+Displacement:  0.125 38
+Step:  0 , convergence:  0.04928548876875449
+['convergence!, nre iter:', 4]
+Displacement:  0.11499999999999999 39
+Step:  0 , convergence:  0.04948113733718466
+['convergence!, nre iter:', 4]
+Displacement:  0.10499999999999998 40
+Step:  0 , convergence:  0.04970680654838065
+['convergence!, nre iter:', 4]
+Displacement:  0.09499999999999997 41
+Step:  0 , convergence:  0.04997106667436291
+['convergence!, nre iter:', 4]
+Displacement:  0.08499999999999996 42
+Step:  0 , convergence:  0.05028913754481638
+['convergence!, nre iter:', 4]
+Displacement:  0.07499999999999996 43
+Step:  0 , convergence:  0.05069597921778146
+['convergence!, nre iter:', 4]
+Displacement:  0.06499999999999995 44
+Step:  0 , convergence:  0.051320048399076224
+['convergence!, nre iter:', 4]
+Displacement:  0.05499999999999994 45
+Step:  0 , convergence:  0.05342265391482581
+['convergence!, nre iter:', 4]
+Displacement:  0.04499999999999993 46
+Step:  0 , convergence:  0.08233787560252234
+['convergence!, nre iter:', 6]
+Displacement:  0.03499999999999992 47
+Step:  0 , convergence:  0.0544307885682752
+['convergence!, nre iter:', 4]
+Displacement:  0.02499999999999991 48
+Step:  0 , convergence:  0.054939166979944866
+['convergence!, nre iter:', 4]
+Displacement:  0.014999999999999902 49
+Step:  0 , convergence:  0.056978300155263
+['convergence!, nre iter:', 5]
+Displacement:  0.004999999999999893 50
+Step:  0 , convergence:  0.06157245985366741
+['convergence!, nre iter:', 5]
+number of boundary_nodes:  10 9
+hyperstatic number:  2
+number of boundary_nodes:  10 9
+min_distance:  0.04510000000000003
+Displacement:  0.0 0
+Step:  0 , convergence:  0.17245306493294316
+['convergence!, nre iter:', 11]
+Displacement:  0.010000000000000009 1
+Step:  0 , convergence:  0.08336823370208477
+['convergence!, nre iter:', 14]
+Displacement:  0.020000000000000018 2
+Step:  0 , convergence:  0.08924020574124432
+['convergence!, nre iter:', 18]
+Displacement:  0.030000000000000027 3
+Step:  0 , convergence:  0.06026063646827101
+['convergence!, nre iter:', 5]
+Displacement:  0.040000000000000036 4
+Step:  0 , convergence:  0.054481971387594044
+['convergence!, nre iter:', 5]
+Displacement:  0.050000000000000044 5
+Step:  0 , convergence:  0.05206056484294774
+['convergence!, nre iter:', 5]
+Displacement:  0.06000000000000005 6
+Step:  0 , convergence:  0.053066770655531004
+Step:  25 , convergence:  0.013335048641832254
+['convergence!, nre iter:', 41]
+Displacement:  0.07000000000000006 7
+Step:  0 , convergence:  0.0611752233061884
+['convergence!, nre iter:', 6]
+Displacement:  0.08000000000000007 8
+Step:  0 , convergence:  0.05179661627101211
+['convergence!, nre iter:', 6]
+Displacement:  0.09000000000000008 9
+Step:  0 , convergence:  0.04955766739972043
+['convergence!, nre iter:', 4]
+Displacement:  0.10000000000000009 10
+Step:  0 , convergence:  0.04888369296052362
+['convergence!, nre iter:', 4]
+Displacement:  0.1100000000000001 11
+Step:  0 , convergence:  0.048437875157642
+['convergence!, nre iter:', 4]
+Displacement:  0.1200000000000001 12
+Step:  0 , convergence:  0.048168439686604454
+['convergence!, nre iter:', 4]
+Displacement:  0.13000000000000012 13
+Step:  0 , convergence:  0.04799646495212316
+['convergence!, nre iter:', 4]
+Displacement:  0.14000000000000012 14
+Step:  0 , convergence:  0.04787372496215343
+['convergence!, nre iter:', 4]
+Displacement:  0.15000000000000013 15
+Step:  0 , convergence:  0.0477802723937786
+['convergence!, nre iter:', 4]
+Displacement:  0.16000000000000014 16
+Step:  0 , convergence:  0.047708511954756956
+['convergence!, nre iter:', 4]
+Displacement:  0.17000000000000015 17
+Step:  0 , convergence:  0.047655236970595274
+['convergence!, nre iter:', 4]
+Displacement:  0.18000000000000016 18
+Step:  0 , convergence:  0.047618877558631055
+['convergence!, nre iter:', 4]
+Displacement:  0.19000000000000017 19
+Step:  0 , convergence:  0.04759910081748269
+['convergence!, nre iter:', 4]
+Displacement:  0.20000000000000018 20
+Step:  0 , convergence:  0.047598255056003846
+['convergence!, nre iter:', 4]
+Displacement:  0.2100000000000002 21
+Step:  0 , convergence:  0.04762936760710794
+['convergence!, nre iter:', 4]
+Displacement:  0.2200000000000002 22
+Step:  0 , convergence:  0.04780972625598453
+['convergence!, nre iter:', 10]
+Displacement:  0.2300000000000002 23
+Step:  0 , convergence:  0.047461667599365584
+['convergence!, nre iter:', 4]
+Displacement:  0.2400000000000002 24
+Step:  0 , convergence:  0.04748687228561655
+['convergence!, nre iter:', 4]
+Displacement:  0.2500000000000002 25
+Step:  0 , convergence:  0.047517720395812056
+['convergence!, nre iter:', 4]
+Displacement:  0.26000000000000023 26
+Step:  0 , convergence:  0.047553456918700075
+['convergence!, nre iter:', 4]
+Displacement:  0.27000000000000024 27
+Step:  0 , convergence:  0.047593723328098456
+['convergence!, nre iter:', 4]
+Displacement:  0.28000000000000025 28
+Step:  0 , convergence:  0.04763832461868805
+['convergence!, nre iter:', 4]
+Displacement:  0.29000000000000026 29
+Step:  0 , convergence:  0.04768700192919479
+['convergence!, nre iter:', 4]
+Displacement:  0.30000000000000027 30
+Step:  0 , convergence:  0.04773924509672649
+['convergence!, nre iter:', 4]
+Displacement:  0.3100000000000003 31
+Step:  0 , convergence:  0.04779422220272052
+['convergence!, nre iter:', 4]
+Displacement:  0.3200000000000003 32
+Step:  0 , convergence:  0.04785085817530015
+['convergence!, nre iter:', 4]
+Displacement:  0.3300000000000003 33
+Step:  0 , convergence:  0.04790796437475316
+['convergence!, nre iter:', 4]
+Displacement:  0.3400000000000003 34
+Step:  0 , convergence:  0.047964110833145335
+['convergence!, nre iter:', 4]
+Displacement:  0.3500000000000003 35
+Step:  0 , convergence:  0.048016612556585625
+['convergence!, nre iter:', 4]
+Displacement:  0.3600000000000003 36
+Step:  0 , convergence:  0.04805904913253982
+['convergence!, nre iter:', 4]
+Displacement:  0.37000000000000033 37
+Step:  0 , convergence:  0.048081236090062436
+['convergence!, nre iter:', 3]
+Displacement:  0.38000000000000034 38
+Step:  0 , convergence:  0.04808289219453865
+['convergence!, nre iter:', 3]
+Displacement:  0.39000000000000035 39
+Step:  0 , convergence:  0.04808023457695298
+['convergence!, nre iter:', 3]
+Displacement:  0.40000000000000036 40
+Step:  0 , convergence:  0.04808303251525086
+['convergence!, nre iter:', 3]
+Displacement:  0.41000000000000036 41
+Step:  0 , convergence:  0.048090071344684564
+['convergence!, nre iter:', 3]
+Displacement:  0.4200000000000004 42
+Step:  0 , convergence:  0.0480984304280169
+['convergence!, nre iter:', 3]
+Displacement:  0.4300000000000004 43
+Step:  0 , convergence:  0.048106418425480656
+['convergence!, nre iter:', 3]
+Displacement:  0.4400000000000004 44
+Step:  0 , convergence:  0.04811331450555463
+['convergence!, nre iter:', 3]
+Displacement:  0.4500000000000004 45
+Step:  0 , convergence:  0.048118898263541335
+['convergence!, nre iter:', 3]
+Displacement:  0.4600000000000004 46
+Step:  0 , convergence:  0.04812318825696798
+['convergence!, nre iter:', 3]
+Displacement:  0.4700000000000004 47
+Step:  0 , convergence:  0.0481263150264484
+['convergence!, nre iter:', 3]
+Displacement:  0.4800000000000004 48
+Step:  0 , convergence:  0.04812845777046503
+['convergence!, nre iter:', 3]
+Displacement:  0.49000000000000044 49
+Step:  0 , convergence:  0.048129810392791975
+['convergence!, nre iter:', 3]
+Displacement:  0.0 0
+Step:  0 , convergence:  0.057167202191212234
+['convergence!, nre iter:', 11]
+Displacement:  0.0033333333333334103 1
+Step:  0 , convergence:  0.029355796138620056
+['convergence!, nre iter:', 18]
+Displacement:  0.006666666666666821 2
+Step:  0 , convergence:  0.028336931266774047
+['convergence!, nre iter:', 7]
+Displacement:  0.010000000000000231 3
+Step:  0 , convergence:  0.02609529468720224
+['convergence!, nre iter:', 6]
+Displacement:  0.013333333333333641 4
+Step:  0 , convergence:  0.025284711107456344
+['convergence!, nre iter:', 7]
+Displacement:  0.01666666666666705 5
+Step:  0 , convergence:  0.025466181282756357
+['convergence!, nre iter:', 12]
+Displacement:  0.020000000000000462 6
+Step:  0 , convergence:  0.02763919359863839
+Step:  25 , convergence:  8.849026904630822e-13
+['convergence!, nre iter:', 25]
+Displacement:  0.023333333333333872 7
+Step:  0 , convergence:  0.023433689633761585
+['convergence!, nre iter:', 6]
+Displacement:  0.026666666666667282 8
+Step:  0 , convergence:  0.025629631026850494
+['convergence!, nre iter:', 13]
+Displacement:  0.030000000000000693 9
+Step:  0 , convergence:  0.02020271827399634
+['convergence!, nre iter:', 4]
+Displacement:  0.0333333333333341 10
+Step:  0 , convergence:  0.019425319463949948
+['convergence!, nre iter:', 4]
+Displacement:  0.03666666666666751 11
+Step:  0 , convergence:  0.018884333344683285
+['convergence!, nre iter:', 4]
+Displacement:  0.040000000000000924 12
+Step:  0 , convergence:  0.018479517956154067
+['convergence!, nre iter:', 4]
+Displacement:  0.043333333333334334 13
+Step:  0 , convergence:  0.018168321038065052
+['convergence!, nre iter:', 4]
+Displacement:  0.046666666666667744 14
+Step:  0 , convergence:  0.01793471176580871
+['convergence!, nre iter:', 4]
+Displacement:  0.050000000000001155 15
+Step:  0 , convergence:  0.01777376676302757
+['convergence!, nre iter:', 4]
+Displacement:  0.053333333333334565 16
+Step:  0 , convergence:  0.017693593172557632
+['convergence!, nre iter:', 4]
+Displacement:  0.056666666666667975 17
+Step:  0 , convergence:  0.017737727453055362
+['convergence!, nre iter:', 4]
+Displacement:  0.060000000000001386 18
+Step:  0 , convergence:  0.01815770737490314
+Step:  25 , convergence:  0.007278817065605883
+['convergence!, nre iter:', 31]
+Displacement:  0.0633333333333348 19
+Step:  0 , convergence:  0.017296724326692162
+['convergence!, nre iter:', 5]
+Displacement:  0.0666666666666682 20
+Step:  0 , convergence:  0.01807025776689478
+Step:  25 , convergence:  69.94814242191144
+Step:  50 , convergence:  6.553765561858067
+Step:  75 , convergence:  1.6686206151661427
+Step:  100 , convergence:  3.7578627527889785
+Step:  125 , convergence:  2.7840596176549828
+Step:  150 , convergence:  0.7611014662347019
+Step:  175 , convergence:  5.264342773552904
+Step:  200 , convergence:  7.6158445664270475
+Step:  225 , convergence:  4.81381127384408
+Step:  250 , convergence:  3.9839102375893503
+Step:  275 , convergence:  3.0755592812183656
+Step:  300 , convergence:  1.5561583222594246
+Step:  325 , convergence:  16.194252173975748
+Step:  350 , convergence:  1.9469648109175097
+Step:  375 , convergence:  1.696734783809723
+Step:  400 , convergence:  16.590548105458673
+Step:  425 , convergence:  5.1695219043753236
+Step:  450 , convergence:  5.485164480672563
+Step:  475 , convergence:  21.835409999516095
+New discretization:  0.0016666666666666668  on step  0.0666666666666682
+Step:  0 , convergence:  0.009232310581726395
+['convergence!, nre iter:', 5]
+Displacement:  0.06833333333333491 21
+Step:  0 , convergence:  0.020953788746224326
+Step:  25 , convergence:  0.0033147796704020654
+['convergence!, nre iter:', 30]
+Displacement:  0.07166666666666832 22
+Step:  0 , convergence:  0.02101010749856197
+['convergence!, nre iter:', 5]
+Displacement:  0.07500000000000173 23
+Step:  0 , convergence:  0.0207094466807311
+['convergence!, nre iter:', 5]
+Displacement:  0.07833333333333514 24
+Step:  0 , convergence:  0.018387541645937033
+['convergence!, nre iter:', 5]
+Displacement:  0.08166666666666855 25
+Step:  0 , convergence:  0.017345143601882107
+['convergence!, nre iter:', 4]
+Displacement:  0.08500000000000196 26
+Step:  0 , convergence:  0.017096429017500008
+['convergence!, nre iter:', 3]
+Displacement:  0.08833333333333537 27
+Step:  0 , convergence:  0.01697568937559934
+['convergence!, nre iter:', 3]
+Displacement:  0.09166666666666878 28
+Step:  0 , convergence:  0.01688453274099493
+['convergence!, nre iter:', 3]
+Displacement:  0.0950000000000022 29
+Step:  0 , convergence:  0.016805044405452798
+['convergence!, nre iter:', 3]
+Displacement:  0.0983333333333356 30
+Step:  0 , convergence:  0.016733598021997097
+['convergence!, nre iter:', 3]
+Displacement:  0.10166666666666901 31
+Step:  0 , convergence:  0.016669908507736468
+['convergence!, nre iter:', 3]
+Displacement:  0.10500000000000242 32
+Step:  0 , convergence:  0.01661421354847049
+['convergence!, nre iter:', 3]
+Displacement:  0.10833333333333584 33
+Step:  0 , convergence:  0.01656637255349468
+['convergence!, nre iter:', 3]
+Displacement:  0.11166666666666925 34
+Step:  0 , convergence:  0.016525716381285863
+['convergence!, nre iter:', 3]
+Displacement:  0.11500000000000266 35
+Step:  0 , convergence:  0.016491222666673945
+['convergence!, nre iter:', 3]
+Displacement:  0.11833333333333607 36
+Step:  0 , convergence:  0.01646176027846112
+['convergence!, nre iter:', 3]
+Displacement:  0.12166666666666948 37
+Step:  0 , convergence:  0.016436272481841836
+['convergence!, nre iter:', 3]
+Displacement:  0.1250000000000029 38
+Step:  0 , convergence:  0.016413869225563444
+['convergence!, nre iter:', 3]
+Displacement:  0.1283333333333363 39
+Step:  0 , convergence:  0.0163938496179165
+['convergence!, nre iter:', 3]
+Displacement:  0.1316666666666697 40
+Step:  0 , convergence:  0.01637568588011256
+['convergence!, nre iter:', 3]
+Displacement:  0.13500000000000312 41
+Step:  0 , convergence:  0.01635899240640747
+['convergence!, nre iter:', 3]
+Displacement:  0.13833333333333653 42
+Step:  0 , convergence:  0.016343493191162996
+['convergence!, nre iter:', 3]
+Displacement:  0.14166666666666994 43
+Step:  0 , convergence:  0.016328993393725545
+['convergence!, nre iter:', 3]
+Displacement:  0.14500000000000335 44
+Step:  0 , convergence:  0.016315356661978097
+['convergence!, nre iter:', 3]
+Displacement:  0.14833333333333676 45
+Step:  0 , convergence:  0.01630248795848675
+['convergence!, nre iter:', 3]
+Displacement:  0.15166666666667017 46
+Step:  0 , convergence:  0.016290320983902762
+['convergence!, nre iter:', 3]
+Displacement:  0.15500000000000358 47
+Step:  0 , convergence:  0.016278809203011287
+['convergence!, nre iter:', 3]
+Displacement:  0.158333333333337 48
+Step:  0 , convergence:  0.016267919600320434
+['convergence!, nre iter:', 3]
+Displacement:  0.1616666666666704 49
+Step:  0 , convergence:  0.01625762846682367
+['convergence!, nre iter:', 3]
+Displacement:  0.1650000000000038 50
+Step:  0 , convergence:  0.01624791868721563
+['convergence!, nre iter:', 3]
+Displacement:  0.16833333333333722 51
+Step:  0 , convergence:  0.01623877814061241
+['convergence!, nre iter:', 3]
+Displacement:  0.17166666666667063 52
+Step:  0 , convergence:  0.01623019894833032
+['convergence!, nre iter:', 3]
+Displacement:  0.17500000000000404 53
+Step:  0 , convergence:  0.016222177406588312
+['convergence!, nre iter:', 3]
+Displacement:  0.17833333333333745 54
+Step:  0 , convergence:  0.016214714540454127
+['convergence!, nre iter:', 3]
+Displacement:  0.18166666666667086 55
+Step:  0 , convergence:  0.016207817322466726
+['convergence!, nre iter:', 3]
+Displacement:  0.18500000000000427 56
+Step:  0 , convergence:  0.01620150073824545
+['convergence!, nre iter:', 3]
+Displacement:  0.18833333333333768 57
+Step:  0 , convergence:  0.0161957910938643
+['convergence!, nre iter:', 3]
+Displacement:  0.1916666666666711 58
+Step:  0 , convergence:  0.01619073132925416
+['convergence!, nre iter:', 3]
+Displacement:  0.1950000000000045 59
+Step:  0 , convergence:  0.01618638980841155
+['convergence!, nre iter:', 3]
+Displacement:  0.1983333333333379 60
+Step:  0 , convergence:  0.016182875519169016
+['convergence!, nre iter:', 3]
+Displacement:  0.20166666666667132 61
+Step:  0 , convergence:  0.016180365887172816
+['convergence!, nre iter:', 3]
+Displacement:  0.20500000000000473 62
+Step:  0 , convergence:  0.016179161411306025
+['convergence!, nre iter:', 3]
+Displacement:  0.20833333333333814 63
+Step:  0 , convergence:  0.016179803153601704
+['convergence!, nre iter:', 3]
+Displacement:  0.21166666666667155 64
+Step:  0 , convergence:  0.016183357664233684
+['convergence!, nre iter:', 3]
+Displacement:  0.21500000000000496 65
+Step:  0 , convergence:  0.016192235265362075
+['convergence!, nre iter:', 3]
+Displacement:  0.21833333333333838 66
+Step:  0 , convergence:  0.01621324032022335
+['convergence!, nre iter:', 4]
+Displacement:  0.22166666666667179 67
+Step:  0 , convergence:  0.016275961827153452
+['convergence!, nre iter:', 5]
+Displacement:  0.2250000000000052 68
+Step:  0 , convergence:  0.017054070885861614
+Step:  25 , convergence:  0.03539148971190009
+Step:  50 , convergence:  0.007107656222942873
+['convergence!, nre iter:', 55]
+Displacement:  0.2283333333333386 69
+Step:  0 , convergence:  0.01609623760997386
+['convergence!, nre iter:', 3]
+Displacement:  0.23166666666667202 70
+Step:  0 , convergence:  0.016094578257228136
+['convergence!, nre iter:', 3]
+Displacement:  0.23500000000000543 71
+Step:  0 , convergence:  0.016093216104972965
+['convergence!, nre iter:', 3]
+Displacement:  0.23833333333333884 72
+Step:  0 , convergence:  0.016092134168060455
+['convergence!, nre iter:', 3]
+Displacement:  0.24166666666667225 73
+Step:  0 , convergence:  0.016091319488438238
+['convergence!, nre iter:', 3]
+Displacement:  0.24500000000000566 74
+Step:  0 , convergence:  0.01609076220124336
+['convergence!, nre iter:', 3]
+Displacement:  0.24833333333333907 75
+Step:  0 , convergence:  0.016090454869279684
+['convergence!, nre iter:', 3]
+Displacement:  0.2516666666666725 76
+Step:  0 , convergence:  0.016090391982437027
+['convergence!, nre iter:', 3]
+Displacement:  0.2550000000000059 77
+Step:  0 , convergence:  0.016090569555119696
+['convergence!, nre iter:', 3]
+Displacement:  0.2583333333333393 78
+Step:  0 , convergence:  0.016090984777629068
+['convergence!, nre iter:', 3]
+Displacement:  0.2616666666666727 79
+Step:  0 , convergence:  0.016091635692852498
+['convergence!, nre iter:', 3]
+Displacement:  0.2650000000000061 80
+Step:  0 , convergence:  0.016092520880853348
+['convergence!, nre iter:', 3]
+Displacement:  0.26833333333333953 81
+Step:  0 , convergence:  0.016093639142841874
+['convergence!, nre iter:', 3]
+Displacement:  0.27166666666667294 82
+Step:  0 , convergence:  0.01609498918331033
+['convergence!, nre iter:', 3]
+Displacement:  0.27500000000000635 83
+Step:  0 , convergence:  0.0160965692951594
+['convergence!, nre iter:', 3]
+Displacement:  0.27833333333333976 84
+Step:  0 , convergence:  0.016098377057335682
+['convergence!, nre iter:', 3]
+Displacement:  0.28166666666667317 85
+Step:  0 , convergence:  0.016100409057692902
+['convergence!, nre iter:', 3]
+Displacement:  0.2850000000000066 86
+Step:  0 , convergence:  0.0161026606553428
+['convergence!, nre iter:', 3]
+Displacement:  0.28833333333334 87
+Step:  0 , convergence:  0.016105125796658994
+['convergence!, nre iter:', 3]
+Displacement:  0.2916666666666734 88
+Step:  0 , convergence:  0.01610779689738623
+['convergence!, nre iter:', 3]
+Displacement:  0.2950000000000068 89
+Step:  0 , convergence:  0.0161106648001483
+['convergence!, nre iter:', 3]
+Displacement:  0.2983333333333402 90
+Step:  0 , convergence:  0.016113718812062094
+['convergence!, nre iter:', 3]
+Displacement:  0.30166666666667363 91
+Step:  0 , convergence:  0.016116946821200726
+['convergence!, nre iter:', 3]
+Displacement:  0.30500000000000704 92
+Step:  0 , convergence:  0.01612033548330407
+['convergence!, nre iter:', 3]
+Displacement:  0.30833333333334045 93
+Step:  0 , convergence:  0.016123870461513423
+['convergence!, nre iter:', 3]
+Displacement:  0.31166666666667386 94
+Step:  0 , convergence:  0.016127536692240783
+['convergence!, nre iter:', 3]
+Displacement:  0.3150000000000073 95
+Step:  0 , convergence:  0.016131318639744652
+['convergence!, nre iter:', 3]
+Displacement:  0.3183333333333407 96
+Step:  0 , convergence:  0.01613520049052548
+['convergence!, nre iter:', 3]
+Displacement:  0.3216666666666741 97
+Step:  0 , convergence:  0.016139166225592402
+['convergence!, nre iter:', 3]
+Displacement:  0.3250000000000075 98
+Step:  0 , convergence:  0.016143199492556486
+['convergence!, nre iter:', 3]
+Displacement:  0.3283333333333409 99
+Step:  0 , convergence:  0.01614728317843641
+['convergence!, nre iter:', 3]
+Displacement:  0.3316666666666743 100
+Step:  0 , convergence:  0.01615139855632681
+['convergence!, nre iter:', 3]
+Displacement:  0.33500000000000774 101
+Step:  0 , convergence:  0.01615552384554511
+['convergence!, nre iter:', 3]
+Displacement:  0.33833333333334115 102
+Step:  0 , convergence:  0.016159631993502042
+['convergence!, nre iter:', 3]
+Displacement:  0.34166666666667456 103
+Step:  0 , convergence:  0.016163687482494787
+['convergence!, nre iter:', 3]
+Displacement:  0.34500000000000797 104
+Step:  0 , convergence:  0.01616764204225879
+['convergence!, nre iter:', 3]
+Displacement:  0.3483333333333414 105
+Step:  0 , convergence:  0.016171429419745562
+['convergence!, nre iter:', 3]
+Displacement:  0.3516666666666748 106
+Step:  0 , convergence:  0.016174959999012403
+['convergence!, nre iter:', 3]
+Displacement:  0.3550000000000082 107
+Step:  0 , convergence:  0.016178117272936113
+['convergence!, nre iter:', 3]
+Displacement:  0.3583333333333416 108
+Step:  0 , convergence:  0.016180759930656877
+['convergence!, nre iter:', 3]
+Displacement:  0.361666666666675 109
+Step:  0 , convergence:  0.016182734871969858
+['convergence!, nre iter:', 3]
+Displacement:  0.36500000000000843 110
+Step:  0 , convergence:  0.01618390561741284
+['convergence!, nre iter:', 3]
+Displacement:  0.36833333333334184 111
+Step:  0 , convergence:  0.016184194261651238
+['convergence!, nre iter:', 3]
+Displacement:  0.37166666666667525 112
+Step:  0 , convergence:  0.016183623000280138
+['convergence!, nre iter:', 3]
+Displacement:  0.37500000000000866 113
+Step:  0 , convergence:  0.016182331325231888
+['convergence!, nre iter:', 3]
+Displacement:  0.37833333333334207 114
+Step:  0 , convergence:  0.01618055111466572
+['convergence!, nre iter:', 3]
+Displacement:  0.3816666666666755 115
+Step:  0 , convergence:  0.016178546674243333
+['convergence!, nre iter:', 3]
+Displacement:  0.3850000000000089 116
+Step:  0 , convergence:  0.016176550076440827
+['convergence!, nre iter:', 3]
+Displacement:  0.3883333333333423 117
+Step:  0 , convergence:  0.016174721369067228
+['convergence!, nre iter:', 3]
+Displacement:  0.3916666666666757 118
+Step:  0 , convergence:  0.01617314212421217
+['convergence!, nre iter:', 3]
+Displacement:  0.3950000000000091 119
+Step:  0 , convergence:  0.016171831603857042
+['convergence!, nre iter:', 3]
+Displacement:  0.39833333333334253 120
+Step:  0 , convergence:  0.016170770019474114
+['convergence!, nre iter:', 3]
+Displacement:  0.40166666666667594 121
+Step:  0 , convergence:  0.016169918669629853
+['convergence!, nre iter:', 3]
+Displacement:  0.40500000000000935 122
+Step:  0 , convergence:  0.016169233492413053
+['convergence!, nre iter:', 3]
+Displacement:  0.40833333333334276 123
+Step:  0 , convergence:  0.01616867258593632
+['convergence!, nre iter:', 3]
+Displacement:  0.4116666666666762 124
+Step:  0 , convergence:  0.016168199552631678
+['convergence!, nre iter:', 3]
+Displacement:  0.4150000000000096 125
+Step:  0 , convergence:  0.016167784412287087
+['convergence!, nre iter:', 3]
+Displacement:  0.418333333333343 126
+Step:  0 , convergence:  0.016167403299948743
+['convergence!, nre iter:', 3]
+Displacement:  0.4216666666666764 127
+Step:  0 , convergence:  0.01616703766953
+['convergence!, nre iter:', 3]
+Displacement:  0.4250000000000098 128
+Step:  0 , convergence:  0.016166673381153115
+['convergence!, nre iter:', 3]
+Displacement:  0.4283333333333432 129
+Step:  0 , convergence:  0.016166299846166382
+['convergence!, nre iter:', 3]
+Displacement:  0.43166666666667663 130
+Step:  0 , convergence:  0.01616590929429254
+['convergence!, nre iter:', 3]
+Displacement:  0.43500000000001005 131
+Step:  0 , convergence:  0.016165496173992485
+['convergence!, nre iter:', 3]
+Displacement:  0.43833333333334346 132
+Step:  0 , convergence:  0.016165056674212863
+['convergence!, nre iter:', 3]
+Displacement:  0.44166666666667687 133
+Step:  0 , convergence:  0.01616458834807473
+['convergence!, nre iter:', 3]
+Displacement:  0.4450000000000103 134
+Step:  0 , convergence:  0.01616408981851286
+['convergence!, nre iter:', 3]
+Displacement:  0.4483333333333437 135
+Step:  0 , convergence:  0.01616356054817042
+['convergence!, nre iter:', 3]
+Displacement:  0.4516666666666771 136
+Step:  0 , convergence:  0.016163000658968054
+['convergence!, nre iter:', 3]
+Displacement:  0.4550000000000105 137
+Step:  0 , convergence:  0.01616241078978958
+['convergence!, nre iter:', 3]
+Displacement:  0.4583333333333439 138
+Step:  0 , convergence:  0.016161791983358258
+['convergence!, nre iter:', 3]
+Displacement:  0.46166666666667733 139
+Step:  0 , convergence:  0.016161145595492008
+['convergence!, nre iter:', 3]
+Displacement:  0.46500000000001074 140
+Step:  0 , convergence:  0.016160473221610912
+['convergence!, nre iter:', 3]
+Displacement:  0.46833333333334415 141
+Step:  0 , convergence:  0.016159776636646465
+['convergence!, nre iter:', 3]
+Displacement:  0.47166666666667756 142
+Step:  0 , convergence:  0.01615905774548174
+['convergence!, nre iter:', 3]
+Displacement:  0.47500000000001097 143
+Step:  0 , convergence:  0.01615831854178075
+['convergence!, nre iter:', 3]
+Displacement:  0.4783333333333444 144
+Step:  0 , convergence:  0.01615756107360196
+['convergence!, nre iter:', 3]
+Displacement:  0.4816666666666778 145
+Step:  0 , convergence:  0.016156787414600436
+['convergence!, nre iter:', 3]
+Displacement:  0.4850000000000112 146
+Step:  0 , convergence:  0.01615599963990578
+['convergence!, nre iter:', 3]
+Displacement:  0.4883333333333446 147
+Step:  0 , convergence:  0.01615519980597843
+['convergence!, nre iter:', 3]
+Displacement:  0.491666666666678 148
+Step:  0 , convergence:  0.016154389933902447
+['convergence!, nre iter:', 3]
+Displacement:  0.49500000000001143 149
+Step:  0 , convergence:  0.0161535719956743
+['convergence!, nre iter:', 3]
+Displacement:  0.49833333333334484 150
+Step:  0 , convergence:  0.016152747903134493
+['convergence!, nre iter:', 3]
+Displacement:  0.0 0
+Step:  0 , convergence:  0.021154531348146016
+['convergence!, nre iter:', 10]
+Displacement:  0.0009999999999998899 1
+Step:  0 , convergence:  0.010534956031277104
+['convergence!, nre iter:', 6]
+Displacement:  0.0019999999999997797 2
+Step:  0 , convergence:  0.008655001792607376
+['convergence!, nre iter:', 5]
+Displacement:  0.0029999999999996696 3
+Step:  0 , convergence:  0.007876212184503328
+['convergence!, nre iter:', 6]
+Displacement:  0.0039999999999995595 4
+Step:  0 , convergence:  0.007517866127234956
+Step:  25 , convergence:  0.0023828078850515475
+Step:  50 , convergence:  0.005612328564087887
+Step:  75 , convergence:  0.00028024715906252527
+['convergence!, nre iter:', 78]
+Displacement:  0.004999999999999449 5
+Step:  0 , convergence:  0.011161731078907404
+['convergence!, nre iter:', 13]
+Displacement:  0.005999999999999339 6
+Step:  0 , convergence:  0.013056797045273605
+['convergence!, nre iter:', 10]
+Displacement:  0.006999999999999229 7
+Step:  0 , convergence:  0.007954969853589402
+['convergence!, nre iter:', 5]
+Displacement:  0.007999999999999119 8
+Step:  0 , convergence:  0.0077118157773362105
+['convergence!, nre iter:', 4]
+Displacement:  0.008999999999999009 9
+Step:  0 , convergence:  0.007540139651678249
+['convergence!, nre iter:', 4]
+Displacement:  0.009999999999998899 10
+Step:  0 , convergence:  0.007421189694589039
+['convergence!, nre iter:', 4]
+Displacement:  0.010999999999998789 11
+Step:  0 , convergence:  0.007342399673156118
+['convergence!, nre iter:', 4]
+Displacement:  0.011999999999998678 12
+Step:  0 , convergence:  0.007295476510429844
+['convergence!, nre iter:', 4]
+Displacement:  0.012999999999998568 13
+Step:  0 , convergence:  0.007275127439865025
+['convergence!, nre iter:', 4]
+Displacement:  0.013999999999998458 14
+Step:  0 , convergence:  0.007278274522708777
+['convergence!, nre iter:', 4]
+Displacement:  0.014999999999998348 15
+Step:  0 , convergence:  0.007303629916974952
+['convergence!, nre iter:', 4]
+Displacement:  0.015999999999998238 16
+Step:  0 , convergence:  0.007351568625808321
+['convergence!, nre iter:', 4]
+Displacement:  0.016999999999998128 17
+Step:  0 , convergence:  0.007424311044031413
+['convergence!, nre iter:', 6]
+Displacement:  0.017999999999998018 18
+Step:  0 , convergence:  0.0075265403066134655
+['convergence!, nre iter:', 4]
+Displacement:  0.018999999999997907 19
+Step:  0 , convergence:  0.007666813337892643
+['convergence!, nre iter:', 4]
+Displacement:  0.019999999999997797 20
+Step:  0 , convergence:  0.007860776712585608
+['convergence!, nre iter:', 5]
+Displacement:  0.020999999999997687 21
+Step:  0 , convergence:  0.008139935037199354
+['convergence!, nre iter:', 6]
+Displacement:  0.021999999999997577 22
+Step:  0 , convergence:  0.00860626172489318
+Step:  25 , convergence:  0.0009404095318685094
+['convergence!, nre iter:', 28]
+Displacement:  0.022999999999997467 23
+Step:  0 , convergence:  0.006410928978558591
+['convergence!, nre iter:', 4]
+Displacement:  0.023999999999997357 24
+Step:  0 , convergence:  0.006341633977966743
+['convergence!, nre iter:', 4]
+Displacement:  0.024999999999997247 25
+Step:  0 , convergence:  0.006287406845460847
+['convergence!, nre iter:', 4]
+Displacement:  0.025999999999997137 26
+Step:  0 , convergence:  0.006243870915294421
+['convergence!, nre iter:', 4]
+Displacement:  0.026999999999997026 27
+Step:  0 , convergence:  0.006203733232804524
+['convergence!, nre iter:', 4]
+Displacement:  0.027999999999996916 28
+Step:  0 , convergence:  0.006156545163377747
+['convergence!, nre iter:', 4]
+Displacement:  0.028999999999996806 29
+Step:  0 , convergence:  0.006093710334026345
+['convergence!, nre iter:', 4]
+Displacement:  0.029999999999996696 30
+Step:  0 , convergence:  0.006018153943781299
+['convergence!, nre iter:', 4]
+Displacement:  0.030999999999996586 31
+Step:  0 , convergence:  0.005943582005284074
+['convergence!, nre iter:', 3]
+Displacement:  0.031999999999996476 32
+Step:  0 , convergence:  0.005879927008553354
+['convergence!, nre iter:', 3]
+Displacement:  0.032999999999996366 33
+Step:  0 , convergence:  0.005827741165420714
+['convergence!, nre iter:', 3]
+Displacement:  0.033999999999996255 34
+Step:  0 , convergence:  0.0057837131660470635
+['convergence!, nre iter:', 3]
+Displacement:  0.034999999999996145 35
+Step:  0 , convergence:  0.005744885804127419
+['convergence!, nre iter:', 3]
+Displacement:  0.035999999999996035 36
+Step:  0 , convergence:  0.005709482294124121
+['convergence!, nre iter:', 3]
+Displacement:  0.036999999999995925 37
+Step:  0 , convergence:  0.005676580478347919
+['convergence!, nre iter:', 3]
+Displacement:  0.037999999999995815 38
+Step:  0 , convergence:  0.0056457329401673525
+['convergence!, nre iter:', 3]
+Displacement:  0.038999999999995705 39
+Step:  0 , convergence:  0.005616731272190156
+['convergence!, nre iter:', 3]
+Displacement:  0.039999999999995595 40
+Step:  0 , convergence:  0.005589482044313478
+['convergence!, nre iter:', 3]
+Displacement:  0.040999999999995485 41
+Step:  0 , convergence:  0.005563945857162528
+['convergence!, nre iter:', 3]
+Displacement:  0.041999999999995374 42
+Step:  0 , convergence:  0.005540108866399286
+['convergence!, nre iter:', 3]
+Displacement:  0.042999999999995264 43
+Step:  0 , convergence:  0.0055179705979758525
+['convergence!, nre iter:', 3]
+Displacement:  0.043999999999995154 44
+Step:  0 , convergence:  0.005497540019775827
+['convergence!, nre iter:', 3]
+Displacement:  0.044999999999995044 45
+Step:  0 , convergence:  0.005478836036031182
+['convergence!, nre iter:', 3]
+Displacement:  0.045999999999994934 46
+Step:  0 , convergence:  0.005461890723752224
+['convergence!, nre iter:', 3]
+Displacement:  0.046999999999994824 47
+Step:  0 , convergence:  0.005446754809244817
+['convergence!, nre iter:', 3]
+Displacement:  0.047999999999994714 48
+Step:  0 , convergence:  0.005433505664389417
+['convergence!, nre iter:', 3]
+Displacement:  0.0489999999999946 49
+Step:  0 , convergence:  0.005422258836893469
+['convergence!, nre iter:', 3]
+Displacement:  0.04999999999999449 50
+Step:  0 , convergence:  0.005413185122853506
+['convergence!, nre iter:', 3]
+Displacement:  0.05099999999999438 51
+Step:  0 , convergence:  0.005406536879392308
+['convergence!, nre iter:', 3]
+Displacement:  0.05199999999999427 52
+Step:  0 , convergence:  0.005402690510058764
+['convergence!, nre iter:', 3]
+Displacement:  0.05299999999999416 53
+Step:  0 , convergence:  0.005402218771096612
+['convergence!, nre iter:', 3]
+Displacement:  0.05399999999999405 54
+Step:  0 , convergence:  0.005406021618392688
+['convergence!, nre iter:', 3]
+Displacement:  0.05499999999999394 55
+Step:  0 , convergence:  0.005415581346483592
+['convergence!, nre iter:', 3]
+Displacement:  0.05599999999999383 56
+Step:  0 , convergence:  0.005433509673484722
+['convergence!, nre iter:', 3]
+Displacement:  0.05699999999999372 57
+Step:  0 , convergence:  0.005464879910260572
+['convergence!, nre iter:', 3]
+Displacement:  0.05799999999999361 58
+Step:  0 , convergence:  0.005521117909853285
+['convergence!, nre iter:', 3]
+Displacement:  0.0589999999999935 59
+Step:  0 , convergence:  0.0056351774853262435
+['convergence!, nre iter:', 4]
+Displacement:  0.05999999999999339 60
+Step:  0 , convergence:  0.005966629966506269
+['convergence!, nre iter:', 24]
+Displacement:  0.06099999999999328 61
+Step:  0 , convergence:  0.0052148886968173425
+['convergence!, nre iter:', 3]
+Displacement:  0.06199999999999317 62
+Step:  0 , convergence:  0.0052202157462181995
+['convergence!, nre iter:', 3]
+Displacement:  0.06299999999999306 63
+Step:  0 , convergence:  0.00522723093967334
+['convergence!, nre iter:', 3]
+Displacement:  0.06399999999999295 64
+Step:  0 , convergence:  0.005234604958729799
+['convergence!, nre iter:', 3]
+Displacement:  0.06499999999999284 65
+Step:  0 , convergence:  0.005239308393342822
+['convergence!, nre iter:', 3]
+Displacement:  0.06599999999999273 66
+Step:  0 , convergence:  0.00523612120684707
+['convergence!, nre iter:', 3]
+Displacement:  0.06699999999999262 67
+Step:  0 , convergence:  0.005219787053612767
+['convergence!, nre iter:', 3]
+Displacement:  0.06799999999999251 68
+Step:  0 , convergence:  0.005191791994957252
+['convergence!, nre iter:', 3]
+Displacement:  0.0689999999999924 69
+Step:  0 , convergence:  0.005164020071170436
+['convergence!, nre iter:', 3]
+Displacement:  0.06999999999999229 70
+Step:  0 , convergence:  0.005149344744369454
+['convergence!, nre iter:', 3]
+Displacement:  0.07099999999999218 71
+Step:  0 , convergence:  0.005152728869053216
+['convergence!, nre iter:', 3]
+Displacement:  0.07199999999999207 72
+Step:  0 , convergence:  0.0051745439066728845
+['convergence!, nre iter:', 3]
+Displacement:  0.07299999999999196 73
+Step:  0 , convergence:  0.00521705822292588
+['convergence!, nre iter:', 3]
+Displacement:  0.07399999999999185 74
+Step:  0 , convergence:  0.005289445965446851
+['convergence!, nre iter:', 3]
+Displacement:  0.07499999999999174 75
+Step:  0 , convergence:  0.005417229826055334
+['convergence!, nre iter:', 4]
+Displacement:  0.07599999999999163 76
+Step:  0 , convergence:  0.005679967563055661
+['convergence!, nre iter:', 4]
+Displacement:  0.07699999999999152 77
+Step:  0 , convergence:  0.00648292124645207
+['convergence!, nre iter:', 23]
+Displacement:  0.07799999999999141 78
+Step:  0 , convergence:  0.005631009569729
+['convergence!, nre iter:', 4]
+Displacement:  0.0789999999999913 79
+Step:  0 , convergence:  0.005456056589715991
+['convergence!, nre iter:', 4]
+Displacement:  0.07999999999999119 80
+Step:  0 , convergence:  0.0053455986033507505
+['convergence!, nre iter:', 3]
+Displacement:  0.08099999999999108 81
+Step:  0 , convergence:  0.0052788818112765035
+['convergence!, nre iter:', 3]
+Displacement:  0.08199999999999097 82
+Step:  0 , convergence:  0.0052373834646754274
+['convergence!, nre iter:', 3]
+Displacement:  0.08299999999999086 83
+Step:  0 , convergence:  0.005209835428783187
+['convergence!, nre iter:', 3]
+Displacement:  0.08399999999999075 84
+Step:  0 , convergence:  0.005190102868852682
+['convergence!, nre iter:', 3]
+Displacement:  0.08499999999999064 85
+Step:  0 , convergence:  0.005174902350325952
+['convergence!, nre iter:', 3]
+Displacement:  0.08599999999999053 86
+Step:  0 , convergence:  0.005162441521060158
+['convergence!, nre iter:', 3]
+Displacement:  0.08699999999999042 87
+Step:  0 , convergence:  0.00515170919105838
+['convergence!, nre iter:', 3]
+Displacement:  0.08799999999999031 88
+Step:  0 , convergence:  0.005142114262285949
+['convergence!, nre iter:', 3]
+Displacement:  0.0889999999999902 89
+Step:  0 , convergence:  0.005133299710986254
+['convergence!, nre iter:', 3]
+Displacement:  0.08999999999999009 90
+Step:  0 , convergence:  0.005125044025070092
+['convergence!, nre iter:', 3]
+Displacement:  0.09099999999998998 91
+Step:  0 , convergence:  0.005117207173081182
+['convergence!, nre iter:', 3]
+Displacement:  0.09199999999998987 92
+Step:  0 , convergence:  0.005109699890644804
+['convergence!, nre iter:', 3]
+Displacement:  0.09299999999998976 93
+Step:  0 , convergence:  0.005102465556291075
+['convergence!, nre iter:', 3]
+Displacement:  0.09399999999998965 94
+Step:  0 , convergence:  0.005095469076997523
+['convergence!, nre iter:', 3]
+Displacement:  0.09499999999998954 95
+Step:  0 , convergence:  0.005088689797077878
+['convergence!, nre iter:', 3]
+Displacement:  0.09599999999998943 96
+Step:  0 , convergence:  0.005082116788581268
+['convergence!, nre iter:', 3]
+Displacement:  0.09699999999998932 97
+Step:  0 , convergence:  0.005075745599117747
+['convergence!, nre iter:', 3]
+Displacement:  0.0979999999999892 98
+Step:  0 , convergence:  0.005069575926728715
+['convergence!, nre iter:', 3]
+Displacement:  0.0989999999999891 99
+Step:  0 , convergence:  0.00506360991239609
+['convergence!, nre iter:', 3]
+Displacement:  0.09999999999998899 100
+Step:  0 , convergence:  0.005057850866809994
+['convergence!, nre iter:', 3]
+Displacement:  0.10099999999998888 101
+Step:  0 , convergence:  0.005052302320318274
+['convergence!, nre iter:', 3]
+Displacement:  0.10199999999998877 102
+Step:  0 , convergence:  0.005046967326157696
+['convergence!, nre iter:', 3]
+Displacement:  0.10299999999998866 103
+Step:  0 , convergence:  0.00504184796996686
+['convergence!, nre iter:', 3]
+Displacement:  0.10399999999998855 104
+Step:  0 , convergence:  0.005036945050816127
+['convergence!, nre iter:', 3]
+Displacement:  0.10499999999998844 105
+Step:  0 , convergence:  0.005032257905183051
+['convergence!, nre iter:', 3]
+Displacement:  0.10599999999998833 106
+Step:  0 , convergence:  0.005027784348375209
+['convergence!, nre iter:', 3]
+Displacement:  0.10699999999998822 107
+Step:  0 , convergence:  0.005023520709624704
+['convergence!, nre iter:', 3]
+Displacement:  0.1079999999999881 108
+Step:  0 , convergence:  0.005019461938500385
+['convergence!, nre iter:', 3]
+Displacement:  0.108999999999988 109
+Step:  0 , convergence:  0.005015601761964958
+['convergence!, nre iter:', 3]
+Displacement:  0.10999999999998789 110
+Step:  0 , convergence:  0.0050119328735054825
+['convergence!, nre iter:', 3]
+Displacement:  0.11099999999998778 111
+Step:  0 , convergence:  0.005008447138316514
+['convergence!, nre iter:', 3]
+Displacement:  0.11199999999998766 112
+Step:  0 , convergence:  0.0050051358013165955
+['convergence!, nre iter:', 3]
+Displacement:  0.11299999999998755 113
+Step:  0 , convergence:  0.005001989687688933
+['convergence!, nre iter:', 3]
+Displacement:  0.11399999999998744 114
+Step:  0 , convergence:  0.004998999388431433
+['convergence!, nre iter:', 3]
+Displacement:  0.11499999999998733 115
+Step:  0 , convergence:  0.004996155425957708
+['convergence!, nre iter:', 3]
+Displacement:  0.11599999999998722 116
+Step:  0 , convergence:  0.0049934483969809726
+['convergence!, nre iter:', 3]
+Displacement:  0.11699999999998711 117
+Step:  0 , convergence:  0.0049908690917061915
+['convergence!, nre iter:', 3]
+Displacement:  0.117999999999987 118
+Step:  0 , convergence:  0.0049884085897279155
+['convergence!, nre iter:', 3]
+Displacement:  0.1189999999999869 119
+Step:  0 , convergence:  0.004986058334017351
+['convergence!, nre iter:', 3]
+Displacement:  0.11999999999998678 120
+Step:  0 , convergence:  0.004983810185027548
+['convergence!, nre iter:', 3]
+Displacement:  0.12099999999998667 121
+Step:  0 , convergence:  0.004981656457302918
+['convergence!, nre iter:', 3]
+Displacement:  0.12199999999998656 122
+Step:  0 , convergence:  0.004979589941117544
+['convergence!, nre iter:', 3]
+Displacement:  0.12299999999998645 123
+Step:  0 , convergence:  0.004977603911639474
+['convergence!, nre iter:', 3]
+Displacement:  0.12399999999998634 124
+Step:  0 , convergence:  0.004975692127975038
+['convergence!, nre iter:', 3]
+Displacement:  0.12499999999998623 125
+Step:  0 , convergence:  0.004973848824238118
+['convergence!, nre iter:', 3]
+Displacement:  0.12599999999998612 126
+Step:  0 , convergence:  0.004972068694535567
+['convergence!, nre iter:', 3]
+Displacement:  0.126999999999986 127
+Step:  0 , convergence:  0.004970346873498583
+['convergence!, nre iter:', 3]
+Displacement:  0.1279999999999859 128
+Step:  0 , convergence:  0.004968678913733451
+['convergence!, nre iter:', 3]
+Displacement:  0.1289999999999858 129
+Step:  0 , convergence:  0.004967060761318497
+['convergence!, nre iter:', 3]
+Displacement:  0.12999999999998568 130
+Step:  0 , convergence:  0.0049654887302610804
+['convergence!, nre iter:', 3]
+Displacement:  0.13099999999998557 131
+Step:  0 , convergence:  0.004963959476631808
+['convergence!, nre iter:', 3]
+Displacement:  0.13199999999998546 132
+Step:  0 , convergence:  0.004962469972930748
+['convergence!, nre iter:', 3]
+Displacement:  0.13299999999998535 133
+Step:  0 , convergence:  0.004961017483099926
+['convergence!, nre iter:', 3]
+Displacement:  0.13399999999998524 134
+Step:  0 , convergence:  0.00495959953848235
+['convergence!, nre iter:', 3]
+Displacement:  0.13499999999998513 135
+Step:  0 , convergence:  0.004958213914933674
+['convergence!, nre iter:', 3]
+Displacement:  0.13599999999998502 136
+Step:  0 , convergence:  0.004956858611220279
+['convergence!, nre iter:', 3]
+Displacement:  0.1369999999999849 137
+Step:  0 , convergence:  0.004955531828775131
+['convergence!, nre iter:', 3]
+Displacement:  0.1379999999999848 138
+Step:  0 , convergence:  0.004954231952843399
+['convergence!, nre iter:', 3]
+Displacement:  0.1389999999999847 139
+Step:  0 , convergence:  0.004952957535010013
+['convergence!, nre iter:', 3]
+Displacement:  0.13999999999998458 140
+Step:  0 , convergence:  0.004951707277080249
+['convergence!, nre iter:', 3]
+Displacement:  0.14099999999998447 141
+Step:  0 , convergence:  0.004950480016266885
+['convergence!, nre iter:', 3]
+Displacement:  0.14199999999998436 142
+Step:  0 , convergence:  0.004949274711622622
+['convergence!, nre iter:', 3]
+Displacement:  0.14299999999998425 143
+Step:  0 , convergence:  0.004948090431650654
+['convergence!, nre iter:', 3]
+Displacement:  0.14399999999998414 144
+Step:  0 , convergence:  0.00494692634302451
+['convergence!, nre iter:', 3]
+Displacement:  0.14499999999998403 145
+Step:  0 , convergence:  0.004945781700340566
+['convergence!, nre iter:', 3]
+Displacement:  0.14599999999998392 146
+Step:  0 , convergence:  0.004944655836832961
+['convergence!, nre iter:', 3]
+Displacement:  0.1469999999999838 147
+Step:  0 , convergence:  0.00494354815597985
+['convergence!, nre iter:', 3]
+Displacement:  0.1479999999999837 148
+Step:  0 , convergence:  0.004942458123931247
+['convergence!, nre iter:', 3]
+Displacement:  0.1489999999999836 149
+Step:  0 , convergence:  0.0049413852626949955
+['convergence!, nre iter:', 3]
+Displacement:  0.14999999999998348 150
+Step:  0 , convergence:  0.004940329144016739
+['convergence!, nre iter:', 3]
+Displacement:  0.15099999999998337 151
+Step:  0 , convergence:  0.004939289383899421
+['convergence!, nre iter:', 3]
+Displacement:  0.15199999999998326 152
+Step:  0 , convergence:  0.00493826563770493
+['convergence!, nre iter:', 3]
+Displacement:  0.15299999999998315 153
+Step:  0 , convergence:  0.004937257595791093
+['convergence!, nre iter:', 3]
+Displacement:  0.15399999999998304 154
+Step:  0 , convergence:  0.004936264979634911
+['convergence!, nre iter:', 3]
+Displacement:  0.15499999999998293 155
+Step:  0 , convergence:  0.004935287538401105
+['convergence!, nre iter:', 3]
+Displacement:  0.15599999999998282 156
+Step:  0 , convergence:  0.004934325045916605
+['convergence!, nre iter:', 3]
+Displacement:  0.1569999999999827 157
+Step:  0 , convergence:  0.0049333772980149244
+['convergence!, nre iter:', 3]
+Displacement:  0.1579999999999826 158
+Step:  0 , convergence:  0.004932444110217983
+['convergence!, nre iter:', 3]
+Displacement:  0.1589999999999825 159
+Step:  0 , convergence:  0.004931525315724879
+['convergence!, nre iter:', 3]
+Displacement:  0.15999999999998238 160
+Step:  0 , convergence:  0.004930620763682896
+['convergence!, nre iter:', 3]
+Displacement:  0.16099999999998227 161
+Step:  0 , convergence:  0.004929730317713625
+['convergence!, nre iter:', 3]
+Displacement:  0.16199999999998216 162
+Step:  0 , convergence:  0.0049288538546755495
+['convergence!, nre iter:', 3]
+Displacement:  0.16299999999998205 163
+Step:  0 , convergence:  0.0049279912636404155
+['convergence!, nre iter:', 3]
+Displacement:  0.16399999999998194 164
+Step:  0 , convergence:  0.004927142445070427
+['convergence!, nre iter:', 3]
+Displacement:  0.16499999999998183 165
+Step:  0 , convergence:  0.004926307310177178
+['convergence!, nre iter:', 3]
+Displacement:  0.16599999999998172 166
+Step:  0 , convergence:  0.004925485780452692
+['convergence!, nre iter:', 3]
+Displacement:  0.1669999999999816 167
+Step:  0 , convergence:  0.0049246777873601325
+['convergence!, nre iter:', 3]
+Displacement:  0.1679999999999815 168
+Step:  0 , convergence:  0.00492388327217641
+['convergence!, nre iter:', 3]
+Displacement:  0.1689999999999814 169
+Step:  0 , convergence:  0.004923102185978213
+['convergence!, nre iter:', 3]
+Displacement:  0.16999999999998128 170
+Step:  0 , convergence:  0.004922334489768805
+['convergence!, nre iter:', 3]
+Displacement:  0.17099999999998117 171
+Step:  0 , convergence:  0.004921580154741263
+['convergence!, nre iter:', 3]
+Displacement:  0.17199999999998106 172
+Step:  0 , convergence:  0.004920839162677437
+['convergence!, nre iter:', 3]
+Displacement:  0.17299999999998095 173
+Step:  0 , convergence:  0.004920111506484833
+['convergence!, nre iter:', 3]
+Displacement:  0.17399999999998084 174
+Step:  0 , convergence:  0.0049193971908732875
+['convergence!, nre iter:', 3]
+Displacement:  0.17499999999998073 175
+Step:  0 , convergence:  0.004918696233180812
+['convergence!, nre iter:', 3]
+Displacement:  0.17599999999998062 176
+Step:  0 , convergence:  0.004918008664352956
+['convergence!, nre iter:', 3]
+Displacement:  0.1769999999999805 177
+Step:  0 , convergence:  0.004917334530092035
+['convergence!, nre iter:', 3]
+Displacement:  0.1779999999999804 178
+Step:  0 , convergence:  0.004916673892189156
+['convergence!, nre iter:', 3]
+Displacement:  0.17899999999998029 179
+Step:  0 , convergence:  0.004916026830058441
+['convergence!, nre iter:', 3]
+Displacement:  0.17999999999998018 180
+Step:  0 , convergence:  0.004915393442496801
+['convergence!, nre iter:', 3]
+Displacement:  0.18099999999998007 181
+Step:  0 , convergence:  0.004914773849702419
+['convergence!, nre iter:', 3]
+Displacement:  0.18199999999997996 182
+Step:  0 , convergence:  0.004914168195580444
+['convergence!, nre iter:', 3]
+Displacement:  0.18299999999997985 183
+Step:  0 , convergence:  0.0049135766503859875
+['convergence!, nre iter:', 3]
+Displacement:  0.18399999999997974 184
+Step:  0 , convergence:  0.004912999413751381
+['convergence!, nre iter:', 3]
+Displacement:  0.18499999999997963 185
+Step:  0 , convergence:  0.0049124367181636415
+['convergence!, nre iter:', 3]
+Displacement:  0.18599999999997952 186
+Step:  0 , convergence:  0.004911888832966092
+['convergence!, nre iter:', 3]
+Displacement:  0.1869999999999794 187
+Step:  0 , convergence:  0.004911356068979921
+['convergence!, nre iter:', 3]
+Displacement:  0.1879999999999793 188
+Step:  0 , convergence:  0.004910838783853677
+['convergence!, nre iter:', 3]
+Displacement:  0.18899999999997918 189
+Step:  0 , convergence:  0.004910337388282645
+['convergence!, nre iter:', 3]
+Displacement:  0.18999999999997907 190
+Step:  0 , convergence:  0.004909852353263614
+['convergence!, nre iter:', 3]
+Displacement:  0.19099999999997896 191
+Step:  0 , convergence:  0.004909384218594986
+['convergence!, nre iter:', 3]
+Displacement:  0.19199999999997885 192
+Step:  0 , convergence:  0.004908933602878119
+['convergence!, nre iter:', 3]
+Displacement:  0.19299999999997874 193
+Step:  0 , convergence:  0.004908501215339843
+['convergence!, nre iter:', 3]
+Displacement:  0.19399999999997863 194
+Step:  0 , convergence:  0.004908087869880697
+['convergence!, nre iter:', 3]
+Displacement:  0.19499999999997852 195
+Step:  0 , convergence:  0.00490769450184984
+['convergence!, nre iter:', 3]
+Displacement:  0.1959999999999784 196
+Step:  0 , convergence:  0.004907322188192845
+['convergence!, nre iter:', 3]
+Displacement:  0.1969999999999783 197
+Step:  0 , convergence:  0.004906972171791247
+['convergence!, nre iter:', 3]
+Displacement:  0.1979999999999782 198
+Step:  0 , convergence:  0.0049066458910518
+['convergence!, nre iter:', 3]
+Displacement:  0.19899999999997808 199
+Step:  0 , convergence:  0.0049063450161201064
+['convergence!, nre iter:', 3]
+Displacement:  0.19999999999997797 200
+Step:  0 , convergence:  0.004906071493519921
+['convergence!, nre iter:', 3]
+Displacement:  0.20099999999997786 201
+Step:  0 , convergence:  0.004905827601602587
+['convergence!, nre iter:', 3]
+Displacement:  0.20199999999997775 202
+Step:  0 , convergence:  0.004905616019995655
+['convergence!, nre iter:', 3]
+Displacement:  0.20299999999997764 203
+Step:  0 , convergence:  0.004905439917361013
+['convergence!, nre iter:', 3]
+Displacement:  0.20399999999997753 204
+Step:  0 , convergence:  0.0049053030633648825
+['convergence!, nre iter:', 3]
+Displacement:  0.20499999999997742 205
+Step:  0 , convergence:  0.004905209973036635
+['convergence!, nre iter:', 3]
+Displacement:  0.2059999999999773 206
+Step:  0 , convergence:  0.004905166095018391
+['convergence!, nre iter:', 3]
+Displacement:  0.2069999999999772 207
+Step:  0 , convergence:  0.004905178060125694
+['convergence!, nre iter:', 3]
+Displacement:  0.2079999999999771 208
+Step:  0 , convergence:  0.004905254014065962
+['convergence!, nre iter:', 3]
+Displacement:  0.20899999999997698 209
+Step:  0 , convergence:  0.004905404069591695
+['convergence!, nre iter:', 3]
+Displacement:  0.20999999999997687 210
+Step:  0 , convergence:  0.004905640931359295
+['convergence!, nre iter:', 3]
+Displacement:  0.21099999999997676 211
+Step:  0 , convergence:  0.004905980775807721
+['convergence!, nre iter:', 3]
+Displacement:  0.21199999999997665 212
+Step:  0 , convergence:  0.0049064445165247226
+['convergence!, nre iter:', 3]
+Displacement:  0.21299999999997654 213
+Step:  0 , convergence:  0.0049070596679817915
+['convergence!, nre iter:', 3]
+Displacement:  0.21399999999997643 214
+Step:  0 , convergence:  0.004907863166550572
+['convergence!, nre iter:', 3]
+Displacement:  0.21499999999997632 215
+Step:  0 , convergence:  0.00490890577718475
+['convergence!, nre iter:', 3]
+Displacement:  0.2159999999999762 216
+Step:  0 , convergence:  0.0049102592350561075
+['convergence!, nre iter:', 3]
+Displacement:  0.2169999999999761 217
+Step:  0 , convergence:  0.004912028334989863
+['convergence!, nre iter:', 3]
+Displacement:  0.217999999999976 218
+Step:  0 , convergence:  0.004914372498771626
+['convergence!, nre iter:', 3]
+Displacement:  0.21899999999997588 219
+Step:  0 , convergence:  0.0049175468130987585
+['convergence!, nre iter:', 3]
+Displacement:  0.21999999999997577 220
+Step:  0 , convergence:  0.00492198673319079
+['convergence!, nre iter:', 3]
+Displacement:  0.22099999999997566 221
+Step:  0 , convergence:  0.004928502511377627
+['convergence!, nre iter:', 3]
+Displacement:  0.22199999999997555 222
+Step:  0 , convergence:  0.004938795469866758
+['convergence!, nre iter:', 3]
+Displacement:  0.22299999999997544 223
+Step:  0 , convergence:  0.004957157694225792
+['convergence!, nre iter:', 3]
+Displacement:  0.22399999999997533 224
+Step:  0 , convergence:  0.004998504783253278
+['convergence!, nre iter:', 4]
+Displacement:  0.22499999999997522 225
+Step:  0 , convergence:  0.005176436190041585
+Step:  25 , convergence:  0.0023707274474524284
+['convergence!, nre iter:', 46]
+Displacement:  0.2259999999999751 226
+Step:  0 , convergence:  0.004877742506449486
+['convergence!, nre iter:', 3]
+Displacement:  0.226999999999975 227
+Step:  0 , convergence:  0.004877481491436086
+['convergence!, nre iter:', 3]
+Displacement:  0.2279999999999749 228
+Step:  0 , convergence:  0.004877227645516437
+['convergence!, nre iter:', 3]
+Displacement:  0.22899999999997478 229
+Step:  0 , convergence:  0.004876980753793986
+['convergence!, nre iter:', 3]
+Displacement:  0.22999999999997467 230
+Step:  0 , convergence:  0.004876740621609225
+['convergence!, nre iter:', 3]
+Displacement:  0.23099999999997456 231
+Step:  0 , convergence:  0.004876507072608359
+['convergence!, nre iter:', 3]
+Displacement:  0.23199999999997445 232
+Step:  0 , convergence:  0.004876279947048772
+['convergence!, nre iter:', 3]
+Displacement:  0.23299999999997434 233
+Step:  0 , convergence:  0.004876059100304321
+['convergence!, nre iter:', 3]
+Displacement:  0.23399999999997423 234
+Step:  0 , convergence:  0.004875844401546676
+['convergence!, nre iter:', 3]
+Displacement:  0.23499999999997412 235
+Step:  0 , convergence:  0.0048756357325754
+['convergence!, nre iter:', 3]
+Displacement:  0.235999999999974 236
+Step:  0 , convergence:  0.00487543298677714
+['convergence!, nre iter:', 3]
+Displacement:  0.2369999999999739 237
+Step:  0 , convergence:  0.00487523606819956
+['convergence!, nre iter:', 3]
+Displacement:  0.2379999999999738 238
+Step:  0 , convergence:  0.004875044890719519
+['convergence!, nre iter:', 3]
+Displacement:  0.23899999999997368 239
+Step:  0 , convergence:  0.004874859377298299
+['convergence!, nre iter:', 3]
+Displacement:  0.23999999999997357 240
+Step:  0 , convergence:  0.004874679459308595
+['convergence!, nre iter:', 3]
+Displacement:  0.24099999999997346 241
+Step:  0 , convergence:  0.004874505075926225
+['convergence!, nre iter:', 3]
+Displacement:  0.24199999999997335 242
+Step:  0 , convergence:  0.004874336173576795
+['convergence!, nre iter:', 3]
+Displacement:  0.24299999999997324 243
+Step:  0 , convergence:  0.004874172705430304
+['convergence!, nre iter:', 3]
+Displacement:  0.24399999999997313 244
+Step:  0 , convergence:  0.00487401463093754
+['convergence!, nre iter:', 3]
+Displacement:  0.24499999999997302 245
+Step:  0 , convergence:  0.004873861915402008
+['convergence!, nre iter:', 3]
+Displacement:  0.2459999999999729 246
+Step:  0 , convergence:  0.004873714529584233
+['convergence!, nre iter:', 3]
+Displacement:  0.2469999999999728 247
+Step:  0 , convergence:  0.004873572449329855
+['convergence!, nre iter:', 3]
+Displacement:  0.2479999999999727 248
+Step:  0 , convergence:  0.004873435655223774
+['convergence!, nre iter:', 3]
+Displacement:  0.24899999999997258 249
+Step:  0 , convergence:  0.004873304132261492
+['convergence!, nre iter:', 3]
+Displacement:  0.24999999999997247 250
+Step:  0 , convergence:  0.0048731778695365
+['convergence!, nre iter:', 3]
+Displacement:  0.25099999999997236 251
+Step:  0 , convergence:  0.004873056859943657
+['convergence!, nre iter:', 3]
+Displacement:  0.25199999999997225 252
+Step:  0 , convergence:  0.004872941099890059
+['convergence!, nre iter:', 3]
+Displacement:  0.25299999999997214 253
+Step:  0 , convergence:  0.004872830589020215
+['convergence!, nre iter:', 3]
+Displacement:  0.253999999999972 254
+Step:  0 , convergence:  0.004872725329942635
+['convergence!, nre iter:', 3]
+Displacement:  0.2549999999999719 255
+Step:  0 , convergence:  0.004872625327967521
+['convergence!, nre iter:', 3]
+Displacement:  0.2559999999999718 256
+Step:  0 , convergence:  0.004872530590845869
+['convergence!, nre iter:', 3]
+Displacement:  0.2569999999999717 257
+Step:  0 , convergence:  0.004872441128512621
+['convergence!, nre iter:', 3]
+Displacement:  0.2579999999999716 258
+Step:  0 , convergence:  0.004872356952833184
+['convergence!, nre iter:', 3]
+Displacement:  0.2589999999999715 259
+Step:  0 , convergence:  0.004872278077350045
+['convergence!, nre iter:', 3]
+Displacement:  0.25999999999997137 260
+Step:  0 , convergence:  0.0048722045170312
+['convergence!, nre iter:', 3]
+Displacement:  0.26099999999997125 261
+Step:  0 , convergence:  0.004872136288019522
+['convergence!, nre iter:', 3]
+Displacement:  0.26199999999997114 262
+Step:  0 , convergence:  0.004872073407381259
+['convergence!, nre iter:', 3]
+Displacement:  0.26299999999997103 263
+Step:  0 , convergence:  0.004872015892855766
+['convergence!, nre iter:', 3]
+Displacement:  0.2639999999999709 264
+Step:  0 , convergence:  0.004871963762604862
+['convergence!, nre iter:', 3]
+Displacement:  0.2649999999999708 265
+Step:  0 , convergence:  0.004871917034962424
+['convergence!, nre iter:', 3]
+Displacement:  0.2659999999999707 266
+Step:  0 , convergence:  0.004871875728184084
+['convergence!, nre iter:', 3]
+Displacement:  0.2669999999999706 267
+Step:  0 , convergence:  0.004871839860198438
+['convergence!, nre iter:', 3]
+Displacement:  0.2679999999999705 268
+Step:  0 , convergence:  0.00487180944835919
+['convergence!, nre iter:', 3]
+Displacement:  0.2689999999999704 269
+Step:  0 , convergence:  0.00487178450919831
+['convergence!, nre iter:', 3]
+Displacement:  0.26999999999997026 270
+Step:  0 , convergence:  0.004871765058183443
+['convergence!, nre iter:', 3]
+Displacement:  0.27099999999997015 271
+Step:  0 , convergence:  0.004871751109475978
+['convergence!, nre iter:', 3]
+Displacement:  0.27199999999997004 272
+Step:  0 , convergence:  0.004871742675695392
+['convergence!, nre iter:', 3]
+Displacement:  0.27299999999996993 273
+Step:  0 , convergence:  0.004871739767686394
+['convergence!, nre iter:', 3]
+Displacement:  0.2739999999999698 274
+Step:  0 , convergence:  0.004871742394293299
+['convergence!, nre iter:', 3]
+Displacement:  0.2749999999999697 275
+Step:  0 , convergence:  0.004871750562139162
+['convergence!, nre iter:', 3]
+Displacement:  0.2759999999999696 276
+Step:  0 , convergence:  0.004871764275414626
+['convergence!, nre iter:', 3]
+Displacement:  0.2769999999999695 277
+Step:  0 , convergence:  0.004871783535672413
+['convergence!, nre iter:', 3]
+Displacement:  0.2779999999999694 278
+Step:  0 , convergence:  0.004871808341633471
+['convergence!, nre iter:', 3]
+Displacement:  0.2789999999999693 279
+Step:  0 , convergence:  0.0048718386890029275
+['convergence!, nre iter:', 3]
+Displacement:  0.27999999999996916 280
+Step:  0 , convergence:  0.00487187457029592
+['convergence!, nre iter:', 3]
+Displacement:  0.28099999999996905 281
+Step:  0 , convergence:  0.0048719159746776815
+['convergence!, nre iter:', 3]
+Displacement:  0.28199999999996894 282
+Step:  0 , convergence:  0.004871962887814861
+['convergence!, nre iter:', 3]
+Displacement:  0.28299999999996883 283
+Step:  0 , convergence:  0.004872015291742397
+['convergence!, nre iter:', 3]
+Displacement:  0.2839999999999687 284
+Step:  0 , convergence:  0.004872073164743384
+['convergence!, nre iter:', 3]
+Displacement:  0.2849999999999686 285
+Step:  0 , convergence:  0.004872136481245685
+['convergence!, nre iter:', 3]
+Displacement:  0.2859999999999685 286
+Step:  0 , convergence:  0.004872205211733671
+['convergence!, nre iter:', 3]
+Displacement:  0.2869999999999684 287
+Step:  0 , convergence:  0.004872279322677548
+['convergence!, nre iter:', 3]
+Displacement:  0.2879999999999683 288
+Step:  0 , convergence:  0.004872358776479116
+['convergence!, nre iter:', 3]
+Displacement:  0.28899999999996817 289
+Step:  0 , convergence:  0.0048724435314348525
+['convergence!, nre iter:', 3]
+Displacement:  0.28999999999996806 290
+Step:  0 , convergence:  0.004872533541717954
+['convergence!, nre iter:', 3]
+Displacement:  0.29099999999996795 291
+Step:  0 , convergence:  0.004872628757377304
+['convergence!, nre iter:', 3]
+Displacement:  0.29199999999996784 292
+Step:  0 , convergence:  0.004872729124355133
+['convergence!, nre iter:', 3]
+Displacement:  0.29299999999996773 293
+Step:  0 , convergence:  0.004872834584522836
+['convergence!, nre iter:', 3]
+Displacement:  0.2939999999999676 294
+Step:  0 , convergence:  0.0048729450757348065
+['convergence!, nre iter:', 3]
+Displacement:  0.2949999999999675 295
+Step:  0 , convergence:  0.0048730605318991795
+['convergence!, nre iter:', 3]
+Displacement:  0.2959999999999674 296
+Step:  0 , convergence:  0.004873180883066625
+['convergence!, nre iter:', 3]
+Displacement:  0.2969999999999673 297
+Step:  0 , convergence:  0.004873306055535861
+['convergence!, nre iter:', 3]
+Displacement:  0.2979999999999672 298
+Step:  0 , convergence:  0.004873435971973933
+['convergence!, nre iter:', 3]
+Displacement:  0.29899999999996707 299
+Step:  0 , convergence:  0.004873570551552217
+['convergence!, nre iter:', 3]
+Displacement:  0.29999999999996696 300
+Step:  0 , convergence:  0.004873709710096503
+['convergence!, nre iter:', 3]
+Displacement:  0.30099999999996685 301
+Step:  0 , convergence:  0.004873853360248542
+['convergence!, nre iter:', 3]
+Displacement:  0.30199999999996674 302
+Step:  0 , convergence:  0.00487400141163991
+['convergence!, nre iter:', 3]
+Displacement:  0.30299999999996663 303
+Step:  0 , convergence:  0.0048741537710740935
+['convergence!, nre iter:', 3]
+Displacement:  0.3039999999999665 304
+Step:  0 , convergence:  0.004874310342716746
+['convergence!, nre iter:', 3]
+Displacement:  0.3049999999999664 305
+Step:  0 , convergence:  0.004874471028291487
+['convergence!, nre iter:', 3]
+Displacement:  0.3059999999999663 306
+Step:  0 , convergence:  0.004874635727278824
+['convergence!, nre iter:', 3]
+Displacement:  0.3069999999999662 307
+Step:  0 , convergence:  0.004874804337114951
+['convergence!, nre iter:', 3]
+Displacement:  0.3079999999999661 308
+Step:  0 , convergence:  0.004874976753390567
+['convergence!, nre iter:', 3]
+Displacement:  0.30899999999996597 309
+Step:  0 , convergence:  0.004875152870042303
+['convergence!, nre iter:', 3]
+Displacement:  0.30999999999996586 310
+Step:  0 , convergence:  0.004875332579538226
+['convergence!, nre iter:', 3]
+Displacement:  0.31099999999996575 311
+Step:  0 , convergence:  0.004875515773051526
+['convergence!, nre iter:', 3]
+Displacement:  0.31199999999996564 312
+Step:  0 , convergence:  0.004875702340617906
+['convergence!, nre iter:', 3]
+Displacement:  0.31299999999996553 313
+Step:  0 , convergence:  0.004875892171275828
+['convergence!, nre iter:', 3]
+Displacement:  0.3139999999999654 314
+Step:  0 , convergence:  0.004876085153183373
+['convergence!, nre iter:', 3]
+Displacement:  0.3149999999999653 315
+Step:  0 , convergence:  0.004876281173706596
+['convergence!, nre iter:', 3]
+Displacement:  0.3159999999999652 316
+Step:  0 , convergence:  0.0048764801194773845
+['convergence!, nre iter:', 3]
+Displacement:  0.3169999999999651 317
+Step:  0 , convergence:  0.004876681876412684
+['convergence!, nre iter:', 3]
+Displacement:  0.317999999999965 318
+Step:  0 , convergence:  0.004876886329691809
+['convergence!, nre iter:', 3]
+Displacement:  0.31899999999996487 319
+Step:  0 , convergence:  0.004877093363684955
+['convergence!, nre iter:', 3]
+Displacement:  0.31999999999996476 320
+Step:  0 , convergence:  0.004877302861827089
+['convergence!, nre iter:', 3]
+Displacement:  0.32099999999996465 321
+Step:  0 , convergence:  0.0048775147064303295
+['convergence!, nre iter:', 3]
+Displacement:  0.32199999999996454 322
+Step:  0 , convergence:  0.004877728778425749
+['convergence!, nre iter:', 3]
+Displacement:  0.3229999999999644 323
+Step:  0 , convergence:  0.004877944957031444
+['convergence!, nre iter:', 3]
+Displacement:  0.3239999999999643 324
+Step:  0 , convergence:  0.004878163119331539
+['convergence!, nre iter:', 3]
+Displacement:  0.3249999999999642 325
+Step:  0 , convergence:  0.004878383139764042
+['convergence!, nre iter:', 3]
+Displacement:  0.3259999999999641 326
+Step:  0 , convergence:  0.004878604889500869
+['convergence!, nre iter:', 3]
+Displacement:  0.326999999999964 327
+Step:  0 , convergence:  0.0048788282357156675
+['convergence!, nre iter:', 3]
+Displacement:  0.3279999999999639 328
+Step:  0 , convergence:  0.004879053040721719
+['convergence!, nre iter:', 3]
+Displacement:  0.32899999999996377 329
+Step:  0 , convergence:  0.0048792791609740685
+['convergence!, nre iter:', 3]
+Displacement:  0.32999999999996366 330
+Step:  0 , convergence:  0.004879506445918236
+['convergence!, nre iter:', 3]
+Displacement:  0.33099999999996355 331
+Step:  0 , convergence:  0.004879734736673186
+['convergence!, nre iter:', 3]
+Displacement:  0.33199999999996344 332
+Step:  0 , convergence:  0.004879963864536111
+['convergence!, nre iter:', 3]
+Displacement:  0.3329999999999633 333
+Step:  0 , convergence:  0.004880193649292583
+['convergence!, nre iter:', 3]
+Displacement:  0.3339999999999632 334
+Step:  0 , convergence:  0.004880423897319762
+['convergence!, nre iter:', 3]
+Displacement:  0.3349999999999631 335
+Step:  0 , convergence:  0.004880654399467494
+['convergence!, nre iter:', 3]
+Displacement:  0.335999999999963 336
+Step:  0 , convergence:  0.004880884928705014
+['convergence!, nre iter:', 3]
+Displacement:  0.3369999999999629 337
+Step:  0 , convergence:  0.004881115237523711
+['convergence!, nre iter:', 3]
+Displacement:  0.3379999999999628 338
+Step:  0 , convergence:  0.004881345055086085
+['convergence!, nre iter:', 3]
+Displacement:  0.33899999999996266 339
+Step:  0 , convergence:  0.004881574084118759
+['convergence!, nre iter:', 3]
+Displacement:  0.33999999999996255 340
+Step:  0 , convergence:  0.004881801997552138
+['convergence!, nre iter:', 3]
+Displacement:  0.34099999999996244 341
+Step:  0 , convergence:  0.004882028434915218
+['convergence!, nre iter:', 3]
+Displacement:  0.34199999999996233 342
+Step:  0 , convergence:  0.004882252998506388
+['convergence!, nre iter:', 3]
+Displacement:  0.3429999999999622 343
+Step:  0 , convergence:  0.0048824752493753405
+['convergence!, nre iter:', 3]
+Displacement:  0.3439999999999621 344
+Step:  0 , convergence:  0.004882694703164453
+['convergence!, nre iter:', 3]
+Displacement:  0.344999999999962 345
+Step:  0 , convergence:  0.0048829108258789744
+['convergence!, nre iter:', 3]
+Displacement:  0.3459999999999619 346
+Step:  0 , convergence:  0.004883123029683912
+['convergence!, nre iter:', 2]
+Displacement:  0.3469999999999618 347
+Step:  0 , convergence:  0.0048833306688495165
+['convergence!, nre iter:', 2]
+Displacement:  0.3479999999999617 348
+Step:  0 , convergence:  0.004883533036003562
+['convergence!, nre iter:', 2]
+Displacement:  0.34899999999996156 349
+Step:  0 , convergence:  0.004883729358886432
+['convergence!, nre iter:', 2]
+Displacement:  0.34999999999996145 350
+Step:  0 , convergence:  0.004883918797846217
+['convergence!, nre iter:', 2]
+Displacement:  0.35099999999996134 351
+Step:  0 , convergence:  0.004884100444356958
+['convergence!, nre iter:', 2]
+Displacement:  0.35199999999996123 352
+Step:  0 , convergence:  0.004884273320884543
+['convergence!, nre iter:', 2]
+Displacement:  0.3529999999999611 353
+Step:  0 , convergence:  0.004884436382467736
+['convergence!, nre iter:', 2]
+Displacement:  0.353999999999961 354
+Step:  0 , convergence:  0.004884588520415134
+['convergence!, nre iter:', 2]
+Displacement:  0.3549999999999609 355
+Step:  0 , convergence:  0.004884728568539195
+['convergence!, nre iter:', 2]
+Displacement:  0.3559999999999608 356
+Step:  0 , convergence:  0.004884855312345586
+['convergence!, nre iter:', 2]
+Displacement:  0.3569999999999607 357
+Step:  0 , convergence:  0.0048849675015753165
+['convergence!, nre iter:', 2]
+Displacement:  0.35799999999996057 358
+Step:  0 , convergence:  0.0048850638664194495
+['convergence!, nre iter:', 2]
+Displacement:  0.35899999999996046 359
+Step:  0 , convergence:  0.0048851431376300495
+['convergence!, nre iter:', 2]
+Displacement:  0.35999999999996035 360
+Step:  0 , convergence:  0.004885204070578465
+['convergence!, nre iter:', 2]
+Displacement:  0.36099999999996024 361
+Step:  0 , convergence:  0.0048852454731001796
+['convergence!, nre iter:', 2]
+Displacement:  0.36199999999996013 362
+Step:  0 , convergence:  0.004885266236698557
+['convergence!, nre iter:', 2]
+Displacement:  0.36299999999996 363
+Step:  0 , convergence:  0.004885265370364476
+['convergence!, nre iter:', 2]
+Displacement:  0.3639999999999599 364
+Step:  0 , convergence:  0.004885242035931436
+['convergence!, nre iter:', 2]
+Displacement:  0.3649999999999598 365
+Step:  0 , convergence:  0.004885195583559624
+['convergence!, nre iter:', 2]
+Displacement:  0.3659999999999597 366
+Step:  0 , convergence:  0.004885125585632501
+['convergence!, nre iter:', 2]
+Displacement:  0.3669999999999596 367
+Step:  0 , convergence:  0.004885031867146372
+['convergence!, nre iter:', 2]
+Displacement:  0.36799999999995947 368
+Step:  0 , convergence:  0.004884914530574669
+['convergence!, nre iter:', 2]
+Displacement:  0.36899999999995936 369
+Step:  0 , convergence:  0.004884773973253137
+['convergence!, nre iter:', 2]
+Displacement:  0.36999999999995925 370
+Step:  0 , convergence:  0.0048846108955924285
+['convergence!, nre iter:', 2]
+Displacement:  0.37099999999995914 371
+Step:  0 , convergence:  0.004884426298849947
+['convergence!, nre iter:', 2]
+Displacement:  0.37199999999995903 372
+Step:  0 , convergence:  0.004884221471810744
+['convergence!, nre iter:', 2]
+Displacement:  0.3729999999999589 373
+Step:  0 , convergence:  0.004883997966438596
+['convergence!, nre iter:', 2]
+Displacement:  0.3739999999999588 374
+Step:  0 , convergence:  0.004883757563336076
+['convergence!, nre iter:', 2]
+Displacement:  0.3749999999999587 375
+Step:  0 , convergence:  0.004883502228584235
+['convergence!, nre iter:', 2]
+Displacement:  0.3759999999999586 376
+Step:  0 , convergence:  0.004883234064154069
+['convergence!, nre iter:', 2]
+Displacement:  0.3769999999999585 377
+Step:  0 , convergence:  0.004882955254508969
+['convergence!, nre iter:', 2]
+Displacement:  0.37799999999995837 378
+Step:  0 , convergence:  0.004882668012209351
+['convergence!, nre iter:', 2]
+Displacement:  0.37899999999995826 379
+Step:  0 , convergence:  0.004882374525280897
+['convergence!, nre iter:', 2]
+Displacement:  0.37999999999995815 380
+Step:  0 , convergence:  0.004882076908814835
+['convergence!, nre iter:', 2]
+Displacement:  0.38099999999995804 381
+Step:  0 , convergence:  0.004881777162802907
+['convergence!, nre iter:', 2]
+Displacement:  0.38199999999995793 382
+Step:  0 , convergence:  0.0048814771376192835
+['convergence!, nre iter:', 2]
+Displacement:  0.3829999999999578 383
+Step:  0 , convergence:  0.004881178507926354
+['convergence!, nre iter:', 2]
+Displacement:  0.3839999999999577 384
+Step:  0 , convergence:  0.004880882755176199
+['convergence!, nre iter:', 2]
+Displacement:  0.3849999999999576 385
+Step:  0 , convergence:  0.0048805911583365055
+['convergence!, nre iter:', 2]
+Displacement:  0.3859999999999575 386
+Step:  0 , convergence:  0.004880304792062025
+['convergence!, nre iter:', 2]
+Displacement:  0.3869999999999574 387
+Step:  0 , convergence:  0.004880024531235976
+['convergence!, nre iter:', 2]
+Displacement:  0.38799999999995727 388
+Step:  0 , convergence:  0.004879751060651477
+['convergence!, nre iter:', 2]
+Displacement:  0.38899999999995716 389
+Step:  0 , convergence:  0.004879484888564915
+['convergence!, nre iter:', 2]
+Displacement:  0.38999999999995705 390
+Step:  0 , convergence:  0.004879226362896173
+['convergence!, nre iter:', 2]
+Displacement:  0.39099999999995694 391
+Step:  0 , convergence:  0.004878975688977833
+['convergence!, nre iter:', 2]
+Displacement:  0.3919999999999568 392
+Step:  0 , convergence:  0.004878732947910628
+['convergence!, nre iter:', 2]
+Displacement:  0.3929999999999567 393
+Step:  0 , convergence:  0.004878498114759699
+['convergence!, nre iter:', 2]
+Displacement:  0.3939999999999566 394
+Step:  0 , convergence:  0.00487827107600948
+['convergence!, nre iter:', 2]
+Displacement:  0.3949999999999565 395
+Step:  0 , convergence:  0.004878051645858426
+['convergence!, nre iter:', 2]
+Displacement:  0.3959999999999564 396
+Step:  0 , convergence:  0.004877839581084553
+['convergence!, nre iter:', 2]
+Displacement:  0.3969999999999563 397
+Step:  0 , convergence:  0.004877634594332071
+['convergence!, nre iter:', 2]
+Displacement:  0.39799999999995617 398
+Step:  0 , convergence:  0.00487743636577299
+['convergence!, nre iter:', 2]
+Displacement:  0.39899999999995606 399
+Step:  0 , convergence:  0.004877244553164169
+['convergence!, nre iter:', 2]
+Displacement:  0.39999999999995595 400
+Step:  0 , convergence:  0.004877058800381765
+['convergence!, nre iter:', 2]
+Displacement:  0.40099999999995584 401
+Step:  0 , convergence:  0.004876878744540807
+['convergence!, nre iter:', 2]
+Displacement:  0.4019999999999557 402
+Step:  0 , convergence:  0.004876704021837112
+['convergence!, nre iter:', 2]
+Displacement:  0.4029999999999556 403
+Step:  0 , convergence:  0.004876534272251093
+['convergence!, nre iter:', 2]
+Displacement:  0.4039999999999555 404
+Step:  0 , convergence:  0.004876369143256179
+['convergence!, nre iter:', 2]
+Displacement:  0.4049999999999554 405
+Step:  0 , convergence:  0.004876208292671106
+['convergence!, nre iter:', 2]
+Displacement:  0.4059999999999553 406
+Step:  0 , convergence:  0.0048760513907832115
+['convergence!, nre iter:', 2]
+Displacement:  0.4069999999999552 407
+Step:  0 , convergence:  0.004875898121860515
+['convergence!, nre iter:', 2]
+Displacement:  0.40799999999995507 408
+Step:  0 , convergence:  0.00487574818515989
+['convergence!, nre iter:', 2]
+Displacement:  0.40899999999995496 409
+Step:  0 , convergence:  0.004875601295519332
+['convergence!, nre iter:', 2]
+Displacement:  0.40999999999995485 410
+Step:  0 , convergence:  0.004875457183618323
+['convergence!, nre iter:', 2]
+Displacement:  0.41099999999995473 411
+Step:  0 , convergence:  0.004875315595974402
+['convergence!, nre iter:', 2]
+Displacement:  0.4119999999999546 412
+Step:  0 , convergence:  0.0048751762947328026
+['convergence!, nre iter:', 2]
+Displacement:  0.4129999999999545 413
+Step:  0 , convergence:  0.0048750390572987355
+['convergence!, nre iter:', 2]
+Displacement:  0.4139999999999544 414
+Step:  0 , convergence:  0.0048749036758532404
+['convergence!, nre iter:', 2]
+Displacement:  0.4149999999999543 415
+Step:  0 , convergence:  0.0048747699567863205
+['convergence!, nre iter:', 2]
+Displacement:  0.4159999999999542 416
+Step:  0 , convergence:  0.00487463772007208
+['convergence!, nre iter:', 2]
+Displacement:  0.4169999999999541 417
+Step:  0 , convergence:  0.004874506798610216
+['convergence!, nre iter:', 2]
+Displacement:  0.41799999999995396 418
+Step:  0 , convergence:  0.0048743770375503735
+['convergence!, nre iter:', 2]
+Displacement:  0.41899999999995385 419
+Step:  0 , convergence:  0.00487424829361143
+['convergence!, nre iter:', 2]
+Displacement:  0.41999999999995374 420
+Step:  0 , convergence:  0.004874120434408759
+['convergence!, nre iter:', 2]
+Displacement:  0.42099999999995363 421
+Step:  0 , convergence:  0.00487399333779495
+['convergence!, nre iter:', 2]
+Displacement:  0.4219999999999535 422
+Step:  0 , convergence:  0.004873866891221887
+['convergence!, nre iter:', 2]
+Displacement:  0.4229999999999534 423
+Step:  0 , convergence:  0.004873740991125786
+['convergence!, nre iter:', 2]
+Displacement:  0.4239999999999533 424
+Step:  0 , convergence:  0.004873615542341776
+['convergence!, nre iter:', 2]
+Displacement:  0.4249999999999532 425
+Step:  0 , convergence:  0.00487349045754456
+['convergence!, nre iter:', 2]
+Displacement:  0.4259999999999531 426
+Step:  0 , convergence:  0.004873365656722084
+['convergence!, nre iter:', 2]
+Displacement:  0.426999999999953 427
+Step:  0 , convergence:  0.004873241066676154
+['convergence!, nre iter:', 2]
+Displacement:  0.42799999999995286 428
+Step:  0 , convergence:  0.004873116620555458
+['convergence!, nre iter:', 2]
+Displacement:  0.42899999999995275 429
+Step:  0 , convergence:  0.004872992257416188
+['convergence!, nre iter:', 2]
+Displacement:  0.42999999999995264 430
+Step:  0 , convergence:  0.004872867921811413
+['convergence!, nre iter:', 2]
+Displacement:  0.43099999999995253 431
+Step:  0 , convergence:  0.004872743563407382
+['convergence!, nre iter:', 2]
+Displacement:  0.4319999999999524 432
+Step:  0 , convergence:  0.0048726191366251816
+['convergence!, nre iter:', 2]
+Displacement:  0.4329999999999523 433
+Step:  0 , convergence:  0.004872494600308072
+['convergence!, nre iter:', 2]
+Displacement:  0.4339999999999522 434
+Step:  0 , convergence:  0.004872369917410914
+['convergence!, nre iter:', 2]
+Displacement:  0.4349999999999521 435
+Step:  0 , convergence:  0.004872245054711363
+['convergence!, nre iter:', 2]
+Displacement:  0.435999999999952 436
+Step:  0 , convergence:  0.004872119982541895
+['convergence!, nre iter:', 2]
+Displacement:  0.43699999999995187 437
+Step:  0 , convergence:  0.004871994674540693
+['convergence!, nre iter:', 2]
+Displacement:  0.43799999999995176 438
+Step:  0 , convergence:  0.004871869107419617
+['convergence!, nre iter:', 2]
+Displacement:  0.43899999999995165 439
+Step:  0 , convergence:  0.004871743260750733
+['convergence!, nre iter:', 2]
+Displacement:  0.43999999999995154 440
+Step:  0 , convergence:  0.0048716171167648556
+['convergence!, nre iter:', 2]
+Displacement:  0.44099999999995143 441
+Step:  0 , convergence:  0.004871490660167727
+['convergence!, nre iter:', 2]
+Displacement:  0.4419999999999513 442
+Step:  0 , convergence:  0.004871363877966842
+['convergence!, nre iter:', 2]
+Displacement:  0.4429999999999512 443
+Step:  0 , convergence:  0.004871236759312517
+['convergence!, nre iter:', 2]
+Displacement:  0.4439999999999511 444
+Step:  0 , convergence:  0.004871109295347914
+['convergence!, nre iter:', 2]
+Displacement:  0.444999999999951 445
+Step:  0 , convergence:  0.004870981479072076
+['convergence!, nre iter:', 2]
+Displacement:  0.4459999999999509 446
+Step:  0 , convergence:  0.004870853305210405
+['convergence!, nre iter:', 2]
+Displacement:  0.44699999999995077 447
+Step:  0 , convergence:  0.004870724770095464
+['convergence!, nre iter:', 2]
+Displacement:  0.44799999999995066 448
+Step:  0 , convergence:  0.004870595871555182
+['convergence!, nre iter:', 2]
+Displacement:  0.44899999999995055 449
+Step:  0 , convergence:  0.004870466608809377
+['convergence!, nre iter:', 2]
+Displacement:  0.44999999999995044 450
+Step:  0 , convergence:  0.004870336982372185
+['convergence!, nre iter:', 2]
+Displacement:  0.45099999999995033 451
+Step:  0 , convergence:  0.004870206993962133
+['convergence!, nre iter:', 2]
+Displacement:  0.4519999999999502 452
+Step:  0 , convergence:  0.004870076646417131
+['convergence!, nre iter:', 2]
+Displacement:  0.4529999999999501 453
+Step:  0 , convergence:  0.004869945943616152
+['convergence!, nre iter:', 2]
+Displacement:  0.45399999999995 454
+Step:  0 , convergence:  0.00486981489040452
+['convergence!, nre iter:', 2]
+Displacement:  0.4549999999999499 455
+Step:  0 , convergence:  0.0048696834925254255
+['convergence!, nre iter:', 2]
+Displacement:  0.4559999999999498 456
+Step:  0 , convergence:  0.004869551756554359
+['convergence!, nre iter:', 2]
+Displacement:  0.45699999999994967 457
+Step:  0 , convergence:  0.004869419689838335
+['convergence!, nre iter:', 2]
+Displacement:  0.45799999999994956 458
+Step:  0 , convergence:  0.004869287300439799
+['convergence!, nre iter:', 2]
+Displacement:  0.45899999999994945 459
+Step:  0 , convergence:  0.004869154597080654
+['convergence!, nre iter:', 2]
+Displacement:  0.45999999999994934 460
+Step:  0 , convergence:  0.004869021589094502
+['convergence!, nre iter:', 2]
+Displacement:  0.46099999999994923 461
+Step:  0 , convergence:  0.0048688882863764955
+['convergence!, nre iter:', 2]
+Displacement:  0.4619999999999491 462
+Step:  0 , convergence:  0.004868754699340673
+['convergence!, nre iter:', 2]
+Displacement:  0.462999999999949 463
+Step:  0 , convergence:  0.004868620838875932
+['convergence!, nre iter:', 2]
+Displacement:  0.4639999999999489 464
+Step:  0 , convergence:  0.004868486716307195
+['convergence!, nre iter:', 2]
+Displacement:  0.4649999999999488 465
+Step:  0 , convergence:  0.004868352343357728
+['convergence!, nre iter:', 2]
+Displacement:  0.4659999999999487 466
+Step:  0 , convergence:  0.004868217732112841
+['convergence!, nre iter:', 2]
+Displacement:  0.46699999999994857 467
+Step:  0 , convergence:  0.00486808289498693
+['convergence!, nre iter:', 2]
+Displacement:  0.46799999999994846 468
+Step:  0 , convergence:  0.004867947844691379
+['convergence!, nre iter:', 2]
+Displacement:  0.46899999999994835 469
+Step:  0 , convergence:  0.004867812594204087
+['convergence!, nre iter:', 2]
+Displacement:  0.46999999999994824 470
+Step:  0 , convergence:  0.004867677156741703
+['convergence!, nre iter:', 2]
+Displacement:  0.4709999999999481 471
+Step:  0 , convergence:  0.004867541545731747
+['convergence!, nre iter:', 2]
+Displacement:  0.471999999999948 472
+Step:  0 , convergence:  0.004867405774787417
+['convergence!, nre iter:', 2]
+Displacement:  0.4729999999999479 473
+Step:  0 , convergence:  0.004867269857682572
+['convergence!, nre iter:', 2]
+Displacement:  0.4739999999999478 474
+Step:  0 , convergence:  0.004867133808330296
+['convergence!, nre iter:', 2]
+Displacement:  0.4749999999999477 475
+Step:  0 , convergence:  0.004866997640758709
+['convergence!, nre iter:', 2]
+Displacement:  0.4759999999999476 476
+Step:  0 , convergence:  0.004866861369092543
+['convergence!, nre iter:', 2]
+Displacement:  0.47699999999994747 477
+Step:  0 , convergence:  0.004866725007531555
+['convergence!, nre iter:', 2]
+Displacement:  0.47799999999994736 478
+Step:  0 , convergence:  0.0048665885703326256
+['convergence!, nre iter:', 2]
+Displacement:  0.47899999999994725 479
+Step:  0 , convergence:  0.004866452071792311
+['convergence!, nre iter:', 2]
+Displacement:  0.47999999999994714 480
+Step:  0 , convergence:  0.004866315526229521
+['convergence!, nre iter:', 2]
+Displacement:  0.480999999999947 481
+Step:  0 , convergence:  0.004866178947970269
+['convergence!, nre iter:', 2]
+Displacement:  0.4819999999999469 482
+Step:  0 , convergence:  0.004866042351331404
+['convergence!, nre iter:', 2]
+Displacement:  0.4829999999999468 483
+Step:  0 , convergence:  0.004865905750607801
+['convergence!, nre iter:', 2]
+Displacement:  0.4839999999999467 484
+Step:  0 , convergence:  0.004865769160057508
+['convergence!, nre iter:', 2]
+Displacement:  0.4849999999999466 485
+Step:  0 , convergence:  0.00486563259388962
+['convergence!, nre iter:', 2]
+Displacement:  0.4859999999999465 486
+Step:  0 , convergence:  0.004865496066252591
+['convergence!, nre iter:', 2]
+Displacement:  0.48699999999994636 487
+Step:  0 , convergence:  0.004865359591221847
+['convergence!, nre iter:', 2]
+Displacement:  0.48799999999994625 488
+Step:  0 , convergence:  0.0048652231827897505
+['convergence!, nre iter:', 2]
+Displacement:  0.48899999999994614 489
+Step:  0 , convergence:  0.004865086854855434
+['convergence!, nre iter:', 2]
+Displacement:  0.48999999999994603 490
+Step:  0 , convergence:  0.004864950621214994
+['convergence!, nre iter:', 2]
+Displacement:  0.4909999999999459 491
+Step:  0 , convergence:  0.004864814495552782
+['convergence!, nre iter:', 2]
+Displacement:  0.4919999999999458 492
+Step:  0 , convergence:  0.0048646784914328665
+['convergence!, nre iter:', 2]
+Displacement:  0.4929999999999457 493
+Step:  0 , convergence:  0.0048645426222915225
+['convergence!, nre iter:', 2]
+Displacement:  0.4939999999999456 494
+Step:  0 , convergence:  0.004864406901429328
+['convergence!, nre iter:', 2]
+Displacement:  0.4949999999999455 495
+Step:  0 , convergence:  0.004864271342005008
+['convergence!, nre iter:', 2]
+Displacement:  0.4959999999999454 496
+Step:  0 , convergence:  0.004864135957028757
+['convergence!, nre iter:', 2]
+Displacement:  0.49699999999994526 497
+Step:  0 , convergence:  0.004864000759356823
+['convergence!, nre iter:', 2]
+Displacement:  0.49799999999994515 498
+Step:  0 , convergence:  0.004863865761684879
+['convergence!, nre iter:', 2]
+Displacement:  0.49899999999994504 499
+Step:  0 , convergence:  0.0048637309765450516
+['convergence!, nre iter:', 2]
+Displacement:  0.49999999999994493 500
+Step:  0 , convergence:  0.004863596416299371
+['convergence!, nre iter:', 2]
+number of boundary_nodes:  9 9
+hyperstatic number:  3
+number of boundary_nodes:  9 9
+min_distance:  0.053100000000000036
+Displacement:  0.0 0
+Step:  0 , convergence:  0.13718462642368975
+['convergence!, nre iter:', 10]
+Displacement:  0.010000000000000009 1
+Step:  0 , convergence:  0.0765626395076013
+['convergence!, nre iter:', 7]
+Displacement:  0.020000000000000018 2
+Step:  0 , convergence:  0.0682150333828985
+['convergence!, nre iter:', 5]
+Displacement:  0.030000000000000027 3
+Step:  0 , convergence:  0.06139689958513623
+['convergence!, nre iter:', 4]
+Displacement:  0.040000000000000036 4
+Step:  0 , convergence:  0.058151896218527004
+['convergence!, nre iter:', 4]
+Displacement:  0.050000000000000044 5
+Step:  0 , convergence:  0.0567882177820102
+['convergence!, nre iter:', 4]
+Displacement:  0.06000000000000005 6
+Step:  0 , convergence:  0.055672136889482166
+['convergence!, nre iter:', 4]
+Displacement:  0.07000000000000006 7
+Step:  0 , convergence:  0.05470311539288536
+['convergence!, nre iter:', 4]
+Displacement:  0.08000000000000007 8
+Step:  0 , convergence:  0.053915449981480346
+['convergence!, nre iter:', 3]
+Displacement:  0.09000000000000008 9
+Step:  0 , convergence:  0.05328377706654042
+['convergence!, nre iter:', 3]
+Displacement:  0.10000000000000009 10
+Step:  0 , convergence:  0.05276603580576109
+['convergence!, nre iter:', 3]
+Displacement:  0.1100000000000001 11
+Step:  0 , convergence:  0.052329371771972215
+['convergence!, nre iter:', 3]
+Displacement:  0.1200000000000001 12
+Step:  0 , convergence:  0.05195116698794857
+['convergence!, nre iter:', 3]
+Displacement:  0.13000000000000012 13
+Step:  0 , convergence:  0.05161651257322963
+['convergence!, nre iter:', 3]
+Displacement:  0.14000000000000012 14
+Step:  0 , convergence:  0.051315934757789596
+['convergence!, nre iter:', 3]
+Displacement:  0.15000000000000013 15
+Step:  0 , convergence:  0.051043775265068175
+['convergence!, nre iter:', 3]
+Displacement:  0.16000000000000014 16
+Step:  0 , convergence:  0.05079710940455026
+['convergence!, nre iter:', 3]
+Displacement:  0.17000000000000015 17
+Step:  0 , convergence:  0.05057522512697964
+['convergence!, nre iter:', 3]
+Displacement:  0.18000000000000016 18
+Step:  0 , convergence:  0.05038054131400153
+['convergence!, nre iter:', 4]
+Displacement:  0.19000000000000017 19
+Step:  0 , convergence:  0.050227449598911796
+['convergence!, nre iter:', 4]
+Displacement:  0.20000000000000018 20
+Step:  0 , convergence:  0.05031249925072305
+Step:  25 , convergence:  0.011251111246534926
+Step:  50 , convergence:  0.00595074584293945
+['convergence!, nre iter:', 74]
+Displacement:  0.2100000000000002 21
+Step:  0 , convergence:  0.049594457723357854
+['convergence!, nre iter:', 3]
+Displacement:  0.2200000000000002 22
+Step:  0 , convergence:  0.04948619360050321
+['convergence!, nre iter:', 3]
+Displacement:  0.2300000000000002 23
+Step:  0 , convergence:  0.04939299573116924
+['convergence!, nre iter:', 3]
+Displacement:  0.2400000000000002 24
+Step:  0 , convergence:  0.04931459052899811
+['convergence!, nre iter:', 4]
+Displacement:  0.2500000000000002 25
+Step:  0 , convergence:  0.049251137936488665
+['convergence!, nre iter:', 4]
+Displacement:  0.26000000000000023 26
+Step:  0 , convergence:  0.04920324772770646
+['convergence!, nre iter:', 4]
+Displacement:  0.27000000000000024 27
+Step:  0 , convergence:  0.0491716664275734
+['convergence!, nre iter:', 4]
+Displacement:  0.28000000000000025 28
+Step:  0 , convergence:  0.049155360822056474
+['convergence!, nre iter:', 5]
+Displacement:  0.29000000000000026 29
+Step:  0 , convergence:  0.049144011184047015
+['convergence!, nre iter:', 5]
+Displacement:  0.30000000000000027 30
+Step:  0 , convergence:  0.04911206779958001
+['convergence!, nre iter:', 4]
+Displacement:  0.3100000000000003 31
+Step:  0 , convergence:  0.04906059291467262
+['convergence!, nre iter:', 4]
+Displacement:  0.3200000000000003 32
+Step:  0 , convergence:  0.04900922363087247
+['convergence!, nre iter:', 3]
+Displacement:  0.3300000000000003 33
+Step:  0 , convergence:  0.048962431831623014
+['convergence!, nre iter:', 3]
+Displacement:  0.3400000000000003 34
+Step:  0 , convergence:  0.04892016253221728
+['convergence!, nre iter:', 3]
+Displacement:  0.3500000000000003 35
+Step:  0 , convergence:  0.04888189186900218
+['convergence!, nre iter:', 3]
+Displacement:  0.3600000000000003 36
+Step:  0 , convergence:  0.0488471299076915
+['convergence!, nre iter:', 3]
+Displacement:  0.37000000000000033 37
+Step:  0 , convergence:  0.048815462315718754
+['convergence!, nre iter:', 3]
+Displacement:  0.38000000000000034 38
+Step:  0 , convergence:  0.04878653899813718
+['convergence!, nre iter:', 3]
+Displacement:  0.39000000000000035 39
+Step:  0 , convergence:  0.04876006072044113
+['convergence!, nre iter:', 3]
+Displacement:  0.40000000000000036 40
+Step:  0 , convergence:  0.04873576906009741
+['convergence!, nre iter:', 3]
+Displacement:  0.41000000000000036 41
+Step:  0 , convergence:  0.04871343912210397
+['convergence!, nre iter:', 3]
+Displacement:  0.4200000000000004 42
+Step:  0 , convergence:  0.04869287409598612
+['convergence!, nre iter:', 3]
+Displacement:  0.4300000000000004 43
+Step:  0 , convergence:  0.04867390102374325
+['convergence!, nre iter:', 3]
+Displacement:  0.4400000000000004 44
+Step:  0 , convergence:  0.04865636739593534
+['convergence!, nre iter:', 3]
+Displacement:  0.4500000000000004 45
+Step:  0 , convergence:  0.048640138344889845
+['convergence!, nre iter:', 3]
+Displacement:  0.4600000000000004 46
+Step:  0 , convergence:  0.048625094290687974
+['convergence!, nre iter:', 3]
+Displacement:  0.4700000000000004 47
+Step:  0 , convergence:  0.04861112894479139
+['convergence!, nre iter:', 3]
+Displacement:  0.4800000000000004 48
+Step:  0 , convergence:  0.04859814760472366
+['convergence!, nre iter:', 3]
+Displacement:  0.49000000000000044 49
+Step:  0 , convergence:  0.04858606569049055
+['convergence!, nre iter:', 3]
+number of boundary_nodes:  11 10
+hyperstatic number:  2
+number of boundary_nodes:  11 10
+min_distance:  0.04910000000000003
+Displacement:  0.0 0
+Step:  0 , convergence:  0.20547824444218116
+['convergence!, nre iter:', 16]
+Displacement:  0.010000000000000009 1
+Step:  0 , convergence:  0.10458079757512893
+['convergence!, nre iter:', 8]
+Displacement:  0.020000000000000018 2
+Step:  0 , convergence:  0.06557809291969002
+['convergence!, nre iter:', 21]
+Displacement:  0.030000000000000027 3
+Step:  0 , convergence:  0.058352710307987055
+['convergence!, nre iter:', 5]
+Displacement:  0.040000000000000036 4
+Step:  0 , convergence:  0.056786220501631623
+['convergence!, nre iter:', 5]
+Displacement:  0.050000000000000044 5
+Step:  0 , convergence:  0.05490842923474482
+['convergence!, nre iter:', 4]
+Displacement:  0.06000000000000005 6
+Step:  0 , convergence:  0.05393559482239504
+['convergence!, nre iter:', 4]
+Displacement:  0.07000000000000006 7
+Step:  0 , convergence:  0.05309969959518415
+['convergence!, nre iter:', 4]
+Displacement:  0.08000000000000007 8
+Step:  0 , convergence:  0.052371904323464356
+['convergence!, nre iter:', 4]
+Displacement:  0.09000000000000008 9
+Step:  0 , convergence:  0.05177859894449228
+['convergence!, nre iter:', 4]
+Displacement:  0.10000000000000009 10
+Step:  0 , convergence:  0.051323235064931395
+['convergence!, nre iter:', 4]
+Displacement:  0.1100000000000001 11
+Step:  0 , convergence:  0.050984943874749535
+['convergence!, nre iter:', 4]
+Displacement:  0.1200000000000001 12
+Step:  0 , convergence:  0.05073494389040093
+['convergence!, nre iter:', 4]
+Displacement:  0.13000000000000012 13
+Step:  0 , convergence:  0.05054725296826401
+['convergence!, nre iter:', 4]
+Displacement:  0.14000000000000012 14
+Step:  0 , convergence:  0.050401956122855064
+['convergence!, nre iter:', 4]
+Displacement:  0.15000000000000013 15
+Step:  0 , convergence:  0.05028505942581303
+['convergence!, nre iter:', 4]
+Displacement:  0.16000000000000014 16
+Step:  0 , convergence:  0.05018759172929873
+['convergence!, nre iter:', 3]
+Displacement:  0.17000000000000015 17
+Step:  0 , convergence:  0.05010467593858831
+['convergence!, nre iter:', 3]
+Displacement:  0.18000000000000016 18
+Step:  0 , convergence:  0.05003433631537088
+['convergence!, nre iter:', 3]
+Displacement:  0.19000000000000017 19
+Step:  0 , convergence:  0.04997595546751002
+['convergence!, nre iter:', 3]
+Displacement:  0.20000000000000018 20
+Step:  0 , convergence:  0.04992894233629242
+['convergence!, nre iter:', 3]
+Displacement:  0.2100000000000002 21
+Step:  0 , convergence:  0.04989218916121262
+['convergence!, nre iter:', 3]
+Displacement:  0.2200000000000002 22
+Step:  0 , convergence:  0.04986421981987363
+['convergence!, nre iter:', 3]
+Displacement:  0.2300000000000002 23
+Step:  0 , convergence:  0.04984354210839383
+['convergence!, nre iter:', 3]
+Displacement:  0.2400000000000002 24
+Step:  0 , convergence:  0.04982888850334481
+['convergence!, nre iter:', 3]
+Displacement:  0.2500000000000002 25
+Step:  0 , convergence:  0.04981930231886258
+['convergence!, nre iter:', 3]
+Displacement:  0.26000000000000023 26
+Step:  0 , convergence:  0.0498141363968123
+['convergence!, nre iter:', 3]
+Displacement:  0.27000000000000024 27
+Step:  0 , convergence:  0.04981302783834695
+['convergence!, nre iter:', 3]
+Displacement:  0.28000000000000025 28
+Step:  0 , convergence:  0.04981588303881807
+['convergence!, nre iter:', 3]
+Displacement:  0.29000000000000026 29
+Step:  0 , convergence:  0.04982288365606114
+['convergence!, nre iter:', 3]
+Displacement:  0.30000000000000027 30
+Step:  0 , convergence:  0.04983449567367086
+['convergence!, nre iter:', 3]
+Displacement:  0.3100000000000003 31
+Step:  0 , convergence:  0.049851375651305714
+['convergence!, nre iter:', 3]
+Displacement:  0.3200000000000003 32
+Step:  0 , convergence:  0.04987374290451019
+['convergence!, nre iter:', 3]
+Displacement:  0.3300000000000003 33
+Step:  0 , convergence:  0.04989890718246972
+['convergence!, nre iter:', 3]
+Displacement:  0.3400000000000003 34
+Step:  0 , convergence:  0.04991630973897027
+['convergence!, nre iter:', 3]
+Displacement:  0.3500000000000003 35
+Step:  0 , convergence:  0.04991390261947473
+['convergence!, nre iter:', 3]
+Displacement:  0.3600000000000003 36
+Step:  0 , convergence:  0.04990249102769017
+['convergence!, nre iter:', 3]
+Displacement:  0.37000000000000033 37
+Step:  0 , convergence:  0.04989631305627198
+['convergence!, nre iter:', 3]
+Displacement:  0.38000000000000034 38
+Step:  0 , convergence:  0.04989493473201832
+['convergence!, nre iter:', 3]
+Displacement:  0.39000000000000035 39
+Step:  0 , convergence:  0.04989561471419807
+['convergence!, nre iter:', 3]
+Displacement:  0.40000000000000036 40
+Step:  0 , convergence:  0.04989712537206096
+['convergence!, nre iter:', 3]
+Displacement:  0.41000000000000036 41
+Step:  0 , convergence:  0.04989903267308012
+['convergence!, nre iter:', 3]
+Displacement:  0.4200000000000004 42
+Step:  0 , convergence:  0.0499011749348015
+['convergence!, nre iter:', 3]
+Displacement:  0.4300000000000004 43
+Step:  0 , convergence:  0.04990347977842917
+['convergence!, nre iter:', 3]
+Displacement:  0.4400000000000004 44
+Step:  0 , convergence:  0.04990590606428332
+['convergence!, nre iter:', 3]
+Displacement:  0.4500000000000004 45
+Step:  0 , convergence:  0.04990842521878513
+['convergence!, nre iter:', 3]
+Displacement:  0.4600000000000004 46
+Step:  0 , convergence:  0.04991101493560083
+['convergence!, nre iter:', 3]
+Displacement:  0.4700000000000004 47
+Step:  0 , convergence:  0.04991365688191735
+['convergence!, nre iter:', 3]
+Displacement:  0.4800000000000004 48
+Step:  0 , convergence:  0.04991633573966134
+['convergence!, nre iter:', 3]
+Displacement:  0.49000000000000044 49
+Step:  0 , convergence:  0.04991903869973525
+['convergence!, nre iter:', 3]
+number of boundary_nodes:  9 10
+hyperstatic number:  3
+number of boundary_nodes:  9 10
+min_distance:  0.04810000000000003
+Displacement:  0.0 0
+Step:  0 , convergence:  0.08522341287818203
+['convergence!, nre iter:', 10]
+Displacement:  0.010000000000000009 1
+Step:  0 , convergence:  0.05479199658814649
+['convergence!, nre iter:', 4]
+Displacement:  0.020000000000000018 2
+Step:  0 , convergence:  0.052292975436269935
+['convergence!, nre iter:', 4]
+Displacement:  0.030000000000000027 3
+Step:  0 , convergence:  0.05047018066818262
+['convergence!, nre iter:', 4]
+Displacement:  0.040000000000000036 4
+Step:  0 , convergence:  0.049157749405046185
+['convergence!, nre iter:', 4]
+Displacement:  0.050000000000000044 5
+Step:  0 , convergence:  0.04806440927983376
+['convergence!, nre iter:', 3]
+Displacement:  0.06000000000000005 6
+Step:  0 , convergence:  0.04712568190819485
+['convergence!, nre iter:', 3]
+Displacement:  0.07000000000000006 7
+Step:  0 , convergence:  0.046467272775553146
+['convergence!, nre iter:', 3]
+Displacement:  0.08000000000000007 8
+Step:  0 , convergence:  0.04606663378577132
+['convergence!, nre iter:', 3]
+Displacement:  0.09000000000000008 9
+Step:  0 , convergence:  0.045830075936031146
+['convergence!, nre iter:', 3]
+Displacement:  0.10000000000000009 10
+Step:  0 , convergence:  0.0456909995414096
+['convergence!, nre iter:', 3]
+Displacement:  0.1100000000000001 11
+Step:  0 , convergence:  0.045612655035482286
+['convergence!, nre iter:', 3]
+Displacement:  0.1200000000000001 12
+Step:  0 , convergence:  0.04557483657270603
+['convergence!, nre iter:', 3]
+Displacement:  0.13000000000000012 13
+Step:  0 , convergence:  0.04556554950752087
+['convergence!, nre iter:', 3]
+Displacement:  0.14000000000000012 14
+Step:  0 , convergence:  0.04557694015914504
+['convergence!, nre iter:', 3]
+Displacement:  0.15000000000000013 15
+Step:  0 , convergence:  0.04560339871152994
+['convergence!, nre iter:', 3]
+Displacement:  0.16000000000000014 16
+Step:  0 , convergence:  0.04564067229701511
+['convergence!, nre iter:', 3]
+Displacement:  0.17000000000000015 17
+Step:  0 , convergence:  0.045685431090905504
+['convergence!, nre iter:', 3]
+Displacement:  0.18000000000000016 18
+Step:  0 , convergence:  0.04573503027675388
+['convergence!, nre iter:', 3]
+Displacement:  0.19000000000000017 19
+Step:  0 , convergence:  0.04578735585944168
+['convergence!, nre iter:', 3]
+Displacement:  0.20000000000000018 20
+Step:  0 , convergence:  0.04584071267232454
+['convergence!, nre iter:', 3]
+Displacement:  0.2100000000000002 21
+Step:  0 , convergence:  0.04589374704038604
+['convergence!, nre iter:', 3]
+Displacement:  0.2200000000000002 22
+Step:  0 , convergence:  0.04594541127771732
+['convergence!, nre iter:', 3]
+Displacement:  0.2300000000000002 23
+Step:  0 , convergence:  0.045994974853203446
+['convergence!, nre iter:', 3]
+Displacement:  0.2400000000000002 24
+Step:  0 , convergence:  0.046042063602420406
+['convergence!, nre iter:', 3]
+Displacement:  0.2500000000000002 25
+Step:  0 , convergence:  0.04608667296953501
+['convergence!, nre iter:', 3]
+Displacement:  0.26000000000000023 26
+Step:  0 , convergence:  0.04612909326455817
+['convergence!, nre iter:', 3]
+Displacement:  0.27000000000000024 27
+Step:  0 , convergence:  0.046169741149990284
+['convergence!, nre iter:', 3]
+Displacement:  0.28000000000000025 28
+Step:  0 , convergence:  0.04620897510113714
+['convergence!, nre iter:', 3]
+Displacement:  0.29000000000000026 29
+Step:  0 , convergence:  0.04624699161783341
+['convergence!, nre iter:', 3]
+Displacement:  0.30000000000000027 30
+Step:  0 , convergence:  0.04628383199989952
+['convergence!, nre iter:', 3]
+Displacement:  0.3100000000000003 31
+Step:  0 , convergence:  0.04631945399430967
+['convergence!, nre iter:', 3]
+Displacement:  0.3200000000000003 32
+Step:  0 , convergence:  0.046353804103717984
+['convergence!, nre iter:', 3]
+Displacement:  0.3300000000000003 33
+Step:  0 , convergence:  0.046386855874986616
+['convergence!, nre iter:', 3]
+Displacement:  0.3400000000000003 34
+Step:  0 , convergence:  0.04641861498235194
+['convergence!, nre iter:', 3]
+Displacement:  0.3500000000000003 35
+Step:  0 , convergence:  0.046449108113249496
+['convergence!, nre iter:', 3]
+Displacement:  0.3600000000000003 36
+Step:  0 , convergence:  0.04647837048387369
+['convergence!, nre iter:', 3]
+Displacement:  0.37000000000000033 37
+Step:  0 , convergence:  0.04650643827549499
+['convergence!, nre iter:', 3]
+Displacement:  0.38000000000000034 38
+Step:  0 , convergence:  0.0465333460371849
+['convergence!, nre iter:', 3]
+Displacement:  0.39000000000000035 39
+Step:  0 , convergence:  0.04655912692825463
+['convergence!, nre iter:', 3]
+Displacement:  0.40000000000000036 40
+Step:  0 , convergence:  0.04658381390194044
+['convergence!, nre iter:', 3]
+Displacement:  0.41000000000000036 41
+Step:  0 , convergence:  0.04660744079634361
+['convergence!, nre iter:', 3]
+Displacement:  0.4200000000000004 42
+Step:  0 , convergence:  0.04663004298007686
+['convergence!, nre iter:', 3]
+Displacement:  0.4300000000000004 43
+Step:  0 , convergence:  0.046651657553589056
+['convergence!, nre iter:', 3]
+Displacement:  0.4400000000000004 44
+Step:  0 , convergence:  0.04667232323083963
+['convergence!, nre iter:', 3]
+Displacement:  0.4500000000000004 45
+Step:  0 , convergence:  0.046692080036054046
+['convergence!, nre iter:', 3]
+Displacement:  0.4600000000000004 46
+Step:  0 , convergence:  0.046710968920013446
+['convergence!, nre iter:', 3]
+Displacement:  0.4700000000000004 47
+Step:  0 , convergence:  0.04672903136431739
+['convergence!, nre iter:', 3]
+Displacement:  0.4800000000000004 48
+Step:  0 , convergence:  0.04674630901262355
+['convergence!, nre iter:', 3]
+Displacement:  0.49000000000000044 49
+Step:  0 , convergence:  0.0467628433472666
+['convergence!, nre iter:', 3]
+number of boundary_nodes:  11 9
+hyperstatic number:  3
+number of boundary_nodes:  11 9
+min_distance:  0.05510000000000004
+Displacement:  0.0 0
+Step:  0 , convergence:  0.1352333837196058
+['convergence!, nre iter:', 11]
+Displacement:  0.010000000000000009 1
+Step:  0 , convergence:  0.11100954128516355
+['convergence!, nre iter:', 8]
+Displacement:  0.020000000000000018 2
+Step:  0 , convergence:  0.06034944193616453
+['convergence!, nre iter:', 6]
+Displacement:  0.030000000000000027 3
+Step:  0 , convergence:  0.05619700711764648
+['convergence!, nre iter:', 5]
+Displacement:  0.040000000000000036 4
+Step:  0 , convergence:  0.05333140161515877
+['convergence!, nre iter:', 4]
+Displacement:  0.050000000000000044 5
+Step:  0 , convergence:  0.05177838643167663
+['convergence!, nre iter:', 4]
+Displacement:  0.06000000000000005 6
+Step:  0 , convergence:  0.052027047811018266
+['convergence!, nre iter:', 16]
+Displacement:  0.07000000000000006 7
+Step:  0 , convergence:  0.05058741773409281
+['convergence!, nre iter:', 4]
+Displacement:  0.08000000000000007 8
+Step:  0 , convergence:  0.05058712520041599
+['convergence!, nre iter:', 4]
+Displacement:  0.09000000000000008 9
+Step:  0 , convergence:  0.05062188840433841
+['convergence!, nre iter:', 5]
+Displacement:  0.10000000000000009 10
+Step:  0 , convergence:  0.05067379913782757
+['convergence!, nre iter:', 6]
+Displacement:  0.1100000000000001 11
+Step:  0 , convergence:  0.05072523123549475
+['convergence!, nre iter:', 6]
+Displacement:  0.1200000000000001 12
+Step:  0 , convergence:  0.050701730481707445
+['convergence!, nre iter:', 4]
+Displacement:  0.13000000000000012 13
+Step:  0 , convergence:  0.05071590042128756
+['convergence!, nre iter:', 4]
+Displacement:  0.14000000000000012 14
+Step:  0 , convergence:  0.05073699749957595
+['convergence!, nre iter:', 4]
+Displacement:  0.15000000000000013 15
+Step:  0 , convergence:  0.05076337413646134
+['convergence!, nre iter:', 4]
+Displacement:  0.16000000000000014 16
+Step:  0 , convergence:  0.050793763266254476
+['convergence!, nre iter:', 4]
+Displacement:  0.17000000000000015 17
+Step:  0 , convergence:  0.050827172416136476
+['convergence!, nre iter:', 3]
+Displacement:  0.18000000000000016 18
+Step:  0 , convergence:  0.05086281686830802
+['convergence!, nre iter:', 3]
+Displacement:  0.19000000000000017 19
+Step:  0 , convergence:  0.05090007382487241
+['convergence!, nre iter:', 3]
+Displacement:  0.20000000000000018 20
+Step:  0 , convergence:  0.05093844892993897
+['convergence!, nre iter:', 3]
+Displacement:  0.2100000000000002 21
+Step:  0 , convergence:  0.05097755068901252
+['convergence!, nre iter:', 3]
+Displacement:  0.2200000000000002 22
+Step:  0 , convergence:  0.05101707032156805
+['convergence!, nre iter:', 3]
+Displacement:  0.2300000000000002 23
+Step:  0 , convergence:  0.05105676559965599
+['convergence!, nre iter:', 3]
+Displacement:  0.2400000000000002 24
+Step:  0 , convergence:  0.05109644777062435
+['convergence!, nre iter:', 3]
+Displacement:  0.2500000000000002 25
+Step:  0 , convergence:  0.05113597096446769
+['convergence!, nre iter:', 3]
+Displacement:  0.26000000000000023 26
+Step:  0 , convergence:  0.05117522365843239
+['convergence!, nre iter:', 3]
+Displacement:  0.27000000000000024 27
+Step:  0 , convergence:  0.051214121873086736
+['convergence!, nre iter:', 3]
+Displacement:  0.28000000000000025 28
+Step:  0 , convergence:  0.0512526038383248
+['convergence!, nre iter:', 3]
+Displacement:  0.29000000000000026 29
+Step:  0 , convergence:  0.051290625913652
+['convergence!, nre iter:', 3]
+Displacement:  0.30000000000000027 30
+Step:  0 , convergence:  0.05132815958520873
+['convergence!, nre iter:', 3]
+Displacement:  0.3100000000000003 31
+Step:  0 , convergence:  0.05136518939844163
+['convergence!, nre iter:', 3]
+Displacement:  0.3200000000000003 32
+Step:  0 , convergence:  0.051401711723932465
+['convergence!, nre iter:', 3]
+Displacement:  0.3300000000000003 33
+Step:  0 , convergence:  0.05143773429787993
+['convergence!, nre iter:', 3]
+Displacement:  0.3400000000000003 34
+Step:  0 , convergence:  0.051473276532153736
+['convergence!, nre iter:', 3]
+Displacement:  0.3500000000000003 35
+Step:  0 , convergence:  0.051508370658177795
+['convergence!, nre iter:', 3]
+Displacement:  0.3600000000000003 36
+Step:  0 , convergence:  0.051543063865336414
+['convergence!, nre iter:', 3]
+Displacement:  0.37000000000000033 37
+Step:  0 , convergence:  0.051577421738153065
+['convergence!, nre iter:', 3]
+Displacement:  0.38000000000000034 38
+Step:  0 , convergence:  0.05161153352394592
+['convergence!, nre iter:', 3]
+Displacement:  0.39000000000000035 39
+Step:  0 , convergence:  0.051645520143773216
+['convergence!, nre iter:', 3]
+Displacement:  0.40000000000000036 40
+Step:  0 , convergence:  0.051679546532229295
+['convergence!, nre iter:', 3]
+Displacement:  0.41000000000000036 41
+Step:  0 , convergence:  0.05171384114214838
+['convergence!, nre iter:', 3]
+Displacement:  0.4200000000000004 42
+Step:  0 , convergence:  0.05174872790681277
+['convergence!, nre iter:', 3]
+Displacement:  0.4300000000000004 43
+Step:  0 , convergence:  0.051784681089352115
+['convergence!, nre iter:', 3]
+Displacement:  0.4400000000000004 44
+Step:  0 , convergence:  0.051822425015850535
+['convergence!, nre iter:', 3]
+Displacement:  0.4500000000000004 45
+Step:  0 , convergence:  0.05186312919766318
+['convergence!, nre iter:', 3]
+Displacement:  0.4600000000000004 46
+Step:  0 , convergence:  0.05190882813996911
+['convergence!, nre iter:', 3]
+Displacement:  0.4700000000000004 47
+Step:  0 , convergence:  0.05196344846220934
+['convergence!, nre iter:', 3]
+Displacement:  0.4800000000000004 48
+Step:  0 , convergence:  0.05203583330148083
+['convergence!, nre iter:', 3]
+Displacement:  0.49000000000000044 49
+Step:  0 , convergence:  0.05215172992461016
+['convergence!, nre iter:', 4]
+number of boundary_nodes:  9 10
+hyperstatic number:  2
+number of boundary_nodes:  9 10
+min_distance:  0.04910000000000003
+Displacement:  0.0 0
+Step:  0 , convergence:  0.17078306047538305
+['convergence!, nre iter:', 10]
+Displacement:  0.010000000000000009 1
+Step:  0 , convergence:  0.0790607786418915
+['convergence!, nre iter:', 6]
+Displacement:  0.020000000000000018 2
+Step:  0 , convergence:  0.05809537582037344
+['convergence!, nre iter:', 5]
+Displacement:  0.030000000000000027 3
+Step:  0 , convergence:  0.049402055263495746
+['convergence!, nre iter:', 4]
+Displacement:  0.040000000000000036 4
+Step:  0 , convergence:  0.047962915428278165
+['convergence!, nre iter:', 4]
+Displacement:  0.050000000000000044 5
+Step:  0 , convergence:  0.04757960385827748
+['convergence!, nre iter:', 4]
+Displacement:  0.06000000000000005 6
+Step:  0 , convergence:  0.04748463049625693
+['convergence!, nre iter:', 4]
+Displacement:  0.07000000000000006 7
+Step:  0 , convergence:  0.04745836953179107
+['convergence!, nre iter:', 4]
+Displacement:  0.08000000000000007 8
+Step:  0 , convergence:  0.047433563541026624
+['convergence!, nre iter:', 4]
+Displacement:  0.09000000000000008 9
+Step:  0 , convergence:  0.047394461026843845
+['convergence!, nre iter:', 4]
+Displacement:  0.10000000000000009 10
+Step:  0 , convergence:  0.047339856408859855
+['convergence!, nre iter:', 3]
+Displacement:  0.1100000000000001 11
+Step:  0 , convergence:  0.047271505491180504
+['convergence!, nre iter:', 3]
+Displacement:  0.1200000000000001 12
+Step:  0 , convergence:  0.04719237087943898
+['convergence!, nre iter:', 3]
+Displacement:  0.13000000000000012 13
+Step:  0 , convergence:  0.047106383832374664
+['convergence!, nre iter:', 3]
+Displacement:  0.14000000000000012 14
+Step:  0 , convergence:  0.04701741213445993
+['convergence!, nre iter:', 3]
+Displacement:  0.15000000000000013 15
+Step:  0 , convergence:  0.04692827574276882
+['convergence!, nre iter:', 3]
+Displacement:  0.16000000000000014 16
+Step:  0 , convergence:  0.04684059150058986
+['convergence!, nre iter:', 3]
+Displacement:  0.17000000000000015 17
+Step:  0 , convergence:  0.0467552346441938
+['convergence!, nre iter:', 3]
+Displacement:  0.18000000000000016 18
+Step:  0 , convergence:  0.0466729016241612
+['convergence!, nre iter:', 3]
+Displacement:  0.19000000000000017 19
+Step:  0 , convergence:  0.04659447444747949
+['convergence!, nre iter:', 3]
+Displacement:  0.20000000000000018 20
+Step:  0 , convergence:  0.04652111876770347
+['convergence!, nre iter:', 3]
+Displacement:  0.2100000000000002 21
+Step:  0 , convergence:  0.04645416570719361
+['convergence!, nre iter:', 3]
+Displacement:  0.2200000000000002 22
+Step:  0 , convergence:  0.04639487511154186
+['convergence!, nre iter:', 3]
+Displacement:  0.2300000000000002 23
+Step:  0 , convergence:  0.04634418931561566
+['convergence!, nre iter:', 3]
+Displacement:  0.2400000000000002 24
+Step:  0 , convergence:  0.04630256573199272
+['convergence!, nre iter:', 3]
+Displacement:  0.2500000000000002 25
+Step:  0 , convergence:  0.04626992982893613
+['convergence!, nre iter:', 3]
+Displacement:  0.26000000000000023 26
+Step:  0 , convergence:  0.04624573861773849
+['convergence!, nre iter:', 3]
+Displacement:  0.27000000000000024 27
+Step:  0 , convergence:  0.04622911173987698
+['convergence!, nre iter:', 3]
+Displacement:  0.28000000000000025 28
+Step:  0 , convergence:  0.04621898102460193
+['convergence!, nre iter:', 3]
+Displacement:  0.29000000000000026 29
+Step:  0 , convergence:  0.04621422228413792
+['convergence!, nre iter:', 3]
+Displacement:  0.30000000000000027 30
+Step:  0 , convergence:  0.04621375185531402
+['convergence!, nre iter:', 3]
+Displacement:  0.3100000000000003 31
+Step:  0 , convergence:  0.04621658557981802
+['convergence!, nre iter:', 3]
+Displacement:  0.3200000000000003 32
+Step:  0 , convergence:  0.04622186643821428
+['convergence!, nre iter:', 3]
+Displacement:  0.3300000000000003 33
+Step:  0 , convergence:  0.04622886991866574
+['convergence!, nre iter:', 3]
+Displacement:  0.3400000000000003 34
+Step:  0 , convergence:  0.04623699570452709
+['convergence!, nre iter:', 3]
+Displacement:  0.3500000000000003 35
+Step:  0 , convergence:  0.046245752382027445
+['convergence!, nre iter:', 3]
+Displacement:  0.3600000000000003 36
+Step:  0 , convergence:  0.046254739805355556
+['convergence!, nre iter:', 3]
+Displacement:  0.37000000000000033 37
+Step:  0 , convergence:  0.04626363206119248
+['convergence!, nre iter:', 3]
+Displacement:  0.38000000000000034 38
+Step:  0 , convergence:  0.04627216279350829
+['convergence!, nre iter:', 3]
+Displacement:  0.39000000000000035 39
+Step:  0 , convergence:  0.046280113926121774
+['convergence!, nre iter:', 3]
+Displacement:  0.40000000000000036 40
+Step:  0 , convergence:  0.046287308413966465
+['convergence!, nre iter:', 3]
+Displacement:  0.41000000000000036 41
+Step:  0 , convergence:  0.04629360738819314
+['convergence!, nre iter:', 3]
+Displacement:  0.4200000000000004 42
+Step:  0 , convergence:  0.04629891174146371
+['convergence!, nre iter:', 3]
+Displacement:  0.4300000000000004 43
+Step:  0 , convergence:  0.046303167639565414
+['convergence!, nre iter:', 3]
+Displacement:  0.4400000000000004 44
+Step:  0 , convergence:  0.046306374526256126
+['convergence!, nre iter:', 3]
+Displacement:  0.4500000000000004 45
+Step:  0 , convergence:  0.04630859298987319
+['convergence!, nre iter:', 3]
+Displacement:  0.4600000000000004 46
+Step:  0 , convergence:  0.04630994879752433
+['convergence!, nre iter:', 3]
+Displacement:  0.4700000000000004 47
+Step:  0 , convergence:  0.046310629217784886
+['convergence!, nre iter:', 3]
+Displacement:  0.4800000000000004 48
+Step:  0 , convergence:  0.04631086917079271
+['convergence!, nre iter:', 3]
+Displacement:  0.49000000000000044 49
+Step:  0 , convergence:  0.046310927819900344
+['convergence!, nre iter:', 3]
+number of boundary_nodes:  9 9
+hyperstatic number:  2
+number of boundary_nodes:  9 9
+min_distance:  0.04910000000000003
+Displacement:  0.0 0
+Step:  0 , convergence:  0.1138443531244003
+Step:  25 , convergence:  0.010183263372389575
+Step:  50 , convergence:  0.010325828767384273
+['convergence!, nre iter:', 65]
+Displacement:  0.010000000000000009 1
+Step:  0 , convergence:  0.11226004542804506
+['convergence!, nre iter:', 9]
+Displacement:  0.020000000000000018 2
+Step:  0 , convergence:  0.06326270957600684
+Step:  25 , convergence:  1.808547891884283e-07
+['convergence!, nre iter:', 26]
+Displacement:  0.030000000000000027 3
+Step:  0 , convergence:  0.06397772467580631
+['convergence!, nre iter:', 5]
+Displacement:  0.040000000000000036 4
+Step:  0 , convergence:  0.05352725445258183
+['convergence!, nre iter:', 4]
+Displacement:  0.050000000000000044 5
+Step:  0 , convergence:  0.050867715295086685
+['convergence!, nre iter:', 4]
+Displacement:  0.06000000000000005 6
+Step:  0 , convergence:  0.04978819733464668
+['convergence!, nre iter:', 4]
+Displacement:  0.07000000000000006 7
+Step:  0 , convergence:  0.04922038799614321
+['convergence!, nre iter:', 3]
+Displacement:  0.08000000000000007 8
+Step:  0 , convergence:  0.048868642806904256
+['convergence!, nre iter:', 3]
+Displacement:  0.09000000000000008 9
+Step:  0 , convergence:  0.04864195278157333
+['convergence!, nre iter:', 3]
+Displacement:  0.10000000000000009 10
+Step:  0 , convergence:  0.048498779135029695
+['convergence!, nre iter:', 3]
+Displacement:  0.1100000000000001 11
+Step:  0 , convergence:  0.0484074802205504
+['convergence!, nre iter:', 3]
+Displacement:  0.1200000000000001 12
+Step:  0 , convergence:  0.04834608163602659
+['convergence!, nre iter:', 3]
+Displacement:  0.13000000000000012 13
+Step:  0 , convergence:  0.04830234670893525
+['convergence!, nre iter:', 3]
+Displacement:  0.14000000000000012 14
+Step:  0 , convergence:  0.04826997720664167
+['convergence!, nre iter:', 3]
+Displacement:  0.15000000000000013 15
+Step:  0 , convergence:  0.04824559483324264
+['convergence!, nre iter:', 3]
+Displacement:  0.16000000000000014 16
+Step:  0 , convergence:  0.048227206486315094
+['convergence!, nre iter:', 3]
+Displacement:  0.17000000000000015 17
+Step:  0 , convergence:  0.048213506737875916
+['convergence!, nre iter:', 3]
+Displacement:  0.18000000000000016 18
+Step:  0 , convergence:  0.04820355884195282
+['convergence!, nre iter:', 3]
+Displacement:  0.19000000000000017 19
+Step:  0 , convergence:  0.04819664256946345
+['convergence!, nre iter:', 3]
+Displacement:  0.20000000000000018 20
+Step:  0 , convergence:  0.04819217793377569
+['convergence!, nre iter:', 3]
+Displacement:  0.2100000000000002 21
+Step:  0 , convergence:  0.04818968476246948
+['convergence!, nre iter:', 3]
+Displacement:  0.2200000000000002 22
+Step:  0 , convergence:  0.0481887597040013
+['convergence!, nre iter:', 3]
+Displacement:  0.2300000000000002 23
+Step:  0 , convergence:  0.04818906192594188
+['convergence!, nre iter:', 3]
+Displacement:  0.2400000000000002 24
+Step:  0 , convergence:  0.048190303290504014
+['convergence!, nre iter:', 3]
+Displacement:  0.2500000000000002 25
+Step:  0 , convergence:  0.04819224097528576
+['convergence!, nre iter:', 3]
+Displacement:  0.26000000000000023 26
+Step:  0 , convergence:  0.048194671563879486
+['convergence!, nre iter:', 3]
+Displacement:  0.27000000000000024 27
+Step:  0 , convergence:  0.04819742613203457
+['convergence!, nre iter:', 3]
+Displacement:  0.28000000000000025 28
+Step:  0 , convergence:  0.04820036607977829
+['convergence!, nre iter:', 3]
+Displacement:  0.29000000000000026 29
+Step:  0 , convergence:  0.04820337955028931
+['convergence!, nre iter:', 3]
+Displacement:  0.30000000000000027 30
+Step:  0 , convergence:  0.04820637830640562
+['convergence!, nre iter:', 3]
+Displacement:  0.3100000000000003 31
+Step:  0 , convergence:  0.04820929494474692
+['convergence!, nre iter:', 3]
+Displacement:  0.3200000000000003 32
+Step:  0 , convergence:  0.04821208033609886
+['convergence!, nre iter:', 3]
+Displacement:  0.3300000000000003 33
+Step:  0 , convergence:  0.04821470119839898
+['convergence!, nre iter:', 3]
+Displacement:  0.3400000000000003 34
+Step:  0 , convergence:  0.04821713773746098
+['convergence!, nre iter:', 3]
+Displacement:  0.3500000000000003 35
+Step:  0 , convergence:  0.048219381327254215
+['convergence!, nre iter:', 3]
+Displacement:  0.3600000000000003 36
+Step:  0 , convergence:  0.04822143223961715
+['convergence!, nre iter:', 3]
+Displacement:  0.37000000000000033 37
+Step:  0 , convergence:  0.04822329746522238
+['convergence!, nre iter:', 3]
+Displacement:  0.38000000000000034 38
+Step:  0 , convergence:  0.04822498868721347
+['convergence!, nre iter:', 3]
+Displacement:  0.39000000000000035 39
+Step:  0 , convergence:  0.048226520473130786
+['convergence!, nre iter:', 3]
+Displacement:  0.40000000000000036 40
+Step:  0 , convergence:  0.04822790874030338
+['convergence!, nre iter:', 3]
+Displacement:  0.41000000000000036 41
+Step:  0 , convergence:  0.04822916952886109
+['convergence!, nre iter:', 3]
+Displacement:  0.4200000000000004 42
+Step:  0 , convergence:  0.04823031809068472
+['convergence!, nre iter:', 3]
+Displacement:  0.4300000000000004 43
+Step:  0 , convergence:  0.04823136827778197
+['convergence!, nre iter:', 3]
+Displacement:  0.4400000000000004 44
+Step:  0 , convergence:  0.04823233219404039
+['convergence!, nre iter:', 3]
+Displacement:  0.4500000000000004 45
+Step:  0 , convergence:  0.04823322006229519
+['convergence!, nre iter:', 3]
+Displacement:  0.4600000000000004 46
+Step:  0 , convergence:  0.048234040254297485
+['convergence!, nre iter:', 3]
+Displacement:  0.4700000000000004 47
+Step:  0 , convergence:  0.048234799433175685
+['convergence!, nre iter:', 3]
+Displacement:  0.4800000000000004 48
+Step:  0 , convergence:  0.04823550276431693
+['convergence!, nre iter:', 3]
+Displacement:  0.49000000000000044 49
+Step:  0 , convergence:  0.04823615415914282
+['convergence!, nre iter:', 3]
+number of boundary_nodes:  12 10
+hyperstatic number:  2
+number of boundary_nodes:  12 10
+min_distance:  0.04610000000000003
+Displacement:  0.0 0
+Step:  0 , convergence:  0.08469647949034446
+Step:  25 , convergence:  0.0008294599786985715
+['convergence!, nre iter:', 34]
+Displacement:  0.010000000000000009 1
+Step:  0 , convergence:  0.15021793515426649
+['convergence!, nre iter:', 11]
+Displacement:  0.020000000000000018 2
+Step:  0 , convergence:  0.07056690181585247
+['convergence!, nre iter:', 7]
+Displacement:  0.030000000000000027 3
+Step:  0 , convergence:  0.05511327668706831
+['convergence!, nre iter:', 5]
+Displacement:  0.040000000000000036 4
+Step:  0 , convergence:  0.05358020649182444
+['convergence!, nre iter:', 4]
+Displacement:  0.050000000000000044 5
+Step:  0 , convergence:  0.0534200972006521
+['convergence!, nre iter:', 4]
+Displacement:  0.06000000000000005 6
+Step:  0 , convergence:  0.05334054281414119
+['convergence!, nre iter:', 4]
+Displacement:  0.07000000000000006 7
+Step:  0 , convergence:  0.05322545469643244
+['convergence!, nre iter:', 4]
+Displacement:  0.08000000000000007 8
+Step:  0 , convergence:  0.053056841123408666
+['convergence!, nre iter:', 4]
+Displacement:  0.09000000000000008 9
+Step:  0 , convergence:  0.05286025603708141
+['convergence!, nre iter:', 4]
+Displacement:  0.10000000000000009 10
+Step:  0 , convergence:  0.052672619051969995
+['convergence!, nre iter:', 4]
+Displacement:  0.1100000000000001 11
+Step:  0 , convergence:  0.05251396118728129
+['convergence!, nre iter:', 4]
+Displacement:  0.1200000000000001 12
+Step:  0 , convergence:  0.05238625432740289
+['convergence!, nre iter:', 4]
+Displacement:  0.13000000000000012 13
+Step:  0 , convergence:  0.05228347032016943
+['convergence!, nre iter:', 4]
+Displacement:  0.14000000000000012 14
+Step:  0 , convergence:  0.052198543766943786
+['convergence!, nre iter:', 4]
+Displacement:  0.15000000000000013 15
+Step:  0 , convergence:  0.052125902076400714
+['convergence!, nre iter:', 3]
+Displacement:  0.16000000000000014 16
+Step:  0 , convergence:  0.05206179844654406
+['convergence!, nre iter:', 3]
+Displacement:  0.17000000000000015 17
+Step:  0 , convergence:  0.05200394034287189
+['convergence!, nre iter:', 3]
+Displacement:  0.18000000000000016 18
+Step:  0 , convergence:  0.05195101832920985
+['convergence!, nre iter:', 3]
+Displacement:  0.19000000000000017 19
+Step:  0 , convergence:  0.051902320154668856
+['convergence!, nre iter:', 3]
+Displacement:  0.20000000000000018 20
+Step:  0 , convergence:  0.05185746114810705
+['convergence!, nre iter:', 3]
+Displacement:  0.2100000000000002 21
+Step:  0 , convergence:  0.05181621411351785
+['convergence!, nre iter:', 3]
+Displacement:  0.2200000000000002 22
+Step:  0 , convergence:  0.051778411709117865
+['convergence!, nre iter:', 3]
+Displacement:  0.2300000000000002 23
+Step:  0 , convergence:  0.051743896644537477
+['convergence!, nre iter:', 3]
+Displacement:  0.2400000000000002 24
+Step:  0 , convergence:  0.051712500835995004
+['convergence!, nre iter:', 3]
+Displacement:  0.2500000000000002 25
+Step:  0 , convergence:  0.05168404052450818
+['convergence!, nre iter:', 3]
+Displacement:  0.26000000000000023 26
+Step:  0 , convergence:  0.051658319116181
+['convergence!, nre iter:', 3]
+Displacement:  0.27000000000000024 27
+Step:  0 , convergence:  0.051635132923814386
+['convergence!, nre iter:', 3]
+Displacement:  0.28000000000000025 28
+Step:  0 , convergence:  0.05161427724467811
+['convergence!, nre iter:', 3]
+Displacement:  0.29000000000000026 29
+Step:  0 , convergence:  0.05159555158807898
+['convergence!, nre iter:', 3]
+Displacement:  0.30000000000000027 30
+Step:  0 , convergence:  0.051578763646374884
+['convergence!, nre iter:', 3]
+Displacement:  0.3100000000000003 31
+Step:  0 , convergence:  0.051563732004347884
+['convergence!, nre iter:', 3]
+Displacement:  0.3200000000000003 32
+Step:  0 , convergence:  0.05155028775971431
+['convergence!, nre iter:', 3]
+Displacement:  0.3300000000000003 33
+Step:  0 , convergence:  0.05153827528305008
+['convergence!, nre iter:', 3]
+Displacement:  0.3400000000000003 34
+Step:  0 , convergence:  0.05152755233999304
+['convergence!, nre iter:', 3]
+Displacement:  0.3500000000000003 35
+Step:  0 , convergence:  0.051517989767309716
+['convergence!, nre iter:', 3]
+Displacement:  0.3600000000000003 36
+Step:  0 , convergence:  0.05150947085589847
+['convergence!, nre iter:', 3]
+Displacement:  0.37000000000000033 37
+Step:  0 , convergence:  0.05150189055703579
+['convergence!, nre iter:', 3]
+Displacement:  0.38000000000000034 38
+Step:  0 , convergence:  0.051495154596784415
+['convergence!, nre iter:', 3]
+Displacement:  0.39000000000000035 39
+Step:  0 , convergence:  0.05148917855836367
+['convergence!, nre iter:', 3]
+Displacement:  0.40000000000000036 40
+Step:  0 , convergence:  0.05148388697302366
+['convergence!, nre iter:', 3]
+Displacement:  0.41000000000000036 41
+Step:  0 , convergence:  0.05147921244565719
+['convergence!, nre iter:', 3]
+Displacement:  0.4200000000000004 42
+Step:  0 , convergence:  0.05147509483105125
+['convergence!, nre iter:', 3]
+Displacement:  0.4300000000000004 43
+Step:  0 , convergence:  0.051471480469379334
+['convergence!, nre iter:', 3]
+Displacement:  0.4400000000000004 44
+Step:  0 , convergence:  0.051468321484518964
+['convergence!, nre iter:', 3]
+Displacement:  0.4500000000000004 45
+Step:  0 , convergence:  0.051465575145434254
+['convergence!, nre iter:', 3]
+Displacement:  0.4600000000000004 46
+Step:  0 , convergence:  0.05146320328870775
+['convergence!, nre iter:', 3]
+Displacement:  0.4700000000000004 47
+Step:  0 , convergence:  0.051461171799003606
+['convergence!, nre iter:', 3]
+Displacement:  0.4800000000000004 48
+Step:  0 , convergence:  0.05145945014352673
+['convergence!, nre iter:', 3]
+Displacement:  0.49000000000000044 49
+Step:  0 , convergence:  0.05145801095622395
+['convergence!, nre iter:', 3]
+number of boundary_nodes:  11 9
+hyperstatic number:  4
+number of boundary_nodes:  11 9
+min_distance:  0.05810000000000004
+Displacement:  0.0 0
+Step:  0 , convergence:  0.16944980328963938
+['convergence!, nre iter:', 15]
+Displacement:  0.010000000000000009 1
+Step:  0 , convergence:  0.05503377108843587
+['convergence!, nre iter:', 4]
+Displacement:  0.020000000000000018 2
+Step:  0 , convergence:  0.054909908037329
+['convergence!, nre iter:', 4]
+Displacement:  0.030000000000000027 3
+Step:  0 , convergence:  0.055665338240690046
+['convergence!, nre iter:', 4]
+Displacement:  0.040000000000000036 4
+Step:  0 , convergence:  0.056471653760996866
+['convergence!, nre iter:', 4]
+Displacement:  0.050000000000000044 5
+Step:  0 , convergence:  0.056577516040203446
+['convergence!, nre iter:', 4]
+Displacement:  0.06000000000000005 6
+Step:  0 , convergence:  0.05564991059492564
+['convergence!, nre iter:', 4]
+Displacement:  0.07000000000000006 7
+Step:  0 , convergence:  0.05422661366514803
+['convergence!, nre iter:', 5]
+Displacement:  0.08000000000000007 8
+Step:  0 , convergence:  0.05291347839891405
+['convergence!, nre iter:', 5]
+Displacement:  0.09000000000000008 9
+Step:  0 , convergence:  0.05188967272996744
+['convergence!, nre iter:', 4]
+Displacement:  0.10000000000000009 10
+Step:  0 , convergence:  0.051094076426698956
+['convergence!, nre iter:', 4]
+Displacement:  0.1100000000000001 11
+Step:  0 , convergence:  0.05044198353505448
+['convergence!, nre iter:', 4]
+Displacement:  0.1200000000000001 12
+Step:  0 , convergence:  0.04988695075046455
+['convergence!, nre iter:', 4]
+Displacement:  0.13000000000000012 13
+Step:  0 , convergence:  0.04940969558448571
+['convergence!, nre iter:', 4]
+Displacement:  0.14000000000000012 14
+Step:  0 , convergence:  0.04900040428553666
+['convergence!, nre iter:', 4]
+Displacement:  0.15000000000000013 15
+Step:  0 , convergence:  0.048650073940750826
+['convergence!, nre iter:', 5]
+Displacement:  0.16000000000000014 16
+Step:  0 , convergence:  0.04834876535241328
+['convergence!, nre iter:', 5]
+Displacement:  0.17000000000000015 17
+Step:  0 , convergence:  0.04808666150293089
+['convergence!, nre iter:', 5]
+Displacement:  0.18000000000000016 18
+Step:  0 , convergence:  0.04785568703775773
+['convergence!, nre iter:', 5]
+Displacement:  0.19000000000000017 19
+Step:  0 , convergence:  0.04765157169433638
+['convergence!, nre iter:', 5]
+Displacement:  0.20000000000000018 20
+Step:  0 , convergence:  0.047479334055373114
+['convergence!, nre iter:', 5]
+Displacement:  0.2100000000000002 21
+Step:  0 , convergence:  0.047388592143179996
+['convergence!, nre iter:', 6]
+Displacement:  0.2200000000000002 22
+Step:  0 , convergence:  0.04908389491059333
+['convergence!, nre iter:', 5]
+Displacement:  0.2300000000000002 23
+Step:  0 , convergence:  0.047731565485192036
+['convergence!, nre iter:', 5]
+Displacement:  0.2400000000000002 24
+Step:  0 , convergence:  0.04767449206796492
+['convergence!, nre iter:', 5]
+Displacement:  0.2500000000000002 25
+Step:  0 , convergence:  0.0476499998148124
+['convergence!, nre iter:', 4]
+Displacement:  0.26000000000000023 26
+Step:  0 , convergence:  0.04764421751371601
+['convergence!, nre iter:', 4]
+Displacement:  0.27000000000000024 27
+Step:  0 , convergence:  0.04765693514012245
+['convergence!, nre iter:', 4]
+Displacement:  0.28000000000000025 28
+Step:  0 , convergence:  0.04768891977366025
+['convergence!, nre iter:', 4]
+Displacement:  0.29000000000000026 29
+Step:  0 , convergence:  0.04774061517222272
+['convergence!, nre iter:', 4]
+Displacement:  0.30000000000000027 30
+Step:  0 , convergence:  0.047809692051493435
+['convergence!, nre iter:', 4]
+Displacement:  0.3100000000000003 31
+Step:  0 , convergence:  0.04788795271107277
+['convergence!, nre iter:', 4]
+Displacement:  0.3200000000000003 32
+Step:  0 , convergence:  0.0479633137144663
+['convergence!, nre iter:', 4]
+Displacement:  0.3300000000000003 33
+Step:  0 , convergence:  0.048027175425387154
+['convergence!, nre iter:', 4]
+Displacement:  0.3400000000000003 34
+Step:  0 , convergence:  0.048077045373929136
+['convergence!, nre iter:', 4]
+Displacement:  0.3500000000000003 35
+Step:  0 , convergence:  0.048114361046225684
+['convergence!, nre iter:', 4]
+Displacement:  0.3600000000000003 36
+Step:  0 , convergence:  0.04814200833959591
+['convergence!, nre iter:', 4]
+Displacement:  0.37000000000000033 37
+Step:  0 , convergence:  0.048162742221739295
+['convergence!, nre iter:', 4]
+Displacement:  0.38000000000000034 38
+Step:  0 , convergence:  0.04817865262896223
+['convergence!, nre iter:', 4]
+Displacement:  0.39000000000000035 39
+Step:  0 , convergence:  0.04819118901312124
+['convergence!, nre iter:', 4]
+Displacement:  0.40000000000000036 40
+Step:  0 , convergence:  0.04820132824386927
+['convergence!, nre iter:', 4]
+Displacement:  0.41000000000000036 41
+Step:  0 , convergence:  0.048209728226009954
+['convergence!, nre iter:', 4]
+Displacement:  0.4200000000000004 42
+Step:  0 , convergence:  0.04821683730017716
+['convergence!, nre iter:', 4]
+Displacement:  0.4300000000000004 43
+Step:  0 , convergence:  0.04822296622028831
+['convergence!, nre iter:', 4]
+Displacement:  0.4400000000000004 44
+Step:  0 , convergence:  0.04822833443816074
+['convergence!, nre iter:', 4]
+Displacement:  0.4500000000000004 45
+Step:  0 , convergence:  0.04823309987940068
+['convergence!, nre iter:', 4]
+Displacement:  0.4600000000000004 46
+Step:  0 , convergence:  0.04823737830478859
+['convergence!, nre iter:', 4]
+Displacement:  0.4700000000000004 47
+Step:  0 , convergence:  0.048241256090273035
+['convergence!, nre iter:', 4]
+Displacement:  0.4800000000000004 48
+Step:  0 , convergence:  0.04824479880281791
+['convergence!, nre iter:', 4]
+Displacement:  0.49000000000000044 49
+Step:  0 , convergence:  0.04824805705088305
+['convergence!, nre iter:', 4]
+number of boundary_nodes:  9 11
+hyperstatic number:  2
+number of boundary_nodes:  9 11
+min_distance:  0.04910000000000003
+Displacement:  0.0 0
+Step:  0 , convergence:  0.060751881739515866
+['convergence!, nre iter:', 9]
+Displacement:  0.010000000000000009 1
+Step:  0 , convergence:  0.06502026362225892
+['convergence!, nre iter:', 7]
+Displacement:  0.020000000000000018 2
+Step:  0 , convergence:  0.06089931114670038
+['convergence!, nre iter:', 5]
+Displacement:  0.030000000000000027 3
+Step:  0 , convergence:  0.05829237529097392
+['convergence!, nre iter:', 5]
+Displacement:  0.040000000000000036 4
+Step:  0 , convergence:  0.05715333543472356
+['convergence!, nre iter:', 5]
+Displacement:  0.050000000000000044 5
+Step:  0 , convergence:  0.056681901648681275
+['convergence!, nre iter:', 4]
+Displacement:  0.06000000000000005 6
+Step:  0 , convergence:  0.05671786226796388
+['convergence!, nre iter:', 5]
+Displacement:  0.07000000000000006 7
+Step:  0 , convergence:  0.058444922836542894
+['convergence!, nre iter:', 19]
+Displacement:  0.08000000000000007 8
+Step:  0 , convergence:  0.053983318575429165
+['convergence!, nre iter:', 4]
+Displacement:  0.09000000000000008 9
+Step:  0 , convergence:  0.053849140876382824
+['convergence!, nre iter:', 4]
+Displacement:  0.10000000000000009 10
+Step:  0 , convergence:  0.05373210974421209
+['convergence!, nre iter:', 4]
+Displacement:  0.1100000000000001 11
+Step:  0 , convergence:  0.05363629050281589
+['convergence!, nre iter:', 4]
+Displacement:  0.1200000000000001 12
+Step:  0 , convergence:  0.05355057453919077
+['convergence!, nre iter:', 4]
+Displacement:  0.13000000000000012 13
+Step:  0 , convergence:  0.053467604110007325
+['convergence!, nre iter:', 4]
+Displacement:  0.14000000000000012 14
+Step:  0 , convergence:  0.053398578525484505
+['convergence!, nre iter:', 4]
+Displacement:  0.15000000000000013 15
+Step:  0 , convergence:  0.053349468975293954
+['convergence!, nre iter:', 4]
+Displacement:  0.16000000000000014 16
+Step:  0 , convergence:  0.05331417381023139
+['convergence!, nre iter:', 4]
+Displacement:  0.17000000000000015 17
+Step:  0 , convergence:  0.05328137027683473
+['convergence!, nre iter:', 4]
+Displacement:  0.18000000000000016 18
+Step:  0 , convergence:  0.05324023615169839
+['convergence!, nre iter:', 3]
+Displacement:  0.19000000000000017 19
+Step:  0 , convergence:  0.053185872195288926
+['convergence!, nre iter:', 3]
+Displacement:  0.20000000000000018 20
+Step:  0 , convergence:  0.05312106118193896
+['convergence!, nre iter:', 3]
+Displacement:  0.2100000000000002 21
+Step:  0 , convergence:  0.05305230031481878
+['convergence!, nre iter:', 3]
+Displacement:  0.2200000000000002 22
+Step:  0 , convergence:  0.05298511093210871
+['convergence!, nre iter:', 3]
+Displacement:  0.2300000000000002 23
+Step:  0 , convergence:  0.0529224756655416
+['convergence!, nre iter:', 3]
+Displacement:  0.2400000000000002 24
+Step:  0 , convergence:  0.052865417192979394
+['convergence!, nre iter:', 3]
+Displacement:  0.2500000000000002 25
+Step:  0 , convergence:  0.052813922173983445
+['convergence!, nre iter:', 3]
+Displacement:  0.26000000000000023 26
+Step:  0 , convergence:  0.05276755931410092
+['convergence!, nre iter:', 3]
+Displacement:  0.27000000000000024 27
+Step:  0 , convergence:  0.05272579551407009
+['convergence!, nre iter:', 3]
+Displacement:  0.28000000000000025 28
+Step:  0 , convergence:  0.05268813326735494
+['convergence!, nre iter:', 3]
+Displacement:  0.29000000000000026 29
+Step:  0 , convergence:  0.05265415601063325
+['convergence!, nre iter:', 3]
+Displacement:  0.30000000000000027 30
+Step:  0 , convergence:  0.0526235277947046
+['convergence!, nre iter:', 3]
+Displacement:  0.3100000000000003 31
+Step:  0 , convergence:  0.05259597242087474
+['convergence!, nre iter:', 3]
+Displacement:  0.3200000000000003 32
+Step:  0 , convergence:  0.05257124763680022
+['convergence!, nre iter:', 3]
+Displacement:  0.3300000000000003 33
+Step:  0 , convergence:  0.052549124191641435
+['convergence!, nre iter:', 3]
+Displacement:  0.3400000000000003 34
+Step:  0 , convergence:  0.05252937422151832
+['convergence!, nre iter:', 3]
+Displacement:  0.3500000000000003 35
+Step:  0 , convergence:  0.05251176877117428
+['convergence!, nre iter:', 3]
+Displacement:  0.3600000000000003 36
+Step:  0 , convergence:  0.052496081434708505
+['convergence!, nre iter:', 3]
+Displacement:  0.37000000000000033 37
+Step:  0 , convergence:  0.05248209447692028
+['convergence!, nre iter:', 3]
+Displacement:  0.38000000000000034 38
+Step:  0 , convergence:  0.0524696046780421
+['convergence!, nre iter:', 3]
+Displacement:  0.39000000000000035 39
+Step:  0 , convergence:  0.052458427492256716
+['convergence!, nre iter:', 3]
+Displacement:  0.40000000000000036 40
+Step:  0 , convergence:  0.05244839920987661
+['convergence!, nre iter:', 3]
+Displacement:  0.41000000000000036 41
+Step:  0 , convergence:  0.05243937743165618
+['convergence!, nre iter:', 3]
+Displacement:  0.4200000000000004 42
+Step:  0 , convergence:  0.05243124037802977
+['convergence!, nre iter:', 3]
+Displacement:  0.4300000000000004 43
+Step:  0 , convergence:  0.05242388553682361
+['convergence!, nre iter:', 3]
+Displacement:  0.4400000000000004 44
+Step:  0 , convergence:  0.05241722804286602
+['convergence!, nre iter:', 3]
+Displacement:  0.4500000000000004 45
+Step:  0 , convergence:  0.05241119906493175
+['convergence!, nre iter:', 3]
+Displacement:  0.4600000000000004 46
+Step:  0 , convergence:  0.05240574438507246
+['convergence!, nre iter:', 3]
+Displacement:  0.4700000000000004 47
+Step:  0 , convergence:  0.05240082330196107
+['convergence!, nre iter:', 3]
+Displacement:  0.4800000000000004 48
+Step:  0 , convergence:  0.05239640797321078
+['convergence!, nre iter:', 3]
+Displacement:  0.49000000000000044 49
+Step:  0 , convergence:  0.052392483332131846
+['convergence!, nre iter:', 3]
+number of boundary_nodes:  9 9
+hyperstatic number:  3
+number of boundary_nodes:  9 9
+min_distance:  0.05710000000000004
+Displacement:  0.0 0
+Step:  0 , convergence:  0.07402570133346972
+['convergence!, nre iter:', 9]
+Displacement:  0.010000000000000009 1
+Step:  0 , convergence:  0.06364397571882571
+['convergence!, nre iter:', 7]
+Displacement:  0.020000000000000018 2
+Step:  0 , convergence:  0.07658309644275144
+['convergence!, nre iter:', 6]
+Displacement:  0.030000000000000027 3
+Step:  0 , convergence:  0.08571175429218843
+['convergence!, nre iter:', 9]
+Displacement:  0.040000000000000036 4
+Step:  0 , convergence:  0.08728620071142537
+['convergence!, nre iter:', 10]
+Displacement:  0.050000000000000044 5
+Step:  0 , convergence:  0.05410348656561599
+['convergence!, nre iter:', 4]
+Displacement:  0.06000000000000005 6
+Step:  0 , convergence:  0.052688240001809716
+['convergence!, nre iter:', 4]
+Displacement:  0.07000000000000006 7
+Step:  0 , convergence:  0.05139852482150828
+['convergence!, nre iter:', 4]
+Displacement:  0.08000000000000007 8
+Step:  0 , convergence:  0.050389179951989556
+['convergence!, nre iter:', 4]
+Displacement:  0.09000000000000008 9
+Step:  0 , convergence:  0.049680985241990876
+['convergence!, nre iter:', 4]
+Displacement:  0.10000000000000009 10
+Step:  0 , convergence:  0.04920352616209713
+['convergence!, nre iter:', 3]
+Displacement:  0.1100000000000001 11
+Step:  0 , convergence:  0.04887841710826295
+['convergence!, nre iter:', 3]
+Displacement:  0.1200000000000001 12
+Step:  0 , convergence:  0.04864922348558514
+['convergence!, nre iter:', 3]
+Displacement:  0.13000000000000012 13
+Step:  0 , convergence:  0.04848056456944382
+['convergence!, nre iter:', 3]
+Displacement:  0.14000000000000012 14
+Step:  0 , convergence:  0.04835106232668475
+['convergence!, nre iter:', 3]
+Displacement:  0.15000000000000013 15
+Step:  0 , convergence:  0.04824773522633712
+['convergence!, nre iter:', 3]
+Displacement:  0.16000000000000014 16
+Step:  0 , convergence:  0.048162575939657434
+['convergence!, nre iter:', 3]
+Displacement:  0.17000000000000015 17
+Step:  0 , convergence:  0.048090591180287814
+['convergence!, nre iter:', 3]
+Displacement:  0.18000000000000016 18
+Step:  0 , convergence:  0.04802864937320094
+['convergence!, nre iter:', 3]
+Displacement:  0.19000000000000017 19
+Step:  0 , convergence:  0.04797476376722527
+['convergence!, nre iter:', 3]
+Displacement:  0.20000000000000018 20
+Step:  0 , convergence:  0.04792762632189255
+['convergence!, nre iter:', 3]
+Displacement:  0.2100000000000002 21
+Step:  0 , convergence:  0.0478863008224002
+['convergence!, nre iter:', 3]
+Displacement:  0.2200000000000002 22
+Step:  0 , convergence:  0.04785002599209138
+['convergence!, nre iter:', 3]
+Displacement:  0.2300000000000002 23
+Step:  0 , convergence:  0.04781809671693933
+['convergence!, nre iter:', 3]
+Displacement:  0.2400000000000002 24
+Step:  0 , convergence:  0.04778979669845633
+['convergence!, nre iter:', 3]
+Displacement:  0.2500000000000002 25
+Step:  0 , convergence:  0.04776435745612142
+['convergence!, nre iter:', 3]
+Displacement:  0.26000000000000023 26
+Step:  0 , convergence:  0.047740922311519114
+['convergence!, nre iter:', 3]
+Displacement:  0.27000000000000024 27
+Step:  0 , convergence:  0.04771850253824405
+['convergence!, nre iter:', 3]
+Displacement:  0.28000000000000025 28
+Step:  0 , convergence:  0.04769592838839582
+['convergence!, nre iter:', 3]
+Displacement:  0.29000000000000026 29
+Step:  0 , convergence:  0.04767182484606147
+['convergence!, nre iter:', 3]
+Displacement:  0.30000000000000027 30
+Step:  0 , convergence:  0.04764468506722908
+['convergence!, nre iter:', 3]
+Displacement:  0.3100000000000003 31
+Step:  0 , convergence:  0.04761315710395832
+['convergence!, nre iter:', 3]
+Displacement:  0.3200000000000003 32
+Step:  0 , convergence:  0.04757662193348464
+['convergence!, nre iter:', 3]
+Displacement:  0.3300000000000003 33
+Step:  0 , convergence:  0.047535888988204926
+['convergence!, nre iter:', 3]
+Displacement:  0.3400000000000003 34
+Step:  0 , convergence:  0.04749343352900096
+['convergence!, nre iter:', 3]
+Displacement:  0.3500000000000003 35
+Step:  0 , convergence:  0.04745263262572281
+['convergence!, nre iter:', 3]
+Displacement:  0.3600000000000003 36
+Step:  0 , convergence:  0.04741634826227702
+['convergence!, nre iter:', 3]
+Displacement:  0.37000000000000033 37
+Step:  0 , convergence:  0.047385956672599705
+['convergence!, nre iter:', 3]
+Displacement:  0.38000000000000034 38
+Step:  0 , convergence:  0.047361385346551196
+['convergence!, nre iter:', 3]
+Displacement:  0.39000000000000035 39
+Step:  0 , convergence:  0.04734173771110408
+['convergence!, nre iter:', 3]
+Displacement:  0.40000000000000036 40
+Step:  0 , convergence:  0.04732589161993683
+['convergence!, nre iter:', 3]
+Displacement:  0.41000000000000036 41
+Step:  0 , convergence:  0.0473128300352352
+['convergence!, nre iter:', 3]
+Displacement:  0.4200000000000004 42
+Step:  0 , convergence:  0.04730175044892271
+['convergence!, nre iter:', 3]
+Displacement:  0.4300000000000004 43
+Step:  0 , convergence:  0.04729206246308324
+['convergence!, nre iter:', 3]
+Displacement:  0.4400000000000004 44
+Step:  0 , convergence:  0.04728334843620282
+['convergence!, nre iter:', 3]
+Displacement:  0.4500000000000004 45
+Step:  0 , convergence:  0.04727532243806547
+['convergence!, nre iter:', 3]
+Displacement:  0.4600000000000004 46
+Step:  0 , convergence:  0.047267800867208574
+['convergence!, nre iter:', 3]
+Displacement:  0.4700000000000004 47
+Step:  0 , convergence:  0.04726069104094162
+['convergence!, nre iter:', 3]
+Displacement:  0.4800000000000004 48
+Step:  0 , convergence:  0.04725400806741362
+['convergence!, nre iter:', 3]
+Displacement:  0.49000000000000044 49
+Step:  0 , convergence:  0.04724795053423799
+['convergence!, nre iter:', 3]

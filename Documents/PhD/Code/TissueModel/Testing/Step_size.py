@@ -30,14 +30,14 @@ def identical_check(path):
 		for i in range(len(vertices_first)):
 			norm_1 = length_square(vertices_first[i]-vertices_second[i])
 			norm_2 = length_square(vertices_first[i]-vertices_third[i])
-			if norm_1 <10e-15:
+			if norm_1 >10e-15:
 				with open('testing.txt', 'a') as writeFile:
-					writeFile.write(filename[17:20]+str(i)+str(norm_1))
-			if norm_2 <10e-15:
+					writeFile.write(filename[17:20]+' ' + str(i)+' ' +str(norm_1)+'\n')
+			if norm_2 >10e-15:
 				with open('testing.txt', 'a') as writeFile:
-					writeFile.write(filename[17:20]+str(i)+str(norm_2))
+					writeFile.write(filename[17:20]+' ' +str(i)+' ' +str(norm_2)+'\n')
 	with open('testing.txt', 'a') as writeFile:
-		writeFile.write('Different step size test : done')
+		writeFile.write('Different step size test : done\n')
 	os.chdir(current_path)
 
 

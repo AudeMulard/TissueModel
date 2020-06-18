@@ -41,9 +41,9 @@ def plot_geometry(network,  **kw):
 		for simplex in network.ridge_vertices:
 		        simplex = np.asarray(simplex)
 		        line_segments.append([(x, y, z) for x, y, z in network.vertices[simplex]])
-		#ax.set_xlim3d([0.0,network.length])
-		#ax.set_ylim3d([0.0,network.length])
-		#ax.set_zlim3d([0.0,network.length])		
+		ax.set_xlim3d([0.0,network.length[0]])
+		ax.set_ylim3d([0.0,network.length[1]])
+		ax.set_zlim3d([0.0,network.length[2]])
 		lc = Line3DCollection(line_segments,linestyle='solid')
 	ax.add_collection(lc)
 	return ax.figure		

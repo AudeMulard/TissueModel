@@ -76,7 +76,7 @@ class Tensile_test:
 				network= solve_force_balance(network, self.constitutive, details) #solve the equilibrium of new configuration
 				result = True
 				network.save_network('temp',path) # save a configuration in case the next discretization fails, so that the code can begin from the beginning of the step
-			except (ValueError,RuntimeWarning):
+			except (ValueError):#,RuntimeWarning):
 				print('New discretization: ', space_discretization/2, ' on step ', current_disp)
 				space_discretization = space_discretization/2
 				with open(os.path.join(path,'network_vertices.csv'),'r') as readFile:

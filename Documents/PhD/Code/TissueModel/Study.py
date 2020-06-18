@@ -13,7 +13,7 @@ import fnmatch,time
 
 ## PARAMETERS
 dimension=2 #dimension of the problem
-complexity_network=100 #number of random seed points
+complexity_network=200 #number of random seed points
 length_domain=(1.0,1.0,1.0)
 min_distance = 0.0001*length_domain[0]
 space_discretization = 0.01*length_domain[0]
@@ -45,7 +45,7 @@ new_dir = data_path+today.strftime("%b-%d-%Y")+'_'+'%04d' % len(os.listdir(data_
 os.mkdir(new_dir)
 path = new_dir
 
-list_modes = [['Voronoi','random'],['Voronoi','grid'],['Voronoi','regular'],['growth_network','grid']]
+list_modes = [['Voronoi','random'],['Voronoi','grid'],['growth_network','grid']]#['Voronoi','regular'],['growth_network','grid']]
 
 test_1 = Tensile_test(constitutive, side, space_discretization, traction_distance, plot, video, path,details)
 
@@ -63,11 +63,12 @@ for mode in list_modes:
 	
 	#### Changing geometry
 	# Changing complexity
-	for complexity in [10,50,100,200,500,1000]:
-		network = Network(dimension, complexity, length_domain, min_distance, k_tension, k_compression, A, disturbance, creation,generation, path)
-		network = network.set_fibers(path)
-		network = test_1.full_test(network, path,test_1.details,name='%s_%s_complexity_%04d' % (creation, generation,complexity))
-
+	if mode[1]=='grid':
+		for complexity in [50,100,200,500]:
+			network = Network(dimension, complexity, length_domain, min_distance, k_tension, k_compression, A, disturbance, creation,generation, path)
+			network = network.set_fibers(path)
+			network = test_1.full_test(network, path,test_1.details,name='%s_%s_complexity_%04d' % (creation, generation,complexity))
+	
 	if mode[1] == 'grid':
 		for disturbance in [0.,0.0001,0.001,0.01,0.1,1.]:
 			network = Network(dimension, complexity, length_domain, min_distance, k_tension, k_compression, A, disturbance, creation,generation, path)
@@ -81,6 +82,8 @@ for mode in list_modes:
 		start = time.time()
 		network = Network(dimension, complexity_network, length_domain, min_distance, k_tension, k_compression, A, disturbance, creation,generation, path)
 		network = network.set_fibers(path)
+		plot_geometry(network)
+		plt.show()
 		writeFile.write('Generation time: %d \n' % (time.time() - start))
 		test_1 = Tensile_test(constitutive, side, space_discretization, traction_distance, plot, video, path,details)
 		network = test_1.full_test(network, path,test_1.details,name='%s_%s_time' % (creation,generation))
@@ -90,7 +93,7 @@ for mode in list_modes:
 	#### Without changing network
 	# Change of k_tension, k_compression
 	network = Network(dimension, complexity_network, length_domain, min_distance, k_tension, k_compression, A, disturbance, creation,generation, path)
-	network = network.set_fibers(network.creation, path)
+	network = network.set_fibers(path)
 
 	for k_compression in [100.,10.,1.,0.1,0.01,0.001]:
 		network.k_compression = k_compression
@@ -99,13 +102,13 @@ for mode in list_modes:
 		network = test_1.full_test(network, path,test_1.details,name='%s_%s_k_%03d' % (creation, generation,k_compression))
 	# Change of ratio k_compression on k_tension
 	network = Network(dimension, complexity_network, length_domain, min_distance, k_tension, k_compression, A, disturbance, creation,generation, path)
-	network = network.set_fibers(network.creation, path)
-
+	network = network.set_fibers(path)
+	
 	for k_compression in [100.,10.,1.,0.1,0.01,0.001]:
 		network.k_compression = k_compression
 		network.vertices = np.array(network.vertices_ini)
 		network = test_1.full_test(network, path,test_1.details,name='%s_%s_ratio_%03d' % (creation, generation,k_compression))
 	"""
-
+	
 
 

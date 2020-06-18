@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import sys
-sys.path.append('/home/aude/Documents/PhD/Code/TissueModel/')
-from Plotting.network_plotting import *
+sys.path.append('/home/am2548/Documents/TissueModel/')
+#from Plotting.network_plotting import *
 from Plotting.information_network import *
 
 
@@ -16,7 +16,7 @@ else:
 	os.chdir(sys.argv[1])
 print(os.getcwd())
 
-list_modes = [['Voronoi','random'],['Voronoi','regular'],['Voronoi','grid'],['growth_network','grid']]
+list_modes = [['Voronoi','random'],['Voronoi','grid'],['growth_network','grid']]#,['Voronoi','regular']]
 
 fig = plt.figure()
 ax1 = fig.add_subplot(221)
@@ -26,9 +26,9 @@ ax4 = fig.add_subplot(224, sharex=ax1, sharey=ax1)
 
 line_segments=[]
 creation , generation = list_modes[0]
-filename = fnmatch.filter(os.listdir('.'), 'network_vertices_*_%s_%s.csv' % (creation,generation))
+filename = fnmatch.filter(os.listdir('.'), 'network_vertices_*_%s_%s_*.csv' % (creation,generation))
 
-network = load_network_info(int(filename[0][25:28]))
+network = load_network_info(int(filename[0][21:24]))
 from matplotlib.collections import LineCollection
 ax1.scatter(network.vertices[:,0],network.vertices[:,1], s =2.)
 for simplex in network.ridge_vertices:
@@ -40,9 +40,9 @@ ax1.set_title('Random Voronoi')
 
 line_segments=[]
 creation , generation = list_modes[1]
-filename = fnmatch.filter(os.listdir('.'), 'network_vertices_*_%s_%s.csv' % (creation,generation))
+filename = fnmatch.filter(os.listdir('.'), 'network_vertices_*_%s_%s_*.csv' % (creation,generation))
 
-network = load_network_info(int(filename[0][25:28]))
+network = load_network_info(int(filename[0][21:24]))
 from matplotlib.collections import LineCollection
 ax2.scatter(network.vertices[:,0],network.vertices[:,1], s =2.)
 for simplex in network.ridge_vertices:
@@ -53,9 +53,9 @@ ax2.add_collection(lc)
 ax2.set_title('Hexagonal network')
 line_segments=[]
 creation , generation = list_modes[2]
-filename = fnmatch.filter(os.listdir('.'), 'network_vertices_*_%s_%s.csv' % (creation,generation))
+filename = fnmatch.filter(os.listdir('.'), 'network_vertices_*_%s_%s_*.csv' % (creation,generation))
 
-network = load_network_info(int(filename[0][25:28]))
+network = load_network_info(int(filename[0][21:24]))
 from matplotlib.collections import LineCollection
 ax3.scatter(network.vertices[:,0],network.vertices[:,1], s =2.)
 for simplex in network.ridge_vertices:
@@ -63,12 +63,13 @@ for simplex in network.ridge_vertices:
         line_segments.append([(x, y) for x, y in network.vertices[simplex]])
 lc = LineCollection(line_segments,linestyle='solid')
 ax3.add_collection(lc)
-ax3.set_title('Disturbed grid')
+ax3.set_title('')
+"""
 line_segments=[]
 creation , generation = list_modes[3]
-filename = fnmatch.filter(os.listdir('.'), 'network_vertices_*_%s_%s.csv' % (creation,generation))
+filename = fnmatch.filter(os.listdir('.'), 'network_vertices_*_%s_%s_*.csv' % (creation,generation))
 
-network = load_network_info(int(filename[0][25:28]))
+network = load_network_info(int(filename[0][21:24]))
 from matplotlib.collections import LineCollection
 ax4.scatter(network.vertices[:,0],network.vertices[:,1], s =2.)
 for simplex in network.ridge_vertices:
@@ -78,6 +79,6 @@ lc = LineCollection(line_segments,linestyle='solid')
 ax4.add_collection(lc)
 ax4.set_title('Growth network')
 
-
+"""
 plt.subplots_adjust(hspace=0.5)
 plt.savefig('Geometries.pdf')

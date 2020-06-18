@@ -1,6 +1,9 @@
 import numpy as np
 from scipy.spatial import Voronoi, voronoi_plot_2d
 import matplotlib.pyplot as plt
+from sympy import Symbol
+from sympy.solvers import solve
+import time
 
 def length_square(x):
 	return x[0]**2+x[1]**2
@@ -15,9 +18,13 @@ def Seeds_generation(network):
 				Seeds.append([np.random.rand()*network.length[0],np.random.rand()*network.length[1],np.random.rand()*network.length[2]])
 	elif network.generation == 'grid':
 		number_points = int(np.sqrt(network.complexity))
-		for x in range(number_points):
-			for y in range(number_points):
-				Seeds.append([x/float(number_points)+np.random.rand()*network.disturbance,y/float(number_points)+np.random.rand()*network.disturbance])
+		for x in range(1,number_points):
+			for y in range(1,number_points):
+				if network.dimension == 2:
+					Seeds.append([x/float(number_points)+np.random.rand()*network.disturbance,y/float(number_points)+np.random.rand()*network.disturbance])
+				if network.dimension == 3:
+					for z in range(1,number_points):
+						Seeds.append([x/float(number_points)+np.random.rand()*network.disturbance,y/float(number_points)+np.random.rand()*network.disturbance,z/float(number_points)+np.random.rand()*network.disturbance])
 	elif network.generation == 'regular':
 		for x in range(int(np.sqrt(network.complexity/2.))):
 			for y in range(-2,int(np.sqrt(network.complexity))+2):
@@ -44,74 +51,187 @@ def select_network(network):
 			return vertices, ridge_vertices
 
 		if creation == "growth_network":
-			div_space = network.complexity * 100.
+			div_space = 100.
+			#div_space = network.complexity * 1.
 			Seeds = Seeds_generation(network)
 			Seeds = np.array(Seeds)
-			plt.scatter(Seeds[:,0],Seeds[:,1])
-			orientations = np.random.rand(len(Seeds),1)*180
-			vertices = np.zeros((len(Seeds)*2,2))
+			print len(Seeds)
+			start = time.time()
+			vertices = np.zeros((len(Seeds)*2,network.dimension))
 			lines = []
-			for i in range(len(Seeds)):
-				a = float(np.tan(orientations[i]))
-				b = float(Seeds[i][1]-np.tan(orientations[i])*Seeds[i][0])
-				lines.append([a,b, Seeds[i][0],Seeds[i][1],Seeds[i][0],Seeds[i][1],'empty','empty'])
-			lines_done_up = []
-			lines_done_down = []
-			for k in range(int(div_space)):
+			if network.dimension == 2:
+				orientations = np.random.rand(len(Seeds),1)*180
 				for i in range(len(Seeds)):
-					if i not in lines_done_up:
-						xk = Seeds[i][0]+k/div_space
-						yk = lines[i][0]*xk+lines[i][1]
-						if xk >= 1.0:
-							vertices[i][0] = 1.0
-							vertices[i][1] = lines[i][0]*1.0+lines[i][1]
-							lines_done_up.append(i)
-						else:
-							lines[i][4]=xk+1./div_space
-							lines[i][5]=lines[i][0]*(xk+1./div_space)+lines[i][1]
-							for j in range(len(Seeds)):
-								if i !=j and i not in lines_done_up:
-									if lines[j][2]<= xk <xk+1./div_space<=lines[j][4]:
-										x_inter = (lines[j][1]-lines[i][1])/(lines[i][0]-lines[j][0])
-										if xk<=x_inter<=xk+1./div_space:
-											vertices[i][0] = x_inter
-											vertices[i][1] = lines[j][0]*x_inter+lines[j][1]
-											lines[i][6] = j
-											lines_done_up.append(i)
-					if i not in lines_done_down:
-						xk = Seeds[i][0]-k/div_space
-						yk = lines[i][0]*xk+lines[i][1]
-						if xk <=0.0:
-							vertices[len(Seeds)+i][0] = 0.0
-							vertices[len(Seeds)+i][1] = lines[i][1] 
-							lines_done_down.append(i)
-						else:
-							lines[i][2]=xk-1./div_space
-							lines[i][3]=lines[i][0]*(xk-1./div_space)+lines[i][1]
-							for j in range(len(Seeds)):
-								if i !=j and i not in lines_done_down:
-									if lines[j][2]<= xk-1./div_space<= xk<= lines[j][4]:
-										x_inter = (lines[j][1]-lines[i][1])/(lines[i][0]-lines[j][0])
-										if xk-1./div_space<=x_inter<=xk:
-											vertices[len(Seeds)+i][0] = x_inter
-											vertices[len(Seeds)+i][1] = lines[j][1] + x_inter*lines[j][0]
-											lines[i][7]=j
-											lines_done_down.append(i)
-			ridge_vertices = []
-			list_points = []
-			import operator
-			for i in range(len(lines)):
-				list_point =[[i, vertices[i][0]], [len(Seeds) + i, vertices[len(Seeds) + i][0]]]
-				for j in range(len(lines)):
-					if lines[j][6] == i:
-						list_point.append([j, vertices[j][0]])
-					if lines[j][7] == i:
-						list_point.append([len(Seeds)+j, vertices[len(Seeds)+j][0]])
-				list_point = sorted(list_point,key=operator.itemgetter(1))
-				list_points.append(list_point)
-			for list_point in list_points:
-				for i in range(len(list_point)-1):
-					ridge_vertices.append([list_point[i][0],list_point[i+1][0]])
+					a = float(np.tan(orientations[i]))
+					b = float(Seeds[i][1]-np.tan(orientations[i])*Seeds[i][0])
+					lines.append([a,b, Seeds[i][0],Seeds[i][1],Seeds[i][0],Seeds[i][1],'empty','empty'])
+				lines_done_up = []
+				lines_done_down = []
+				for k in range(int(div_space)):
+					for i in range(len(Seeds)):
+						if i not in lines_done_up:
+							xk = Seeds[i][0]+k/div_space
+							yk = lines[i][0]*xk+lines[i][1]
+							if xk >= 1.0:
+								vertices[i][0] = 1.0
+								vertices[i][1] = lines[i][0]*1.0+lines[i][1]
+								lines_done_up.append(i)
+							else:
+								lines[i][4]=xk+1./div_space
+								lines[i][5]=lines[i][0]*(xk+1./div_space)+lines[i][1]
+								for j in range(len(Seeds)):
+									if i !=j and i not in lines_done_up:
+										if lines[j][2]<= xk <xk+1./div_space<=lines[j][4]:
+											x_inter = (lines[j][1]-lines[i][1])/(lines[i][0]-lines[j][0])
+											if xk<=x_inter<=xk+1./div_space:
+												vertices[i][0] = x_inter
+												vertices[i][1] = lines[j][0]*x_inter+lines[j][1]
+												lines[i][6] = j
+												lines_done_up.append(i)
+						if i not in lines_done_down:
+							xk = Seeds[i][0]-k/div_space
+							yk = lines[i][0]*xk+lines[i][1]
+							if xk <=0.0:
+								vertices[len(Seeds)+i][0] = 0.0
+								vertices[len(Seeds)+i][1] = lines[i][1] 
+								lines_done_down.append(i)
+							else:
+								lines[i][2]=xk-1./div_space
+								lines[i][3]=lines[i][0]*(xk-1./div_space)+lines[i][1]
+								for j in range(len(Seeds)):
+									if i !=j and i not in lines_done_down:
+										if lines[j][2]<= xk-1./div_space<= xk<= lines[j][4]:
+											x_inter = (lines[j][1]-lines[i][1])/(lines[i][0]-lines[j][0])
+											if xk-1./div_space<=x_inter<=xk:
+												vertices[len(Seeds)+i][0] = x_inter
+												vertices[len(Seeds)+i][1] = lines[j][1] + x_inter*lines[j][0]
+												lines[i][7]=j
+												lines_done_down.append(i)
+				ridge_vertices = []
+				list_points = []
+				import operator
+				for i in range(len(lines)):
+					list_point =[[i, vertices[i][0]], [len(Seeds) + i, vertices[len(Seeds) + i][0]]]
+					for j in range(len(lines)):
+						if lines[j][6] == i:
+							list_point.append([j, vertices[j][0]])
+						if lines[j][7] == i:
+							list_point.append([len(Seeds)+j, vertices[len(Seeds)+j][0]])
+					list_point = sorted(list_point,key=operator.itemgetter(1))
+					list_points.append(list_point)
+				for list_point in list_points:
+					for i in range(len(list_point)-1):
+						ridge_vertices.append([list_point[i][0],list_point[i+1][0]])
+			elif network.dimension == 3:
+				import matplotlib.pyplot as plt
+				from mpl_toolkits.mplot3d import Axes3D
+				diameter_fiber = 0.4
+				fig = plt.figure()
+				ax = fig.add_subplot(111,projection='3d')
+				ax.set_xlim([0.0,1.0])
+				ax.set_ylim([0.0,1.0])
+				ax.set_zlim([0.0,1.0])
+				for i in range(len(Seeds)):
+					second_point = [np.random.rand() * network.length[0], np.random.rand() * network.length[1],
+									np.random.rand() * network.length[2]]
+					u0 = second_point[0]-Seeds[i][0]
+					u1 = second_point[1]-Seeds[i][1]
+					u2 = second_point[2]-Seeds[i][2]
+					lines.append([u0,u1,u2, Seeds[i][0],Seeds[i][1],Seeds[i][2],Seeds[i][0],Seeds[i][1],Seeds[i][2],'empty','empty'])
+					#if 0<i<15:
+					#	print i, Seeds[i,0]
+					#	ax.plot([0.0,1.0],[Seeds[i][1]+(0.0-Seeds[i][0])/lines[i][0]*lines[i][1],Seeds[i][1]+(1.0-Seeds[i][0])/lines[i][0]*lines[i][1]],[Seeds[i][2]+(0.0-Seeds[i][0])/lines[i][0]*lines[i][2],Seeds[i][2]+(1.0-Seeds[i][0])/lines[i][0]*lines[i][2]])
+				lines_done_up = []
+				lines_done_down = []
+				points = []
+				for k in range(int(div_space)):
+					for i in range(len(Seeds)):
+						if i not in lines_done_up:
+							xk = Seeds[i][0]+k/div_space
+							yk = Seeds[i][1]+k/div_space/lines[i][0]*lines[i][1]
+							zk = Seeds[i][2]+k/div_space/lines[i][0]*lines[i][2]
+							if xk >= network.length[0]:
+								vertices[i][0] = 1.0
+								vertices[i][1] = Seeds[i][1]+(1.0-Seeds[i][0])/lines[i][0]*lines[i][1]
+								vertices[i][2] = Seeds[i][2]+(1.0-Seeds[i][0])/lines[i][0]*lines[i][2]
+								lines_done_up.append(i)
+							else:
+								lines[i][6]=xk+1./div_space*lines[i][0]
+								lines[i][7]=yk+1./div_space*lines[i][1]
+								lines[i][8]=zk+1./div_space*lines[i][2]
+								for j in range(len(Seeds)):
+									if i !=j and i not in lines_done_up:
+										if lines[j][3]<= xk <xk+1./div_space*lines[i][0]<=lines[j][6]:
+											AMk = [xk-Seeds[j][0],yk-Seeds[j][1],zk-Seeds[j][2]]
+											uj = [lines[j][0],lines[j][1],lines[j][2]]
+											cross = np.cross(uj,AMk)
+											distance = np.linalg.norm(cross)/np.linalg.norm(uj)
+											if distance <= diameter_fiber:
+												x = Symbol('x')
+												Eq = uj[0]*(xk-uj[0]*x-Seeds[j][0])+uj[1]*(xk-uj[1]*x-Seeds[j][1])+uj[2]*(xk-uj[2]*x-Seeds[j][2])
+												t = solve(Eq,x)
+												#print i,j,t
+												x_inter = Seeds[j][0]+t[0]*lines[j][0]
+												#print x_inter, xk, xk+1./div_space*lines[i][0]
+												if xk<=x_inter<=xk+1./div_space*lines[i][0]:
+													vertices[i][0] = x_inter
+													vertices[i][1] = Seeds[j][1]+t[0]*lines[j][1]
+													vertices[i][2] = Seeds[j][2]+t[0]*lines[j][2]
+													lines_done_up.append(i)
+													lines[i][9] = j
+													#print time.time()-start,i
+						if i not in lines_done_down:
+							xk = Seeds[i][0]-k/div_space
+							yk = Seeds[i][1]-k/div_space*lines[i][1]/lines[i][0]
+							zk = Seeds[i][2]-k/div_space*lines[i][2]/lines[i][0]
+							if xk <=0.0:
+								vertices[len(Seeds)+i][0] = 0.0
+								vertices[len(Seeds)+i][1] = Seeds[i][1]+(-Seeds[i][0])/lines[i][0]*lines[i][1]
+								vertices[len(Seeds)+i][2] = Seeds[i][2]+(-Seeds[i][0])/lines[i][0]*lines[i][2]
+								lines_done_down.append(i)
+							else:
+								lines[i][6]=xk-1./div_space*lines[i][0]
+								lines[i][7]=yk-1./div_space*lines[i][1]
+								lines[i][8]=zk-1./div_space*lines[i][2]
+								for j in range(len(Seeds)):
+									if i !=j and i not in lines_done_down:
+										if lines[j][3]<= xk-1./div_space*lines[i][0]<= xk<= lines[j][6]:
+											AMk = [xk - Seeds[j][0], yk - Seeds[j][1], zk - Seeds[j][2]]
+											uj = [lines[j][0], lines[j][1], lines[j][2]]
+											cross = np.cross(uj, AMk)
+											distance = np.linalg.norm(cross) / np.linalg.norm(uj)
+											if distance <= diameter_fiber:
+												x = Symbol('x')
+												Eq = uj[0] * (xk - uj[0] * x - Seeds[j][0]) + uj[1] * (
+															xk - uj[1] * x - Seeds[j][1]) + uj[2] * (
+																 xk - uj[2] * x - Seeds[j][2])
+												t = solve(Eq, x)
+												# print i,j,t
+												x_inter = Seeds[j][0] + t[0] * lines[j][0]
+												if xk-1./div_space*lines[i][0]<=x_inter<=xk:
+													vertices[i][0] = x_inter
+													vertices[i][1] = Seeds[j][1] + t[0] * lines[j][1]
+													vertices[i][2] = Seeds[j][2] + t[0] * lines[j][2]
+													lines[i][10]=j
+													lines_done_down.append(i)
+				#ax.scatter(np.array(points)[:,0],np.array(points)[:,1],np.array(points)[:,2])
+				print sorted(lines_done_down), sorted(lines_done_up)
+				ridge_vertices = []
+				list_points = []
+				import operator
+				for i in range(len(lines)):
+					list_point =[[i, vertices[i][0]], [len(Seeds) + i, vertices[len(Seeds) + i][0]]]
+					for j in range(len(lines)):
+						if lines[j][9] == i:
+							list_point.append([j, vertices[j][0]])
+						if lines[j][10] == i:
+							list_point.append([len(Seeds)+j, vertices[len(Seeds)+j][0]])
+					list_point = sorted(list_point,key=operator.itemgetter(1))
+					list_points.append(list_point)
+				for list_point in list_points:
+					for i in range(len(list_point)-1):
+						ridge_vertices.append([list_point[i][0],list_point[i+1][0]])
+			print len(vertices)
 			return vertices,ridge_vertices
 				
 
