@@ -15,15 +15,15 @@ import numpy
 
 ## PARAMETERS
 dimension=2 #dimension of the problem
-complexity_network=10 #number of random seed points
-length_domain=(1.0,1.0,1./3.)
+complexity_network=50 #number of random seed points
+length_domain=(1.0,1.0,1.0)
 min_distance = 0.0001*length_domain[0]
-space_discretization = 0.01*length_domain[0]
+space_discretization = 0.0001*length_domain[0]
 k_tension=1.0
 k_compression = 1.0
 A=1.
 disturbance=0.02
-traction_distance = 0.01*length_domain[0]
+traction_distance = 0.1*length_domain[0]
 #iteration = 15
 
 
@@ -50,17 +50,17 @@ details = True
 
 network = Network(dimension, complexity_network, length_domain, min_distance, k_tension, k_compression, A, disturbance, creation, generation, path)
 network = network.set_fibers(path)
-
+"""
 print(len(network.ridge_vertices)-network.dimension*len(network.interior_nodes))
 plot_geometry(network)
 plt.show()
 
-
+"""
 test_1 = Tensile_test(constitutive, side, space_discretization, traction_distance, plot, video, path,details)
 network = test_1.full_test(network, path,details)
+
+
 """
-
-
 
 #print Network.__mro__()
 for i in range(20):

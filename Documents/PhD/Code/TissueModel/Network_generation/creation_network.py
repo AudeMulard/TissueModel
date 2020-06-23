@@ -129,7 +129,10 @@ class Network:
 		for i in range(len(nodes)):
 			if i in self.interior_nodes:
 				for j in range(i):
-					distance = np.sqrt((nodes[i,0]-nodes[j,0])**2+(nodes[i,1]-nodes[j,1])**2)
+					if self.dimension == 2:
+						distance = np.sqrt((nodes[i,0]-nodes[j,0])**2+(nodes[i,1]-nodes[j,1])**2)
+					elif self.dimension == 3:
+						distance = np.sqrt((nodes[i, 0] - nodes[j, 0]) ** 2 + (nodes[i, 1] - nodes[j, 1]) ** 2 +(nodes[i, 2] - nodes[j, 2]) ** 2  )
 					if distance < self.min_distance:
 					    for k in range(len(self.ridge_vertices)):
 					        if self.ridge_vertices[k][0]==j:
@@ -480,16 +483,13 @@ class Network:
 			self = self.create_network()
 			self = self.delete_doubles()
 			self = self.cut_network_updown()
-			if self.dimension != 3:
-				self = self.delete_doubles()
-				self = self.cut_network_updown()
-				self = self.delete_alone_points()
-				self = self.delete_single_ridge_points()
-				self.min_distance = 0.01
-				self = self.merge_nodes()
-				#self=self.delete_points_with_two_ridges()
-				self = self.sort_nodes()
-				self = self.create_ridge_node_list()
+			self = self.delete_alone_points()
+			self = self.delete_single_ridge_points()
+			self.min_distance = 0.05
+			self = self.merge_nodes()
+			self=self.delete_points_with_two_ridges()
+			self = self.sort_nodes()
+			self = self.create_ridge_node_list()
 		elif self.creation != 'Voronoi' and self.creation != "growth_network":# and creation != 'reg_Voronoi':
 			self = self.create_network()
 			#self = self.delete_first_point()
@@ -526,7 +526,7 @@ class Network:
 		self.vertices_ini = np.array(self.vertices.tolist())
 		self = self.sort_nodes()
 		#network.vertices_ini=np.array(self.vertices.tolist())
-		self = self.distribution_length_fiber(path)
+		#self = self.distribution_length_fiber(path)
 		self.save_network('initial', path)
 		self = self.create_ridge_node_list()
 		self.state_ridge = ['tension']*len(self.ridge_vertices)

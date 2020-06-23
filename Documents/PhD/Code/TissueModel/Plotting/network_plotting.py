@@ -38,6 +38,9 @@ def plot_geometry(network,  **kw):
 		ax = fig.add_subplot(111, projection='3d')
 		if kw.get('show_vertices', True):
 			ax.scatter(network.vertices[:,0],network.vertices[:,1],network.vertices[:,2])
+		for i in range(len(network.vertices[:, 0])):
+			ax.text(network.vertices[i, 0], network.vertices[i, 1],network.vertices[i,2],i)
+		print network.ridge_vertices
 		for simplex in network.ridge_vertices:
 		        simplex = np.asarray(simplex)
 		        line_segments.append([(x, y, z) for x, y, z in network.vertices[simplex]])

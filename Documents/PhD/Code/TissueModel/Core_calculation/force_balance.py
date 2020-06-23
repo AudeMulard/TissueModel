@@ -10,7 +10,7 @@ import time
 from sympy import Matrix
 from sympy import *
 from scipy.sparse.linalg.dsolve import linsolve
-from scipy.optimize import newton_krylov,anderson,fsolve
+from scipy.optimize import newton_krylov,anderson,fsolve,root, newton
 
 warnings.filterwarnings("error", category=RuntimeWarning)
 
@@ -233,7 +233,7 @@ def iterative_newton(network, constitutive,details):
 		vertices.append(vertices_ini[j][1])
 	start = time.time()
 	jac=BroydenFirst()
-	sol = newton_krylov(create_F, vertices,verbose=True,f_tol=epsilon, inner_M=KrylovJacobian(inner_M=InverseJacobian(jac)))
+	sol = newton(create_F, vertices,tol=epsilon,maxiter=500)#,method='df-sane')#,verbose=True,f_tol=epsilon, inner_M=KrylovJacobian(inner_M=InverseJacobian(jac)),method='gmres')
 	print sol
 	vertices_sol = np.array(network.vertices)
 	for i in range(len(network.interior_nodes)):
@@ -331,7 +331,7 @@ def create_F(array):
 			force_equation_y+= (float(sp.sqrt((array[2 * i] - vertices_all[j][0]) ** 2 + (array[2 * i + 1] - vertices_all[j][1]) ** 2))
 								- float(np.linalg.norm(vertices_ini[k] - vertices_ini[j]))) * (array[2 * i + 1] -vertices_all[j][1])\
 							    / float(sp.sqrt((array[2 * i] - vertices_all[j][0]) ** 2 + (array[2 * i + 1] - vertices_all[j][1]) ** 2))
-			#print 'force_eq', force_equation_x
+			#print i,'force_eq', force_equation_x
 		result.append(force_equation_x)
 		result.append(force_equation_y)
 	return result

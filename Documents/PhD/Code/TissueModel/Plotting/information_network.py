@@ -5,7 +5,8 @@ import matplotlib.pyplot as plt
 import sys
 import fnmatch
 import math
-from statistics import mean 
+from statistics import mean
+sys.path.append('/home/aude/Documents/PhD/Code/TissueModel/')
 import Network_generation.creation_network
 
 def sorted_ls(path):
@@ -130,7 +131,7 @@ def plot_avg_angle(strain,network,ax2,color):
 	return avg_angles
 
 if __name__ == "__main__":
-	os.chdir('../Data/growth_network/')
+	os.chdir('../Data/default/')
 	if len(sys.argv) == 1:
 		os.chdir(sorted_ls('.')[-1])
 	else:
@@ -151,11 +152,11 @@ if __name__ == "__main__":
 		network = load_network_info(int(filename[-7:-4]))
 		#print smallest_values()
 		strain = plot_stress_strain(len(network.vertices),ax1,ax2,color)
-		avg_angles = plot_avg_angle(strain, network,ax2,color)
-	handles, labels = ax1.get_legend_handles_labels()
+		#avg_angles = plot_avg_angle(strain, network,ax2,color)
+	#handles, labels = ax1.get_legend_handles_labels()
 	# sort both labels and handles by labels
-	labels, handles = zip(*sorted(zip(labels, handles), key=lambda t: t[0]))
-	ax1.legend(handles, labels)
+	#labels, handles = zip(*sorted(zip(labels, handles), key=lambda t: t[0]))
+	#ax1.legend(handles, labels)
 	#ax1.legend(loc='upper left')
 	plt.savefig('stress_strain.pdf')
 	plt.show()
