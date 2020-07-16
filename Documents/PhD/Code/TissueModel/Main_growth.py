@@ -27,7 +27,7 @@ traction_distance = 0.1*length_domain[0]
 #iteration = 15
 
 
-data_path = '../Data/3D_Voronoi/'
+data_path = '../Data/3D_GN/'
 
 today = date.today()
 
@@ -38,8 +38,8 @@ path = new_dir
 
 
 ## EXPERIMENT
-creation="Voronoi"
-generation = 'random'
+creation="growth_network"
+generation = 'grid'
 constitutive = 'spring'
 side = 'right'
 plot = True
@@ -50,17 +50,17 @@ details = True
 
 network = Network(dimension, complexity_network, length_domain, min_distance, k_tension, k_compression, A, disturbance, creation, generation, path)
 network = network.set_fibers(path)
-"""
+
 print(len(network.ridge_vertices)-network.dimension*len(network.interior_nodes))
 plot_geometry(network)
 plt.show()
 
-"""
+
 test_1 = Tensile_test(constitutive, side, space_discretization, traction_distance, plot, video, path,details)
 network = test_1.full_test(network, path,details)
 
-
 """
+
 
 #print Network.__mro__()
 for i in range(20):

@@ -268,6 +268,7 @@ class Network:
 
 	def cut_network_side(self):
 		nodes = self.vertices
+		self = self.delete_doubles()
 		nodes_to_delete_left = []
 		nodes_to_delete_right = []
 		ridges_to_delete = []
@@ -311,20 +312,20 @@ class Network:
 			        if self.dimension==2:
 			            y = nodes[node,1]+(nodes[self.ridge_vertices[k][1],1]-nodes[node,1])/(nodes[self.ridge_vertices[k][1],0]-nodes[node,0])*(self.length[0]-nodes[node,0])
 			            nodes=np.append(nodes,[[self.length[0],y]], axis=0)
-			        if self.dimension == 3:
-			            y = nodes[node,1]+(nodes[self.ridge_vertices[k][1],1]-nodes[node,1])/(nodes[self.ridge_vertices[k][1],0]-nodes[node,0])*(self.length[0]-nodes[node,0])
-			            z = nodes[node,2]+(nodes[self.ridge_vertices[k][1],2]-nodes[node,2])/(nodes[self.ridge_vertices[k][1],0]-nodes[node,0])*(self.length[0]-nodes[node,0])
-			            nodes=np.append(nodes,[[self.length[0],y,z]], axis=0)
-			        self.ridge_vertices[k][0]=len(nodes)-1
+			        elif self.dimension == 3:
+						y = nodes[node,1]+(nodes[self.ridge_vertices[k][1],1]-nodes[node,1])/(nodes[self.ridge_vertices[k][1],0]-nodes[node,0])*(self.length[0]-nodes[node,0])
+						z = nodes[node,2]+(nodes[self.ridge_vertices[k][1],2]-nodes[node,2])/(nodes[self.ridge_vertices[k][1],0]-nodes[node,0])*(self.length[0]-nodes[node,0])
+						nodes=np.append(nodes,[[self.length[0],y,z]], axis=0)
+			    	self.ridge_vertices[k][0]=len(nodes)-1
 			    elif self.ridge_vertices[k][1]==node:
 			        if self.dimension == 2:
 			            y = nodes[node,1]+(nodes[self.ridge_vertices[k][0],1]-nodes[node,1])/(nodes[self.ridge_vertices[k][0],0]-nodes[node,0])*(self.length[0]-nodes[node,0])
 			            nodes=np.append(nodes,[[self.length[0],y]], axis=0)
-			        if self.dimension == 3:
-			            y = nodes[node,1]+(nodes[self.ridge_vertices[k][0],1]-nodes[node,1])/(nodes[self.ridge_vertices[k][0],0]-nodes[node,0])*(self.length[0]-nodes[node,0])
-			            z = nodes[node,2]+(nodes[self.ridge_vertices[k][0],2]-nodes[node,2])/(nodes[self.ridge_vertices[k][0],0]-nodes[node,0])*(self.length[0]-nodes[node,0])
-			            nodes=np.append(nodes,[[self.length[0],y,z]], axis=0)
-			        self.ridge_vertices[k][1]=len(nodes)-1
+			        elif self.dimension == 3:
+						y = nodes[node,1]+(nodes[self.ridge_vertices[k][0],1]-nodes[node,1])/(nodes[self.ridge_vertices[k][0],0]-nodes[node,0])*(self.length[0]-nodes[node,0])
+						z = nodes[node,2]+(nodes[self.ridge_vertices[k][0],2]-nodes[node,2])/(nodes[self.ridge_vertices[k][0],0]-nodes[node,0])*(self.length[0]-nodes[node,0])
+						nodes=np.append(nodes,[[self.length[0],y,z]], axis=0)
+			    	self.ridge_vertices[k][1]=len(nodes)-1
 		nodes_to_delete=np.array(sorted(nodes_to_delete, reverse=True))
 		for point in nodes_to_delete:
 			nodes=np.delete(nodes,int(point),0)
@@ -338,10 +339,23 @@ class Network:
 				ridge[i] = ridge[i] - r 
 		self.vertices=nodes
 		return self
-	
+
 	def cut_network(self):
 		self=self.cut_network_side()
 		self=self.cut_network_updown()
+		return self
+
+	def delete_boundary_to_boundary_fibre(self):
+		ridges_to_delete=[]
+		for i in range(len(self.ridge_vertices)):
+			ridge = self.ridge_vertices
+			if ridge[i][0] in self.boundary_nodes_left and ridge[i][1] in self.boundary_nodes_right:
+				ridges_to_delete = np.append(ridges_to_delete, i)
+			elif ridge[i][1] in self.boundary_nodes_left and ridge[i][0] in self.boundary_nodes_right:
+				ridges_to_delete = np.append(ridges_to_delete, i)
+		ridges_to_delete=np.array(sorted(ridges_to_delete, reverse=True))
+		for ridge in ridges_to_delete:
+			self.ridge_vertices=np.delete(self.ridge_vertices,int(ridge), axis=0)
 		return self
 
 	def delete_doubles(self):
@@ -481,13 +495,19 @@ class Network:
 			self = self.delete_doubles()
 		elif self.creation == 'growth_network':
 			self = self.create_network()
+			plot_geometry(self)
 			self = self.delete_doubles()
+			#plot_geometry(self)
 			self = self.cut_network_updown()
+			#plot_geometry(self)
 			self = self.delete_alone_points()
 			self = self.delete_single_ridge_points()
 			self.min_distance = 0.05
 			self = self.merge_nodes()
+			#plot_geometry(self)
 			self=self.delete_points_with_two_ridges()
+			self = self.sort_nodes()
+			self = self.delete_boundary_to_boundary_fibre()
 			self = self.sort_nodes()
 			self = self.create_ridge_node_list()
 		elif self.creation != 'Voronoi' and self.creation != "growth_network":# and creation != 'reg_Voronoi':
@@ -505,7 +525,7 @@ class Network:
 				self = self.delete_doubles()
 				self = self.sort_nodes()
 			print('number of boundary_nodes: ', len(self.boundary_nodes_right),len(self.boundary_nodes_left))
-		if self.generation!= 'regular' and self.creation != 'old' and self.dimension!=3 and self.creation != '1 straight line':
+		if self.generation!= 'regular' and self.creation != 'old' and self.creation != '1 straight line': #and self.creation != 'growth_network':
 			while len(self.ridge_vertices)-self.dimension*len(self.interior_nodes)<=1:
 				self.min_distance +=0.001
 				self = self.delete_doubles()

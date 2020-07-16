@@ -51,11 +51,10 @@ def select_network(network):
 			return vertices, ridge_vertices
 
 		if creation == "growth_network":
-			div_space = 500.
+			div_space = 1000.
 			#div_space = network.complexity * 1.
 			Seeds = Seeds_generation(network)
 			Seeds = np.array(Seeds)
-			print len(Seeds)
 			start = time.time()
 			vertices = np.zeros((len(Seeds)*2,network.dimension))
 			lines = []
@@ -125,14 +124,26 @@ def select_network(network):
 			elif network.dimension == 3:
 				import matplotlib.pyplot as plt
 				from mpl_toolkits.mplot3d import Axes3D
-				diameter_fiber = 0.2
+				diameter_fiber = 0.05
 				fig = plt.figure()
 				ax = fig.add_subplot(111,projection='3d')
 				ax.set_xlim([0.0,1.0])
 				ax.set_ylim([0.0,1.0])
 				ax.set_zlim([0.0,1.0])
 				offset_x = 0.05
+				#print Seeds
+				#Seeds = [[ 0.34267262,  0.34628781,  0.35309049], [ 0.35053563,  0.3356506,   0.67923106], [ 0.33468477,  0.68051519,  0.33757988], [ 0.34352039,  0.68166876,  0.68542981],
+				#		 [ 0.67642432,  0.33763399,  0.34145357], [ 0.67503487,  0.3519626,   0.6762634 ], [ 0.68428047,  0.6853272,   0.34369957], [ 0.67330054,  0.6850678,   0.6822873 ]]
+				#second_points = [[0.2397136118138366, 0.15446889008712694, 0.036614045832598086],[0.4107753877503444, 0.6992630323315421, 0.43396258671037113],[0.6942876161449569, 0.078249204207548, 0.2801077867489494],
+				#				 [0.9792752270951485, 0.8447762338490203, 0.22813937889599878],[0.9429814771364727, 0.17689244118639125, 0.14399745686240262],[0.8116648188216613, 0.16364547666771379, 0.36185171154921825],
+				#				 [0.7030992242857612, 0.03361402247523271, 0.445611093279633],[0.32535752965131903, 0.6019511866362497, 0.1933813688220396]]
+				#Seeds = [[ 0.33525341, 0.33874622, 0.34570835], [ 0.3441963, 0.34781281, 0.66725275], [ 0.34619191, 0.68480315, 0.34121317], [ 0.33893427, 0.6791277, 0.67030765],
+				#		 [ 0.68344549, 0.33397098, 0.34099821], [ 0.68338242, 0.33392333, 0.67741991], [ 0.68118369, 0.68022618, 0.34915255], [ 0.67224526, 0.68489387, 0.67417929]]
+				#second_points = [[0.655368105748464, 0.7175258861299552, 0.008322213815366242],[0.24493782892033478, 0.2232824224362745, 0.22278651107590375],[0.1861917413020815, 0.8454535069321121, 0.09384796140824248],
+				#				[0.5695826971470684, 0.6960567403184661, 0.4145449312906935],[0.33620564897049293, 0.19325882187520682, 0.5435268359393607],[0.10877489994364772, 0.8865711465229716, 0.09555314348516997],
+				#				[0.7411219354878787, 0.4612934366150022, 0.34785603005373245],[0.519656529146887, 0.4034048922921195, 0.41363648567254374]]
 				for i in range(len(Seeds)):
+					#second_point = second_points[i]
 					second_point = [np.random.rand() * (network.length[0]-offset_x)+offset_x, np.random.rand() * network.length[1],
 									np.random.rand() * network.length[2]]
 					u0 = second_point[0]-Seeds[i][0]
@@ -141,6 +152,7 @@ def select_network(network):
 					ax.scatter(np.array(second_point)[0], np.array(second_point)[1], np.array(second_point)[2],
 							   color='green')
 					lines.append([u0,u1,u2, Seeds[i][0],Seeds[i][1],Seeds[i][2],Seeds[i][0],Seeds[i][1],Seeds[i][2],'empty','empty'])
+					#print second_point
 				ax.scatter(np.array(Seeds)[:,0],np.array(Seeds)[:,1],np.array(Seeds)[:,2],color='red')
 					#if 0<i<15:
 					#	print i, Seeds[i,0]
@@ -154,6 +166,7 @@ def select_network(network):
 							xk = Seeds[i][0]+k/div_space
 							yk = Seeds[i][1]+k/div_space/lines[i][0]*lines[i][1]
 							zk = Seeds[i][2]+k/div_space/lines[i][0]*lines[i][2]
+							if i == 3 or i == 7: ax.scatter(xk, yk, zk, color='green')  # ; print xk, yk,zk
 							if xk >= network.length[0]:
 								vertices[i][0] = 1.0
 								vertices[i][1] = Seeds[i][1]+(1.0-Seeds[i][0])/lines[i][0]*lines[i][1]
@@ -165,44 +178,43 @@ def select_network(network):
 								lines[i][8]=zk+1./div_space*lines[i][2]
 								for j in range(len(Seeds)):
 									if i !=j and i not in lines_done_up:
-										if lines[j][3]<= xk <xk+1./div_space*lines[i][0]<=lines[j][6]:
-											#print i
+										if lines[j][3]<= xk-diameter_fiber/2. <xk+1./div_space+diameter_fiber/2.<=lines[j][6]:
 											AMk = [xk-Seeds[j][0],yk-Seeds[j][1],zk-Seeds[j][2]]
 											uj = [lines[j][0],lines[j][1],lines[j][2]]
 											cross = np.cross(uj,AMk)
 											distance = np.linalg.norm(cross)/np.linalg.norm(uj)
-											#print distance
 											if distance <= diameter_fiber:
 												x = Symbol('x')
 												Eq = uj[0]*(xk-uj[0]*x-Seeds[j][0])+uj[1]*(xk-uj[1]*x-Seeds[j][1])+uj[2]*(xk-uj[2]*x-Seeds[j][2])
 												t = solve(Eq,x)
-												#print i,j,t
 												x_inter = Seeds[j][0]+t[0]*lines[j][0]
-												#print x_inter, xk, xk+1./div_space*lines[i][0]
-												#if xk<=x_inter<=xk+1./div_space*lines[i][0]:
-												#print i
 												vertices[i][0] = x_inter
 												vertices[i][1] = Seeds[j][1]+t[0]*lines[j][1]
 												vertices[i][2] = Seeds[j][2]+t[0]*lines[j][2]
 												lines_done_up.append(i)
+												#print k, 'up',i, j
 												lines[i][9] = j
-													#print time.time()-start,i
 						if i not in lines_done_down:
 							xk = Seeds[i][0]-k/div_space
 							yk = Seeds[i][1]-k/div_space*lines[i][1]/lines[i][0]
 							zk = Seeds[i][2]-k/div_space*lines[i][2]/lines[i][0]
+							if i == 3 or i == 7 or i == 15-len(Seeds):
+								ax.scatter(xk,yk,zk, color='red')#; print xk, yk,zk
 							if xk <=0.0:
 								vertices[len(Seeds)+i][0] = 0.0
 								vertices[len(Seeds)+i][1] = Seeds[i][1]+(-Seeds[i][0])/lines[i][0]*lines[i][1]
 								vertices[len(Seeds)+i][2] = Seeds[i][2]+(-Seeds[i][0])/lines[i][0]*lines[i][2]
 								lines_done_down.append(i)
 							else:
-								lines[i][6]=xk-1./div_space*lines[i][0]
-								lines[i][7]=yk-1./div_space*lines[i][1]
-								lines[i][8]=zk-1./div_space*lines[i][2]
+								lines[i][3]=xk-1./div_space*lines[i][0]
+								lines[i][4]=yk-1./div_space*lines[i][1]
+								lines[i][5]=zk-1./div_space*lines[i][2]
 								for j in range(len(Seeds)):
 									if i !=j and i not in lines_done_down:
-										if lines[j][3]<= xk-1./div_space*lines[i][0]<= xk<= lines[j][6]:
+										#if i==2 or j==2:
+											#if i==5 or j==5:
+												#print k, lines[j][3],xk-1./div_space-diameter_fiber/2., xk+diameter_fiber/2., lines[j][6]
+										if lines[j][3]<= xk-1./div_space-diameter_fiber/2.<= xk+diameter_fiber/2.<= lines[j][6]:
 											AMk = [xk - Seeds[j][0], yk - Seeds[j][1], zk - Seeds[j][2]]
 											uj = [lines[j][0], lines[j][1], lines[j][2]]
 											cross = np.cross(uj, AMk)
@@ -213,16 +225,25 @@ def select_network(network):
 															xk - uj[1] * x - Seeds[j][1]) + uj[2] * (
 																 xk - uj[2] * x - Seeds[j][2])
 												t = solve(Eq, x)
-												# print i,j,t
 												x_inter = Seeds[j][0] + t[0] * lines[j][0]
-												#if xk-1./div_space*lines[i][0]<=x_inter<=xk:
 												vertices[len(Seeds)+i][0] = x_inter
 												vertices[len(Seeds)+i][1] = Seeds[j][1] + t[0] * lines[j][1]
 												vertices[len(Seeds)+i][2] = Seeds[j][2] + t[0] * lines[j][2]
 												lines[i][10]=j
+												#print k, 'down', len(Seeds)+i, j
 												lines_done_down.append(i)
+				"""for i in range(len(Seeds)):
+					for j in range(len(Seeds)):
+						ui = [lines[i][0],lines[i][1],lines[i][2]]
+						uj = [lines[j][0],lines[j][1],lines[j][2]]
+						AA=[Seeds[i][0]-Seeds[j][0],Seeds[i][1]-Seeds[j][1],Seeds[i][2]-Seeds[j][2]]
+						det = np.dot(np.cross(AA,ui),uj)
+						dot = np.dot(ui,uj)
+						distance = np.linalg.norm(det)/abs(dot)
+						if distance<0.1: print distance, i, j
+				"""
+				print lines_done_up, [len(Seeds)+k for k in lines_done_down]
 				#ax.scatter(np.array(points)[:,0],np.array(points)[:,1],np.array(points)[:,2])
-				print sorted(lines_done_down), sorted(lines_done_up)
 				ridge_vertices = []
 				list_points = []
 				import operator
@@ -238,7 +259,15 @@ def select_network(network):
 				for list_point in list_points:
 					for i in range(len(list_point)-1):
 						ridge_vertices.append([list_point[i][0],list_point[i+1][0]])
-			ax.scatter(np.array(vertices)[:, 0], np.array(vertices)[:, 1], np.array(vertices)[:, 2],color='blue')
+				ax.scatter(np.array(vertices)[:, 0], np.array(vertices)[:, 1], np.array(vertices)[:, 2],color='blue')
+			line_segments =[]
+			from mpl_toolkits.mplot3d import Axes3D
+			from mpl_toolkits.mplot3d.art3d import Line3DCollection
+			for simplex in ridge_vertices:
+				simplex = np.asarray(simplex)
+				line_segments.append([(x, y, z) for x, y, z in vertices[simplex]])
+			lc = Line3DCollection(line_segments, linestyle='solid')
+			ax.add_collection(lc)
 			return vertices,ridge_vertices
 				
 

@@ -4,7 +4,7 @@
 
 
 current_dir=$(pwd)
-cd ../Data/reg_Voronoi/
+cd ../Data/3D_GN/
 
 if [ "$1" == "" ]; then
 	cd $(ls -Art | tail -n 1)

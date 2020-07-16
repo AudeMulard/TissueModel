@@ -1,4 +1,4 @@
-import numpy as np
+import numpy
 import os, sys, fnmatch, csv
 sys.path.append('/home/aude/Documents/PhD/Code/TissueModel/')
 from Core_calculation.force_balance import length_square
@@ -10,6 +10,8 @@ import matplotlib.patches as patches
 def length_square(network,x):
 	if int(network.dimension) == 2:
 		return x[0]**2+x[1]**2
+	if int(network.dimension) == 3:
+		return x[0]**2+x[1]**2+x[2]**2
 
 
 ####################################### PLOTTING THE GEOMETRY OF NETWORKS ###########################################
@@ -29,7 +31,7 @@ def plot_geometry(network,  **kw):
 		#circ = patches.Circle((0.5, 0.5), 0.1, alpha=0.8, fc='yellow')
 		#ax.add_patch(circ)
 		for simplex in network.ridge_vertices:
-		        simplex = np.asarray(simplex)
+		        simplex = numpy.asarray(simplex)
 		        line_segments.append([(x, y) for x, y in network.vertices[simplex]])
 		lc = LineCollection(line_segments,linestyle='solid')
 	if int(network.dimension) ==3:
@@ -40,9 +42,8 @@ def plot_geometry(network,  **kw):
 			ax.scatter(network.vertices[:,0],network.vertices[:,1],network.vertices[:,2])
 		for i in range(len(network.vertices[:, 0])):
 			ax.text(network.vertices[i, 0], network.vertices[i, 1],network.vertices[i,2],i)
-		print network.ridge_vertices
 		for simplex in network.ridge_vertices:
-		        simplex = np.asarray(simplex)
+		        simplex = numpy.asarray(simplex)
 		        line_segments.append([(x, y, z) for x, y, z in network.vertices[simplex]])
 		ax.set_xlim3d([0.0,network.length[0]])
 		ax.set_ylim3d([0.0,network.length[1]])
@@ -63,11 +64,11 @@ def plot_network_extension(network, **kw):
 		ax.scatter(network.vertices[:,0],network.vertices[:,1], color='red')
 	line_segments_ini = []
 	for simplex_ini in network.ridge_vertices:
-	        simplex_ini = np.asarray(simplex_ini)
+	        simplex_ini = numpy.asarray(simplex_ini)
 	        line_segments_ini.append([(x, y) for x, y in network.vertices_ini[simplex_ini]])
 	line_segments = []
 	for simplex in network.ridge_vertices:
-	        simplex = np.asarray(simplex)
+	        simplex = numpy.asarray(simplex)
 	        line_segments.append([(x, y) for x, y in network.vertices[simplex]])
 	lc_ini = LineCollection(line_segments_ini,linestyle='dashed', color='grey', label='initial')
 	lc = LineCollection(line_segments,linestyle='solid', label='after tensile test', color='red')
@@ -83,24 +84,46 @@ def plot_constraints(network, **kw):
 	from matplotlib import cm
 	import matplotlib.colors
 	ridge_constraints=[]
-	### ATTENTION: TOOK NETWORK.EF OUT, SO NO COEFFICIENT
-	for ridge in network.ridge_vertices:
-		ridge_constraints.append((np.sqrt(length_square(network,network.vertices[ridge[0]]-network.vertices[ridge[1]]))-np.sqrt(length_square(network,network.vertices_ini[ridge[0]]-network.vertices_ini[ridge[1]]))))
-	max_constraint = max(ridge_constraints)
-	cmap = plt.cm.rainbow
-	norm = matplotlib.colors.Normalize(vmin=0., vmax=max_constraint)
 	fig = plt.figure()
 	line_segments = []
-	ax = fig.gca()
-	ax.set(xlim=(0., 2.0), ylim=(0., 1.1))
-	from matplotlib.collections import LineCollection
-	ax.scatter(network.vertices[:,0],network.vertices[:,1])
-	for simplex in network.ridge_vertices:
-		simplex = np.asarray(simplex)
-		line_segments.append([(x, y) for x, y in network.vertices[simplex]])
-	lc = LineCollection(line_segments,linestyle='solid',cmap=cmap,norm=norm)
+	### ATTENTION: TOOK NETWORK.EF OUT, SO NO COEFFICIENT
+	if int(network.dimension) == 2:
+		for ridge in network.ridge_vertices:
+			ridge_constraints.append((numpy.sqrt(length_square(network,network.vertices[ridge[0]]-network.vertices[ridge[1]]))-numpy.sqrt(length_square(network,network.vertices_ini[ridge[0]]-network.vertices_ini[ridge[1]]))))
+		max_constraint = max(ridge_constraints)
+		cmap = plt.cm.rainbow
+		norm = matplotlib.colors.Normalize(vmin=0., vmax=max_constraint)
+		ax = fig.gca()
+		#sax.set(xlim=(0., 2.0), ylim=(0., 1.1))
+		from matplotlib.collections import LineCollection
+		ax.scatter(network.vertices[:,0],network.vertices[:,1])
+		for simplex in network.ridge_vertices:
+			simplex = numpy.asarray(simplex)
+			line_segments.append([(x, y) for x, y in network.vertices[simplex]])
+		lc = LineCollection(line_segments,linestyle='solid',cmap=cmap,norm=norm)
+	elif int(network.dimension) == 3:
+		from mpl_toolkits.mplot3d import Axes3D
+		from mpl_toolkits.mplot3d.art3d import Line3DCollection
+		for ridge in network.ridge_vertices:
+			ridge_constraints.append((numpy.sqrt(length_square(network,network.vertices[ridge[0]]-network.vertices[ridge[1]]))-numpy.sqrt(length_square(network,network.vertices_ini[ridge[0]]-network.vertices_ini[ridge[1]]))))
+		max_constraint = max(ridge_constraints)
+		cmap = plt.cm.rainbow
+		norm = matplotlib.colors.Normalize(vmin=0., vmax=max_constraint)
+		ax = fig.add_subplot(111, projection='3d')
+		line_segments = []
+		if kw.get('show_vertices', True):
+			ax.scatter(network.vertices[:, 0], network.vertices[:, 1], network.vertices[:, 2])
+		for i in range(len(network.vertices[:, 0])):
+			ax.text(network.vertices[i, 0], network.vertices[i, 1], network.vertices[i, 2], i)
+		for simplex in network.ridge_vertices:
+			simplex = numpy.asarray(simplex)
+			line_segments.append([(x, y, z) for x, y, z in network.vertices[simplex]])
+		ax.set_xlim3d([0.0, network.length[0]])
+		ax.set_ylim3d([0.0, network.length[1]])
+		ax.set_zlim3d([0.0, network.length[2]])
+		lc = Line3DCollection(line_segments, linestyle='solid')
 	sm = plt.cm.ScalarMappable(cmap=cmap, norm=norm)
-	lc.set_array(np.array(ridge_constraints))
+	lc.set_array(numpy.array(ridge_constraints))
 	ax.add_collection(lc)
 	sm.set_array([])
 	fig.colorbar(sm, orientation='vertical')

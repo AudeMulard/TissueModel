@@ -460,12 +460,12 @@ def iterative_newton_3d(network, constitutive,details):
 	for k in range(max_iter):
 		F = write_vector_F_3d(network, constitutive)
 		J = write_matrix_J_3d(network, constitutive)
-		print np.linalg.cond(J)
+		#print np.linalg.cond(J)
 		#conversion in sparse
 		J_sparse = csc_matrix(J)
-		start = time.time()
+		#start = time.time()
 		diff = spsolve(J_sparse,-F)
-		print time.time()-start
+		#print time.time()-start
 		for i in range(len(network.interior_nodes)):
 			j=network.interior_nodes[i]
 			network.vertices[j,0] = network.vertices[j,0] + diff[network.dimension*i]

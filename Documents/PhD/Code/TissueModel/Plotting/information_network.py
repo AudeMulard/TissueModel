@@ -131,7 +131,7 @@ def plot_avg_angle(strain,network,ax2,color):
 	return avg_angles
 
 if __name__ == "__main__":
-	os.chdir('../Data/default/')
+	os.chdir('../Data/3D_GN/')
 	if len(sys.argv) == 1:
 		os.chdir(sorted_ls('.')[-1])
 	else:
