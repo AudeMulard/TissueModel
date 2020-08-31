@@ -5,13 +5,17 @@ import numpy as np
 
 
 def length_square(x):
-	return x[0]**2+x[1]**2
+	if len(x)==2:
+		return x[0]**2+x[1]**2
+	if len(x) ==3:
+		return x[0]**2+x[1]**2+x[2]**2
 
 class Cell:
 	
-	def __init__(self,centre_x,centre_y,radius):
-		self.centre_x = centre_x
-		self.centre_y = centre_y
+	def __init__(self,centre,radius):
+		self.centre_x = centre[0]
+		self.centre_y = centre[1]
+		if len(centre) == 3: self.centre_z = centre[2]
 		self.radius = radius
 		self.boundary_cell = []
 
@@ -37,8 +41,12 @@ class Cell:
 			node = int(node)
 			for ridge in network.ridge_vertices:
 				if ridge[0] == node:
-					In_point = sg.Point(nodes[node][0],nodes[node][1])
-					Out_point = sg.Point(nodes[ridge[1]][0],nodes[ridge[1]][1])
+					if len(nodes[node])==3:
+						In_point = sg.Point(nodes[node][0],nodes[node][1],nodes[node][2])
+						Out_point = sg.Point(nodes[ridge[1]][0],nodes[ridge[1]][1],nodes[ridge[1]][1])
+					elif len(nodes[node])==2:
+						In_point = sg.Point(nodes[node][0],nodes[node][1])
+						Out_point = sg.Point(nodes[ridge[1]][0],nodes[ridge[1]][1])
 					line = sg.Line(In_point,Out_point)
 					intersec = sg.intersection(circ, line)
 					if length_square(nodes[ridge[1]]-intersec[0]) >= length_square(nodes[ridge[1]]-intersec[1]):
@@ -48,8 +56,12 @@ class Cell:
 					ridge[0]=len(nodes)-1
 					k+=1
 				if ridge[1] == node:
-					In_point = sg.Point(nodes[node][0],nodes[node][1])
-					Out_point = sg.Point(nodes[ridge[0]][0],nodes[ridge[0]][1])
+					if len(nodes[node])==3:
+						In_point = sg.Point(nodes[node][0],nodes[node][1],nodes[node][2])
+						Out_point = sg.Point(nodes[ridge[0]][0],nodes[ridge[0]][1],nodes[ridge[0]][1])
+					elif len(nodes[node])==2:
+						In_point = sg.Point(nodes[node][0],nodes[node][1])
+						Out_point = sg.Point(nodes[ridge[0]][0],nodes[ridge[0]][1])
 					line = sg.Line(In_point,Out_point)
 					intersec = sg.intersection(circ, line)
 					if length_square(nodes[ridge[0]]-intersec[0]) >= length_square(nodes[ridge[0]]-intersec[1]):

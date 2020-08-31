@@ -232,15 +232,18 @@ def iterative_newton(network, constitutive,details):
 		vertices.append(vertices_ini[j][0])
 		vertices.append(vertices_ini[j][1])
 	start = time.time()
-	jac=BroydenFirst()
-	sol = newton(create_F, vertices,tol=epsilon,maxiter=500)#,method='df-sane')#,verbose=True,f_tol=epsilon, inner_M=KrylovJacobian(inner_M=InverseJacobian(jac)),method='gmres')
-	print sol
+	#jac=BroydenFirst()
+	#sol = newton(create_F, vertices,tol=epsilon,maxiter=500)#,method='df-sane')#,verbose=True,f_tol=epsilon, inner_M=KrylovJacobian(inner_M=InverseJacobian(jac)),method='gmres')
+	sol = root(create_F, vertices, method='krylov', options  = {'disp':True,'fatol':1e-8,'jac_options':{'rdiff':0.001,'method':'gmres','inner_atol':1e-10}})
+	print 'solution', sol.x
 	vertices_sol = np.array(network.vertices)
+	sol = sol.x
 	for i in range(len(network.interior_nodes)):
 		j = network.interior_nodes[i]
 		vertices_sol[j]=[sol[2*i],sol[2*i+1]]
 	print 'krylov_time', time.time()-start
 	middle = time.time()
+	
 	for k in range(max_iter):
 		F = write_vector_F(network, constitutive)
 		#print F
@@ -250,8 +253,8 @@ def iterative_newton(network, constitutive,details):
 		#print np.linalg.cond(J)
 		#conversion in sparse
 		J_sparse = csc_matrix(J)
-		"""#diff = spsolve(J_sparse,-F)#, use_umfpack=True)
-		diff = isolve.bicg(J_sparse,-F)
+		#diff = spsolve(J_sparse,-F)#, use_umfpack=True)
+		"""diff = isolve.bicg(J_sparse,-F)
 		print 'isolve', time.time()-start
 		middle = time.time()
 		#diff_h = linsolve.spsolve(J_sparse,-F, use_umfpack=True)
@@ -301,7 +304,7 @@ def iterative_newton(network, constitutive,details):
 	print 'mymethod', time.time()-middle
 	for i in range(len(network.vertices)):
 		if np.linalg.norm(network.vertices[i]-vertices_sol[i])>10e-10: print i, network.vertices[i],vertices_sol[i], network.vertices_ini[i]
-	print vertices_sol
+	#print vertices_sol, vertices_ini
 	return network
 
 

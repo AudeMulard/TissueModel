@@ -71,12 +71,12 @@ class Tensile_test:
 					network.state_ridge[index]='compression'
 				index+=1
 		while result == False and tries <=10: # solve the balance, if it does not work with initial discretization, reduce the discretization until it works. (more than 10 divides probably means there is an issue with the network)
-			try:
-				network = new_bc(network, space_discretization*self.traction_distance/abs(self.traction_distance), self.side) #change boundary positions
-				network= solve_force_balance(network, self.constitutive, details) #solve the equilibrium of new configuration
-				result = True
-				network.save_network('temp',path) # save a configuration in case the next discretization fails, so that the code can begin from the beginning of the step
-			except (ValueError):#,RuntimeWarning):
+			#try:
+			network = new_bc(network, space_discretization*self.traction_distance/abs(self.traction_distance), self.side) #change boundary positions
+			network= solve_force_balance(network, self.constitutive, details) #solve the equilibrium of new configuration
+			result = True
+			network.save_network('temp',path) # save a configuration in case the next discretization fails, so that the code can begin from the beginning of the step
+			"""except (ValueError):#,RuntimeWarning):
 				print('New discretization: ', space_discretization/2, ' on step ', current_disp)
 				space_discretization = space_discretization/2
 				with open(os.path.join(path,'network_vertices.csv'),'r') as readFile:
@@ -84,7 +84,7 @@ class Tensile_test:
 					list_vertices = np.array(list(reader))
 					network.vertices=list_vertices.astype(float)
 				tries +=1
-				continue
+				continue"""
 		space_discretization = self.space_discretization
 		network.stress.append(self.calculate_macro_stress(network))
 		network.strain.append((max(network.vertices[:,0])-network.length[0])/network.length[0])

@@ -14,11 +14,11 @@ import cProfile
 import numpy 
 
 ## PARAMETERS
-dimension=3 #dimension of the problem
-complexity_network=50 #number of random seed points
-length_domain=(1.0,1.0,1.0)
+dimension=2 #dimension of the problem
+complexity_network=2000 #number of random seed points
+length_domain=(2.0,1.0,2.0)
 min_distance = 0.0001*length_domain[0]
-space_discretization = 0.01*length_domain[0]
+space_discretization = 0.1*length_domain[0]
 k_tension=1.0
 k_compression = 1.0
 A=1.
@@ -50,15 +50,22 @@ details = True
 
 network = Network(dimension, complexity_network, length_domain, min_distance, k_tension, k_compression, A, disturbance, creation, generation, path)
 network = network.set_fibers(path)
-"""
+
 print(len(network.ridge_vertices)-network.dimension*len(network.interior_nodes))
+
+cell1 = Cell((0.5,0.5),0.1)
+cell2 = Cell((1.5,0.5),0.1)
+network = cell1.add_cell(network)
+network = cell2.add_cell(network)
 plot_geometry(network)
 plt.show()
+
+#cell = Cell(0.5,0.5,0.1)
 
 """
 test_1 = Tensile_test(constitutive, side, space_discretization, traction_distance, plot, video, path,details)
 network = test_1.full_test(network, path,details)
-
+"""
 
 """
 
