@@ -42,23 +42,23 @@ ax.plot(x,tangent_line(f,1.0,-2,2),linestyle = 'dashed')
 first_line = LineString(np.column_stack((x,y)))
 second_line = LineString(np.column_stack((x,tangent_line(f,2.5,-2,2))))
 intersection = first_line.intersection(second_line)
-print intersection.xy[0],intersection.xy[1]
+#print intersection.xy[0],intersection.xy[1]
 plt.scatter(intersection.xy[0], 'o')
 plt.annotate(r'$t_1$',(intersection.xy[0][0],intersection.xy[1][0]+0.2),fontsize=15)
 second_line = LineString(np.column_stack((x,tangent_line(f,1.5,-2,2))))
 intersection = first_line.intersection(second_line)
-print intersection.xy[0],intersection.xy[1]
+#print intersection.xy[0],intersection.xy[1]
 plt.scatter(intersection.xy[0], 'o')
 plt.annotate(r'$t_2$',(intersection.xy[0][0]+0.05,intersection.xy[1][0]+0.2),fontsize=15)
 second_line = LineString(np.column_stack((x,tangent_line(f,1.0,-2,2))))
 intersection = first_line.intersection(second_line)
-print intersection.xy[0][0],intersection.xy[1]
+#print intersection.xy[0][0],intersection.xy[1]
 plt.scatter(intersection.xy[0], 'o')
 plt.annotate(r'$t_3$',(intersection.xy[0][0],intersection.xy[1][0]+0.2),fontsize=15)
 
 second_line = LineString(np.column_stack((x,f(x))))
 intersection = first_line.intersection(second_line)
-print intersection.xy[0][0],intersection.xy[1]
+#print intersection.xy[0][0],intersection.xy[1]
 plt.scatter(intersection.xy[0], 'o')
 plt.annotate(r'$t$',(intersection.xy[0][0]-0.1,intersection.xy[1][0]+0.2),fontsize=15)
 

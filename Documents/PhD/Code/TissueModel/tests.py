@@ -17,13 +17,18 @@ complexity_network=100 #number of random seed points
 length_domain=(1.0,1.0,1.0)
 min_distance = 0.0001*length_domain[0]
 space_discretization = 0.01*length_domain[0]
-k_tension=1.0
-k_compression = 1.0
-A=1.
-disturbance=0.02
-traction_distance = 0.5*length_domain[0]
-#iteration = 15
 
+element_size=0.01
+#iteration = 15
+beam_Young = 33000
+beam_poisson = 0.3
+beam_profile = 0.01
+truss_young = 33000
+truss_poisson = 0.3
+truss_area =  0.01
+disturbance=0.02
+traction_distance = 0.2*length_domain[0]
+hyperstatic_param = dimension
 
 
 ## EXPERIMENT
@@ -37,7 +42,9 @@ phase = 'only_one'
 stress_rep = True
 details = True
 
-list_modes = [['growth_network','grid']]#['Voronoi','random'],['Voronoi','regular'],['growth_network','grid']]#,['Voronoi','grid']
+#list_modes = [['growth_network','grid'],['Voronoi','random'],['Voronoi','regular'],['Voronoi','grid']]
+
+list_modes = [['Voronoi','random']]
 
 for mode in list_modes:
 	creation = mode[0]
@@ -61,13 +68,13 @@ for mode in list_modes:
 	with open(os.path.join(path,'testing.txt'), 'a') as writeFile:
 		writeFile.write('%s \n' % mode)
 	############################### REPEATABILITY ######################################
-	
+	"""
 	# Repeatability for same network
 	with open(os.path.join(path,'testing.txt'), 'a') as writeFile:
 		writeFile.write('Repeatability for the same network\n')
 	from Testing.Identical_network import *
-	network = Network(dimension, complexity_network, length_domain, min_distance, k_tension, k_compression, A, disturbance, creation,generation, path)
-	test_1 = Tensile_test(constitutive, side, space_discretization, traction_distance, plot, video, path,details)
+	network = Network(dimension, complexity_network, length_domain, min_distance, beam_Young, beam_poisson, beam_profile, truss_young, truss_poisson, truss_area,disturbance, hyperstatic_param, creation, generation, path)
+	test_1 = Tensile_test(constitutive, side, space_discretization, traction_distance,element_size, plot, video, path,details)
 	network_def_tests(network,path,test_1)
 	identical_check(path)
 	
@@ -75,29 +82,29 @@ for mode in list_modes:
 	with open(os.path.join(path,'testing.txt'), 'a') as writeFile:
 		writeFile.write('Repeatability for different networks, same parameters\n')
 	from Testing.Identical_parameters import *
-	network = Network(dimension, complexity_network, length_domain, min_distance, k_tension, k_compression, A, disturbance, creation,generation, path)
-	test_1 = Tensile_test(constitutive, side, space_discretization, traction_distance, _plot, video, path,details)
+	network = Network(dimension, complexity_network, length_domain, min_distance, k_tension, k_compression, A, disturbance, hyperstatic_param,creation,generation, path)
+	test_1 = Tensile_test(constitutive, side, space_discretization, traction_distance,element_size, _plot, video, path,details)
 	network_def_idparams(network,path,test_1)
 	idparams_check(path)
-	
+	"""
 	# Elasticity test
 	with open(os.path.join(path,'testing.txt'), 'a') as writeFile:
 		writeFile.write('Elasticity test\n')
 	from Testing.Elasticity import *
-	network = Network(dimension, complexity_network, length_domain, min_distance, k_tension, k_compression, A, disturbance, creation,generation, path)
-	test_1 = Tensile_test(constitutive, side, space_discretization, traction_distance, _plot, video, path,details)
+	network = Network(dimension, complexity_network, length_domain, min_distance, beam_Young, beam_poisson, beam_profile, truss_young, truss_poisson, truss_area,disturbance, hyperstatic_param, creation, generation, path)
+	test_1 = Tensile_test(constitutive, side, space_discretization, traction_distance, element_size,_plot, video, path,details)
 	network_def_elasticity(network,path,test_1)
 	elasticity_check(path)
-
+"""
 	# Add the change of step size
 	with open(os.path.join(path,'testing.txt'), 'a') as writeFile:
 		writeFile.write('Step size change test\n')
 	from Testing.Step_size import *
-	network = Network(dimension, complexity_network, length_domain, min_distance, k_tension, k_compression, A, disturbance, creation,generation, path)
-	test_1 = Tensile_test(constitutive, side, space_discretization, traction_distance, _plot, video, path,details)
+	network = Network(dimension, complexity_network, length_domain, min_distance, beam_Young, beam_poisson, beam_profile, truss_young, truss_poisson, truss_area,disturbance, hyperstatic_param, creation, generation, path)
+	test_1 = Tensile_test(constitutive, side, space_discretization, traction_distance, element_size, _plot, video, path,details)
 	network_def_tests(network,path,test_1)
-	identical_check(path)
-	
+	discretization_check(path)
+		
 
 	############################### BIOLOGICAL MEANING ######################################
 	with open(os.path.join(path,'testing.txt'), 'a') as writeFile:
@@ -113,4 +120,4 @@ for mode in list_modes:
 	from Testing.Biological_meaning import *
 
 	check_bio(path)
-
+"""

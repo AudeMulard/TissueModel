@@ -1,32 +1,49 @@
 import os
 import csv
 import numpy as np
-import matplotlib.pyplot as plt
 import sys
 import fnmatch
 import math
-from statistics import mean
-sys.path.append('/home/aude/Documents/PhD/Code/TissueModel/')
+sys.path.append('C:/Users/am2548/TissueModel/Documents/PhD/Code/TissueModel/')
 import Network_generation.creation_network
+import Core_calculation.tensile_test
+
 
 def sorted_ls(path):
     mtime = lambda f: os.stat(os.path.join(path, f)).st_mtime
     return list(sorted(os.listdir(path), key=mtime))
 
 def load_network_info(path,**kw):
-	with open('parameters_%03d.csv' % path, 'r') as readFile:
+	filename = fnmatch.filter(os.listdir('.'), 'parameters_??_%05d.csv' % path)
+	#print(path,filename)
+	with open(filename[-1],'r') as readFile:
 		reader = csv.reader(readFile)
-		params = dict(list(reader))
-	network = Network_generation.creation_network.Network(int(params['dimension']), params['complexity'], eval(params['length']), params['merge_distance'], eval(params['k_tension']), eval(params['k_compression']), params['A'], params['disturbance'], params['creation'],params['generation'],path)
-	filename = fnmatch.filter(os.listdir('.'),'network_vertices_initial_%03d*.csv' % path)
+		params = list(reader)
+		params = dict([param for param in params if param !=[]])
+	network = Network_generation.creation_network.Network(int(params['dimension']), 
+															params['complexity'], 
+															eval(params['length']), 
+															eval(params['merge_distance']), 
+															eval(params["beam Young"]),
+															eval(params["beam Poisson"]),
+															eval(params["beam Profile"]),
+															eval(params["connector coeff"]),
+															params['disturbance'],
+															params['hyperstatic_param'], 
+															params['creation'],
+															params['generation'],
+															path)
+	filename = fnmatch.filter(os.listdir('.'),'network_vertices_initial_*_%05d.csv' % path)
 	with open(filename[0], 'r') as readFile:
 		reader = csv.reader(readFile)
-		list_vertices = np.array(list(reader))
+		list_vertices = list(reader)
+		list_vertices = np.array([vertice for vertice in list_vertices if vertice !=[]],dtype=object)
 		network.vertices_ini=list_vertices.astype(float)
-	filename = fnmatch.filter(os.listdir('.'), 'network_ridge_vertices_*.csv')
-	with open('network_ridge_vertices_%03d.csv' % path, 'r') as readFile:
+	filename = fnmatch.filter(os.listdir('.'), 'network_ridge_vertices_*_%05d.csv' % path)
+	with open(filename[0], 'r') as readFile:
 		reader = csv.reader(readFile)
-		list_ridge_vertices=np.array(list(reader))
+		list_ridge_vertices=list(reader)
+		list_ridge_vertices=np.array([ridge for ridge in list_ridge_vertices if ridge !=[]],dtype=object)
 		network.ridge_vertices=list_ridge_vertices.astype(int)
 	network.ridge_vertices = [list(l) for l in network.ridge_vertices]
 	if kw.get('step'): 
@@ -45,20 +62,69 @@ def load_network_info(path,**kw):
 	network=network.create_ridge_node_list()
 	return network
 
+def write_node_label(test_number,network):
+	import pandas as pd
+	filename = 'nodes_label_%09d.csv' % int(test_number)
+	list_node_label = []
+	node_label = pd.read_csv('node_label_%09d.csv' % int(test_number),header=None).to_numpy()[0]
+	number_elements = pd.read_csv('number_elements_%s.csv' % test_number,header=None).to_numpy()[0]
+	number_elements=[number+1 for number in number_elements]
+	for k in range(len(node_label)):
+		ridge=network.list_nodes_ridges[k]
+		if node_label[k]==0:
+			list_node_label.append(sum(number_elements[:(ridge[0]+1)-1]))
+		elif node_label[k]==1:
+			list_node_label.append(sum(number_elements[:(ridge[0]+1)])-1)
+	return list_node_label
+
+
+def load_info_test(path):
+	filename = fnmatch.filter(os.listdir('.'), 'parameters_test_%05d.csv' % path)
+	#print(filename)
+	with open(filename[0],'r') as readFile:
+		reader = csv.reader(readFile)
+		params = list(reader)
+		params = dict([param for param in params if param !=[]])
+	test = Core_calculation.tensile_test.Tensile_test(params["constitutive"],params["side"],eval(params["space discretization"]),
+		eval(params["traction_distance"]),eval(params["element size"]),params["plot"], params["video"],'.',params["details"])
+	return test
+
+def stress_strain_curve(test_number,network):
+	import pandas as pd
+	filenames = fnmatch.filter(os.listdir('.'), 'stress_data_*_%09d.rpt' % int(test_number))
+	stress=[]
+	lengths = []
+	for ridge in network.ridge_vertices:
+		# Minimum length
+		length = np.sqrt(length_square(network.vertices[ridge[0]]-network.vertices[ridge[1]]))
+		lengths.append(length)
+	#df_1 =  pd.read_csv(filenames[0],header=None).to_numpy()
+	#node_label = write_node_label(test_number,network)
+	#node_label_stress = [node*2 for node in node_label]
+	#node_label_right= node_label[-len(network.boundary_nodes_right)-len(network.boundary_nodes_left):-len(network.boundary_nodes_left)]
+	df_1 = pd.read_fwf(filenames[0],skiprows=2,skipfooter=4,colspecs=([0,30],[31,50]), sep='\t').to_numpy()
+	stress_1 = df_1[:,1]
+	strain=[]
+	for i in range(len(stress_1)):
+		stress.append(stress_1[i]*df_1[i,0]/(np.mean(lengths)*len(network.ridge_vertices)))#(len(network.boundary_nodes_right)+len(network.boundary_nodes_left)))#np.mean(lengths)))#*len(network.ridge_vertices)))#/(len(network.ridge_vertices)*np.mean(lengths)))
+		strain.append(df_1[i,0]*1.0)
+	#print(test_number,strain,stress)
+	return strain, stress
+
 
 def plot_second_der(ax,strain, stress,color):
-	der_sec = [0]
-	for i in range(1,len(stress)-1):
-		der_sec.append((stress[i+1]+stress[i-1]-2*stress[i])/(strain[i+1]-strain[i])**2)
-		#print stress[i+1],stress[i],stress[i-1]
-		#der_sec.append((stress[i]))
-	ax.plot(strain[0:len(der_sec)],der_sec, color = color)
+	der_sec = []
+	#print(strain,stress)
+	for i in range(1,len(strain)-1):
+		der_sec.append(2*stress[i-1]/[(strain[i]-strain[i-1])*(strain[i+1]-strain[i-1])]-2*stress[i]/[(strain[i+1]-strain[i])*(strain[i]-strain[i-1])]+2*stress[i+1]/[(strain[i+1]-strain[i])*(strain[i+1]-strain[i-1])])
+	print(der_sec)
+	ax.plot(strain[1:-1],der_sec, color = color,linestyle='dashed')
 
 def plot_first_der(ax,strain, stress,color):
 	der_sec = []
-	for i in range(0,len(stress)-1):
-		der_sec.append((stress[i+1]-stress[i])/(strain[i+1]-strain[i]))
-	ax.plot(strain[0:len(der_sec)],der_sec, color = color)
+	for i in range(1,len(stress)-1):
+		der_sec.append((stress[i+1]-stress[i-1])/(strain[i+1]-strain[i-1]))
+	ax.plot(strain[1:-1],der_sec, color = color,linestyle='dashed')
 
 def plot_stress_strain(k,ax1,ax2,color):
 	filename = fnmatch.filter(os.listdir('.'), 'stress_strain_%03d.csv' % k)
@@ -67,98 +133,65 @@ def plot_stress_strain(k,ax1,ax2,color):
 		curve = np.array(list(reader))
 		stress = [float(i) for i in curve[1]]
 		strain=[float(i) for i in curve[0]]
-	#for i in range(int(len(curve[1]))):
-	#	strain.append(i*0.0025)
-	
-	
+
 	ax1.plot(strain, stress, marker='o',linestyle='dashed', markersize=5., color = color,label=k)
-	
-	
-	#plot_second_der(ax2,strain, stress, color='tab:blue')
-	#plot_first_der(ax2,strain, stress, 'green')
-	
-
-
-	#plt.plot(stress)
-	#plt.show()
 	return strain
 
-def length_square(x):	
-	return x[0]**2+x[1]**2
+def length_square(x):
+	if len(x) ==2: return x[0]**2+x[1]**2
+	if len(x) ==3: return x[0]**2+x[1]**2+x[2]**2
+
+
+def test_isotropy(network):
+	import matplotlib.pyplot as plt
+	fig = plt.figure()
+	ax1 = fig.add_subplot()
+	angles,lengths=[],[]
+	for ridge in network.ridge_vertices:
+		if 0.1*network.length[0]<network.vertices[ridge[0]][0]<0.9*network.length[0] and 0.1*network.length[0]<network.vertices[ridge[1]][0]<0.9*network.length[0]:
+			if 0.1*network.length[1]<network.vertices[ridge[0]][1]<0.9*network.length[1] and 0.1*network.length[1]<network.vertices[ridge[1]][1]<0.9*network.length[1]:
+				lengths.append(np.sqrt(length_square(network.vertices[ridge[0]]-network.vertices[ridge[1]])))
+				angles.append(np.arccos(np.dot(network.vertices[ridge[0]]-network.vertices[ridge[1]], [1.,0.])/lengths[-1])*180/np.pi)
+	import seaborn as sns
+	plt.hist(angles,weights=lengths)
+	fig1 = plt.figure()
+	plt.hist(angles)
+	#ax1.scatter(angles,lengths)
+	#print(angles)
+				
 
 def calculate_network_data(network, length_ini, **kw):
+	import pandas as pd
 	if kw.get('step')!=None:
-		if kw.get('name')!=None:
-			filename = 'network_vertices_%03d_%03d_%s.csv' % (int(kw['step']),len(network.vertices),kw['name'])
+		if kw.get('test_number')!=None:
+			filename = 'network_vertices_01_%02d_%s.csv' % (int(kw['step']),kw['test_number'])
 		else:
 			filename = 'network_vertices_%03d_%03d.csv' % (int(kw['step']),len(network.vertices))
-		with open(filename  ,'r') as readFile:
-			reader = csv.reader(readFile)
-			list_vertices = np.array(list(reader))
-			network.vertices=list_vertices.astype(float)
+		df = pd.read_csv(filename,usecols=[4,12,13])
+		if network.dimension==3:
+			network.vertices=df.reindex(list(kw['node_label'].transpose()[0])).loc[:,['   COORD-COOR1','   COORD-COOR2','   COORD-COOR3']].to_numpy()
+		elif network.dimension ==2:
+			network.vertices=df.reindex(list(kw['node_label'])).loc[:,['   COORD-COOR1','   COORD-COOR2']].to_numpy()
+		from Plotting.network_plotting import plot_geometry
+		import matplotlib.pyplot as plt
+	strain_omega_step=(np.max(network.vertices)-1.0)/1.0
 	stretch_ratios,cos_theta_square = [],[]
 	list_angle = []
 	lengths=[]
+	print(len(network.vertices))
 	for ridge in network.ridge_vertices:
 		# Minimum length
 		length = np.sqrt(length_square(network.vertices[ridge[0]]-network.vertices[ridge[1]]))
 		lengths.append(length)		
 		stretch_ratios.append(length / length_ini[list(network.ridge_vertices).index(ridge)])
 		# Minimum & max angle
-		cos_theta_square.append(np.dot(network.vertices[ridge[0]]-network.vertices[ridge[1]], [1.,0.])**2/length**2)
+		try:
+			if network.dimension==2: cos_theta_square.append(np.dot(network.vertices[ridge[0]]-network.vertices[ridge[1]], [1.,0.])**2/length**2)
+			if network.dimension==3: cos_theta_square.append(np.dot(network.vertices[ridge[0]]-network.vertices[ridge[1]], [1.,0.,0])**2/length**2)
+		except RuntimeWarning:
+			continue
 		list_angle.append(cos_theta_square[-1]*length)
 	omega_xx = sum(list_angle)/sum(lengths)
-	return lengths, stretch_ratios, cos_theta_square, omega_xx
+	return lengths, stretch_ratios, cos_theta_square, omega_xx,strain_omega_step
 
-def plot_avg_angle(strain,network,ax2,color):
-	avg_angles = []
-	min_lengths=[]
-	min_angles=[]
-	max_angles=[]
-	for k in range(len(strain)-1):
-		values = smallest_values(k,network.ridge_vertices)
-		min_lengths.append(values[0])
-		avg_angles.append(values[1])
-		min_angles.append(values[2])
-		max_angles.append(values[3])
-	"""fig = plt.figure()
-	ax = fig.add_subplot(111)
-	ax2.plot(strain[:-1],avg_angles,color=color)
-	#plt.plot(strain,min_angles)
-	#plt.plot(strain,max_angles)
-	#plt.plot(strain,min_lengths)
-	#plt.show()"""
-	return avg_angles
 
-if __name__ == "__main__":
-	os.chdir('../Data/3D_GN/')
-	if len(sys.argv) == 1:
-		os.chdir(sorted_ls('.')[-1])
-	else:
-		os.chdir(sys.argv[1])
-	filenames=fnmatch.filter(os.listdir('.'), 'stress_strain_*.csv')
-	print(filenames)
-	fig, ax1 = plt.subplots()
-	color = 'tab:red'
-	ax1.set_xlabel('strain')
-	ax1.set_ylabel('stress', color=color)
-	ax1.tick_params(axis='y',labelcolor=color)
-	color = 'tab:blue'
-	ax2 =ax1.twinx()
-	ax2.set_ylabel('second derivative', color=color)
-	ax2.tick_params(axis='y',labelcolor=color)
-	for filename in filenames: 
-		color = np.random.rand(3,)
-		network = load_network_info(int(filename[-7:-4]))
-		#print smallest_values()
-		strain = plot_stress_strain(len(network.vertices),ax1,ax2,color)
-		#avg_angles = plot_avg_angle(strain, network,ax2,color)
-	#handles, labels = ax1.get_legend_handles_labels()
-	# sort both labels and handles by labels
-	#labels, handles = zip(*sorted(zip(labels, handles), key=lambda t: t[0]))
-	#ax1.legend(handles, labels)
-	#ax1.legend(loc='upper left')
-	plt.savefig('stress_strain.pdf')
-	plt.show()
-
-	os.chdir('../../../TissueModel/')
