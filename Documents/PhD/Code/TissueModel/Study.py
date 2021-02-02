@@ -11,7 +11,7 @@ import matplotlib.patches as patches
 import fnmatch,time
 
 ## PARAMETERS
-dimension=2 #dimension of the problem
+dimension=3 #dimension of the problem
 complexity_network=200 #number of random seed points
 length_domain=(1.0,1.0,1.0)
 min_distance = 0.0001*length_domain[0]
@@ -21,7 +21,7 @@ beam_poisson = 0.3
 beam_profile = 0.01
 connector_coeff = 0.01
 disturbance=0.02
-traction_distance = 1.0*length_domain[0]
+traction_distance = 0.5*length_domain[0]
 #iteration = 15
 
 
@@ -36,9 +36,9 @@ video = True
 phase = 'only_one'
 stress_rep = True
 details = True
-element_size=0.0005
-hyperstatic_param=2
-data_path = '../Data_1/Study_networks/' 
+element_size=0.005
+hyperstatic_param=3
+data_path = '../Data_1/Com_Vor_GN/' 
 
 today = date.today()
 
@@ -48,7 +48,7 @@ path = new_dir
 
 
 #list_modes = [['Voronoi','random'],['Voronoi','grid'],['growth_network','grid'],['Voronoi','regular']]#,['growth_network','grid']]
-list_modes = [['growth_network','grid'],['Voronoi','random']]
+list_modes = [['Voronoi','random'],['growth_network','grid']]
 test_1 = Tensile_test(constitutive, side, space_discretization, traction_distance, element_size, plot, video, path,details)
 
 
@@ -61,9 +61,9 @@ test_1 = Tensile_test(constitutive, side, space_discretization, traction_distanc
 	
 	#### Changing geometry
 	# Changing complexity
-
-for k in range(5):
-	for complexity in [400,600,800,1000,1200,1500,2000]:
+"""
+for k in range(6):
+	for complexity in [200,400,600,800,1000,1200,1500,2000,2500]:
 		complexity_network=complexity
 		with open(os.path.join(path,'time_complexity.txt'), 'a') as writeFile:
 			writeFile.write('%s \n' % complexity)
@@ -73,10 +73,10 @@ for k in range(5):
 			network = network.set_fibers(path)
 			test_1 = Tensile_test(constitutive, side, space_discretization, traction_distance,element_size, plot, video, path,details)
 			test_1.save_parameters(network,path)
-			os.system("abaqus cae script=new_solver_1.py")
+			os.system("abaqus cae noGUI=new_solver_1.py")
 			writeFile.write('Test time: %d \n' % (time.time() - start))
 			writeFile.close()
-"""
+
 #new_dir = data_path+today.strftime("%b-%d-%Y")+'_'+'%04d' % len(os.listdir(data_path))
 #os.mkdir(new_dir)
 #path = new_dir
@@ -110,7 +110,7 @@ for connector_coeff in [0.001,0.005,0.01,0.05,0.1,0.5,1.0,1.1]:
 			network = Network(dimension, complexity_network, length_domain, min_distance, beam_Young, beam_poisson, beam_profile, connector_coeff, disturbance, hyperstatic_param, creation, generation, path)
 			network = network.set_fibers(path)
 			network = test_1.full_test(network, path,test_1.details,name='%s_%s_disturbance_%04d' % (creation,generation,disturbance))
-
+"""
 for k in range(5):
 	for mode in list_modes:
 		print(mode)
@@ -135,11 +135,11 @@ for k in range(5):
 			writeFile.write('Generation time: %d \n' % (time.time() - start))
 			test_1 = Tensile_test(constitutive, side, space_discretization, traction_distance,element_size, plot, video, path,details)
 			test_1.save_parameters(network,path)
-			os.system("abaqus cae noGUI=new_solver_1.py")
+			os.system("abaqus cae noGUI=new_solver_2.py")
 			#network = test_1.full_test(network, path,test_1.details,name='%s_%s_time' % (creation,generation))
 			writeFile.write('Test time: %d \n' % (time.time() - start))
 			writeFile.close()
-
+"""
 
 	#### Without changing network
 	# Change of k_tension, k_compression

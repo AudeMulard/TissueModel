@@ -12,7 +12,7 @@ import matplotlib.patches as patches
 import cProfile
 import numpy 
 ## PARAMETERS
-dimension=2 #dimension of the problem
+dimension=3 #dimension of the problem
 complexity_network=200 #number of random seed points
 length_domain=(1.0,1.0,1.0)
 min_distance = 0.0001*length_domain[0]
@@ -22,8 +22,8 @@ beam_poisson = 0.3
 beam_profile = 0.01
 disturbance=0.02
 traction_distance = 1.0*length_domain[0]
-hyperstatic_param = dimension
-element_size = 0.001
+hyperstatic_param = 3
+element_size = 0.01
 connector_coeff = 1.
 
 ### SET DATA FILE
@@ -51,14 +51,13 @@ details = True
 
 
 
+
+
 network = Network(dimension, complexity_network, length_domain, min_distance, beam_Young, beam_poisson, beam_profile, connector_coeff, disturbance, hyperstatic_param, creation, generation, path)
 network = network.set_fibers(path)
-network = network.create_attached_nodes_list()
-#print(network.list_attached_nodes[150],network.list_attached_nodes[210],network.list_attached_nodes[207],network.list_attached_nodes[35])
-plot_geometry(network)
-print(network.ridge_vertices)
-#test_isotropy(network)
-plt.show()
+test_1 = Tensile_test(constitutive, side, space_discretization, traction_distance,element_size, plot, video, path,details)
+test_1.save_parameters(network,path)
+#os.system("abaqus cae script=new_solver_2.py")
 
 """
 ### TENSILE TEST WITH DIFFERENT BC

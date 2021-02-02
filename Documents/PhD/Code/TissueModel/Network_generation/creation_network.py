@@ -679,12 +679,13 @@ class Network:
 				self = self.delete_doubles()
 				self = self.sort_nodes()
 				print('number of boundary_nodes: ', len(self.boundary_nodes_right),len(self.boundary_nodes_left))
+		#if len(self.boundary_nodes_left)>0 and len(self.boundary_nodes_right)>0:
 		if self.generation!= 'regular' and self.creation != 'old' and self.creation != '1 straight line':# and self.creation != 'growth_network':
-			while len(self.ridge_vertices)-float(self.hyperstatic_param)*len(self.interior_nodes)<=1:
-				if len(self.boundary_nodes_left)>0 and len(self.boundary_nodes_right)>0:
+			while len(self.ridge_vertices)-float(self.hyperstatic_param)*len(self.interior_nodes)<=0:
+				#if len(self.boundary_nodes_left)>0 and len(self.boundary_nodes_right)>0:
 					self.min_distance +=0.001
 					print('minimum distance: ', self.min_distance)
-					print('hyperstatic number: ',len(self.ridge_vertices)-self.dimension*len(self.interior_nodes))
+					print('hyperstatic number: ',len(self.ridge_vertices)-float(self.hyperstatic_param)*len(self.interior_nodes))
 					self = self.delete_doubles()
 					self = self.delete_points_with_two_ridges()
 					self = self.sort_nodes()
@@ -696,9 +697,9 @@ class Network:
 					self = self.delete_boundary_to_boundary_fibre()
 					self = self.sort_nodes()
 					self = self.delete_two_fibres_boundary_points()
-				else:
-					print('No boundary nodes')
-					break
+				#else:
+				#	print('No boundary nodes')
+				#	break
 			print('hyperstatic number: ',len(self.ridge_vertices)-float(self.hyperstatic_param)*len(self.interior_nodes))
 			print('number of boundary_nodes: ', len(self.boundary_nodes_right),len(self.boundary_nodes_left))
 			print('min_distance: ', self.min_distance)
@@ -715,7 +716,7 @@ class Network:
 			print(k)
 			if self.creation == 'growth_network': self = self.add_boundary_nodes_adaptedtoGN()
 			self = self.add_boundary_nodes()
-			self = self.delete_crossings()
+			if self.dimension == 2: self = self.delete_crossings()
 			self = self.delete_single_ridge_points()
 			self = self.sort_nodes()
 			self = self.delete_points_with_two_ridges()
@@ -723,9 +724,11 @@ class Network:
 			self = self.merge_nodes()
 			self = self.sort_nodes()
 			self = self.delete_boundary_to_boundary_fibre()
-			self = self.delete_doubles_growth_network()
+			if self.dimension == 2: self = self.delete_doubles_growth_network()
 			from Plotting.network_plotting import plot_geometry
 			import matplotlib.pyplot as plt
+		#else:
+		#	print('No boundary nodes')
 		self.state_ridge = ['tension']*len(self.ridge_vertices)
 		self.ridge_vertices = [list(l) for l in self.ridge_vertices]
 		self.save_network('initial', path)

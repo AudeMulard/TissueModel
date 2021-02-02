@@ -98,16 +98,12 @@ def stress_strain_curve(test_number,network):
 		# Minimum length
 		length = np.sqrt(length_square(network.vertices[ridge[0]]-network.vertices[ridge[1]]))
 		lengths.append(length)
-	#df_1 =  pd.read_csv(filenames[0],header=None).to_numpy()
-	#node_label = write_node_label(test_number,network)
-	#node_label_stress = [node*2 for node in node_label]
-	#node_label_right= node_label[-len(network.boundary_nodes_right)-len(network.boundary_nodes_left):-len(network.boundary_nodes_left)]
 	df_1 = pd.read_fwf(filenames[0],skiprows=2,skipfooter=4,colspecs=([0,30],[31,50]), sep='\t').to_numpy()
 	stress_1 = df_1[:,1]
 	strain=[]
 	for i in range(len(stress_1)):
-		stress.append(stress_1[i]*df_1[i,0]/(np.mean(lengths)*len(network.ridge_vertices)))#(len(network.boundary_nodes_right)+len(network.boundary_nodes_left)))#np.mean(lengths)))#*len(network.ridge_vertices)))#/(len(network.ridge_vertices)*np.mean(lengths)))
-		strain.append(df_1[i,0]*1.0)
+		stress.append(stress_1[i]/(np.mean(lengths)*len(network.ridge_vertices)))#(len(network.boundary_nodes_right)+len(network.boundary_nodes_left)))#np.mean(lengths)))#*len(network.ridge_vertices)))#/(len(network.ridge_vertices)*np.mean(lengths)))
+		strain.append(df_1[i,0]*0.5)
 	#print(test_number,strain,stress)
 	return strain, stress
 

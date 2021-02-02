@@ -49,7 +49,7 @@ def sorted_ls(path):
     mtime = lambda f: os.stat(os.path.join(path, f)).st_mtime
     return list(sorted(os.listdir(path), key=mtime))
 current_dir=os.getcwd()
-os.chdir('../Data/Study_networks/')
+os.chdir('../Data_1/Com_Vor_GN/')
 
 if len(sys.argv) == 1:
 	os.chdir(sorted_ls('.')[-1])
@@ -159,7 +159,7 @@ def micro_info(axct,axcl,axlf,axll,creation, generation,cos_theta_square_ini,cos
 	axll[i].set_ylabel(r'$\lambda$',labelpad=0,fontsize=8)
 	axll[i].set_title(title,fontsize=10)
 """
-
+"""
 #################### COMPARISON OF DIFFERENT COMPLEXITY #########################
 
 creation, generation = 'Voronoi', 'random'
@@ -265,10 +265,11 @@ fig_lambda_freq,axlf = plt.subplots(int(len(list_modes)/2.+1),2)
 fig_lambda_length,axll = plt.subplots(int(len(list_modes)/2.+1),2)
 
 
-stress_V=np.zeros((3,20))
-stress_G=np.zeros((3,20))
-omega_V=np.zeros((3,11))
-omega_G=np.zeros((3,11))
+stress_V=np.zeros((3,26))
+stress_G=np.zeros((3,26))
+omega_V=np.zeros((3,26))
+omega_G=np.zeros((3,26))
+strain = []
 for i in range(len(list_modes)):
 	creation, generation = list_modes[i]
 	test_number = fnmatch.filter(sorted_ls('.'), 'node_label_*.csv')[i][-13:-4]
@@ -359,4 +360,3 @@ axss.legend(loc = 'upper left')
 fig_stress_strain.savefig('comp_networks_figure_stress_strain.png')
 
 os.chdir(current_dir)
-"""

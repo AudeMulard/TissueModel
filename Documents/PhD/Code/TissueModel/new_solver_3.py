@@ -19,21 +19,21 @@ from Network_generation import *
 import fnmatch
 
 
-os.chdir('../Data_1/Study_networks/Jan-20-2021_0023')
+os.chdir('../Data/Study_networks/understanding/')
 #os.chdir(sorted_ls('.')[-1])
 #os.chdir(sorted_ls('.')[-1])
 print(os.getcwd())
 
 
 filenames=sorted(fnmatch.filter(sorted_ls('.'), 'network_vertices_initial_*.csv'))
-network = load_network_info(int(filenames[-1][-9:-4]))
-
-network = load_network_info(633)
+network = load_network_info(706)
+#network = load_network_info(523)
+#network.ridge_vertices = np.delete(network.ridge_vertices, 248,axis=0)
+#network.vertices = [[0.,0.],[1.0,0.]]
+#network.ridge_vertices = [[0,1]]
 network = network.create_ridge_node_list()
 network = network.sort_nodes()
-tensile_test = load_info_test(633)
-
-tensile_test = load_info_test(int(filenames[-1][-9:-4]))
+tensile_test = load_info_test(706)
 space_discretization=tensile_test.space_discretization
 traction_distance = tensile_test.traction_distance
 iterations = abs(int(traction_distance / space_discretization))
@@ -159,12 +159,8 @@ def define_mesh(mask):
 	number_elements = []
 	for i in range(len(ridge_vertices)):
 		instancename = 'Part-' + str(i+1) + '-1'
-		#myModel.rootAssembly.setElementType(elemTypes=(ElemType(
-		#	elemCode=B21, elemLibrary=STANDARD), ), regions=(
-		#	myModel.rootAssembly.instances[instancename].edges.getSequenceFromMask(
-		#	mask=('[#1 ]', ), ), ))
 		myModel.rootAssembly.setElementType(elemTypes=(ElemType(
-			elemCode=B22, elemLibrary=EXPLICIT), ), regions=(
+			elemCode=B21, elemLibrary=STANDARD), ), regions=(
 			myModel.rootAssembly.instances[instancename].edges.getSequenceFromMask(
 			mask=('[#1 ]', ), ), ))
 		myModel.rootAssembly.seedPartInstance(regions=(
@@ -254,15 +250,8 @@ def write_stress_report(odb,filename,network):
 		part = network.list_nodes_ridges[node]
 		instancename='PART-'+str(part[0]+1)+'-1'
 		p = odb.rootAssembly.instances[instancename]
-		if p.nodes[-1].coordinates[0]>=0.99: picked_nodes.append(p.nodes[-1:])
-		else: picked_nodes.append(p.nodes[:1])
-	"""for node in network.boundary_nodes_left:
-		part = network.list_nodes_ridges[node]
-		instancename='PART-'+str(part[0]+1)+'-1'
-		p = odb.rootAssembly.instances[instancename]
-		if p.nodes[-1].coordinates[0]==0.0: picked_nodes.append(p.nodes[-1:])
-		else: picked_nodes.append(p.nodes[:1])"""
-	node_set_name='node_set_bc_1' +str(len(network.vertices))
+		picked_nodes.append(p.nodes[-1:])
+	node_set_name='node_set_' +str(len(network.vertices))
 	odb.rootAssembly.NodeSet(name = node_set_name, nodes = picked_nodes)
 	#reports = session.xyDataListFromField(odb=odb, outputPosition=NODAL, variable=(('S', 
 		#INTEGRATION_POINT, ((COMPONENT, 'S11'), )), ), nodeSets=(node_set_name, ))
@@ -339,4 +328,3 @@ for j in range(len(odb.steps)):
 				odb=odb,step=0,frame=lastFrame,outputPosition=NODAL,variable=(('COORD', NODAL),))
 			k+=1
 """
-

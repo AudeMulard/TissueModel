@@ -19,22 +19,21 @@ from Network_generation import *
 import fnmatch
 
 
-os.chdir('../Data_1/Study_networks/Dec-08-2020_0019')
-#os.chdir(sorted_ls('.')[-1])
-#os.chdir(sorted_ls('.')[-1])
+os.chdir('../Data_1/')
+
+os.chdir(sorted_ls('.')[-1])
+os.chdir(sorted_ls('.')[-1])
 print(os.getcwd())
 
 
 filenames=sorted(fnmatch.filter(sorted_ls('.'), 'network_vertices_initial_*.csv'))
-#network = load_network_info(int(filenames[-1][-9:-4]))
-network = load_network_info(65)
-network.ridge_vertices= np.delete(network.ridge_vertices,78,axis=0)
-network.ridge_vertices= np.delete(network.ridge_vertices,46,axis=0)
-network.delete_alone_points()
+network = load_network_info(int(filenames[-1][-9:-4]))
+"""
+network = load_network_info(640)
 network = network.create_ridge_node_list()
 network = network.sort_nodes()
-#network.vertices = [[0.,0.],[0.,1.]]
-#network.ridge_vertices = [[0,1]]
+tensile_test = load_info_test(640)
+"""
 tensile_test = load_info_test(int(filenames[-1][-9:-4]))
 space_discretization=tensile_test.space_discretization
 traction_distance = tensile_test.traction_distance
@@ -48,19 +47,34 @@ test_number = int(np.random.rand()*10e8)
 
 #### PART DEFINITION ####
 def define_part():
-	for i in range(len(ridge_vertices)):
-		ridge = ridge_vertices[i]
-		partname = 'Part-' + str(i+1)
-		myModel.Part(dimensionality=TWO_D_PLANAR, name=partname, type=
-			DEFORMABLE_BODY)
-		try:
-			myModel.parts[partname].DatumPointByCoordinate(coords=(vertices[ridge[0]][0],vertices[ridge[0]][1], 0.0))
-			myModel.parts[partname].DatumPointByCoordinate(coords=(vertices[ridge[1]][0],vertices[ridge[1]][1], 0.0))
-		except IndexError:
-			myModel.parts[partname].DatumPointByCoordinate(coords=(vertices[i][0],vertices[i][1], 0.0))
-		myModel.parts[partname].WirePolyLine(mergeType=IMPRINT, meshable=
-			ON, points=((myModel.parts[partname].datums[1], 
-			myModel.parts[partname].datums[2]), ))
+	if int(network.dimension) == 2:
+		for i in range(len(ridge_vertices)):
+			ridge = ridge_vertices[i]
+			partname = 'Part-' + str(i+1)
+			myModel.Part(dimensionality=TWO_D_PLANAR, name=partname, type=
+				DEFORMABLE_BODY)
+			try:
+				myModel.parts[partname].DatumPointByCoordinate(coords=(vertices[ridge[0]][0],vertices[ridge[0]][1], 0.0))
+				myModel.parts[partname].DatumPointByCoordinate(coords=(vertices[ridge[1]][0],vertices[ridge[1]][1], 0.0))
+			except IndexError:
+				myModel.parts[partname].DatumPointByCoordinate(coords=(vertices[i][0],vertices[i][1], 0.0))
+			myModel.parts[partname].WirePolyLine(mergeType=IMPRINT, meshable=
+				ON, points=((myModel.parts[partname].datums[1], 
+				myModel.parts[partname].datums[2]), ))
+	elif int(network.dimension)==3:
+		for i in range(len(ridge_vertices)):
+			ridge = ridge_vertices[i]
+			partname = 'Part-' + str(i+1)
+			myModel.Part(dimensionality=THREE_D, name=partname, type=
+				DEFORMABLE_BODY)
+			try:
+				myModel.parts[partname].DatumPointByCoordinate(coords=(vertices[ridge[0]][0],vertices[ridge[0]][1], vertices[ridge[0]][2]))
+				myModel.parts[partname].DatumPointByCoordinate(coords=(vertices[ridge[1]][0],vertices[ridge[1]][1], vertices[ridge[1]][2]))
+			except IndexError:
+				myModel.parts[partname].DatumPointByCoordinate(coords=(vertices[i][0],vertices[i][1], vertices[i][2]))
+			myModel.parts[partname].WirePolyLine(mergeType=IMPRINT, meshable=
+				ON, points=((myModel.parts[partname].datums[1], 
+				myModel.parts[partname].datums[2]), ))
 
 
 #### MATERIAL AND SECTION DEFINITION ####
@@ -117,8 +131,14 @@ def assembly(network):
 # Step Creation
 def set_steps(network):
     myModel.StaticStep(name='Step-1', previous='Initial',maxNumInc=500, minInc=1e-10, nlgeom=ON)
-    myModel.FieldOutputRequest(name='F-Output-3',createStepName='Step-1', variables=('COORD', 'S','E',),numIntervals=
-        iterations)
+    #myModel.FieldOutputRequest(name='F-Output-3',createStepName='Step-1', variables=('COORD', 'S','E','SE'),numIntervals=
+    #    iterations)
+    myModel.fieldOutputRequests['F-Output-1'].setValues(variables=(
+    'S', 'SEQUT', 'E', 'SE', 'U', 'RF', 'CF', 'COORD', 'MVF'))
+    myModel.fieldOutputRequests['F-Output-1'].setValues(
+		numIntervals=25)
+    myModel.steps['Step-1'].setValues(stabilizationMethod=DISSIPATED_ENERGY_FRACTION, 
+    continueDampingFactors=True, adaptiveDampingRatio=0.1)
 
 def set_boundary_conditions(network): ## can be changed with the node label list
     list_vertices_right = []
@@ -144,7 +164,7 @@ def set_boundary_conditions(network): ## can be changed with the node label list
         'BC-1', region=Region(vertices=VertexArray(list_vertices_left)))
     myModel.DisplacementBC(amplitude=UNSET, createStepName='Step-1',
         distributionType=UNIFORM, fieldName='', fixed=OFF, localCsys=None, name=
-        'BC-2', region=Region(vertices=VertexArray(list_vertices_right)), u1=traction_distance, u2=0.0,ur3=UNSET)
+        'BC-2', region=Region(vertices=VertexArray(list_vertices_right)), u1=traction_distance, u2=0.0,u3=0.0,ur3=UNSET)
 
 
 ## to be deleted and adapted with network
@@ -155,10 +175,20 @@ def define_mesh(mask):
 	number_elements = []
 	for i in range(len(ridge_vertices)):
 		instancename = 'Part-' + str(i+1) + '-1'
-		myModel.rootAssembly.setElementType(elemTypes=(ElemType(
-			elemCode=B21, elemLibrary=STANDARD), ), regions=(
-			myModel.rootAssembly.instances[instancename].edges.getSequenceFromMask(
-			mask=('[#1 ]', ), ), ))
+		#myModel.rootAssembly.setElementType(elemTypes=(ElemType(
+		#	elemCode=B21, elemLibrary=STANDARD), ), regions=(
+		#	myModel.rootAssembly.instances[instancename].edges.getSequenceFromMask(
+		#	mask=('[#1 ]', ), ), ))
+		if int(network.dimension)==2:
+			myModel.rootAssembly.setElementType(elemTypes=(ElemType(
+				elemCode=B22, elemLibrary=EXPLICIT), ), regions=(
+				myModel.rootAssembly.instances[instancename].edges.getSequenceFromMask(
+				mask=('[#1 ]', ), ), ))
+		elif int(network.dimension)==3:
+				myModel.rootAssembly.setElementType(elemTypes=(ElemType(
+				elemCode=B32, elemLibrary=EXPLICIT), ), regions=(
+				myModel.rootAssembly.instances[instancename].edges.getSequenceFromMask(
+				mask=('[#1 ]', ), ), ))
 		myModel.rootAssembly.seedPartInstance(regions=(
 			mdb.models['Model-1'].rootAssembly.instances[instancename], ), size=tensile_test.element_size)
 		mdb.models['Model-1'].rootAssembly.generateMesh(regions=(
@@ -180,7 +210,8 @@ for i in range(len(ridge_vertices)):
 def create_connectors(network):
 	connector_list=[]
 	for k in range(len(list_nodes_ridges)):
-		coords = (vertices[k][0],vertices[k][1],0.0)
+		if int(network.dimension)==2: coords = (vertices[k][0],vertices[k][1],0.0)
+		elif int(network.dimension)==3: coords = (vertices[k][0],vertices[k][1],vertices[k][2])
 		list_ridge = list_nodes_ridges[k]
 		if len(list_ridge) > 1:
 			for i in range(len(list_ridge)-1):
@@ -198,8 +229,8 @@ def create_connectors(network):
 	mdb.models['Model-1'].ConnectorSection(name='ConnSect-1', translationalType=
 		JOIN)
 	mdb.models['Model-1'].sections['ConnSect-1'].setValues(behaviorOptions=(
-		ConnectorElasticity(table=((network.connector_coeff, ), ), independentComponents=(), 
-		components=(6, )), ), rotationalType=ROTATION)
+		ConnectorElasticity(table=((network.connector_coeff, network.connector_coeff,network.connector_coeff), ), independentComponents=(), 
+		components=(4, 5, 6)), ), rotationalType=ROTATION)
 	mdb.models['Model-1'].sections['ConnSect-1'].behaviorOptions[0].ConnectorOptions(
 		)
 	myModel.rootAssembly.SectionAssignment(region=
@@ -233,8 +264,8 @@ def job():
 		multiprocessingMode=DEFAULT, name=job_name, nodalOutputPrecision=SINGLE, 
 		numCpus=1, numGPUs=0, queue=None, resultsFormat=ODB, scratch='', type=
 		ANALYSIS, userSubroutine='', waitHours=0, waitMinutes=0)
-	#mdb.jobs[job_name].submit(consistencyChecking=OFF)
-	#mdb.jobs[job_name].waitForCompletion()
+	mdb.jobs[job_name].submit(consistencyChecking=OFF)
+	mdb.jobs[job_name].waitForCompletion()
 
 
 define_mesh(mask)
@@ -246,62 +277,19 @@ def write_stress_report(odb,filename,network):
 		part = network.list_nodes_ridges[node]
 		instancename='PART-'+str(part[0]+1)+'-1'
 		p = odb.rootAssembly.instances[instancename]
-		picked_nodes.append(p.nodes[-1:])
-	node_set_name='node_set_' +str(len(network.vertices))
+		for k in range(len(p.nodes)):
+			if p.nodes[k].coordinates[0]>=1-10e-4:
+				picked_nodes.append(p.nodes[k:k+1])
+				break
+		#if p.nodes[-1].coordinates[0]>=1-10e-4: picked_nodes.append(p.nodes[-1:])
+		#else: picked_nodes.append(p.nodes[:1])
+	node_set_name='node_set_bc_7_' +str(len(network.vertices))
 	odb.rootAssembly.NodeSet(name = node_set_name, nodes = picked_nodes)
-	#reports = session.xyDataListFromField(odb=odb, outputPosition=NODAL, variable=(('S', 
-		#INTEGRATION_POINT, ((COMPONENT, 'S11'), )), ), nodeSets=(node_set_name, ))
 	reports=session.xyDataListFromField(odb=odb, outputPosition=NODAL, variable=(('RF', NODAL, ((COMPONENT, 'RF1'), )), ),nodeSets=(node_set_name, ))
-	"""
-	reports_corrected=[]
-	for report in reports:
-		report = np.array(report)
-		length = len(report)
-		for k in range(1,length-1):
-			if report[length-k][0] == report[length-(k+1)][0]:
-				report= np.delete(report,length-k,axis=0)
-		#print(report)
-		reports_corrected.append(report)
-	lengths = []
-	for k in reports_corrected:
-		lengths.append(len(k))
-		if len(k)<max(lengths):
-			print(k)
-	strain , stress = [],[]
-	import csv
-	#print(max(lengths),min(lengths))
-	with open(filename, 'w') as csvfile:
-		spamwriter = csv.writer(csvfile)
-		for i in range(max(lengths)):
-			strain.append(np.array(reports_corrected[0])[i,0])
-			sum=0
-			for k in range(len(reports_corrected)):
-				sum += np.array(reports_corrected[k])[i,1]
-				if len(report[k]) == max(lengths): sum += np.array(report[k])[2*i,1]
-				elif i < (max(lengths)-1)/2:
-					if np.array(report[k])[i,0] == strain[-1]: sum += np.array(report[k])[2*i,1]
-					else: sum += np.array(report[k])[2*i-1,1]
-				else: sum += np.array(report[k])[2*i-1,1]
-			spamwriter.writerow([strain[-1],sum])
-			stress.append(sum)
-	with open(filename, 'w') as writeFile:
-		writeFile.write(strain,stress)
-		writeFile.close()
-	x_data = np.zeros(((max(lengths)-1)/2+1,2))
-	for k in range(len(report)):
-		print(list(report[k])[:((max(lengths)-1)):2])
-		x_data += list(report[k])[:((max(lengths)-1)):2]
-	for k in range(len(report))
-	x_data = sum(report[::2])[::2]
-	try:
-		x_data = sum(report[::2])
-	except XypError:
-		x_data = sum(report[1::2])
-	"""
 	x_data = sum(reports)
 	x0 = session.xyDataObjects[x_data.name]
 	session.writeXYReport(fileName=filename, xyData=(x0, ))
-"""
+
 from odbAccess import *
 o1 = session.openOdb(name=job_name+'.odb',readOnly=False)
 session.viewports['Viewport: 1'].setValues(displayedObject=o1)
@@ -319,8 +307,9 @@ for j in range(len(odb.steps)):
 		name='network_vertices_%02d_%02d_%09d.csv' % (j+1,k,int(test_number))
 		print(i)
 		print(lastFrame.frameValue, (k)*0.1)
-		if abs(lastFrame.frameValue- (k)*0.1) <10e-5: 
-			session.writeFieldReport(fileName=name,append=OFF,sortItem='Node Label',
-				odb=odb,step=0,frame=lastFrame,outputPosition=NODAL,variable=(('COORD', NODAL),))
-			k+=1
-"""
+		#if abs(lastFrame.frameValue- (k)*0.1) <10e-5: 
+		session.writeFieldReport(fileName=name,append=OFF,sortItem='Node Label',
+			odb=odb,step=0,frame=lastFrame,outputPosition=NODAL,variable=(('COORD', NODAL),))
+		k+=1
+
+
