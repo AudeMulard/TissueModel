@@ -102,7 +102,8 @@ def stress_strain_curve(test_number,network):
 	stress_1 = df_1[:,1]
 	strain=[]
 	for i in range(len(stress_1)):
-		stress.append(stress_1[i]/(np.mean(lengths)*len(network.ridge_vertices)))#(len(network.boundary_nodes_right)+len(network.boundary_nodes_left)))#np.mean(lengths)))#*len(network.ridge_vertices)))#/(len(network.ridge_vertices)*np.mean(lengths)))
+		#stress.append(stress_1[i]/(len(network.boundary_nodes_right)+len(network.boundary_nodes_left))/(network.beam_young*network.beam_profile**2*np.pi))
+		stress.append(stress_1[i]/(np.mean(lengths)*len(network.ridge_vertices))/(network.beam_young*network.beam_profile**2*np.pi))#(len(network.boundary_nodes_right)+len(network.boundary_nodes_left)))#np.mean(lengths)))#*len(network.ridge_vertices)))#/(len(network.ridge_vertices)*np.mean(lengths)))
 		strain.append(df_1[i,0]*0.5)
 	#print(test_number,strain,stress)
 	return strain, stress
@@ -111,10 +112,10 @@ def stress_strain_curve(test_number,network):
 def plot_second_der(ax,strain, stress,color):
 	der_sec = []
 	#print(strain,stress)
-	for i in range(1,len(strain)-1):
+	for i in range(len(strain)-1):
 		der_sec.append(2*stress[i-1]/[(strain[i]-strain[i-1])*(strain[i+1]-strain[i-1])]-2*stress[i]/[(strain[i+1]-strain[i])*(strain[i]-strain[i-1])]+2*stress[i+1]/[(strain[i+1]-strain[i])*(strain[i+1]-strain[i-1])])
-	print(der_sec)
-	ax.plot(strain[1:-1],der_sec, color = color,linestyle='dashed')
+	#print(der_sec)
+	ax.plot(strain[:-1],der_sec, color = color,linestyle='dashed')
 
 def plot_first_der(ax,strain, stress,color):
 	der_sec = []
@@ -174,7 +175,7 @@ def calculate_network_data(network, length_ini, **kw):
 	stretch_ratios,cos_theta_square = [],[]
 	list_angle = []
 	lengths=[]
-	print(len(network.vertices))
+	#print(len(network.vertices))
 	for ridge in network.ridge_vertices:
 		# Minimum length
 		length = np.sqrt(length_square(network.vertices[ridge[0]]-network.vertices[ridge[1]]))

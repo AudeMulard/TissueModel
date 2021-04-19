@@ -50,9 +50,9 @@ class Cell:
 					line = sg.Line(In_point,Out_point)
 					intersec = sg.intersection(circ, line)
 					if length_square(nodes[ridge[1]]-intersec[0]) >= length_square(nodes[ridge[1]]-intersec[1]):
-						nodes=np.append(nodes,[[intersec[1].x,intersec[1].y]],axis=0)
+						nodes=np.append(nodes,[[float(intersec[1].x),float(intersec[1].y)]],axis=0)
 					else:
-						nodes=np.append(nodes,[[intersec[0].x,intersec[0].y]],axis=0)
+						nodes=np.append(nodes,[[float(intersec[0].x),float(intersec[0].y)]],axis=0)
 					ridge[0]=len(nodes)-1
 					k+=1
 				if ridge[1] == node:
@@ -65,9 +65,9 @@ class Cell:
 					line = sg.Line(In_point,Out_point)
 					intersec = sg.intersection(circ, line)
 					if length_square(nodes[ridge[0]]-intersec[0]) >= length_square(nodes[ridge[0]]-intersec[1]):
-						nodes=np.append(nodes,[[intersec[1].x,intersec[1].y]],axis=0)
+						nodes=np.append(nodes,[[float(intersec[1].x),float(intersec[1].y)]],axis=0)
 					else:
-						nodes=np.append(nodes,[[intersec[0].x,intersec[0].y]],axis=0)
+						nodes=np.append(nodes,[[float(intersec[0].x),float(intersec[0].y)]],axis=0)
 					ridge[1]=len(nodes)-1
 					k+=1
 		nodes_to_delete = np.array(sorted(nodes_to_delete, reverse=True))

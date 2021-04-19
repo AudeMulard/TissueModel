@@ -49,20 +49,23 @@ def sorted_ls(path):
     mtime = lambda f: os.stat(os.path.join(path, f)).st_mtime
     return list(sorted(os.listdir(path), key=mtime))
 current_dir=os.getcwd()
-os.chdir('../Data_1/Com_Vor_GN/')
-
+os.chdir('../Data_1/default/Apr-12-2021_0003/')
+"""
 if len(sys.argv) == 1:
 	os.chdir(sorted_ls('.')[-1])
 else:
 	os.chdir(sys.argv[1])
 print(os.getcwd())
-
+"""
 
 ########################## GRAPHICALS OUTPUTS #################################
 
 # Initial info: segment length and angles, alone then cumulative curves together
 def graph_comp_ini_end_info(name,number, generation,test_number):
-	filename = fnmatch.filter(os.listdir('.'), 'parameters_%02d_*.csv' % number) 
+	#if number == 1: number =2
+	#elif number == 2: number = 3
+	filename = fnmatch.filter(os.listdir('.'), 'parameters_%02d_*.csv' % (number)) 
+	print('parameters_%02d_*.csv' % (number)) 
 	
 	network, lengths_ini, stretch_ratio_ini, cos_theta_square_ini, omega_xx_ini = plot_initial_info(filename)
 	fig_ini_end, axs = plt.subplots(2,2,sharex='row',sharey='row')
@@ -159,20 +162,42 @@ def micro_info(axct,axcl,axlf,axll,creation, generation,cos_theta_square_ini,cos
 	axll[i].set_ylabel(r'$\lambda$',labelpad=0,fontsize=8)
 	axll[i].set_title(title,fontsize=10)
 """
-"""
+
+def curve_analysis(stress,strain):
+	initial_slope = (stress[1]-stress[0])/(strain[1]-strain[0])
+	end_slope = (stress[-1]-stress[-2])/(strain[-1]-strain[-2])
+	#inflexion_point= -(initial_slope-end_slope)/(strain[-1]-(stress[-1]-end_slope))
+	inflexion_point= (-strain[-1]*end_slope+stress[-1])/(initial_slope-end_slope)
+	for i in range(len(strain)):
+		if inflexion_point>strain[i]:
+			yp = (stress[i+1]-stress[i])/(strain[i+1]-strain[i])
+			ypp = (stress[i+1]+stress[i]-2*(yp*inflexion_point+stress[i+1]-yp*strain[i+1]))/((strain[i+1]-inflexion_point)*(inflexion_point-strain[i]))
+			radius_IP = (1+yp**2)**(3/2)/ypp
+			break
+	return initial_slope, end_slope, inflexion_point, radius_IP
+
+
 #################### COMPARISON OF DIFFERENT COMPLEXITY #########################
 
 creation, generation = 'Voronoi', 'random'
 
 #complexities = [10,50,100,200]
-#parameter_values=[0.001,0.005,0.01,0.05,0.1,0.5,1.0,1.1]
-parameter_values=range(5)#, 0.06,0.07,0.08,0.09]#,0.1]
+
+#parameter_values=range(5)#, 0.06,0.07,0.08,0.09]#,0.1]
 #parameter_name = 'truss_area'
 #parameter_values = [1,2,3,4,5,6]#,7]
-#parameter_values=[0,1,2,3]
 #parameter_values = [0.01,0.1,1.0]
-parameter_name = 'complexity'
 
+#parameter_values=[0,1.6,1.75,1.9,2,2.2,2.4,2.6,2.8]#,3.0]
+#parameter_name = 'hyperstatic_param'
+#number=[1,2,3,5,6,7,8,9,10]
+
+parameter_name = 'beam_profile'
+parameter_values=[0.1,0.01,0.2,0.05,0.007]
+#parameter_name = 'connector_coeff'
+#parameter_values=[0.001,0.01,0.1,1,1e-4]
+#test_number = fnmatch.filter(sorted_ls('.'), 'network_vertices_01_00_*.csv')[0][-13:-4]
+#network,lengths_ini,cos_theta_square_ini,lengths, stretch_ratio, cos_theta_square, omega_xx, strain_omega,corr_lambda_l0, corr_theta_0, corr_lamd_theta=graph_comp_ini_end_info('%s' % (parameter_name) ,1, generation,test_number)
 
 figure_omega_xx,axom = plt.subplots()
 fig_stress_strain,axss = plt.subplots()
@@ -189,28 +214,47 @@ else:
 	fig_costh_lambda,axcl = plt.subplots(int(len(parameter_values)/2.)+len(parameter_values)%2,2)
 	fig_lambda_freq,axlf = plt.subplots(int(len(parameter_values)/2.)+len(parameter_values)%2,2)
 	fig_lambda_length,axll = plt.subplots(int(len(parameter_values)/2.)+len(parameter_values)%2,2)
+	
 
-for i in range(5):
+
+initial_slopes= []
+end_slopes=[]
+inflexion_points=[]
+radiuss_IP =[]
+label_names=[]
+for i in range(1):
 	parameter = parameter_values[i]
 	test_number = fnmatch.filter(sorted_ls('.'), 'network_vertices_01_00_*.csv')[i][-13:-4]
 	print(test_number)
 	# Initial info: segment length and angles, alone then cumulative curves together
-	network,lengths_ini,cos_theta_square_ini,lengths, stretch_ratio, cos_theta_square, omega_xx, strain_omega,corr_lambda_l0, corr_theta_0, corr_lamd_theta=graph_comp_ini_end_info('%s' % (parameter_name) ,i, generation,test_number)
+	network,lengths_ini,cos_theta_square_ini,lengths, stretch_ratio, cos_theta_square, omega_xx, strain_omega,corr_lambda_l0, corr_theta_0, corr_lamd_theta=graph_comp_ini_end_info('%s' % (parameter_name) ,number[i], generation,test_number)
 	
 	# Stress-strain responses and omega xx responses
 	strain,stress = stress_strain_curve(test_number,network)
+	for j in range(len(stress)):
+		stress[j] = stress[j]/(parameter**2*0.1**2)
 	test_1 = load_info_test(len(network.vertices))
 	
+	initial_slope, end_slope, inflexion_point, radius_IP=curve_analysis(stress,strain)
+	print(initial_slope, end_slope, inflexion_point)
+	initial_slopes.append(initial_slope)
+	end_slopes.append(end_slope)
+	radiuss_IP.append(radius_IP)
+	inflexion_points.append(inflexion_point)
 	#strain = [i/test_1.iterations * test_1.traction_distance for i in range(test_1.iterations+1)]
-	if parameter_name == 'hyperstatic_param': label_name = int(len(network.ridge_vertices)/len(network.vertices)*1e3)/1e3
-	elif parameter_name == 'complexity': label_name = len(network.vertices)
+	if parameter_name == 'hyperstatic_param': 
+		#label_name = int(len(network.ridge_vertices)/(len(network.vertices)-len(network.boundary_nodes_right)-len(network.boundary_nodes_left))*1e3)/1e3
+		label_name = int(np.mean(list(map(len, network.list_nodes_ridges)))*1e2)/1e2
+	elif parameter_name == 'complexity': 
+		label_name = len(network.vertices)
 	else: label_name = parameter
+	label_names.append(label_name)
 	color = np.random.rand(3,)
 	axss.plot(strain, stress, label='%s' % label_name,color=color)
 	print(parameter)
 	#if parameter!=2 and parameter!=0.3: 
 	#	print('I am printing',parameter)
-	plot_second_der(axssd,strain, stress,color = color)
+	#plot_second_der(axssd,strain, stress,color = color)
 	axom.plot(strain_omega,omega_xx, label='%s' % label_name,color=color)
 	# Information on the microscopic geometry
 	micro_info(axct,axcl,axlf,axll,creation, generation,cos_theta_square_ini,cos_theta_square,stretch_ratio,lengths_ini,'%s' % str(label_name))
@@ -247,10 +291,47 @@ plt.close()
 
 axss.set_xlabel(r'$\frac{L-L_0}{L_0}$',fontsize=20)
 axss.set_ylabel(r'$\frac{\sigma_{xx}}{E}$',fontsize=20)
+axss.set_xlim([0.,0.2])
+axss.set_ylim([0.,2000])
 fig_stress_strain.tight_layout()
 axss.legend(loc = 'upper left')
 fig_stress_strain.savefig('%s_figure_stress_strain_%s_%s.png' % (parameter_name,creation, generation))
 
+figure_initial_slope,axis = plt.subplots()
+axis.set_xlabel('%s' % parameter_name,fontsize=20)
+axis.set_ylabel('Initial slope',fontsize=20)
+axis.set_xscale('log')
+figure_initial_slope.tight_layout()
+axis.scatter(label_names,initial_slopes)
+figure_initial_slope.savefig('%s_figure_initial_slope_%s_%s.png' % (parameter_name,creation, generation))
+plt.close()
+
+figure_end_slope,axes = plt.subplots()
+axes.set_xlabel('%s' % parameter_name,fontsize=20)
+axes.set_ylabel('End slope',fontsize=20)
+axes.set_xscale('log')
+figure_end_slope.tight_layout()
+axes.scatter(label_names,end_slopes)
+figure_end_slope.savefig('%s_figure_end_slope_%s_%s.png' % (parameter_name,creation, generation))
+plt.close()
+
+figure_inflexion_point,axip = plt.subplots()
+axip.set_xlabel('%s' % parameter_name,fontsize=20)
+axip.set_ylabel('Inflexion point x',fontsize=20)
+axip.set_xscale('log')
+figure_inflexion_point.tight_layout()
+axip.scatter(label_names,inflexion_points)
+figure_inflexion_point.savefig('%s_figure_inflexion_point_%s_%s.png' % (parameter_name,creation, generation))
+plt.close()
+
+figure_radius_IP,axcip = plt.subplots()
+axcip.set_xlabel('%s' % parameter_name,fontsize=20)
+axcip.set_ylabel('Radius at inflexion point',fontsize=20)
+figure_radius_IP.tight_layout()
+axcip.set_xscale('log')
+axcip.scatter(label_names,radiuss_IP)
+figure_radius_IP.savefig('%s_figure_radius_IP_%s_%s.png' % (parameter_name,creation, generation))
+plt.close()
 """
 #################### COMPARISON OF DIFFERENT NETWORKS #########################
 figure_omega_xx,axom = plt.subplots()
@@ -360,3 +441,4 @@ axss.legend(loc = 'upper left')
 fig_stress_strain.savefig('comp_networks_figure_stress_strain.png')
 
 os.chdir(current_dir)
+"""

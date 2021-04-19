@@ -13,29 +13,30 @@ import cProfile
 import numpy 
 ## PARAMETERS
 dimension=2 #dimension of the problem
-complexity_network=100 #number of random seed points
+complexity_network=200 #number of random seed points
 length_domain=(1.0,1.0,1.0)
 min_distance = 0.0001*length_domain[0]
 space_discretization = 0.1*length_domain[0]
-beam_Young = 1000
+beam_Young = 33000
 beam_poisson = 0.3
-beam_profile = 0.1
-connector_coeff = 1.0
+beam_profile = 0.01
 disturbance=0.02
 traction_distance = 1.0*length_domain[0]
-hyperstatic_param = dimension
-element_size = 0.001
-
+hyperstatic_param = 2
+element_size = 0.0005
+connector_coeff = 0.01
 
 ### SET DATA FILE
 
-path = '../Data/Study_networks/understanding/'
-#data_path = '../Data_1/Study_networks/Nov-17-2020_0073/'
+data_path = '../Data_1/default/'
+
 today = date.today()
 
+new_dir = data_path+today.strftime("%b-%d-%Y")+'_'+'%04d' % len(os.listdir(data_path))
+os.mkdir(new_dir)
+path = new_dir
 
 
-current_dir = os.getcwd()
 
 ### CREATE NETWORK
 creation="growth_network"
@@ -48,16 +49,15 @@ phase = 'only_one'
 stress_rep = True
 details = True
 
-test_1 = Tensile_test(constitutive, side, space_discretization, traction_distance,element_size, plot, video, path,details)
-os.chdir(path)
-#filenames =  fnmatch.filter(sorted_ls('.'), 'network_vertices_initial_*.csv')
-network = load_network_info(912)
-os.chdir(current_dir)
 
-for connector_coeff in [0.006]:#,0.005,0.004,0.003]:
-	#network = load_network_info(int(filename[-9:-4]))
-	network.connector_coeff = connector_coeff
-	network.save_network('initial',path)
-	test_1.save_parameters(network,path)
-	os.system("abaqus cae script=new_solver_2.py")
+
+
+
+network = Network(dimension, complexity_network, length_domain, min_distance, beam_Young, beam_poisson, beam_profile, connector_coeff, disturbance, hyperstatic_param, creation, generation, path)
+network = network.set_fibers(path)
+plot_geometry(network)
+plt.show()
+test_1 = Tensile_test(constitutive, side, space_discretization, traction_distance,element_size, plot, video, path,details)
+test_1.save_parameters(network,path)
+os.system("abaqus cae script=new_solver_4.py")
 

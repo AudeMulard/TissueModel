@@ -69,6 +69,6 @@ plt.xlim([-1,3])
 plt.ylim([-5,10])
 plt.xlabel('x')     
 plt.ylabel('y')     
-plt.savefig('newton_graph.pdf')
+plt.savefig('newton_graph.png')
 
 plt.show()  
